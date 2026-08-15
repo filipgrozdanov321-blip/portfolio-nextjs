@@ -1,0 +1,62 @@
+.portfolio-testimonials {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+  
+  .portfolio-testimonials-title {
+    font-size: 2rem;
+    text-align: center;
+    margin: 0 0 3rem;
+  }
+  
+  .portfolio-testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+  }
+  
+  .portfolio-testimonial-card {
+    background-color: transparent;
+    border: 1px solid var(--portfolio-border);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 220px;
+  }
+  
+  .portfolio-testimonial-quote {
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--portfolio-black);
+    margin: 0 0 1.5rem;
+  }
+  
+  .portfolio-testimonial-author {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  
+  .portfolio-testimonial-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--portfolio-black);
+  }
+  
+  .portfolio-testimonial-role {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: var(--portfolio-gray);
+  }
+  
+  @media (max-width: 900px) {
+    .portfolio-testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+  }

@@ -1,0 +1,198 @@
+.startup-origin-story {
+    padding: 72px 0 120px;
+  }
+  
+  .startup-origin-story-header {
+    max-width: 680px;
+    margin-bottom: 56px;
+  }
+  
+  .startup-origin-story-eyebrow {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--startup-gray);
+    margin-bottom: 18px;
+  }
+  
+  .startup-origin-story-headline {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    line-height: 1.15;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+  
+  .startup-origin-story-lede {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--startup-gray);
+  }
+  
+  .startup-origin-story-narrative {
+    max-width: 680px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 72px;
+  }
+  
+  .startup-origin-story-narrative p {
+    font-size: 0.98rem;
+    line-height: 1.75;
+    color: var(--startup-white);
+    opacity: 0.9;
+  }
+  
+  .startup-origin-story-section-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+  }
+  
+  .startup-origin-story-timeline {
+    list-style: none;
+    margin: 0 0 80px;
+    padding: 0;
+    max-width: 680px;
+    position: relative;
+  }
+  
+  .startup-origin-story-timeline::before {
+    content: "";
+    position: absolute;
+    left: 84px;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background: var(--startup-border);
+  }
+  
+  .startup-origin-story-timeline-item {
+    display: grid;
+    grid-template-columns: 84px 1fr;
+    gap: 24px;
+    padding-bottom: 32px;
+    position: relative;
+  }
+  
+  .startup-origin-story-timeline-item:last-child {
+    padding-bottom: 0;
+  }
+  
+  .startup-origin-story-timeline-date {
+    font-size: 0.72rem;
+    color: var(--startup-accent);
+    padding-top: 3px;
+  }
+  
+  .startup-origin-story-timeline-content {
+    position: relative;
+    padding-left: 24px;
+  }
+  
+  .startup-origin-story-timeline-content::before {
+    content: "";
+    position: absolute;
+    left: -5px;
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--startup-accent);
+    border: 2px solid var(--startup-black);
+  }
+  
+  .startup-origin-story-timeline-content h3 {
+    font-size: 0.98rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  
+  .startup-origin-story-timeline-content p {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--startup-gray);
+  }
+  
+  .startup-origin-story-future {
+    max-width: 680px;
+    margin-bottom: 80px;
+  }
+  
+  .startup-origin-story-future p {
+    font-size: 0.98rem;
+    line-height: 1.75;
+    color: var(--startup-gray);
+  }
+  
+  .startup-origin-story-team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 320px));
+    gap: 24px;
+  }
+  
+  .startup-origin-story-team-card {
+    border: 1px solid var(--startup-border);
+    border-radius: 10px;
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .startup-origin-story-team-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(108, 92, 231, 0.15);
+    border: 1px solid rgba(108, 92, 231, 0.3);
+    color: var(--startup-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Sora", sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+  }
+  
+  .startup-origin-story-team-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--startup-white);
+  }
+  
+  .startup-origin-story-team-title {
+    font-size: 0.78rem;
+    color: var(--startup-accent);
+    margin-bottom: 8px;
+  }
+  
+  .startup-origin-story-team-bio {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--startup-gray);
+  }
+  
+  @media (max-width: 640px) {
+    .startup-origin-story-timeline::before {
+      left: 6px;
+    }
+  
+    .startup-origin-story-timeline-item {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+  
+    .startup-origin-story-timeline-date {
+      padding-left: 24px;
+    }
+  
+    .startup-origin-story-timeline-content {
+      padding-left: 24px;
+    }
+  
+    .startup-origin-story-team-grid {
+      grid-template-columns: 1fr;
+    }
+  }

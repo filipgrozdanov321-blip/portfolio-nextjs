@@ -1,0 +1,88 @@
+.realestate-searchbar {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    background-color: var(--realestate-white);
+    border-radius: var(--realestate-radius-md);
+    padding: 16px;
+    box-shadow: var(--realestate-shadow);
+  }
+  
+  .realestate-searchbar-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .realestate-searchbar-field label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--realestate-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  
+  .realestate-searchbar-field input,
+  .realestate-searchbar-field select {
+    border: 1px solid var(--realestate-border);
+    border-radius: var(--realestate-radius-sm);
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    color: var(--realestate-navy);
+    background-color: var(--realestate-white);
+  }
+  
+  .realestate-searchbar-field input:focus,
+  .realestate-searchbar-field select:focus {
+    outline: 2px solid var(--realestate-gold);
+    outline-offset: 1px;
+  }
+  
+  .realestate-searchbar-submit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--realestate-navy);
+    color: var(--realestate-white);
+    padding: 11px 22px;
+    border-radius: var(--realestate-radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: background-color 0.15s ease;
+  }
+  
+  .realestate-searchbar-submit:hover {
+    background-color: #14202f;
+  }
+  
+  /* Hero variant floats over the image */
+  .realestate-searchbar-hero {
+    width: 100%;
+    max-width: 920px;
+  }
+  
+  /* Page variant sits inline in normal document flow on /listings */
+  .realestate-searchbar-page {
+    width: 100%;
+    box-shadow: none;
+    border: 1px solid var(--realestate-border);
+  }
+  
+  @media (max-width: 860px) {
+    .realestate-searchbar {
+      flex-wrap: wrap;
+    }
+  
+    .realestate-searchbar-field {
+      flex: 1 1 45%;
+    }
+  
+    .realestate-searchbar-submit {
+      flex: 1 1 100%;
+      justify-content: center;
+    }
+  }

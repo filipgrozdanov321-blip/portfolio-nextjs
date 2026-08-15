@@ -1,0 +1,73 @@
+.shop-order-confirmation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 64px 24px;
+  }
+  
+  .shop-order-confirmation-icon {
+    color: var(--shop-accent);
+    margin-bottom: 20px;
+  }
+  
+  .shop-order-confirmation-heading {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  
+  .shop-order-confirmation-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--shop-black);
+    opacity: 0.8;
+    margin-bottom: 28px;
+  }
+  
+  .shop-order-confirmation-order-number {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px 28px;
+    background-color: var(--shop-white);
+    border: 1px solid var(--shop-border);
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
+  
+  .shop-order-confirmation-order-number-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--shop-gray);
+  }
+  
+  .shop-order-confirmation-order-number-value {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  
+  .shop-order-confirmation-demo-note {
+    font-size: 12px;
+    color: var(--shop-gray);
+    margin-bottom: 28px;
+  }
+  
+  .shop-order-confirmation-link {
+    padding: 14px 32px;
+    background-color: var(--shop-black);
+    color: var(--shop-white);
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 2px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .shop-order-confirmation-link:hover {
+    background-color: var(--shop-accent);
+  }

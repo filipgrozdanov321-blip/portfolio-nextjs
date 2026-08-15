@@ -1,0 +1,58 @@
+.booking-staff-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  background: var(--booking-card-bg);
+  border: 1.5px solid var(--booking-border);
+  border-radius: var(--booking-radius-md);
+  padding: var(--booking-space-4) var(--booking-space-2);
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.booking-staff-card:hover {
+  border-color: var(--booking-primary);
+}
+
+.booking-staff-card--selected {
+  border-color: var(--booking-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.booking-staff-card-check {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--booking-primary);
+  color: #FFFFFF;
+}
+
+.booking-staff-card-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--booking-bg);
+  color: var(--booking-text-secondary);
+}
+
+.booking-staff-card-name {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.booking-staff-card-role {
+  font-size: 0.78rem;
+  color: var(--booking-text-secondary);
+}

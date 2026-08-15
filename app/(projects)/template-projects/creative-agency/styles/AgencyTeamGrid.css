@@ -1,0 +1,51 @@
+.agency-team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem 2rem;
+  }
+  
+  .agency-team-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .agency-team-card-image {
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(135deg, #1a1a1a, #0D0D0D);
+    border: 1px solid var(--agency-border);
+    border-radius: 2px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .agency-team-card .agency-team-card-name {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--agency-off-white);
+  }
+  
+  .agency-team-card-role {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--agency-accent);
+  }
+  
+  .agency-team-card-line {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: var(--agency-gray);
+    line-height: 1.5;
+  }
+  
+  @media (max-width: 1024px) {
+    .agency-team-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .agency-team-grid {
+      grid-template-columns: 1fr;
+    }
+  }

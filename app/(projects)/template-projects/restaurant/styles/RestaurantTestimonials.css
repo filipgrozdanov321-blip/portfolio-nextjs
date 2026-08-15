@@ -1,0 +1,112 @@
+.restaurant-testimonials {
+    padding: 7rem 2rem;
+    background-color: var(--restaurant-burgundy);
+  }
+  
+  .restaurant-testimonials-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .restaurant-testimonials-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+  
+  .restaurant-testimonials-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--restaurant-gold);
+    margin-bottom: 0.75rem;
+  }
+  
+  .restaurant-testimonials-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--restaurant-cream);
+  }
+  
+  .restaurant-testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  
+  .restaurant-testimonials-card {
+    background-color: rgba(253, 251, 247, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 2px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  
+  .restaurant-testimonials-stars {
+    display: flex;
+    gap: 0.25rem;
+  }
+  
+  .restaurant-testimonials-star {
+    color: var(--restaurant-gold);
+    font-size: 1rem;
+  }
+  
+  .restaurant-testimonials-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.8;
+    color: var(--restaurant-cream);
+    flex: 1;
+  }
+  
+  .restaurant-testimonials-author {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(212, 175, 55, 0.15);
+  }
+  
+  .restaurant-testimonials-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--restaurant-gold);
+  }
+  
+  .restaurant-testimonials-location {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: rgba(253, 251, 247, 0.45);
+  }
+  
+  @media (max-width: 900px) {
+    .restaurant-testimonials-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  
+    .restaurant-testimonials-card:last-child {
+      grid-column: 1 / -1;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .restaurant-testimonials {
+      padding: 5rem 1.5rem;
+    }
+  
+    .restaurant-testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .restaurant-testimonials-card:last-child {
+      grid-column: auto;
+    }
+  }

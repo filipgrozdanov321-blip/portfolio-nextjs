@@ -1,0 +1,124 @@
+.agency-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(13, 13, 13, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--agency-border);
+  }
+  
+  .agency-navbar-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .agency-navbar-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    color: var(--agency-off-white);
+  }
+  
+  .agency-navbar-logo-dot {
+    color: var(--agency-accent);
+  }
+  
+  .agency-navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+  }
+  
+  .agency-navbar-link {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--agency-gray);
+    position: relative;
+    padding: 0.25rem 0;
+    transition: color 0.2s ease;
+  }
+  
+  .agency-navbar-link:hover {
+    color: var(--agency-off-white);
+  }
+  
+  .agency-navbar-link-active {
+    color: var(--agency-off-white);
+  }
+  
+  .agency-navbar-link-active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--agency-accent);
+  }
+  
+  .agency-navbar-cta {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--agency-black) !important;
+    background: var(--agency-accent);
+    padding: 0.65rem 1.4rem;
+    border-radius: 2px;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+  
+  .agency-navbar-cta:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+  }
+  
+  .agency-navbar-toggle {
+    display: none;
+    background: none;
+    color: var(--agency-off-white);
+  }
+  
+  @media (max-width: 768px) {
+    .agency-navbar-links {
+      position: fixed;
+      top: 73px;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      background: var(--agency-black);
+      border-bottom: 1px solid var(--agency-border);
+      padding: 1rem 2rem 2rem;
+      transform: translateY(-150%);
+      opacity: 0;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+  
+    .agency-navbar-links-open {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  
+    .agency-navbar-link {
+      width: 100%;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--agency-border);
+    }
+  
+    .agency-navbar-cta {
+      margin-top: 1rem;
+      text-align: center;
+      width: 100%;
+    }
+  
+    .agency-navbar-toggle {
+      display: block;
+    }
+  }

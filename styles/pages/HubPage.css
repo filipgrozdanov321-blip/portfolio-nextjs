@@ -1,0 +1,25 @@
+.hub-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; /* stack elements vertically */
+  align-items: center;
+  background-color: #fcfcfc; /* matches hero */
+}
+
+/* If you ever use hub-title again */
+.hub-title {
+  margin: 40px 0;
+  font-size: 52px;
+  color: #fff;
+}
+
+/* Cards section */
+.hub-grid {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  padding: 3rem 0; /* space around cards */
+}

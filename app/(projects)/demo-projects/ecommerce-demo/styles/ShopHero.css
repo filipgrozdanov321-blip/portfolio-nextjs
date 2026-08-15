@@ -1,0 +1,106 @@
+.shop-hero {
+    position: relative;
+    width: 100%;
+    height: 68vh;
+    min-height: 440px;
+    max-height: 680px;
+    overflow: hidden;
+  }
+
+  .shop-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(26, 26, 24, 0.05) 0%, rgba(26, 26, 24, 0.55) 100%),
+      linear-gradient(90deg, rgba(26, 26, 24, 0.5) 0%, rgba(26, 26, 24, 0.15) 45%, rgba(26, 26, 24, 0) 100%);
+  }
+  
+  .shop-hero-image-wrapper {
+    position: absolute;
+    inset: 0;
+  }
+  
+  .shop-hero-image {
+    object-fit: cover;
+  }
+  
+  .shop-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(26, 26, 24, 0.05) 0%,
+      rgba(26, 26, 24, 0.35) 100%
+    );
+  }
+  
+  .shop-hero-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 32px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    color: var(--shop-white);
+  }
+  
+  .shop-hero-eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    opacity: 0.9;
+  }
+  
+  .shop-hero-heading {
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.15;
+    max-width: 560px;
+    margin-bottom: 16px;
+  }
+  
+  .shop-hero-subtext {
+    font-size: 15px;
+    font-weight: 400;
+    max-width: 420px;
+    margin-bottom: 28px;
+    opacity: 0.92;
+  }
+  
+  .shop-hero-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 28px;
+    background-color: var(--shop-white);
+    color: var(--shop-black);
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 2px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  
+  .shop-hero-cta:hover {
+    background-color: var(--shop-accent);
+    color: var(--shop-white);
+  }
+  
+  @media (max-width: 640px) {
+    .shop-hero {
+      height: 56vh;
+      min-height: 380px;
+    }
+  
+    .shop-hero-content {
+      padding: 0 20px 40px;
+    }
+  
+    .shop-hero-heading {
+      font-size: 30px;
+    }
+  }

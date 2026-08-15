@@ -1,0 +1,106 @@
+.portfolio-gallery {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+  
+  .portfolio-gallery-tabs {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--portfolio-border);
+    padding-bottom: 1.25rem;
+  }
+  
+  .portfolio-gallery-tab {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--portfolio-gray);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem 0;
+    position: relative;
+    transition: color 0.2s ease;
+  }
+  
+  .portfolio-gallery-tab:hover {
+    color: var(--portfolio-black);
+  }
+  
+  .portfolio-gallery-tab-active {
+    color: var(--portfolio-black);
+    font-weight: 500;
+  }
+  
+  .portfolio-gallery-tab-active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1.35rem;
+    width: 100%;
+    height: 1px;
+    background-color: var(--portfolio-accent);
+  }
+  
+  .portfolio-gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+  }
+
+  .portfolio-gallery-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+    flex: 1 1 100%;
+  }
+  
+  .portfolio-gallery-item {
+    position: relative;
+    width: calc(33.333% - 0.834rem);
+    aspect-ratio: 3 / 4;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background-color: var(--portfolio-border);
+    display: block;
+    overflow: hidden;
+  }
+  
+  .portfolio-gallery-item:nth-child(3n + 2) {
+    aspect-ratio: 3 / 4;
+  }
+
+  .portfolio-gallery-row .portfolio-gallery-item {
+    aspect-ratio: 3 / 4;
+  }
+  
+  .portfolio-gallery-image {
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  
+  .portfolio-gallery-item:hover .portfolio-gallery-image {
+    transform: scale(1.03);
+  }
+  
+  @media (max-width: 900px) {
+    .portfolio-gallery-item {
+      width: calc(50% - 0.625rem);
+    }
+  
+    .portfolio-gallery-tabs {
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+  }
+  
+  @media (max-width: 560px) {
+    .portfolio-gallery-item {
+      width: 100%;
+    }
+  }

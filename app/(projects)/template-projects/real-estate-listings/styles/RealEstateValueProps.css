@@ -1,0 +1,62 @@
+.realestate-valueprops {
+    background-color: var(--realestate-white);
+  }
+  
+  .realestate-valueprops-header {
+    max-width: 560px;
+    margin-bottom: 44px;
+  }
+  
+  .realestate-valueprops-title {
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 8px;
+  }
+  
+  .realestate-valueprops-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+  
+  .realestate-valueprops-card {
+    padding: 28px 22px;
+    border: 1px solid var(--realestate-border);
+    border-radius: var(--realestate-radius-md);
+  }
+  
+  .realestate-valueprops-icon {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--realestate-radius-sm);
+    background-color: var(--realestate-gold-soft);
+    color: var(--realestate-gold);
+    margin-bottom: 18px;
+  }
+  
+  .realestate-valueprops-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .realestate-valueprops-card p {
+    font-size: 14px;
+    color: var(--realestate-gray);
+    line-height: 1.6;
+  }
+  
+  @media (max-width: 960px) {
+    .realestate-valueprops-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .realestate-valueprops-grid {
+      grid-template-columns: 1fr;
+    }
+  }

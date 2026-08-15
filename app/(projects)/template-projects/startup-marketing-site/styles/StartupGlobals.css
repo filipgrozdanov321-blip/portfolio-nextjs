@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --startup-black: #0B0C10;
+  --startup-white: #F4F5F7;
+  --startup-accent: #6C5CE7;
+  --startup-accent-hover: #5843D6;
+  --startup-gray: #8A8D93;
+  --startup-border: rgba(244, 245, 247, 0.1);
+  --startup-success: #34D399;
+}
+
+/* Scoped to .startup-shell so nothing leaks into the rest of the portfolio */
+.startup-shell * {
+  box-sizing: border-box;
+}
+
+.startup-shell {
+  background: var(--startup-black);
+  background-image: radial-gradient(circle, rgba(244, 245, 247, 0.045) 1px, transparent 1px);
+  background-size: 26px 26px;
+  color: var(--startup-white);
+  font-family: "Inter", sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.startup-shell h1,
+.startup-shell h2,
+.startup-shell h3,
+.startup-shell h4 {
+  font-family: "Sora", sans-serif;
+  color: var(--startup-white);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.startup-shell p {
+  margin: 0;
+}
+
+.startup-shell a {
+  color: inherit;
+}
+
+.startup-shell button {
+  font-family: inherit;
+}
+
+.startup-shell ::selection {
+  background: var(--startup-accent);
+  color: var(--startup-white);
+}
+
+.startup-container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.startup-mono {
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: 0.04em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .startup-shell * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

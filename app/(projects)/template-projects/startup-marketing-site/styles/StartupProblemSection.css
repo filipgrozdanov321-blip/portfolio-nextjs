@@ -1,0 +1,37 @@
+.startup-problem {
+    padding: 88px 0;
+  }
+  
+  .startup-problem-inner {
+    max-width: 720px;
+  }
+  
+  .startup-problem-eyebrow {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--startup-gray);
+    margin-bottom: 20px;
+  }
+  
+  .startup-problem-headline {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    line-height: 1.25;
+    font-weight: 700;
+    margin-bottom: 22px;
+  }
+  
+  .startup-problem-body {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--startup-gray);
+    margin-bottom: 18px;
+  }
+  
+  .startup-problem-highlight {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--startup-white);
+    border-left: 2px solid var(--startup-accent);
+    padding-left: 18px;
+  }

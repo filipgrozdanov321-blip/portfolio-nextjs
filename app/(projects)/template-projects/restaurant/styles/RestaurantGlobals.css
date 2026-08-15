@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --restaurant-burgundy: #58111A;
+  --restaurant-cream: #FDFBF7;
+  --restaurant-charcoal: #1C1A1A;
+  --restaurant-gold: #D4AF37;
+  --restaurant-gold-hover: #b8960c;
+  --restaurant-border: rgba(212, 175, 55, 0.2);
+}
+
+.restaurant-root {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--restaurant-cream);
+  color: var(--restaurant-charcoal);
+}
+
+.restaurant-root *,
+.restaurant-root *::before,
+.restaurant-root *::after {
+  box-sizing: border-box;
+}
+
+.restaurant-root h1,
+.restaurant-root h2,
+.restaurant-root h3,
+.restaurant-root h4 {
+  font-family: 'Playfair Display', serif;
+}

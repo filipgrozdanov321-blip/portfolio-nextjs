@@ -1,0 +1,394 @@
+/* =====================
+   HABIT CARD
+===================== */
+.habit-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+    background-color: #f7f9fc;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin: 10px 0;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+  
+    max-width: 400px;
+  
+    position: relative;
+    overflow: hidden; /* 🔑 hard containment */
+  }
+
+.habit-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* restored spacing */
+  }
+
+  .habit-card__expandable {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .popup,
+.edit-form {
+  contain: layout paint;
+}
+
+.habit-card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #000;
+    align-self: self-start;
+}
+
+.habit-card .paragraph {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #555;
+    align-self: self-start;
+}
+
+/* =====================
+   PROGRESS BAR
+===================== */
+.progress-container {
+    width: 100%;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4caf50;
+    border-radius: 5px;
+    transition: width 0.4s ease-in-out;
+}
+
+/* =====================
+   ADD DAY BUTTON
+===================== */
+.add-day-button {
+    align-self: flex-start;
+
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+
+    font-size: 1rem;
+    font-weight: 500;
+
+    background-color: #1a1a1a;
+    color: #fff;
+
+    cursor: pointer;
+    width: fit-content;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.add-day-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+.add-day-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* =====================
+   HABIT ACTION BUTTONS
+===================== */
+.habit-buttons {
+    display: flex;
+    flex-direction: column; /* 🔑 THIS IS THE KEY */
+    gap: 12px;
+    width: 100%;
+}
+
+.habit-buttons__actions {
+    display: flex;
+    gap: 10px;
+
+    max-height: 60px;
+    overflow: hidden;
+
+    transition:
+        max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.3s ease;
+}
+
+.habit-buttons__actions.hidden {
+    max-height: 0;
+    transform: translateY(-6px);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+  
+    overflow: hidden;
+    max-height: 60px; /* enough for buttons */
+    opacity: 1;
+  
+    pointer-events: auto;
+  
+    transition:
+      max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.6s ease;
+  }
+  
+  
+  .action-buttons--hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .buttons-swap {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .buttons-swap button {
+    padding: 0.5rem 1.1rem;
+    border-radius: 10px;
+    border: none;
+  
+    font-size: 1rem;
+    font-weight: 600;
+  
+    cursor: pointer;
+    color: white;
+  
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+  
+  .buttons-swap button:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn-primary {
+    background-color: #1976d2;
+  }
+  
+  .btn-primary:hover {
+    background-color: #1565c0;
+  }
+  
+  .btn-danger {
+    background-color: #e53935;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c62828;
+  }
+  
+
+/* .habit-buttons button {
+    padding: 0.5rem 1.1rem;
+    border-radius: 10px;
+    border: none;
+
+    font-size: 1rem;
+    font-weight: 600;
+
+    cursor: pointer;
+    color: white;
+    background-color: #1976d2;
+
+    transition: background-color 0.2s ease;
+} */
+
+.habit-buttons button:hover {
+    background-color: #1565c0;
+}
+
+.habit-buttons button:last-child {
+    background-color: #e53935;
+}
+
+.habit-buttons button:last-child:hover {
+    background-color: #c62828;
+}
+
+/* =====================
+   POPUP
+===================== */
+.popup {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+
+    padding: 16px;
+
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    opacity: 0;
+    transform: translateY(-12px) scale(0.95);
+    pointer-events: none;
+
+    transition:
+    max-height 1s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.6s ease 0.15s,
+    transform 0.5s ease 0.15s; 
+}
+
+.popup--open {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 250px; /* just enough for content */
+    padding-bottom: 1rem;
+    pointer-events: auto;
+}
+
+.popup__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+
+.popup p {
+    text-align: center;
+    margin: 0;
+    font-size: 1rem;
+    color: #111;
+}
+
+/* Popup buttons */
+.popup button {
+    width: 100%;
+    padding: 0.5rem 1.1rem;
+    border-radius: 10px;
+    border: none;
+
+    font-size: 1rem;
+    font-weight: 600;
+
+    cursor: pointer;
+    color: white;
+    background-color: #111;
+
+    transition: background-color 0.2s ease;
+}
+
+.popup button:first-of-type {
+    background-color: #28a745;
+}
+
+.popup button:first-of-type:hover {
+    background-color: #078f26;
+}
+
+.popup button:last-of-type {
+    background-color: #dc3545;
+}
+
+.popup button:last-of-type:hover {
+    background-color: #b41525;
+}
+
+/* =====================
+   EDIT FORM
+===================== */
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-6px);
+  
+    transition:
+      max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.4s ease,
+      transform 0.4s ease;
+  
+    will-change: max-height, opacity, transform;
+  }
+  
+  .edit-form--open {
+    max-height: 260px; /* must be large enough for full form */
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+
+.edit-form input {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 0.6rem;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+
+    font-size: 1rem;
+    background-color: #f7f9fc;
+    color: #333;
+}
+
+.edit-form input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+    -webkit-appearance: none;
+}
+
+/* .edit-form .edit-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-form .edit-buttons button {
+    padding: 0.5rem 1.1rem;
+    border-radius: 10px;
+    border: none;
+
+    font-size: 1rem;
+    font-weight: 600;
+
+    cursor: pointer;
+    color: white;
+    background-color: #1976d2;
+
+    transition: background-color 0.2s ease, transform 0.2s ease;
+} */
+
+.edit-form .edit-buttons button:hover {
+    background-color: #1565c0;
+}
+
+.edit-form .edit-buttons button:last-child {
+    background-color: #c62828;
+}
+
+.edit-form .edit-buttons button:last-child:hover {
+    background-color: #c62828;
+}
+
+.habit-card--completed .btn-danger {
+    background-color: #e53935; /* green instead of red */
+    margin-top: 12px;
+  }
+  
+  .habit-card--completed .btn-danger:hover {
+    background-color: #c62828;
+  }
+  

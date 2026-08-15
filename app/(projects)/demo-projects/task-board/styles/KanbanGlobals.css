@@ -1,0 +1,34 @@
+:root {
+  --kanban-bg: #F1F2F6;
+  --kanban-column-bg: #EBECF0;
+  --kanban-card-bg: #FFFFFF;
+  --kanban-text: #172B4D;
+  --kanban-text-secondary: #5E6C84;
+  --kanban-accent: #0052CC;
+  --kanban-priority-low: #36B37E;
+  --kanban-priority-medium: #FFAB00;
+  --kanban-priority-high: #DE350B;
+  --kanban-wip-safe: #36B37E;
+  --kanban-wip-warning: #FFAB00;
+  --kanban-wip-danger: #DE350B;
+}
+
+.kanban-page {
+  font-family: var(--kanban-font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--kanban-bg);
+  min-height: 100vh;
+  color: var(--kanban-text);
+}
+
+.kanban-page *,
+.kanban-page *::before,
+.kanban-page *::after {
+  box-sizing: border-box;
+}
+
+.kanban-page button,
+.kanban-page input,
+.kanban-page textarea,
+.kanban-page select {
+  font-family: inherit;
+}

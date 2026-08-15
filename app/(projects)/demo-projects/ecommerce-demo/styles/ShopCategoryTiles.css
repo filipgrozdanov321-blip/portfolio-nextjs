@@ -1,0 +1,60 @@
+.shop-category-tiles-section {
+    padding: 8px 0 80px;
+  }
+  
+  .shop-category-tiles-heading {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 28px;
+  }
+  
+  .shop-category-tiles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  
+  .shop-category-tile {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    aspect-ratio: 3 / 4;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  
+  .shop-category-tile-image-wrapper {
+    position: absolute;
+    inset: 0;
+  }
+  
+  .shop-category-tile-image {
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .shop-category-tile:hover .shop-category-tile-image {
+    transform: scale(1.05);
+  }
+  
+  .shop-category-tile::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(26, 26, 24, 0) 40%, rgba(26, 26, 24, 0.55) 100%);
+  }
+  
+  .shop-category-tile-label {
+    position: relative;
+    z-index: 1;
+    padding: 16px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--shop-white);
+  }
+  
+  @media (max-width: 768px) {
+    .shop-category-tiles-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }

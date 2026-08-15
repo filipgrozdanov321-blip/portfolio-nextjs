@@ -1,0 +1,70 @@
+.startup-founder-note {
+    padding: 88px 0;
+    border-top: 1px solid var(--startup-border);
+  }
+  
+  .startup-founder-note-inner {
+    display: flex;
+    gap: 36px;
+    align-items: flex-start;
+    max-width: 780px;
+  }
+  
+  .startup-founder-note-avatar {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(108, 92, 231, 0.15);
+    border: 1px solid rgba(108, 92, 231, 0.3);
+    color: var(--startup-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Sora", sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  
+  .startup-founder-note-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .startup-founder-note-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--startup-gray);
+  }
+  
+  .startup-founder-note-quote {
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: var(--startup-white);
+    font-style: italic;
+  }
+  
+  .startup-founder-note-attribution {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .startup-founder-note-name {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--startup-white);
+  }
+  
+  .startup-founder-note-title {
+    font-size: 0.82rem;
+    color: var(--startup-gray);
+  }
+  
+  @media (max-width: 600px) {
+    .startup-founder-note-inner {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }

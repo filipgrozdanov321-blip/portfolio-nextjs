@@ -1,0 +1,215 @@
+/* ============================= */
+/* SECTION BASE */
+/* ============================= */
+
+.businesses-thrive {
+  width: 100%;
+  background-color: #fcfcfc;
+  color: #111;
+}
+
+.bt-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ============================= */
+/* TITLE + SUBTITLE */
+/* ============================= */
+
+.heading {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: opacity 1s ease, transform 1s ease;
+  transition-delay: 1.2s;
+}
+
+.heading.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.bt-under-header {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  margin-bottom: 3rem;
+  max-width: 850px;
+  margin-inline: auto;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.bt-under-header.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================= */
+/* GRID */
+/* ============================= */
+
+.bt-grid {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ============================= */
+/* COLUMNS (OWN THE TIMING) */
+/* ============================= */
+
+.bt-column-left,
+.bt-column-right {
+  opacity: 0;
+  position: relative;
+  padding-bottom: 3rem;
+}
+
+.bt-column-left {
+  transform: translateX(-100px);
+}
+
+.bt-column-right {
+  transform: translateX(100px);
+}
+
+.bt-column-left.visible {
+  animation: slideInFromLeft 1s forwards;
+}
+
+.bt-column-right.visible {
+  animation: slideInFromRight 1s forwards;
+}
+
+/* ============================= */
+/* HEADERS */
+/* ============================= */
+
+.bt-column-left h3,
+.bt-column-right h3 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+.problems {
+  color: #ef4444;
+}
+
+.solutions {
+  color: #22c55e;
+}
+
+/* ============================= */
+/* CARDS */
+/* ============================= */
+
+.bt-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 2rem;
+}
+
+/* Column Hover (for problems and solutions) */
+.bt-column-left .problems + .bt-card {
+  box-shadow:
+    0 16px 38px rgba(239, 68, 68, 0.28),
+    0 6px 14px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bt-column-right .solutions + .bt-card {
+  box-shadow:
+    0 16px 38px rgba(34, 197, 94, 0.28),
+    0 6px 14px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* On hover */
+.bt-column-left .problems + .bt-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 30px 60px rgba(239, 68, 68, 0.4),
+    0 12px 24px rgba(0, 0, 0, 0.18);
+}
+
+.bt-column-right .solutions + .bt-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 30px 60px rgba(34, 197, 94, 0.4),
+    0 12px 24px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ============================= */
+/* LIST BASE (INERT) */
+/* ============================= */
+
+.bt-card ul {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  list-style: disc;
+  padding: 1rem 0rem 1rem 1.5rem;
+  text-align: left;
+  margin: 0;
+}
+
+.bt-card li {
+  opacity: 0;
+  transform: translateY(10px);
+  /* margin-bottom: 0.8rem; */
+}
+
+.bt-card.left li.animate {
+  animation: fadeInFromLeft 0.6s ease forwards;
+}
+
+.bt-card.right li.animate {
+  animation: fadeInFromRight 0.6s ease forwards;
+}
+
+.bt-card li.animate:nth-child(1) { animation-delay: 0s; }
+.bt-card li.animate:nth-child(2) { animation-delay: 0.4s; }
+.bt-card li.animate:nth-child(3) { animation-delay: 0.8s; }
+.bt-card li.animate:nth-child(4) { animation-delay: 1.2s; }
+.bt-card li.animate:nth-child(5) { animation-delay: 1.6s; }
+
+
+/* ============================= */
+/* KEYFRAMES */
+/* ============================= */
+
+@keyframes slideInFromRight {
+  from { opacity: 0; transform: translateX(100px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInFromLeft {
+  from { opacity: 0; transform: translateX(-100px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInFromLeft {
+  from { opacity: 0; transform: translateX(-25px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInFromRight {
+  from { opacity: 0; transform: translateX(25px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 768px) {
+  .bt-grid {
+    flex-direction: column;
+  }
+}

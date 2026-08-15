@@ -1,0 +1,29 @@
+.booking-confirm-card {
+  background: var(--booking-bg);
+  border: 1px solid var(--booking-border);
+  border-radius: var(--booking-radius-md);
+  padding: var(--booking-space-5);
+}
+
+.booking-confirm-row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--booking-space-4);
+  padding: var(--booking-space-2) 0;
+  font-size: 0.92rem;
+}
+
+.booking-confirm-label {
+  color: var(--booking-text-secondary);
+}
+
+.booking-confirm-value {
+  font-weight: 600;
+  text-align: right;
+}
+
+.booking-confirm-divider {
+  height: 1px;
+  background: var(--booking-border);
+  margin: var(--booking-space-3) 0;
+}

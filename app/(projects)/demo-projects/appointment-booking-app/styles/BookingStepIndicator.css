@@ -1,0 +1,80 @@
+.booking-step-indicator {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 36px;
+}
+
+.booking-step-indicator-item {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  position: relative;
+}
+
+.booking-step-indicator-item:last-child {
+  flex: 0;
+}
+
+.booking-step-indicator-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  background: var(--booking-card-bg);
+  border: 2px solid var(--booking-border);
+  color: var(--booking-text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.booking-step-indicator-circle--active {
+  border-color: var(--booking-primary);
+  color: var(--booking-primary);
+}
+
+.booking-step-indicator-circle--completed {
+  border-color: var(--booking-primary);
+  background: var(--booking-primary);
+  color: #FFFFFF;
+}
+
+.booking-step-indicator-label {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  color: var(--booking-text-secondary);
+}
+
+.booking-step-indicator-label--active {
+  color: var(--booking-text);
+  font-weight: 600;
+}
+
+.booking-step-indicator-connector {
+  flex: 1;
+  height: 2px;
+  background: var(--booking-border);
+  margin: 0 var(--booking-space-2);
+}
+
+.booking-step-indicator-connector--completed {
+  background: var(--booking-primary);
+}
+
+@media (max-width: 480px) {
+  .booking-step-indicator-label {
+    font-size: 0.65rem;
+  }
+  .booking-step-indicator-circle {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    font-size: 0.75rem;
+  }
+}

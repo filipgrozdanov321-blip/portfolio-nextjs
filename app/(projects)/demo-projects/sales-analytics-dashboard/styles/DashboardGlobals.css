@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --dashboard-bg: #F8F9FB;
+  --dashboard-card: #FFFFFF;
+  --dashboard-text: #111827;
+  --dashboard-text-secondary: #6B7280;
+  --dashboard-primary: #10B981;
+  --dashboard-secondary: #F59E0B;
+  --dashboard-danger: #EF4444;
+  --dashboard-border: #E5E7EB;
+
+  --dashboard-radius: 12px;
+  --dashboard-radius-sm: 8px;
+  --dashboard-shadow: 0 1px 2px rgba(17, 24, 39, 0.04), 0 2px 8px rgba(17, 24, 39, 0.04);
+  --dashboard-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.dashboard-page {
+  min-height: 100vh;
+  background-color: var(--dashboard-bg);
+  color: var(--dashboard-text);
+  font-family: var(--dashboard-font);
+  padding: 60px clamp(16px, 4vw, 48px) 64px;
+}
+
+.dashboard-page,
+.dashboard-page * {
+  box-sizing: border-box;
+}
+
+/* Shared card shell used by KPI tiles, chart panels, and the products table */
+.dashboard-card {
+  background-color: var(--dashboard-card);
+  border: 1px solid var(--dashboard-border);
+  border-radius: var(--dashboard-radius);
+  box-shadow: var(--dashboard-shadow);
+}
+
+/* Applied to any element showing a KPI figure so digits stay aligned */
+.dashboard-numeric {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.dashboard-section {
+  margin-top: 24px;
+}
+
+.dashboard-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.dashboard-grid-2 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .dashboard-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .dashboard-grid-4 {
+    grid-template-columns: 1fr;
+  }
+}

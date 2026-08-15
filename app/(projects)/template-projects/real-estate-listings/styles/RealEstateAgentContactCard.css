@@ -1,0 +1,113 @@
+.realestate-agentcontactcard {
+    background-color: var(--realestate-white);
+    border: 1px solid var(--realestate-border);
+    border-radius: var(--realestate-radius-md);
+    padding: 24px;
+    position: sticky;
+    top: 96px;
+  }
+  
+  .realestate-agentcontactcard-agent {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--realestate-border);
+  }
+  
+  .realestate-agentcontactcard-photo {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .realestate-agentcontactcard-name {
+    font-size: 15px;
+    font-weight: 700;
+  }
+  
+  .realestate-agentcontactcard-title {
+    font-size: 13px;
+    color: var(--realestate-gray);
+    margin-top: 2px;
+  }
+  
+  .realestate-agentcontactcard-direct {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--realestate-border);
+  }
+  
+  .realestate-agentcontactcard-direct a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--realestate-navy);
+  }
+  
+  .realestate-agentcontactcard-direct svg {
+    color: var(--realestate-gold);
+  }
+  
+  .realestate-agentcontactcard-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 20px;
+  }
+  
+  .realestate-agentcontactcard-form-label {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--realestate-navy);
+    margin-bottom: 2px;
+  }
+  
+  .realestate-agentcontactcard-form input,
+  .realestate-agentcontactcard-form textarea {
+    border: 1px solid var(--realestate-border);
+    border-radius: var(--realestate-radius-sm);
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    color: var(--realestate-navy);
+    resize: none;
+  }
+  
+  .realestate-agentcontactcard-form input:focus,
+  .realestate-agentcontactcard-form textarea:focus {
+    outline: 2px solid var(--realestate-gold);
+    outline-offset: 1px;
+  }
+  
+  .realestate-agentcontactcard-form button {
+    margin-top: 4px;
+    width: 100%;
+  }
+  
+  .realestate-agentcontactcard-success {
+    padding-top: 20px;
+  }
+  
+  .realestate-agentcontactcard-success p {
+    font-size: 14px;
+    color: var(--realestate-navy);
+    line-height: 1.6;
+  }
+  
+  .realestate-agentcontactcard-success-sub {
+    margin-top: 8px;
+    font-size: 12.5px;
+    color: var(--realestate-gray);
+  }
+  
+  @media (max-width: 860px) {
+    .realestate-agentcontactcard {
+      position: static;
+    }
+  }

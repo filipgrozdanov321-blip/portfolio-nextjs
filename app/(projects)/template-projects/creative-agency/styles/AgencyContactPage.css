@@ -1,0 +1,91 @@
+.agency-contact-page {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 6rem 2rem 6rem;
+  }
+  
+  .agency-contact-page-header {
+    max-width: 800px;
+    margin-bottom: 4rem;
+  }
+  
+  .agency-contact-page-header .agency-contact-page-title {
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--agency-off-white);
+  }
+  
+  .agency-contact-page-body {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+  }
+  
+  .agency-contact-page-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding-top: 0.5rem;
+  }
+  
+  .agency-contact-page-info-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .agency-contact-page-info-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--agency-gray);
+  }
+  
+  .agency-contact-page-email {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    color: var(--agency-off-white);
+    border-bottom: 1px solid var(--agency-border);
+    width: fit-content;
+    padding-bottom: 2px;
+    transition: border-color 0.2s ease;
+  }
+  
+  .agency-contact-page-email:hover {
+    border-color: var(--agency-accent);
+  }
+  
+  .agency-contact-page-socials {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  
+  .agency-contact-page-social {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--agency-gray);
+    transition: color 0.2s ease;
+    width: fit-content;
+  }
+  
+  .agency-contact-page-social:hover {
+    color: var(--agency-accent);
+  }
+  
+  @media (max-width: 900px) {
+    .agency-contact-page-body {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .agency-contact-page {
+      padding: 5rem 1.5rem 5rem;
+    }
+  }

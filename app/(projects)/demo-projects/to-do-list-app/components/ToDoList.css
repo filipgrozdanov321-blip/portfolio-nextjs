@@ -1,0 +1,27 @@
+h2 {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.todo-list-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 2rem;
+}
+
+.todo-list-container h2 {
+  text-align: center;     /* ⬅ center title only */
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+

@@ -1,0 +1,113 @@
+.portfolio-hero {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    min-height: 560px;
+    overflow: hidden;
+  }
+  
+  .portfolio-hero-image {
+    object-fit: cover;
+  }
+  
+  .portfolio-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(20, 19, 15, 0.65) 0%,
+      rgba(20, 19, 15, 0.15) 45%,
+      rgba(20, 19, 15, 0.35) 100%
+    );
+  }
+  
+  .portfolio-hero-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  .portfolio-hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 4rem;
+    font-weight: 500;
+    color: var(--portfolio-white);
+    margin: 0 0 0.75rem;
+    letter-spacing: 0.01em;
+  }
+  
+  .portfolio-hero-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: rgba(250, 249, 246, 0.9);
+    max-width: 480px;
+    line-height: 1.6;
+    margin: 0 0 2rem;
+  }
+  
+  .portfolio-hero-actions {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .portfolio-hero-btn-primary,
+  .portfolio-hero-btn-secondary {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.85rem 1.75rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  
+  .portfolio-hero-btn-primary {
+    background-color: var(--portfolio-accent);
+    color: var(--portfolio-white);
+    border: 1px solid var(--portfolio-accent);
+  }
+  
+  .portfolio-hero-btn-primary:hover {
+    background-color: #97663f;
+    border-color: #97663f;
+  }
+  
+  .portfolio-hero-btn-secondary {
+    background-color: transparent;
+    color: var(--portfolio-white);
+    border: 1px solid rgba(250, 249, 246, 0.6);
+  }
+  
+  .portfolio-hero-btn-secondary:hover {
+    background-color: rgba(250, 249, 246, 0.1);
+    border-color: var(--portfolio-white);
+  }
+  
+  @media (max-width: 768px) {
+    .portfolio-hero-title {
+      font-size: 2.6rem;
+    }
+  
+    .portfolio-hero-subtitle {
+      font-size: 0.95rem;
+    }
+  
+    .portfolio-hero-actions {
+      flex-direction: column;
+      width: 100%;
+    }
+  
+    .portfolio-hero-btn-primary,
+    .portfolio-hero-btn-secondary {
+      text-align: center;
+      width: 100%;
+    }
+  }

@@ -1,0 +1,23 @@
+.shop-product-detail-page {
+    padding: 40px 32px 88px;
+  }
+  
+  .shop-product-detail-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  
+  @media (max-width: 900px) {
+    .shop-product-detail-layout {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .shop-product-detail-page {
+      padding: 24px 20px 56px;
+    }
+  }

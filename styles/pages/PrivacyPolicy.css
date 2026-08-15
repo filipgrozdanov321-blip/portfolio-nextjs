@@ -1,0 +1,83 @@
+/* Root container */
+.privacy-policy {
+    background-color: #fcfcfc;
+    color: #111;
+    width: 100%;
+  }
+  
+  /* Content wrapper */
+  .privacy-policy__container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 96px 24px;
+  }
+  
+  /* Header */
+  .privacy-policy__header {
+    margin-bottom: 64px;
+  }
+  
+  .privacy-policy__title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  
+  .privacy-policy__effective-date {
+    font-size: 0.95rem;
+    opacity: 0.7;
+  }
+  
+  /* Sections */
+  .privacy-policy__section {
+    margin-bottom: 56px;
+  }
+  
+  /* Headings */
+  .privacy-policy__heading {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  
+  /* Text */
+  .privacy-policy__text {
+    font-size: 1rem;
+    line-height: 1.75;
+    margin-bottom: 14px;
+  }
+  
+  /* Lists */
+  .privacy-policy__list {
+    padding-left: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .privacy-policy__list li {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+  
+  /* Email styling */
+  .privacy-policy__email {
+    font-weight: 500;
+    word-break: break-all;
+  }
+  
+  /* Subtle visual rhythm on large screens */
+  @media (min-width: 768px) {
+    .privacy-policy__container {
+      padding: 120px 32px;
+    }
+  
+    .privacy-policy__title {
+      font-size: 2.8rem;
+    }
+  
+    .privacy-policy__heading {
+      font-size: 1.5rem;
+    }
+  }
+  

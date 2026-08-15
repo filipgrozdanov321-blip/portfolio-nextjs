@@ -1,0 +1,43 @@
+.shop-product-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .shop-product-gallery-main {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background-color: var(--shop-cream);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  
+  .shop-product-gallery-main-image {
+    object-fit: cover;
+  }
+  
+  .shop-product-gallery-thumbnails {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .shop-product-gallery-thumbnail {
+    position: relative;
+    width: 72px;
+    height: 88px;
+    flex-shrink: 0;
+    border-radius: 2px;
+    overflow: hidden;
+    background-color: var(--shop-cream);
+    border: 1.5px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+  
+  .shop-product-gallery-thumbnail-active {
+    border-color: var(--shop-black);
+  }
+  
+  .shop-product-gallery-thumbnail-image {
+    object-fit: cover;
+  }

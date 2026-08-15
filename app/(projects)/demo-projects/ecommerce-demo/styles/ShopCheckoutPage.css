@@ -1,0 +1,33 @@
+.shop-checkout-page {
+    padding: 48px 32px 96px;
+    max-width: 720px;
+  }
+  
+  .shop-checkout-page-heading {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 28px;
+  }
+  
+  .shop-checkout-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 80px 24px;
+    text-align: center;
+    color: var(--shop-gray);
+    font-size: 14px;
+  }
+  
+  .shop-checkout-empty-link {
+    font-weight: 600;
+    color: var(--shop-accent);
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 640px) {
+    .shop-checkout-page {
+      padding: 32px 20px 64px;
+    }
+  }

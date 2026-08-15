@@ -1,0 +1,120 @@
+.portfolio-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: var(--portfolio-white);
+    border-bottom: 1px solid var(--portfolio-border);
+  }
+  
+  .portfolio-navbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .portfolio-navbar-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: var(--portfolio-black);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  
+  .portfolio-navbar-links-desktop {
+    display: flex;
+    align-items: center;
+    gap: 2.25rem;
+  }
+  
+  .portfolio-navbar-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--portfolio-black);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 0.25rem;
+    transition: color 0.2s ease;
+  }
+  
+  .portfolio-navbar-link:hover {
+    color: var(--portfolio-accent);
+  }
+  
+  .portfolio-navbar-link-active {
+    color: var(--portfolio-accent);
+  }
+  
+  .portfolio-navbar-link-active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--portfolio-accent);
+  }
+  
+  .portfolio-navbar-cta {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--portfolio-white);
+    background-color: var(--portfolio-accent);
+    padding: 0.65rem 1.4rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+  }
+  
+  .portfolio-navbar-cta:hover {
+    background-color: #97663f;
+  }
+  
+  .portfolio-navbar-cta-mobile {
+    display: inline-block;
+    margin-top: 1rem;
+  }
+  
+  .portfolio-navbar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--portfolio-black);
+    cursor: pointer;
+    padding: 0.25rem;
+  }
+  
+  .portfolio-navbar-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 2rem 1.5rem;
+    border-top: 1px solid var(--portfolio-border);
+  }
+  
+  .portfolio-navbar-mobile-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: var(--portfolio-black);
+    text-decoration: none;
+  }
+  
+  @media (max-width: 768px) {
+    .portfolio-navbar-links-desktop,
+    .portfolio-navbar-cta-desktop {
+      display: none;
+    }
+  
+    .portfolio-navbar-toggle {
+      display: block;
+    }
+  
+    .portfolio-navbar-inner {
+      padding: 1.1rem 1.25rem;
+    }
+  }

@@ -1,0 +1,26 @@
+.realestate-cta {
+    background-color: var(--realestate-navy);
+    padding: 80px 24px;
+  }
+  
+  .realestate-cta-inner {
+    text-align: center;
+    max-width: 560px;
+  }
+  
+  .realestate-cta-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--realestate-white);
+  }
+  
+  .realestate-cta-text {
+    font-size: 15.5px;
+    color: rgba(255, 255, 255, 0.75);
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+  
+  .realestate-cta-btn {
+    margin-top: 28px;
+  }

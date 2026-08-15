@@ -1,0 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --booking-bg: #FAFAFA;
+  --booking-card-bg: #FFFFFF;
+  --booking-text: #1A1A1A;
+  --booking-text-secondary: #6B6B6B;
+  --booking-primary: #2563EB;
+  --booking-primary-hover: #1D4ED8;
+  --booking-border: #E5E5E5;
+  --booking-success: #16A34A;
+  --booking-slot-unavailable: #F0F0F0;
+
+  --booking-radius-sm: 8px;
+  --booking-radius-md: 12px;
+  --booking-radius-lg: 16px;
+  --booking-space-1: 4px;
+  --booking-space-2: 8px;
+  --booking-space-3: 12px;
+  --booking-space-4: 16px;
+  --booking-space-5: 24px;
+  --booking-space-6: 32px;
+}
+
+.booking-demo-root {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--booking-bg);
+  color: var(--booking-text);
+  min-height: 100vh;
+}
+
+.booking-demo-root *,
+.booking-demo-root *::before,
+.booking-demo-root *::after {
+  box-sizing: border-box;
+}
+
+.booking-demo-root h1,
+.booking-demo-root h2,
+.booking-demo-root h3 {
+  margin: 0 0 var(--booking-space-1) 0;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.booking-demo-root p {
+  margin: 0;
+}
+
+.booking-demo-root button {
+  font-family: inherit;
+}
+
+.booking-page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: var(--booking-space-6) var(--booking-space-4) 64px;
+}
+
+.booking-page-header {
+  margin-bottom: var(--booking-space-6);
+}
+
+.booking-page-title {
+  font-size: 1.75rem;
+}
+
+.booking-page-subtitle {
+  color: var(--booking-text-secondary);
+  font-size: 0.95rem;
+}
+
+.booking-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--booking-space-5);
+  margin-top: var(--booking-space-6);
+  align-items: start;
+}
+
+
+.booking-main {
+  background: var(--booking-card-bg);
+  border: 1px solid var(--booking-border);
+  border-radius: var(--booking-radius-lg);
+  padding: var(--booking-space-6);
+}
+
+.booking-step-subtitle {
+  color: var(--booking-text-secondary);
+  margin-bottom: var(--booking-space-6);
+  font-size: 0.95rem;
+}
+
+.booking-step-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--booking-space-3);
+  margin-top: var(--booking-space-6);
+  padding-top: var(--booking-space-5);
+  border-top: 1px solid var(--booking-border);
+}
+
+.booking-step-actions--single {
+  justify-content: flex-end;
+}
+
+.booking-btn-primary,
+.booking-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--booking-space-2);
+  border-radius: var(--booking-radius-sm);
+  padding: 12px 22px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    transform 0.05s ease;
+}
+
+.booking-btn-primary {
+  background: var(--booking-primary);
+  color: #FFFFFF;
+}
+
+.booking-btn-primary:hover:not(:disabled) {
+  background: var(--booking-primary-hover);
+}
+
+.booking-btn-primary:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.booking-btn-primary:disabled {
+  background: var(--booking-border);
+  color: var(--booking-text-secondary);
+  cursor: not-allowed;
+}
+
+.booking-btn-secondary {
+  background: transparent;
+  color: var(--booking-text);
+  border-color: var(--booking-border);
+}
+
+.booking-btn-secondary:hover {
+  border-color: var(--booking-text-secondary);
+}

@@ -1,0 +1,160 @@
+#contact {
+  background-color: #fcfcfc;
+  padding: 4rem 0rem;
+  margin-bottom: 3rem;
+  overflow: hidden;
+}
+
+.contact-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.contact-content {
+  max-width: 1100px;     /* THIS controls form + socials width */
+  margin: 0 auto;
+}
+
+
+.contact-title {
+  color: #111;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.contact-intro {
+  color: #333;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  max-width: 820px;
+  margin: 0 auto 4rem;
+  text-align: center;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 6rem;
+}
+
+/* Right column */
+.contact-info {
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.contact-info h3 {
+  color: #111;
+  font-size: 1.6rem;
+  margin-bottom: 1.25rem;
+  text-align: left;
+}
+
+.contact-page-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.contact-link a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.125rem;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.contact-link a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  background-color: #555;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.contact-link a:hover {
+  color: #111;
+}
+
+.contact-link a:hover::after {
+  transform: scaleX(1);
+}
+
+.contact-icon {
+  color: #555;
+  transition: transform 0.2s ease, color 0.2s ease;
+  font-size: 1.8rem;
+}
+
+.contact-link:hover .contact-icon {
+  color: #111;
+  transform: scale(1.1);
+}
+
+/* =========================
+   ANIMATIONS
+   ========================= */
+
+.animate {
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-down {
+  transform: translateY(-40px);
+}
+
+.animate-up {
+  transform: translateY(40px);
+}
+
+.animate-left {
+  transform: translateX(-60px);
+}
+
+.animate-right {
+  transform: translateX(60px);
+}
+
+.animate.in-view {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .contact-info {
+    align-items: center;
+    text-align: center;
+  }
+
+  .contact-info h3 {
+    text-align: center;
+  }
+
+  .contact-link {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,30 @@
+.shop-product-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px 24px;
+    align-content: start;
+  }
+  
+  .shop-product-grid-empty {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    color: var(--shop-gray);
+    font-size: 14px;
+  }
+  
+  @media (max-width: 900px) {
+    .shop-product-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .shop-product-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 14px;
+    }
+  }

@@ -1,0 +1,106 @@
+.shop-payment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 520px;
+  }
+  
+  .shop-payment-form-heading {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  
+  .shop-payment-form-demo-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    background-color: var(--shop-cream);
+    border: 1px solid var(--shop-border);
+    border-radius: 2px;
+    font-size: 12.5px;
+    color: var(--shop-black);
+    opacity: 0.85;
+    margin-bottom: 4px;
+  }
+  
+  .shop-payment-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .shop-payment-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  
+  .shop-payment-form-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--shop-black);
+  }
+  
+  .shop-payment-form-input {
+    padding: 12px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--shop-black);
+    background-color: var(--shop-white);
+    border: 1px solid var(--shop-border);
+    border-radius: 2px;
+    transition: border-color 0.2s ease;
+  }
+  
+  .shop-payment-form-input:focus {
+    outline: none;
+    border-color: var(--shop-black);
+  }
+  
+  .shop-payment-form-error {
+    font-size: 12px;
+    color: var(--shop-error);
+  }
+  
+  .shop-payment-form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+  }
+  
+  .shop-payment-form-back {
+    padding: 15px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--shop-black);
+    border: 1px solid var(--shop-border);
+    border-radius: 2px;
+    transition: border-color 0.2s ease;
+  }
+  
+  .shop-payment-form-back:hover {
+    border-color: var(--shop-black);
+  }
+  
+  .shop-payment-form-submit {
+    flex: 1;
+    padding: 15px;
+    background-color: var(--shop-black);
+    color: var(--shop-white);
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 2px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .shop-payment-form-submit:hover {
+    background-color: var(--shop-accent);
+  }
+  
+  @media (max-width: 480px) {
+    .shop-payment-form-row {
+      grid-template-columns: 1fr;
+    }
+  }

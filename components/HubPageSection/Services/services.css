@@ -1,0 +1,130 @@
+.services {
+  background-color: #fcfcfc;
+  padding: 6rem 1.5rem;
+  padding-bottom: 0rem;
+  color: #111;
+  overflow: hidden;
+}
+
+.services-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-title {
+  font-size: clamp(2.2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+/* Layout */
+.service-row {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 3rem;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+
+.service-row.reverse {
+  grid-template-columns: 1fr 1.2fr;
+}
+
+/* Headings */
+.service-heading {
+  padding-left: 2rem;
+}
+
+.service-heading.web {
+  border-left: 4px solid #2563eb;
+}
+
+.service-heading.marketing {
+  border-left: 4px solid #16a34a;
+}
+
+.service-heading h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.service-heading p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #333;
+  max-width: 420px;
+}
+
+/* Content */
+.service-content ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.service-content li {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.service-content li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.service-row.reverse .service-content li::before {
+  color: #16a34a;
+}
+
+.service-outcome {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #111;
+}
+
+/* =========================
+   ANIMATIONS
+   ========================= */
+
+.animate {
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-down {
+  transform: translateY(-40px);
+}
+
+.animate-left {
+  transform: translateX(-60px);
+}
+
+.animate-right {
+  transform: translateX(60px);
+}
+
+.animate.in-view {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .service-row,
+  .service-row.reverse {
+    grid-template-columns: 1fr;
+  }
+
+  .service-heading {
+    padding-left: 1.25rem;
+  }
+}

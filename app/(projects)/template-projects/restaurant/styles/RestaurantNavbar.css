@@ -1,0 +1,133 @@
+.restaurant-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background-color: var(--restaurant-cream);
+  border-bottom: 1px solid var(--restaurant-border);
+}
+
+.restaurant-navbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.25rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.restaurant-navbar-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--restaurant-burgundy);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.restaurant-navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.restaurant-navbar-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--restaurant-charcoal);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.2s ease;
+}
+
+.restaurant-navbar-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--restaurant-gold);
+  transition: width 0.2s ease;
+}
+
+.restaurant-navbar-link:hover {
+  color: var(--restaurant-burgundy);
+}
+
+.restaurant-navbar-link:hover::after {
+  width: 100%;
+}
+
+.restaurant-navbar-cta {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--restaurant-charcoal);
+  background-color: var(--restaurant-gold);
+  padding: 0.7rem 1.5rem;
+  border-radius: 2px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.restaurant-navbar-cta:hover {
+  background-color: var(--restaurant-gold-hover);
+}
+
+.restaurant-navbar-cta-mobile {
+  display: none;
+}
+
+.restaurant-navbar-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--restaurant-charcoal);
+  cursor: pointer;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .restaurant-navbar-cta-desktop {
+    display: none;
+  }
+
+  .restaurant-navbar-toggle {
+    display: flex;
+    align-items: center;
+  }
+
+  .restaurant-navbar-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    background-color: var(--restaurant-cream);
+    border-bottom: 1px solid var(--restaurant-border);
+    padding: 1.5rem 2rem;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
+
+  .restaurant-navbar-links-open {
+    max-height: 500px;
+    opacity: 1;
+  }
+
+  .restaurant-navbar-cta-mobile {
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
+}

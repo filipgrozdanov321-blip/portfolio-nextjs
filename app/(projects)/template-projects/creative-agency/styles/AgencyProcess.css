@@ -1,0 +1,58 @@
+.agency-process {
+    padding: 6rem 2rem;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  
+  .agency-process-inner .agency-process-title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: var(--agency-off-white);
+    margin-bottom: 3rem;
+  }
+  
+  .agency-process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  
+  .agency-process-step {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--agency-border);
+  }
+  
+  .agency-process-step-number {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--agency-accent);
+  }
+  
+  .agency-process-step-name {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--agency-off-white);
+  }
+  
+  .agency-process-step-description {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--agency-gray);
+    line-height: 1.6;
+  }
+  
+  @media (max-width: 1024px) {
+    .agency-process-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .agency-process-grid {
+      grid-template-columns: 1fr;
+    }
+  }

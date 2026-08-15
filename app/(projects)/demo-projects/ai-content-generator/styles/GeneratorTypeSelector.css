@@ -1,0 +1,36 @@
+.generator-type-selector {
+    display: flex;
+    gap: 4px;
+    background-color: var(--generator-card-bg);
+    border: 1px solid var(--generator-border);
+    border-radius: 10px;
+    padding: 4px;
+    width: fit-content;
+  }
+  
+  .generator-type-tab {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--generator-text-secondary);
+    background-color: transparent;
+    border: none;
+    border-radius: 7px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    white-space: nowrap;
+  }
+  
+  .generator-type-tab:hover {
+    color: var(--generator-text);
+  }
+  
+  .generator-type-tab-active {
+    color: #ffffff;
+    background-color: var(--generator-primary);
+  }
+  
+  .generator-type-tab-active:hover {
+    color: #ffffff;
+  }

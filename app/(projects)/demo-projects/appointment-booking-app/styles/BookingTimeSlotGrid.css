@@ -1,0 +1,41 @@
+.booking-timeslot-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--booking-space-2);
+}
+
+.booking-timeslot-pill {
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--booking-border);
+  background: var(--booking-card-bg);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.booking-timeslot-pill:hover:not(:disabled) {
+  border-color: var(--booking-primary);
+}
+
+.booking-timeslot-pill--selected {
+  background: var(--booking-primary);
+  border-color: var(--booking-primary);
+  color: #FFFFFF;
+}
+
+.booking-timeslot-pill--unavailable {
+  background: var(--booking-slot-unavailable);
+  color: var(--booking-text-secondary);
+  border-color: var(--booking-slot-unavailable);
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.booking-timeslot-empty {
+  color: var(--booking-text-secondary);
+  font-size: 0.9rem;
+  padding: var(--booking-space-4) 0;
+}

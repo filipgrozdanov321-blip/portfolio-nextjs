@@ -1,0 +1,35 @@
+.booking-success-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: var(--booking-card-bg);
+  border: 1px solid var(--booking-border);
+  border-radius: var(--booking-radius-lg);
+  padding: 64px var(--booking-space-5);
+  margin: var(--booking-space-6) auto 64px;
+  max-width: 1080px;
+  width: calc(100% - 32px);
+}
+
+.booking-success-icon {
+  color: var(--booking-success);
+  margin-bottom: var(--booking-space-4);
+}
+
+.booking-success-message {
+  color: var(--booking-text-secondary);
+  margin-top: var(--booking-space-2);
+  max-width: 420px;
+}
+
+.booking-success-note {
+  color: var(--booking-text-secondary);
+  font-size: 0.8rem;
+  margin-top: var(--booking-space-3);
+  font-style: italic;
+}
+
+.booking-success-screen .booking-btn-primary {
+  margin-top: var(--booking-space-6);
+}

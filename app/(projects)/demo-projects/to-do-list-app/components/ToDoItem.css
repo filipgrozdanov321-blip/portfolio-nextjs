@@ -1,0 +1,78 @@
+.todo-item {
+  display: flex;
+  align-items: center; /* ✅ vertical alignment FIXED */
+  gap: 1rem;
+
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+/* checkbox */
+.todo-checkbox {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* text block */
+.todo-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-left: 1rem;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.todo-content h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.todo-content p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6b7280;
+  line-height: 1.3;
+}
+
+/* delete button */
+.todo-delete {
+  margin-left: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+
+  height: 36px;              /* ⬅ force same vertical baseline */
+  padding: 0 1.1rem;
+
+  font-size: 0.85rem;
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
+}
+
+
+
+.todo-delete:hover {
+  background-color: #b91c1c;
+}
+
+.todo-item.completed h3,
+.todo-item.completed p {
+  text-decoration: line-through;
+  color: #9ca3af; /* subtle gray */
+}

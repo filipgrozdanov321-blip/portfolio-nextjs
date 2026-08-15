@@ -1,0 +1,171 @@
+/* PAGE WRAPPER */
+.habit-tracker-page {
+    display: flex;
+    flex-direction: column;
+    background: #fcfcfc;
+  
+    display: flex;
+    align-items: center;
+    justify-content: top;
+  
+    padding: 0rem;
+    height: 100vh;
+  }
+
+  /* FORM CONTAINER */
+  .habit-tracker-form {
+    width: 100%;
+    max-width: 420px;
+  
+    padding: 2.4rem 2.2rem;
+  
+    background: rgba(240, 240, 240, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  
+    border-radius: 18px;
+  
+    box-shadow:
+      0 20px 50px rgba(0, 0, 0, 0.08),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  }
+  
+  /* TITLE */
+  .habit-tracker-form__title {
+    text-align: center;
+    margin-bottom: 2rem;
+  
+    font-size: 1.7rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #111;
+  }
+
+  .test-h1 {
+    color: #111;
+  }
+
+  .create-habit {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #111;
+  }
+  
+  /* FORM */
+  .habit-tracker-form__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+  
+  /* FIELD */
+  .habit-tracker-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+  
+  .habit-tracker-form__field label {
+    padding-left: 5px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #333;
+  }
+  
+  /* INPUTS */
+  .habit-tracker-form__field input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.75rem 0.75rem;
+  
+    font-size: 0.95rem;
+    color: #111;
+  
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+  
+    transition:
+      border-color 0.25s ease,
+      box-shadow 0.25s ease,
+      background 0.25s ease;
+  }
+  
+  .habit-tracker-form__field input::placeholder {
+    color: #777;
+  }
+  
+  .habit-tracker-form__field input:focus {
+    outline: none;
+    border-color: #ffb300;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(255, 179, 0, 0.18);
+  }
+  
+  /* ERROR */
+  .habit-tracker-form__error {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #d64b4b;
+  }
+  
+  /* SUBMIT */
+  .habit-tracker-form__submit {
+    align-self: center;
+  
+    padding: 0.8rem 2.5rem;
+    border-radius: 12px;
+  
+    font-size: 1rem;
+    font-weight: 700;
+  
+    border: none;
+    cursor: pointer;
+  
+    background: linear-gradient(135deg, #ffeb3b, #ffb300);
+    color: #111;
+  
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease,
+      background 0.3s ease,
+      color 0.3s ease;
+  }
+  
+  .habit-tracker-form__submit:hover:not(:disabled) {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #ffb300, #ffeb3b);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+    color: #fcfcfc;
+  }
+  
+  .habit-tracker-form__submit:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  
+  /* REDUCED MOTION */
+  @media (prefers-reduced-motion: reduce) {
+    .habit-tracker-form,
+    .habit-tracker-form * {
+      transition: none !important;
+    }
+  }
+  
+  /* Chrome, Edge, Safari */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  appearance: textfield;      /* standard */
+  -moz-appearance: textfield; /* Firefox */
+}
+

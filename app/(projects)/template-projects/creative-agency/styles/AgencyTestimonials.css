@@ -1,0 +1,114 @@
+.agency-testimonials {
+  background: var(--agency-off-white);
+  padding: 6rem 2rem;
+  position: relative;
+}
+
+.agency-testimonials::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--agency-accent);
+}
+
+.agency-testimonials-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.agency-testimonials-header {
+  margin-bottom: 3.5rem;
+}
+
+.agency-testimonials-header .agency-testimonials-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--agency-gray);
+  margin-bottom: 0.75rem;
+}
+
+.agency-testimonials-header .agency-testimonials-title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--agency-black);
+}
+
+.agency-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
+.agency-testimonial-card {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem;
+  border-top: 2px solid var(--agency-black);
+}
+
+.agency-testimonial-card .agency-testimonial-mark {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--agency-black);
+  margin-bottom: -0.5rem;
+}
+
+.agency-testimonial-card .agency-testimonial-quote {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--agency-black);
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.agency-testimonial-attribution {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin-top: auto;
+}
+
+.agency-testimonial-attribution::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  margin-top: 0.5em;
+  border-radius: 50%;
+  background: var(--agency-accent);
+  flex-shrink: 0;
+}
+
+.agency-testimonial-attribution-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.agency-testimonial-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--agency-black);
+}
+
+.agency-testimonial-role {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: var(--agency-gray);
+}
+
+@media (max-width: 1024px) {
+  .agency-testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}

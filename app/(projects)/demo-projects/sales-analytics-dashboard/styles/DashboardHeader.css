@@ -1,0 +1,20 @@
+.dashboard-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .dashboard-header-title {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--dashboard-text);
+  }
+  
+  .dashboard-header-subtitle {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--dashboard-text-secondary);
+  }

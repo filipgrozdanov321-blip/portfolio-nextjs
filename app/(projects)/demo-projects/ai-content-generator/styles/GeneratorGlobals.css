@@ -1,0 +1,27 @@
+:root {
+    --generator-bg: #FAFAFA;
+    --generator-card-bg: #FFFFFF;
+    --generator-text: #18181B;
+    --generator-text-secondary: #71717A;
+    --generator-primary: #7C5CFF;
+    --generator-primary-hover: #6845F0;
+    --generator-border: #E4E4E7;
+    --generator-success: #16A34A;
+    --generator-error: #DC2626;
+  }
+  
+  .generator-page {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--generator-bg);
+    color: var(--generator-text);
+    min-height: 100vh;
+    padding: 40px 24px;
+  }
+  
+  .generator-container {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }

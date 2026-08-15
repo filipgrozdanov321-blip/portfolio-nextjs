@@ -1,0 +1,12 @@
+.booking-datetime-section {
+  margin-bottom: var(--booking-space-5);
+}
+
+.booking-datetime-section-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--booking-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: var(--booking-space-3);
+}

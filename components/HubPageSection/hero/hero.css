@@ -1,0 +1,101 @@
+.hero {
+  position: relative;
+  min-height: 80vh; /* Ensures the hero section takes up a significant part of the viewport */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url("../../../public/images/laptop.jpeg") center / cover no-repeat;
+  color: white;
+  background-attachment: fixed; /* Keeps the background fixed as you scroll */
+  overflow: hidden;
+  transition: background-position 0.1s ease-out;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(3.5px) brightness(0.95) saturate(0.8);
+  -webkit-backdrop-filter: blur(3.5px) brightness(0.95) saturate(0.8);
+  z-index: 1;
+}
+
+/* Hero content (title, description, button) */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 700px;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.hero-h1-title {
+  margin: 0;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  line-height: 1.2;
+  text-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  animation: fadeInUp 0.7s ease-out forwards 0.3s;
+}
+
+.hero-content p {
+  font-size: 1.05rem;
+  opacity: 0.9;
+  line-height: 1.6;
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards 0.5s;
+}
+
+.hero-cta-anim {
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards 0.7s;
+}
+
+
+.contact-button-hero {
+  align-self: center;
+  display: inline-block;
+  background: linear-gradient(135deg, #FFEB3B, #FFB300);
+  color: #111;
+  padding: 0.8rem 2.9rem;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.contact-button-hero:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #FFB300, #FFEB3B);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
+  color: #fcfcfc;
+}
+
+.contact-button-hero:active {
+  transform: translateY(0);
+  background-color: white;
+  color: black;
+}
+
+/* Fade-in and slide-up animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

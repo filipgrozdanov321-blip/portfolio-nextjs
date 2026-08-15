@@ -1,0 +1,69 @@
+.generator-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: var(--generator-card-bg);
+    border: 1px solid var(--generator-border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  
+  .generator-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .generator-form-field label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--generator-text-secondary);
+  }
+  
+  .generator-form-field input,
+  .generator-form-field select,
+  .generator-form-field textarea {
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--generator-text);
+    background-color: var(--generator-bg);
+    border: 1px solid var(--generator-border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+  
+  .generator-form-field textarea {
+    min-height: 80px;
+    resize: vertical;
+  }
+  
+  .generator-form-field input:focus,
+  .generator-form-field select:focus,
+  .generator-form-field textarea:focus {
+    border-color: var(--generator-primary);
+  }
+  
+  .generator-form-submit {
+    align-self: flex-start;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: var(--generator-primary);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+  }
+  
+  .generator-form-submit:hover:not(:disabled) {
+    background-color: var(--generator-primary-hover);
+  }
+  
+  .generator-form-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }

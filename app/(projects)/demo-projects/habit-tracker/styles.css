@@ -1,0 +1,106 @@
+.habit-tracker-app {
+  max-width: 100%;
+  margin: 0 auto;
+  background-color: #fcfcfc;
+  min-height: 100vh;
+  text-align: left;
+}
+
+/* Headings */
+.habit-tracker-main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+
+/* Page containers */
+.home-page,
+.completed-habits {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.home-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 1rem;
+  }
+  
+  .habit-list {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    text-align: center;
+    gap: 24px;
+  
+    max-width: 1200px;
+    width: 100%;
+  }
+  
+
+/* Loading / messages */
+.habit-tracker-app p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Utility classes */
+.text-center {
+    text-align: center;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .habit-tracker-app button:hover {
+    background-color: #0056b3;
+} */
+
+/* Completed Page */
+
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.habit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.page-title {
+  color: #111;
+  text-align: center;
+}
+
+.empty-state {
+  text-align: center;
+  color: #111;
+}
+
+@media (max-width: 1024px) {
+    .habit-list {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .habit-list {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  

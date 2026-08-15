@@ -1,0 +1,60 @@
+.realestate-testimonials {
+    background-color: var(--realestate-white);
+  }
+  
+  .realestate-testimonials-header {
+    max-width: 560px;
+    margin-bottom: 44px;
+  }
+  
+  .realestate-testimonials-title {
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 8px;
+  }
+  
+  .realestate-testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  
+  .realestate-testimonials-card {
+    background-color: var(--realestate-offwhite);
+    border-radius: var(--realestate-radius-md);
+    padding: 28px 24px;
+  }
+  
+  .realestate-testimonials-icon {
+    color: var(--realestate-gold);
+    margin-bottom: 14px;
+  }
+  
+  .realestate-testimonials-quote {
+    font-size: 15px;
+    color: var(--realestate-navy);
+    line-height: 1.7;
+  }
+  
+  .realestate-testimonials-attribution {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--realestate-border);
+  }
+  
+  .realestate-testimonials-name {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  
+  .realestate-testimonials-location {
+    font-size: 13px;
+    color: var(--realestate-gray);
+    margin-top: 2px;
+  }
+  
+  @media (max-width: 960px) {
+    .realestate-testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+  }

@@ -1,0 +1,131 @@
+.why-me {
+  background-color: #fcfcfc;
+  padding: 3rem 1.5rem;
+  color: #111;
+  overflow: hidden;
+}
+
+.why-me-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.why-me-title {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.why-me-intro {
+  max-width: 760px;
+  margin: 0 auto 4rem;
+  text-align: center;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #333;
+}
+
+/* Grid */
+.why-me-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+
+/* Card wrapper (ENTRANCE ONLY) */
+.why-me-item {
+  border-left: 3px solid #007bff;
+}
+
+.item-right {
+  border-right: 3px solid #007bff;
+  border-left: none;
+}
+
+/* Inner card (HOVER ONLY) */
+.why-me-item-inner {
+  padding: 2.25rem;
+  background: #ffffff;
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.08);
+
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+
+  will-change: transform, box-shadow;
+}
+
+.why-me-item:hover .why-me-item-inner {
+  transform: translateY(-6px);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.18),
+    0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Text */
+.why-me-number {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #007bff;
+  margin-bottom: 0.75rem;
+}
+
+.why-me-item h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.why-me-item p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 0.75rem;
+}
+
+.why-me-result {
+  font-weight: 600;
+  color: #111;
+}
+
+/* =========================
+   ENTRANCE ANIMATIONS
+   ========================= */
+
+.animate {
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-down {
+  transform: translateY(-40px);
+}
+
+.animate-up {
+  transform: translateY(40px);
+}
+
+.animate-left {
+  transform: translateX(-60px);
+}
+
+.animate-right {
+  transform: translateX(60px);
+}
+
+.animate.in-view {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .why-me-list {
+    grid-template-columns: 1fr;
+  }
+}

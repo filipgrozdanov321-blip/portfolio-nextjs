@@ -1,0 +1,72 @@
+.shop-shipping-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 520px;
+  }
+  
+  .shop-shipping-form-heading {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  
+  .shop-shipping-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .shop-shipping-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  
+  .shop-shipping-form-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--shop-black);
+  }
+  
+  .shop-shipping-form-input {
+    padding: 12px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--shop-black);
+    background-color: var(--shop-white);
+    border: 1px solid var(--shop-border);
+    border-radius: 2px;
+    transition: border-color 0.2s ease;
+  }
+  
+  .shop-shipping-form-input:focus {
+    outline: none;
+    border-color: var(--shop-black);
+  }
+  
+  .shop-shipping-form-error {
+    font-size: 12px;
+    color: var(--shop-error);
+  }
+  
+  .shop-shipping-form-submit {
+    margin-top: 12px;
+    padding: 15px;
+    background-color: var(--shop-black);
+    color: var(--shop-white);
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 2px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .shop-shipping-form-submit:hover {
+    background-color: var(--shop-accent);
+  }
+  
+  @media (max-width: 480px) {
+    .shop-shipping-form-row {
+      grid-template-columns: 1fr;
+    }
+  }

@@ -1,0 +1,19 @@
+.generator-header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  
+  .generator-header-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--generator-text);
+    margin: 0;
+  }
+  
+  .generator-header-subtitle {
+    font-size: 14px;
+    color: var(--generator-text-secondary);
+    margin: 0;
+  }

@@ -1,0 +1,48 @@
+.final-cta {
+    padding: 5rem 1.5rem;
+    background-color: var(--accent);
+    text-align: center;
+  }
+  
+  .final-cta-container {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .final-cta-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #ffffff;
+  }
+  
+  .final-cta-subtitle {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+  }
+  
+  .final-cta-button {
+    margin-top: 0.5rem;
+    background-color: #ffffff;
+    color: var(--accent);
+    padding: 0.85rem 1.8rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  
+  .final-cta-button:hover {
+    background-color: var(--bg-secondary);
+  }
+  
+  @media (max-width: 640px) {
+    .final-cta-title {
+      font-size: 1.8rem;
+    }
+  }

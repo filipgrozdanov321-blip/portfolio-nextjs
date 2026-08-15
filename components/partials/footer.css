@@ -1,0 +1,119 @@
+#footer {
+  background-color: #111;
+  color: #fcfcfc;
+  padding: 4rem 0rem 0.5rem;
+  width: 100%;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Main layout */
+.footer-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 3rem;
+}
+
+/* Brand */
+.footer-brand h3 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.footer-brand p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #b5b5b5;
+  max-width: 420px;
+}
+
+/* Sections */
+.footer-section h4 {
+  color: #ffffff;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section li {
+  margin-bottom: 0.6rem;
+}
+
+/* Links */
+.footer-section a {
+  color: #cfcfcf;
+  text-decoration: none;
+  font-size: 0.95rem;
+  position: relative;
+  display: inline-block;  /* Ensure the hover effect is only applied to the width of the text */
+  padding: 0.2rem 0; /* Optional padding for spacing */
+  transition: color 0.2s ease;
+}
+
+.footer-section a:hover {
+  color: #ffffff;
+  border-radius: 4px; /* Optional border radius for smoother hover */
+}
+
+/* Icons */
+.footer-section i {
+  margin-right: 0.5rem; /* Adds spacing between icon and text */
+  font-size: 1.1rem; /* Optional to match text size */
+}
+
+.footer-bottom {
+  border-top: 1px solid #2a2a2a;
+  padding-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: #888;
+  position: relative;  /* Ensure relative positioning for absolute positioning of Back to Top link */
+}
+
+  .back-to-top {
+    background: none;
+    border: none;
+  
+    color: #888;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+  
+    transition: color 0.2s ease, transform 0.3s ease;
+  }
+
+
+.back-to-top:hover {
+  color: #ffffff;
+  transform: translateY(-3px); /* Slight lift effect on hover */
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .footer-main {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    text-align: center;
+  }
+
+  .footer-brand p {
+    margin: 0 auto;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}

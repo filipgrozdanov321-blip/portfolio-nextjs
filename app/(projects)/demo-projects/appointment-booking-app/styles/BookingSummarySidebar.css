@@ -1,0 +1,65 @@
+.booking-summary-sidebar {
+  background: var(--booking-card-bg);
+  border: 1px solid var(--booking-border);
+  border-radius: var(--booking-radius-lg);
+  padding: var(--booking-space-5);
+  position: sticky;
+  top: var(--booking-space-4);
+}
+
+.booking-summary-sidebar h3 {
+  font-size: 1rem;
+  margin-bottom: var(--booking-space-4);
+}
+
+.booking-summary-item {
+  padding: var(--booking-space-3) 0;
+  border-bottom: 1px solid var(--booking-border);
+}
+
+.booking-summary-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.booking-summary-item-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--booking-text-secondary);
+}
+
+.booking-summary-edit {
+  background: none;
+  border: none;
+  color: var(--booking-primary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.booking-summary-edit:hover {
+  text-decoration: underline;
+}
+
+.booking-summary-item-value {
+  margin-top: 4px;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.booking-summary-total {
+  display: flex;
+  justify-content: space-between;
+  padding-top: var(--booking-space-4);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+@media (max-width: 859px) {
+  .booking-summary-sidebar {
+    position: static;
+  }
+}

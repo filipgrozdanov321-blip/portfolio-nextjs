@@ -1,0 +1,121 @@
+.realestate-listingdetail-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--realestate-border);
+  }
+  
+  .realestate-listingdetail-type {
+    display: inline-block;
+    background-color: var(--realestate-gold-soft);
+    color: var(--realestate-navy);
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--realestate-radius-sm);
+    margin-bottom: 12px;
+  }
+  
+  .realestate-listingdetail-address {
+    font-size: 26px;
+    font-weight: 700;
+  }
+  
+  .realestate-listingdetail-city {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14.5px;
+    color: var(--realestate-gray);
+    margin-top: 8px;
+  }
+  
+  .realestate-listingdetail-city svg {
+    color: var(--realestate-gold);
+  }
+  
+  .realestate-listingdetail-price {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--realestate-navy);
+    white-space: nowrap;
+  }
+  
+  .realestate-listingdetail-specs {
+    display: flex;
+    gap: 28px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--realestate-border);
+  }
+  
+  .realestate-listingdetail-spec {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--realestate-navy);
+  }
+  
+  .realestate-listingdetail-spec svg {
+    color: var(--realestate-gold);
+  }
+  
+  .realestate-listingdetail-section {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--realestate-border);
+  }
+  
+  .realestate-listingdetail-section:last-child {
+    border-bottom: none;
+  }
+  
+  .realestate-listingdetail-section h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  
+  .realestate-listingdetail-section p {
+    font-size: 15px;
+    color: var(--realestate-gray);
+    line-height: 1.75;
+  }
+  
+  .realestate-listingdetail-amenities {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 20px;
+  }
+  
+  .realestate-listingdetail-amenities li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--realestate-navy);
+  }
+  
+  .realestate-listingdetail-amenities svg {
+    color: var(--realestate-gold);
+    flex-shrink: 0;
+  }
+  
+  @media (max-width: 640px) {
+    .realestate-listingdetail-header {
+      flex-direction: column;
+    }
+  
+    .realestate-listingdetail-amenities {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .realestate-detail-layout {
+      grid-template-columns: 1fr;
+    }
+  }

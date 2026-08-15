@@ -1,0 +1,47 @@
+.booking-date-grid {
+  display: flex;
+  gap: var(--booking-space-2);
+  overflow-x: auto;
+  padding-bottom: var(--booking-space-2);
+  scrollbar-width: thin;
+}
+
+.booking-date-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 64px;
+  padding: var(--booking-space-3) var(--booking-space-2);
+  border-radius: var(--booking-radius-md);
+  border: 1.5px solid var(--booking-border);
+  background: var(--booking-card-bg);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.booking-date-cell:hover {
+  border-color: var(--booking-primary);
+}
+
+.booking-date-cell--active {
+  border-color: var(--booking-primary);
+  background: var(--booking-primary);
+}
+
+.booking-date-cell--active .booking-date-weekday,
+.booking-date-cell--active .booking-date-label {
+  color: #FFFFFF;
+}
+
+.booking-date-weekday {
+  font-size: 0.72rem;
+  color: var(--booking-text-secondary);
+  text-transform: uppercase;
+}
+
+.booking-date-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+}

@@ -1,0 +1,104 @@
+.contact-form {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Individual form group */
+.contact-form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+/* Labels */
+.contact-form label {
+  color: #111;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+/* Inputs, selects, textarea */
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  background-color: #ffffff;
+  border: 1px solid #b3b3b3; /* darker than before for visibility */
+  border-radius: 10px;
+  padding: 0.8rem 0.95rem;
+  color: #111;
+  font-size: 0.95rem;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Placeholder */
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #6e6e6e; /* darker placeholder for better contrast */
+}
+
+
+/* Focus state */
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.12);
+}
+
+/* Textarea specifics */
+.contact-form textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+/* Two-column row */
+.contact-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+/* Submit button */
+.contact-form-button {
+  margin-top: 1.5rem;
+  align-self: flex-start;
+  background-color: #111;
+  color: #ffffff;
+  padding: 0.95rem 2.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.contact-form-button:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 10px 18px rgba(0, 0, 0, 0.35),  /* main dark shadow */
+    0 4px 8px rgba(0, 0, 0, 0.25);     /* subtle secondary layer */
+  background-color: #ffffff;
+  color: #111;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .contact-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form-button {
+    align-self: center;
+  }
+}

@@ -1,0 +1,82 @@
+.agency-work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem 2rem;
+  padding-bottom: 6rem;
+}
+
+.agency-work-grid-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.agency-work-grid-card-image {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--agency-border);
+  border-radius: 2px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.agency-work-grid-card:hover .agency-work-grid-card-image {
+  border-color: var(--agency-accent);
+}
+
+.agency-work-grid-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.agency-work-grid-card-client {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--agency-off-white);
+}
+
+.agency-work-grid-card-details {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.agency-work-grid-card-type {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: var(--agency-gray);
+}
+
+.agency-work-grid-card-year {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: var(--agency-gray);
+  position: relative;
+  padding-left: 0.7rem;
+}
+
+.agency-work-grid-card-year::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--agency-gray);
+}
+
+@media (max-width: 1024px) {
+  .agency-work-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .agency-work-grid {
+    grid-template-columns: 1fr;
+  }
+}

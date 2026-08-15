@@ -1,0 +1,99 @@
+.portfolio-contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 560px;
+  }
+  
+  .portfolio-contact-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .portfolio-contact-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--portfolio-black);
+  }
+  
+  .portfolio-contact-input,
+  .portfolio-contact-select,
+  .portfolio-contact-textarea {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--portfolio-black);
+    background-color: var(--portfolio-white);
+    border: 1px solid var(--portfolio-border);
+    border-radius: 2px;
+    padding: 0.75rem 1rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  
+  .portfolio-contact-input:focus,
+  .portfolio-contact-select:focus,
+  .portfolio-contact-textarea:focus {
+    border-color: var(--portfolio-accent);
+  }
+  
+  .portfolio-contact-textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  
+  .portfolio-contact-submit {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--portfolio-white);
+    background-color: var(--portfolio-accent);
+    border: none;
+    border-radius: 2px;
+    padding: 0.9rem 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: fit-content;
+  }
+  
+  .portfolio-contact-submit:hover {
+    background-color: #97663f;
+  }
+  
+  .portfolio-contact-success {
+    max-width: 560px;
+    padding: 2.5rem;
+    border: 1px solid var(--portfolio-border);
+  }
+  
+  .portfolio-contact-success-title {
+    font-size: 1.5rem;
+    margin: 0 0 0.75rem;
+  }
+  
+  .portfolio-contact-success-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--portfolio-gray);
+    line-height: 1.7;
+    margin: 0 0 1.5rem;
+  }
+  
+  .portfolio-contact-success-button {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: var(--portfolio-accent);
+    background: none;
+    border: 1px solid var(--portfolio-accent);
+    border-radius: 2px;
+    padding: 0.7rem 1.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  
+  .portfolio-contact-success-button:hover {
+    background-color: var(--portfolio-accent);
+    color: var(--portfolio-white);
+  }

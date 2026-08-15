@@ -1,0 +1,101 @@
+.dashboard-filter-bar {
+    display: inline-flex;
+    gap: 4px;
+    padding: 4px;
+    background-color: var(--dashboard-card);
+    border: 1px solid var(--dashboard-border);
+    border-radius: 10px;
+    box-shadow: var(--dashboard-shadow);
+  }
+  
+  .dashboard-filter-option {
+    appearance: none;
+    border: none;
+    background: transparent;
+    padding: 8px 16px;
+    font-family: var(--dashboard-font);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--dashboard-text-secondary);
+    border-radius: var(--dashboard-radius-sm);
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    white-space: nowrap;
+  }
+  
+  .dashboard-filter-option:hover {
+    color: var(--dashboard-text);
+    background-color: var(--dashboard-bg);
+  }
+  
+  .dashboard-filter-option:focus-visible {.dashboard-filter-bar {
+    display: inline-flex;
+    gap: 4px;
+    padding: 4px;
+    background-color: var(--dashboard-card);
+    border: 1px solid var(--dashboard-border);
+    border-radius: 10px;
+    box-shadow: var(--dashboard-shadow);
+  }
+  
+  .dashboard-filter-option {
+    appearance: none;
+    border: none;
+    background: transparent;
+    padding: 8px 16px;
+    font-family: var(--dashboard-font);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--dashboard-text-secondary);
+    border-radius: var(--dashboard-radius-sm);
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    white-space: nowrap;
+  }
+  
+  .dashboard-filter-option:hover {
+    color: var(--dashboard-text);
+    background-color: var(--dashboard-bg);
+  }
+  
+  .dashboard-filter-option:focus-visible {
+    outline: 2px solid var(--dashboard-primary);
+    outline-offset: 2px;
+  }
+  
+  .dashboard-filter-option-active {
+    color: #FFFFFF;
+    background-color: var(--dashboard-primary);
+  }
+  
+  .dashboard-filter-option-active:hover {
+    color: #FFFFFF;
+    background-color: var(--dashboard-primary);
+  }
+  
+  @media (max-width: 520px) {
+    .dashboard-filter-bar {
+      width: 100%;
+      overflow-x: auto;
+    }
+  }
+    outline: 2px solid var(--dashboard-primary);
+    outline-offset: 2px;
+  }
+  
+  .dashboard-filter-option-active {
+    color: #FFFFFF;
+    background-color: var(--dashboard-primary);
+  }
+  
+  .dashboard-filter-option-active:hover {
+    color: #FFFFFF;
+    background-color: var(--dashboard-primary);
+  }
+  
+  @media (max-width: 520px) {
+    .dashboard-filter-bar {
+      width: 100%;
+      overflow-x: auto;
+    }
+  }

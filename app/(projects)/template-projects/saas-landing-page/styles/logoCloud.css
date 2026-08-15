@@ -1,0 +1,66 @@
+.saas-logo-cloud {
+  padding: 3.5rem 0;
+  background-color: var(--bg-primary);
+  overflow: hidden;
+}
+
+.saas-logo-cloud-label {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 2rem;
+}
+
+.saas-logo-marquee-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.saas-logo-marquee-fade-left,
+.saas-logo-marquee-fade-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 150px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.saas-logo-marquee-fade-left {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-primary), transparent);
+}
+
+.saas-logo-marquee-fade-right {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-primary), transparent);
+}
+
+.saas-logo-marquee-track {
+  display: flex;
+  gap: 5rem;
+  width: max-content;
+}
+
+.saas-logo-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.saas-logo-cloud-item {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  opacity: 0.5;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+  cursor: default;
+}
+
+.saas-logo-cloud-item:hover {
+  opacity: 1;
+  color: var(--text-primary);
+}

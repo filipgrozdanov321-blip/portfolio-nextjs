@@ -1,0 +1,88 @@
+.startup-social-proof {
+    padding: 64px 0;
+    border-top: 1px solid var(--startup-border);
+    border-bottom: 1px solid var(--startup-border);
+  }
+  
+  .startup-social-proof-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  
+  .startup-social-proof-stat {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .startup-social-proof-number {
+    font-family: "Sora", sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--startup-accent);
+    line-height: 1;
+  }
+  
+  .startup-social-proof-stat-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: 320px;
+  }
+  
+  .startup-social-proof-headline {
+    font-size: 0.95rem;
+    color: var(--startup-white);
+    line-height: 1.4;
+  }
+  
+  .startup-social-proof-detail {
+    font-size: 0.72rem;
+    color: var(--startup-gray);
+    letter-spacing: 0.02em;
+  }
+  
+  .startup-social-proof-mentions {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  
+  .startup-social-proof-mention {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .startup-social-proof-mention svg {
+    color: var(--startup-accent);
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  
+  .startup-social-proof-mention div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .startup-social-proof-mention-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--startup-white);
+  }
+  
+  .startup-social-proof-mention-detail {
+    font-size: 0.78rem;
+    color: var(--startup-gray);
+  }
+  
+  @media (max-width: 720px) {
+    .startup-social-proof-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }

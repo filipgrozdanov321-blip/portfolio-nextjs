@@ -1,0 +1,26 @@
+.dashboard-orders-chart {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+  }
+  
+  .dashboard-orders-chart-header {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .dashboard-orders-chart-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--dashboard-text);
+  }
+  
+  .dashboard-orders-chart-subtitle {
+    margin: 0;
+    font-size: 13px;
+    color: var(--dashboard-text-secondary);
+  }

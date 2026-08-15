@@ -1,0 +1,84 @@
+.generator-result {
+    background-color: var(--generator-card-bg);
+    border: 1px solid var(--generator-border);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .generator-result-skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .generator-result-skeleton-line {
+    height: 14px;
+    border-radius: 6px;
+    background-color: var(--generator-border);
+    animation: generator-pulse 1.4s ease-in-out infinite;
+  }
+  
+  @keyframes generator-pulse {
+    0% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.6;
+    }
+  }
+  
+  .generator-result-error {
+    color: var(--generator-error);
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+  }
+  
+  .generator-result-text {
+    color: var(--generator-text);
+    font-size: 15px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    margin: 0;
+  }
+  
+  .generator-result-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .generator-result-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: var(--generator-primary);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+  }
+  
+  .generator-result-btn:hover {
+    background-color: var(--generator-primary-hover);
+  }
+  
+  .generator-result-btn-secondary {
+    color: var(--generator-text);
+    background-color: var(--generator-bg);
+    border: 1px solid var(--generator-border);
+  }
+  
+  .generator-result-btn-secondary:hover {
+    background-color: var(--generator-border);
+  }

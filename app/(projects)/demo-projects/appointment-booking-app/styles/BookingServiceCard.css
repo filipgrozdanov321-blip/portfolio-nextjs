@@ -1,0 +1,55 @@
+.booking-service-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  text-align: left;
+  background: var(--booking-card-bg);
+  border: 1.5px solid var(--booking-border);
+  border-radius: var(--booking-radius-md);
+  padding: var(--booking-space-4);
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.booking-service-card:hover {
+  border-color: var(--booking-primary);
+}
+
+.booking-service-card--selected {
+  border-color: var(--booking-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.booking-service-card-check {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--booking-primary);
+  color: #FFFFFF;
+}
+
+.booking-service-card-name {
+  font-weight: 600;
+  font-size: 1rem;
+  padding-right: 28px;
+}
+
+.booking-service-card-meta {
+  font-size: 0.85rem;
+  color: var(--booking-primary);
+  font-weight: 600;
+}
+
+.booking-service-card-description {
+  font-size: 0.85rem;
+  color: var(--booking-text-secondary);
+  line-height: 1.4;
+}

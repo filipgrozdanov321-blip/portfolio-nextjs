@@ -1,0 +1,94 @@
+.realestate-listing-card {
+    display: block;
+    background-color: var(--realestate-white);
+    border-radius: var(--realestate-radius-md);
+    overflow: hidden;
+    border: 1px solid var(--realestate-border);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .realestate-listing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--realestate-shadow);
+  }
+  
+  .realestate-listing-card-image-wrap {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background-color: var(--realestate-offwhite);
+  }
+  
+  .realestate-listing-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .realestate-listing-card-type {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: rgba(27, 42, 65, 0.85);
+    color: var(--realestate-white);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: var(--realestate-radius-sm);
+  }
+  
+  .realestate-listing-card-featured {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: var(--realestate-gold);
+    color: var(--realestate-navy);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: var(--realestate-radius-sm);
+  }
+  
+  .realestate-listing-card-body {
+    padding: 18px 20px 20px;
+  }
+  
+  .realestate-listing-card-price {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--realestate-navy);
+  }
+  
+  .realestate-listing-card-address {
+    margin-top: 6px;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--realestate-navy);
+  }
+  
+  .realestate-listing-card-city {
+    font-size: 13.5px;
+    color: var(--realestate-gray);
+    margin-top: 2px;
+  }
+  
+  .realestate-listing-card-specs {
+    display: flex;
+    gap: 16px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--realestate-border);
+  }
+  
+  .realestate-listing-card-specs span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    color: var(--realestate-gray);
+  }
+  
+  .realestate-listing-card-specs svg {
+    color: var(--realestate-gold);
+  }

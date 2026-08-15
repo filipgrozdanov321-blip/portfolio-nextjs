@@ -1,0 +1,163 @@
+.restaurant-footer {
+    background-color: var(--restaurant-charcoal);
+    color: var(--restaurant-cream);
+    padding: 5rem 2rem 2rem;
+  }
+  
+  .restaurant-footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 4rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .restaurant-footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--restaurant-gold);
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  .restaurant-footer-tagline {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: rgba(253, 251, 247, 0.6);
+    line-height: 1.7;
+    max-width: 280px;
+    margin-bottom: 1.75rem;
+  }
+  
+  .restaurant-footer-socials {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .restaurant-footer-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 2px;
+    color: var(--restaurant-gold);
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+  
+  .restaurant-footer-social-link:hover {
+    background-color: var(--restaurant-gold);
+    border-color: var(--restaurant-gold);
+    color: var(--restaurant-charcoal);
+  }
+  
+  .restaurant-footer-nav-heading {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--restaurant-gold);
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+  
+  .restaurant-footer-nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: 0;
+  }
+  
+  .restaurant-footer-nav-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: rgba(253, 251, 247, 0.7);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .restaurant-footer-nav-link:hover {
+    color: var(--restaurant-cream);
+  }
+  
+  .restaurant-footer-contact-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-bottom: 1.75rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: rgba(253, 251, 247, 0.7);
+    line-height: 1.5;
+    padding: 0
+  }
+  
+  .restaurant-footer-cta {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--restaurant-charcoal);
+    background-color: var(--restaurant-gold);
+    padding: 0.65rem 1.4rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  
+  .restaurant-footer-cta:hover {
+    background-color: var(--restaurant-gold-hover);
+  }
+  
+  .restaurant-footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .restaurant-footer-copyright,
+  .restaurant-footer-credit {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: rgba(253, 251, 247, 0.35);
+  }
+
+  
+  @media (max-width: 900px) {
+    .restaurant-footer-inner {
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+  
+    .restaurant-footer-brand {
+      grid-column: 1 / -1;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .restaurant-footer-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  
+    .restaurant-footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+  }

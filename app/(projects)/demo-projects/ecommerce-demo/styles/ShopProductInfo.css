@@ -1,0 +1,122 @@
+.shop-product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 4px;
+  }
+  
+  .shop-product-info-category {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--shop-gray);
+  }
+  
+  .shop-product-info-name {
+    font-size: 26px;
+    font-weight: 700;
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+  
+  .shop-product-info-price {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--shop-black);
+    margin-bottom: 20px;
+  }
+  
+  .shop-product-info-description {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--shop-black);
+    opacity: 0.85;
+    margin-bottom: 28px;
+    max-width: 440px;
+  }
+  
+  .shop-product-info-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--shop-black);
+    margin-bottom: 10px;
+  }
+  
+  .shop-product-info-variants {
+    margin-bottom: 24px;
+  }
+  
+  .shop-product-info-variant-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .shop-product-info-variant-button {
+    padding: 9px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid var(--shop-border);
+    border-radius: 2px;
+    color: var(--shop-black);
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+  
+  .shop-product-info-variant-button-active {
+    border-color: var(--shop-black);
+    background-color: var(--shop-black);
+    color: var(--shop-white);
+  }
+  
+  .shop-product-info-quantity {
+    margin-bottom: 28px;
+  }
+  
+  .shop-product-info-stepper {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    border: 1px solid var(--shop-border);
+    border-radius: 2px;
+    padding: 10px 16px;
+  }
+  
+  .shop-product-info-stepper-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--shop-black);
+  }
+  
+  .shop-product-info-quantity-value {
+    font-size: 14px;
+    font-weight: 600;
+    min-width: 14px;
+    text-align: center;
+  }
+  
+  .shop-product-info-add-button {
+    width: 100%;
+    max-width: 440px;
+    padding: 16px;
+    background-color: var(--shop-black);
+    color: var(--shop-white);
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 2px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .shop-product-info-add-button:hover {
+    background-color: var(--shop-accent);
+  }
+  
+  @media (max-width: 640px) {
+    .shop-product-info-name {
+      font-size: 22px;
+    }
+  }
