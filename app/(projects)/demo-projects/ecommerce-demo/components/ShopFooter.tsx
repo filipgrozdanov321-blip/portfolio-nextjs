@@ -19,7 +19,7 @@ export default function ShopFooter() {
 
   return (
     <footer className="shop-footer">
-      <div className="shop-footer-inner shop-container">
+      <div className="shop-footer-inner">
         <div className="shop-footer-brand">
           <span className="shop-footer-logo">Norrland</span>
           <p className="shop-footer-blurb">
@@ -63,7 +63,7 @@ export default function ShopFooter() {
         </div>
       </div>
 
-      <div className="shop-footer-bottom shop-container">
+      <div className="shop-footer-bottom">
         <span className="shop-footer-copyright">
           © {new Date().getFullYear()} Norrland. All rights reserved.
         </span>

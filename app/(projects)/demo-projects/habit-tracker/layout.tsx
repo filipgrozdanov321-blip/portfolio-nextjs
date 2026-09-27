@@ -1,7 +1,7 @@
 "use client";
 
 import Header from "./components/Header";
-import BackButton from "@/components/ComponentsUsedAroundTheWebSite/BackButton/BackButton";
+
 import "./styles.css";
 
 export default function HabitTrackerLayout({
@@ -13,7 +13,6 @@ export default function HabitTrackerLayout({
     <>
       <main className="habit-tracker-main">
         <Header />
-        <BackButton />
         {children}
 
       </main>

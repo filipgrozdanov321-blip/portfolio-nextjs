@@ -92,6 +92,12 @@ export default function AiContentGeneratorPage() {
   return (
     <div className="generator-page">
       <div className="generator-container">
+        <div className="generator-demo-notice">
+          <strong>Demo note:</strong> this project isn't connected to a live
+          AI model in this public demo (to keep it free to run) — it's here
+          to show the interface and flow I built around it.
+        </div>
+
         <GeneratorHeader />
         <GeneratorTypeSelector
           selectedType={selectedType}

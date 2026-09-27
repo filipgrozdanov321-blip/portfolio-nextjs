@@ -64,19 +64,123 @@
   background-color: var(--bg-primary);
 }
 
-.saas-hero-image-placeholder {
+/* Product mockup — replaces the old image placeholder */
+.saas-hero-mockup {
   width: 100%;
-  max-width: 700px;
-  height: 360px;
+  max-width: 780px;
   margin-top: 2rem;
-  background-color: var(--bg-primary);
-  border: 1px solid var(--border);
   border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+  background-color: var(--bg-primary);
+}
+
+.saas-mockup-browserbar {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.7rem 1rem;
+  background-color: var(--border);
+}
+
+.saas-mockup-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.saas-mockup-dot.red { background: #ff5f57; }
+.saas-mockup-dot.yellow { background: #febc2e; }
+.saas-mockup-dot.green { background: #28c840; }
+
+.saas-mockup-body {
+  display: flex;
+  min-height: 320px;
+  text-align: left;
+}
+
+.saas-mockup-sidebar {
+  width: 160px;
+  background-color: var(--accent);
+  color: #ffffff;
+  padding: 1.25rem 1rem;
+  flex-shrink: 0;
+}
+
+.saas-mockup-logo {
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.saas-mockup-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.saas-mockup-nav .active {
+  opacity: 1;
+  font-weight: 600;
+}
+
+.saas-mockup-main {
+  flex: 1;
+  padding: 1.25rem 1.5rem;
+  background-color: var(--bg-primary);
+}
+
+.saas-mockup-stats {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.saas-mockup-stat {
+  flex: 1;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.saas-mockup-stat-label {
+  display: block;
+  font-size: 0.75rem;
   color: var(--text-secondary);
-  font-size: 0.95rem;
+}
+
+.saas-mockup-stat-value {
+  display: block;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 0.2rem;
+}
+
+.saas-mockup-schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.saas-mockup-appt {
+  display: flex;
+  gap: 0.75rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.85rem;
+}
+
+.saas-mockup-time {
+  font-weight: 700;
+  color: var(--accent);
+  min-width: 45px;
+}
+
+.saas-mockup-appt-name {
+  color: var(--text-primary);
 }
 
 @media (max-width: 640px) {
@@ -87,5 +191,9 @@
   .saas-hero-actions {
     flex-direction: column;
     width: 100%;
+  }
+
+  .saas-mockup-sidebar {
+    display: none;
   }
 }

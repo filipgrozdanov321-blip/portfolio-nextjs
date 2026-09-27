@@ -13,19 +13,16 @@ export default function ShopNavbar() {
 
   return (
     <header className="shop-navbar">
-      <div className="shop-navbar-inner">
-        <div className="shop-navbar-back-wrapper">
-          <BackButton />
-        </div>
+      <div className="shop-navbar-back-wrapper">
+        <BackButton />
+      </div>
 
+      <div className="shop-navbar-inner">
         <Link href={BASE_PATH} className="shop-navbar-logo">
           Norrland
         </Link>
 
         <nav className="shop-navbar-links">
-          <Link href={BASE_PATH} className="shop-navbar-link">
-            Home
-          </Link>
           <Link href={`${BASE_PATH}/products`} className="shop-navbar-link">
             Shop
           </Link>

@@ -1,24 +1,30 @@
 .hero {
   position: relative;
-  min-height: 80vh; /* Ensures the hero section takes up a significant part of the viewport */
+  min-height: 80vh;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url("../../../public/images/laptop.jpeg") center / cover no-repeat;
   color: white;
-  background-attachment: fixed; /* Keeps the background fixed as you scroll */
   overflow: hidden;
-  transition: background-position 0.1s ease-out;
 }
 
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
+  background: url("../../../public/images/hero.jpg") center / cover no-repeat;
+  background-attachment: fixed;
+  filter: blur(6px) brightness(0.95) saturate(0.8);
+  transform: scale(1.02); /* hides blurry/transparent edges from the blur */
+  z-index: 0;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
   background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(3.5px) brightness(0.95) saturate(0.8);
-  -webkit-backdrop-filter: blur(3.5px) brightness(0.95) saturate(0.8);
   z-index: 1;
 }
 

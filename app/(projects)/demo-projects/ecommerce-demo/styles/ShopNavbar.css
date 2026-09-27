@@ -6,20 +6,14 @@
   border-bottom: 1px solid var(--shop-border);
 }
 
-.shop-navbar-inner {
-  position: relative;
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 20px 32px;
-  display: flex;
-  align-items: center;
-  gap: 28px;
-}
-
 .shop-navbar-back-wrapper {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
   display: flex;
   align-items: center;
-  flex-shrink: 0;
 }
 
 /* Safety net: neutralizes fixed/absolute positioning or stray margin
@@ -31,6 +25,15 @@
   margin: 0 !important;
   top: auto !important;
   left: auto !important;
+}
+
+.shop-navbar-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
 }
 
 .shop-navbar-logo {
@@ -82,6 +85,10 @@
 }
 
 @media (max-width: 640px) {
+  .shop-navbar-back-wrapper {
+    left: 16px;
+  }
+
   .shop-navbar-inner {
     padding: 16px 20px;
     gap: 16px;

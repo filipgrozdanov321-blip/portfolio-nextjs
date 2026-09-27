@@ -14,7 +14,7 @@ const steps = [
   {
     number: "03",
     title: "Start Booking",
-    description: "Share your booking link and let clients schedule appointments instantly.",
+    description: "Share your booking link and let clients schedule instantly.",
   },
 ];
 

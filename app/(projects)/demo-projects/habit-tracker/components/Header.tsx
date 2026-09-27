@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import BackButton from "@/components/ComponentsUsedAroundTheWebSite/BackButton/BackButton";
 import "./header.css";
 
 export default function Header() {
@@ -12,6 +13,10 @@ export default function Header() {
 
   return (
     <header className="header-habit-tracker">
+      <div className="header-habit-tracker__back-wrapper">
+        <BackButton />
+      </div>
+
       <nav className="header-habit-tracker__nav">
         <Link
           href="/demo-projects/habit-tracker"

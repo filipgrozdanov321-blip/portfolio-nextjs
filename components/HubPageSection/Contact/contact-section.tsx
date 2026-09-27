@@ -40,8 +40,8 @@ export default function ContactSection() {
         </h2>
 
         <p className="contact-intro animate animate-up">
-          Ready to take your online presence to the next level? I’d love to help
-          you bring your vision to life.
+          Tell me what you’re building and where it’s stuck — I’ll reply
+          within a day with real next steps, not a sales pitch.
         </p>
 
         <div className="contact-content">
@@ -56,12 +56,19 @@ export default function ContactSection() {
               <div className="contact-page-links">
                 <div className="contact-link">
                   <i className="fas fa-envelope contact-icon"></i>
-                  <a href="mailto:youremail@example.com">
-                    youremail@example.com
+                  <a href="mailto:filip.grozdanov.web@gmail.com">
+                    filip.grozdanov.web@gmail.com
                   </a>
                 </div>
 
                 <div className="contact-link">
+                  <i className="fab fa-whatsapp contact-icon"></i>
+                  <a href="/api/whatsapp" target="_blank" rel="noopener noreferrer">
+                    WhatsApp
+                  </a>
+                </div>
+
+                {/* <div className="contact-link">
                   <i className="fab fa-linkedin contact-icon"></i>
                   <a
                     href="https://www.linkedin.com/in/yourprofile"
@@ -70,18 +77,7 @@ export default function ContactSection() {
                   >
                     LinkedIn
                   </a>
-                </div>
-
-                <div className="contact-link">
-                  <i className="fas fa-calendar-alt contact-icon"></i>
-                  <a
-                    href="https://calendly.com/yourprofile"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Schedule a Meeting
-                  </a>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

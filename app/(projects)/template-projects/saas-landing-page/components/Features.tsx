@@ -4,22 +4,22 @@ import "../styles/Features.css";
 const features = [
   {
     title: "Online Booking",
-    description: "Clients book appointments themselves, 24/7, without a single phone call.",
+    description: "Clients book their own appointment in seconds, any time — no calls needed.",
     icon: CalendarCheck,
   },
   {
     title: "Automatic Reminders",
-    description: "Cut no-shows with automated SMS and email reminders before every appointment.",
+    description: "Automated reminders before every appointment, so fewer no-shows.",
     icon: BellRing,
   },
   {
     title: "Staff Calendars",
-    description: "Manage multiple staff schedules side by side, all in one clear view.",
+    description: "Every stylist's schedule side by side, so double-bookings stop happening by accident.",
     icon: Users,
   },
   {
     title: "Client Profiles",
-    description: "Keep notes, preferences, and visit history for every client in one place.",
+    description: "Notes, preferences, and visit history saved and ready before they sit down.",
     icon: UserCircle,
   },
 ];
@@ -30,7 +30,7 @@ export default function Features() {
       <div className="saas-features-header">
         <h2 className="saas-features-title">Everything your studio needs</h2>
         <p className="saas-features-subtitle">
-          Simple tools that save time, reduce no-shows, and keep clients coming back.
+          The day-to-day tools that make running a busy chair actually manageable.
         </p>
       </div>
 

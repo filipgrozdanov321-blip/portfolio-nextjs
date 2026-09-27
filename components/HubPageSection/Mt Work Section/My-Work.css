@@ -54,7 +54,7 @@
   min-width: 100%;
   height: 660px;
   background-size: cover;
-  background-position: center;
+  background-position: center top; /* try: top, center top, 50% 20%, etc. per image */
   position: relative;
 }
 

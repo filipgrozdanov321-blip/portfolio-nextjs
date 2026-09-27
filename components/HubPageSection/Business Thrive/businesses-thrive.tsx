@@ -51,8 +51,8 @@ const BusinessesThriveSection = () => {
 
         <p className={`bt-under-header ${isVisible.subtitle ? "visible" : ""}`}>
           Most businesses don’t have a traffic problem — they have a clarity,
-          conversion, and execution problem. Here’s where things usually break
-          down, and how I fix them.
+          conversion, and execution problem. Here’s where it usually breaks
+          down, and how I fix it.
         </p>
 
         <div className="bt-grid">
@@ -76,21 +76,24 @@ const BusinessesThriveSection = () => {
             >
               <ul>
                 <li className={isVisible.problemItemsStart ? "animate" : ""}>
-                  Outdated websites that look <strong>untrustworthy</strong>
+                  A website that looks <strong>outdated</strong> the moment
+                  someone lands on it
                 </li>
                 <li className={isVisible.problemItemsStart ? "animate" : ""}>
-                  Low <strong>conversion</strong> rates despite decent traffic
+                  Messaging that talks about you, not to your{" "}
+                  <strong>customer</strong>
                 </li>
                 <li className={isVisible.problemItemsStart ? "animate" : ""}>
-                  Confusing messaging that doesn’t <strong>speak</strong> to the
-                  customer
+                  Decent traffic that never actually turns into{" "}
+                  <strong>customers</strong>
                 </li>
                 <li className={isVisible.problemItemsStart ? "animate" : ""}>
-                  No clear funnel or strategy to generate <strong>leads</strong>
+                  No real funnel — just a page waiting around for{" "}
+                  <strong>leads</strong>
                 </li>
                 <li className={isVisible.problemItemsStart ? "animate" : ""}>
-                  Marketing efforts that produce no measurable{" "}
-                  <strong>ROI</strong>
+                  Marketing spend with no clear <strong>ROI</strong> to point
+                  to
                 </li>
               </ul>
             </div>
@@ -118,23 +121,24 @@ const BusinessesThriveSection = () => {
             >
               <ul>
                 <li className={isVisible.solutionItemsStart ? "animate" : ""}>
-                  Modern, high-performance websites built for{" "}
-                  <strong>conversions</strong>
+                  A modern site that reads as <strong>credible</strong> in the
+                  first five seconds
                 </li>
                 <li className={isVisible.solutionItemsStart ? "animate" : ""}>
-                  Clear <strong>messaging</strong> that positions your offer
-                  correctly
+                  Messaging built around what your{" "}
+                  <strong>customer</strong> actually cares about
                 </li>
                 <li className={isVisible.solutionItemsStart ? "animate" : ""}>
-                  Responsive design <strong>optimized</strong> for all devices
+                  A structure designed to turn visitors into{" "}
+                  <strong>customers</strong>
                 </li>
                 <li className={isVisible.solutionItemsStart ? "animate" : ""}>
-                  Data-driven marketing strategies focused on{" "}
+                  A real <strong>funnel</strong> — content, capture, and
+                  follow-up working together
+                </li>
+                <li className={isVisible.solutionItemsStart ? "animate" : ""}>
+                  Tracking that shows exactly what's driving{" "}
                   <strong>results</strong>
-                </li>
-                <li className={isVisible.solutionItemsStart ? "animate" : ""}>
-                  Scalable <strong>systems</strong> designed to grow with your
-                  business
                 </li>
               </ul>
             </div>

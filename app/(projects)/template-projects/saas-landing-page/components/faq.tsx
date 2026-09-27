@@ -7,7 +7,7 @@ const faqs = [
   {
     question: "Do I need a credit card to start?",
     answer:
-      "No, you can start your free trial without entering any payment details. We'll only ask for billing info if you decide to upgrade.",
+      "No — the free trial on our Pro plan doesn't require a card upfront. We'll only ask for billing details once you decide to subscribe or upgrade.",
   },
   {
     question: "Can my clients book without creating an account?",
@@ -22,12 +22,12 @@ const faqs = [
   {
     question: "Is there a contract or can I cancel anytime?",
     answer:
-      "There's no long-term contract. All plans are billed monthly and you can cancel whenever you'd like, no questions asked.",
+      "No long-term contract on Starter or Pro — both are billed monthly and you can cancel anytime. Enterprise plans are set up individually based on your studio's needs.",
   },
   {
     question: "Does ChairTime send reminders to clients?",
     answer:
-      "Yes, automatic email and SMS reminders are included on the Pro and Enterprise plans to help reduce no-shows.",
+      "Yes — email reminders are included on every plan, and Pro and Enterprise add SMS reminders on top to cut no-shows even further.",
   },
 ];
 

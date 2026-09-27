@@ -35,7 +35,7 @@ export default function ServicesSection() {
     <section id="services" className="services" ref={sectionRef}>
       <div className="services-container">
         <h2 className="services-title animate animate-down">
-          How I Help Businesses Grow
+          What I Actually Deliver
         </h2>
 
         {/* Web Development */}
@@ -43,14 +43,14 @@ export default function ServicesSection() {
           <div className="service-heading web animate animate-left">
             <h3>Websites That Convert</h3>
             <p>
-              I build modern, high-performance websites designed to turn visitors
-              into leads — not just look good.
+              I build fast, modern websites designed to turn visitors into
+              leads — not just look good.
             </p>
           </div>
 
           <div className="service-content animate animate-right">
             <ul>
-              <li>Custom website design aligned with your brand</li>
+              <li>Custom design built around your brand, not a template</li>
               <li>Mobile-first, responsive layouts</li>
               <li>Clear messaging and conversion-focused structure</li>
               <li>Fast load times and clean code</li>
@@ -68,8 +68,8 @@ export default function ServicesSection() {
           <div className="service-heading marketing animate animate-left">
             <h3>Marketing That Drives Results</h3>
             <p>
-              I focus on practical, measurable marketing — not vanity metrics or
-              empty traffic.
+              I focus on practical, measurable marketing — not vanity metrics
+              or empty traffic.
             </p>
           </div>
 

@@ -1,8 +1,38 @@
+"use client";
+
+import { useState } from "react";
 import "./ContactForm.css";
 
 export default function ContactForm() {
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">(
+    "idle"
+  );
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("sending");
+
+    const form = e.currentTarget;
+    const payload = Object.fromEntries(new FormData(form).entries());
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error("Failed to send");
+
+      setStatus("success");
+      form.reset();
+    } catch {
+      setStatus("error");
+    }
+  };
+
   return (
-    <form className="contact-form">
+    <form className="contact-form" onSubmit={handleSubmit}>
       <div className="contact-form-group">
         <label htmlFor="name">Name *</label>
         <input
@@ -71,9 +101,24 @@ export default function ContactForm() {
         />
       </div>
 
-      <button type="submit" className="contact-form-button">
-        Let's Get Started
+      <button
+        type="submit"
+        className="contact-form-button"
+        disabled={status === "sending"}
+      >
+        {status === "sending" ? "Sending..." : "Let's Get Started"}
       </button>
+
+      {status === "success" && (
+        <p className="contact-form-status success">
+          Thanks — I'll get back to you within a day.
+        </p>
+      )}
+      {status === "error" && (
+        <p className="contact-form-status error">
+          Something went wrong. Try emailing me directly instead.
+        </p>
+      )}
     </form>
   );
 }

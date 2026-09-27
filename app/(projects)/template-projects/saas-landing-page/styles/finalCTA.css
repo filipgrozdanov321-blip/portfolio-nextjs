@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
   }
   
   .final-cta-title {
@@ -26,7 +26,7 @@
   }
   
   .final-cta-button {
-    margin-top: 0.5rem;
+    margin: 0;
     background-color: #ffffff;
     color: var(--accent);
     padding: 0.85rem 1.8rem;

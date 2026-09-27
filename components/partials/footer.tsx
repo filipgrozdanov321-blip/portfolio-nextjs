@@ -18,8 +18,8 @@ export default function Footer() {
           <div className="footer-brand">
             <h3>Filip Grozdanov</h3>
             <p>
-              Web Developer & Digital Strategist helping businesses build
-              high-performing, conversion-focused websites.
+              Web developer building fast, conversion-focused websites for
+              businesses that want real results, not just a nice-looking site.
             </p>
           </div>
 
@@ -47,28 +47,27 @@ export default function Footer() {
             <h4>Connect</h4>
             <ul>
               <li>
-                <a href="mailto:youremail@example.com">
+                <a href="mailto:filip.grozdanov.web@gmail.com">
+                  <i className="fas fa-envelope"></i>
                   Email
                 </a>
               </li>
               <li>
-                <a
+                <a href="/api/whatsapp" target="_blank" rel="noopener noreferrer">
+                  <i className="fab fa-whatsapp"></i>
+                  WhatsApp
+                </a>
+              </li>
+              {/* <li>
+                
                   href="https://www.linkedin.com/in/yourprofile"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
+                  <i className="fab fa-linkedin"></i>
                   LinkedIn
                 </a>
-              </li>
-              <li>
-                <a
-                  href="https://calendly.com/yourprofile"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Schedule a Meeting
-                </a>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

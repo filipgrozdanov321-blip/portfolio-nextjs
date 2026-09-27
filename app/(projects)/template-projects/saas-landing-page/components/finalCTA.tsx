@@ -12,7 +12,7 @@ export default function FinalCTA() {
           Join hundreds of studios already saving time and reducing no-shows with ChairTime.
         </p>
         <a href="#pricing" onClick={(e) => scrollToSection(e, "pricing")} className="final-cta-button">
-          Get Started Free
+          Get Started
         </a>
       </div>
     </section>

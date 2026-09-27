@@ -1,48 +1,67 @@
 .header-habit-tracker {
-    background: #1f1f1f;
-    padding: 1rem 0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-  }
-  
-  .header-habit-tracker__nav {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    gap: 0.75rem;
-  }
-  
-  /* Links as buttons */
+  position: relative;
+  background: #1f1f1f;
+  padding: 1rem 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.header-habit-tracker__back-wrapper {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+}
+
+.header-habit-tracker__back-wrapper > * {
+  position: static !important;
+  margin: 0 !important;
+  top: auto !important;
+  left: auto !important;
+}
+
+.header-habit-tracker__nav {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.header-habit-tracker a {
+  text-decoration: none;
+  color: #fcfcfc;
+  font-weight: 600;
+  font-size: 0.95rem;
+
+  padding: 0.6rem 1.1rem;
+  border-radius: 10px;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.header-habit-tracker a:hover {
+  background-color: #2a2a2a;
+  transform: translateY(-1px);
+}
+
+.header-habit-tracker a.active {
+  background: #fcfcfc;
+  color: #111;
+}
+
+@media (prefers-reduced-motion: reduce) {
   .header-habit-tracker a {
-    text-decoration: none;
-    color: #fcfcfc;
-    font-weight: 600;
-    font-size: 0.95rem;
-  
-    padding: 0.6rem 1.1rem;
-    border-radius: 10px;
-  
-    transition:
-      background-color 0.25s ease,
-      color 0.25s ease,
-      transform 0.25s ease;
+    transition: none;
   }
-  
-  /* Hover */
-  .header-habit-tracker a:hover {
-    background-color: #2a2a2a;
-    transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .header-habit-tracker__back-wrapper {
+    left: 16px;
   }
-  
-  /* Active route */
-  .header-habit-tracker a.active {
-    background: #fcfcfc;
-    color: #111;
-  }
-  
-  /* Reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    .header-habit-tracker a {
-      transition: none;
-    }
-  }
-  
+}

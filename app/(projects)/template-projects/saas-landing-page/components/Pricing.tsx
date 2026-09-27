@@ -72,7 +72,7 @@ export default function Pricing() {
               ))}
             </ul>
 
-            <a href="#" className="pricing-cta">
+            <a href="/contact" className="pricing-cta">
               {plan.cta}
             </a>
           </div>

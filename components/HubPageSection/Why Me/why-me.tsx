@@ -34,7 +34,7 @@ export default function WhyMeSection() {
     <section id="why-me" className="why-me" ref={sectionRef}>
       <div className="why-me-container">
         <h2 className="why-me-title animate animate-down">
-          How I Actually Help Clients Win
+          The Way I Work
         </h2>
 
         <p className="why-me-intro animate animate-up">
@@ -47,14 +47,14 @@ export default function WhyMeSection() {
             {
               n: "01",
               t: "Clarity Before Code",
-              d: "Most websites fail because they’re built without a clear message. I define the goal, structure, and flow before touching design or code.",
-              r: "Result: users understand your offer faster and convert more.",
+              d: "I nail down the goal, message, and structure before writing a line of code — so there's a clear direction from day one.",
+              r: "Result: your offer is clearer and converts faster.",
             },
             {
               n: "02",
               t: "Speed Without Breaking Things",
-              d: "Fast work doesn’t mean rushed work. I move quickly, but I build systems that are stable, scalable, and easy to improve.",
-              r: "Result: faster launches without technical debt and convert more.",
+              d: "I move fast without cutting corners. Everything is built to stay stable, scalable, and easy to improve.",
+              r: "Result: faster launches without piling up technical debt.",
               right: true,
             },
             {
