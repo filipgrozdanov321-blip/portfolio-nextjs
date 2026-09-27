@@ -8,8 +8,8 @@ export default function Contact() {
         <div>      
           <h1 className="contact-page-title">Let’s Work Together</h1>
           <p className="contact-page-intro">
-          Ready to improve your online presence or start a new project?
-          Fill out the form below and I’ll get back to you personally.
+          Tell me what you're building or what's not working, and I'll get
+          back to you personally with real next steps.
         </p>
         </div>
 
@@ -19,15 +19,22 @@ export default function Contact() {
         <ContactForm />
 
         <div className="contact-info">
-            <h3>Prefer email or social?</h3>
+            <h3 className="title-of-alternative">Prefer email or social?</h3>
 
             <div className="contact-page-links">
               <div className="contact-link">
                 <i className="fas fa-envelope contact-icon"></i>
-                <a href="mailto:youremail@example.com">youremail@example.com</a>
+                <a href="mailto:filip.grozdanov.web@gmail.com">filip.grozdanov.web@gmail.com</a>
               </div>
 
               <div className="contact-link">
+                <i className="fab fa-whatsapp contact-icon"></i>
+                <a href="/api/whatsapp" target="_blank" rel="noopener noreferrer">
+                  WhatsApp
+                </a>
+              </div>
+
+              {/* <div className="contact-link">
                 <i className="fab fa-linkedin contact-icon"></i>
                 <a
                   href="https://www.linkedin.com/in/yourprofile"
@@ -35,17 +42,7 @@ export default function Contact() {
                   rel="noopener noreferrer">
                   LinkedIn
                 </a>
-              </div>
-
-              <div className="contact-link">
-                <i className="fas fa-calendar-alt contact-icon"></i>
-                <a
-                  href="https://calendly.com/yourprofile"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  Schedule a Meeting
-                </a>
-              </div>
+              </div> */}
             </div>
           </div>
       </div>

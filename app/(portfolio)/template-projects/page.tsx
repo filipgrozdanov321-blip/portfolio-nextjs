@@ -7,37 +7,37 @@ import "../../../styles/pages/template-projects.css";
 const templateProjects = [
   {
     title: "SaaS Landing Template",
-    description: "High-conversion SaaS landing layout optimized for clarity, speed, and sign-ups.",
+    description: "A SaaS landing page built around one goal: getting the sign-up, not just looking sleek.",
     tech: "React · Next.js · CSS",
     link: "/template-projects/saas-landing-page",
   },
   {
     title: "Restaurant Website",
-    description: "Elegant restaurant template with menu showcase, hours, and reservation call-to-action.",
+    description: "Elegant restaurant site with menu, hours, and a booking flow built to get the table filled.",
     tech: "React · Next.js · CSS",
     link: "/template-projects/restaurant",
   },
   {
     title: "Creative Agency Website",
-    description: "Bold, multi-page agency template built for service-based businesses and studios.",
+    description: "A bold, multi-page agency site built to make a service business look like the obvious choice.",
     tech: "React · Next.js · CSS",
     link: "/template-projects/creative-agency",
   },
   {
     title: "Photographer Portfolio",
-    description: "Minimal, image-led portfolio template for photographers and creatives to showcase work and attract clients.",
+    description: "Minimal, image-led portfolio built to let the work speak — and turn viewers into inquiries.",
     tech: "React · Next.js · CSS",
     link: "/template-projects/photographer-portfolio",
   },
   {
     title: "Real Estate Listings",
-    description: "Property listing template with filterable grid layout, search options, and a clear agent contact section.",
+    description: "Property listings with a filterable grid, search, and sorting options — built to get the agent the call.",
     tech: "React · Next.js · CSS",
     link: "/template-projects/real-estate-listings",
   },
   {
     title: "Startup Marketing Site",
-    description: "Marketing-oriented template for early-stage startups looking to build trust fast.",
+    description: "A trust-building site for early-stage startups that need to look credible on day one.",
     tech: "React · Next.js · CSS",
     link: "/template-projects/startup-marketing-site",
   },
@@ -88,8 +88,8 @@ export default function TemplateProjects() {
         </h1>
 
         <p data-animate="fade-up" data-delay="2" data-animate-load>
-          Production-ready templates designed for speed, scalability, and real-world use.
-          Built to eliminate guesswork and accelerate launches.
+          Polished, production-ready layouts built to launch fast — without
+          weeks of back-and-forth over structure and design.
         </p>
       </section>
 
@@ -123,10 +123,10 @@ export default function TemplateProjects() {
 
         <div className="templates-proof-grid">
           {[
-            ["Speed to Market", "Pre-built structures that cut development time."],
-            ["Scalable Layouts", "Templates designed to grow with content and features."],
-            ["Consistent UX", "Clear hierarchy and predictable user flows."],
-            ["Production Standards", "Clean code and real-world best practices."],
+            ["Speed to Market", "A solid starting structure means less time spent building from zero."],
+            ["Layouts That Grow", "Built to handle more content and features without a rebuild."],
+            ["Consistent UX", "Predictable navigation and hierarchy across every page."],
+            ["Real Production Code", "Clean, maintainable code — not throwaway prototype work."],
           ].map(([title, text], i, arr) => (
             <div
               key={i}
@@ -150,7 +150,7 @@ export default function TemplateProjects() {
           {[
             ["01", "Design the System", "Layouts planned for reuse and flexibility."],
             ["02", "Build the Structure", "Clean HTML, scalable CSS, minimal JS."],
-            ["03", "Optimize & Polish", "Performance, responsiveness, and UX refinement."],
+            ["03", "Optimize & Polish", "Performance, responsiveness, and every small detail."],
           ].map(([num, title, text], i) => (
             <div
               key={i}

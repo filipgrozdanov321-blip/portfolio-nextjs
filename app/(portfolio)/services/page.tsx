@@ -42,8 +42,8 @@ export default function ServicesPage() {
         </h1>
 
         <p data-animate="fade-up" data-delay="2" data-animate-load>
-          I design and build high-performance websites and marketing systems
-          focused on clarity, speed, and conversion — not trends.
+          I build websites and marketing systems that are fast, clear, and
+          built to get results — not to chase a trend.
         </p>
 
         <div data-animate="fade-up" data-delay="3" data-animate-load>
@@ -60,7 +60,7 @@ export default function ServicesPage() {
           </h2>
 
           <p data-animate="fade-up">
-            Two focused offerings — designed to work together or stand strong on their own.
+            Two services, built to work together or hold their own on their own.
           </p>
         </div>
 
@@ -87,8 +87,8 @@ export default function ServicesPage() {
             >
               <h3>Digital Marketing</h3>
               <p>
-                SEO, analytics, and conversion-focused improvements designed to
-                increase visibility and results.
+                SEO, analytics, and marketing built to get you found — and
+                make that traffic worth something.
               </p>
             </div>
           </div>
@@ -100,8 +100,9 @@ export default function ServicesPage() {
           <h2>Web Development</h2>
 
           <p className="service-description">
-            I build websites from the ground up — clean structure, fast performance,
-            and zero fluff. Every decision supports clarity and conversion.
+            I build websites from the ground up — clean code, fast
+            performance, zero fluff. Every decision comes down to one
+            question: does this help the site do its job.
           </p>
 
           <ul className="service-points">
@@ -146,7 +147,7 @@ export default function ServicesPage() {
           {[
             ["01", "Understand", "Identify what’s broken or missing."],
             ["02", "Build / Fix", "Focus on what creates impact."],
-            ["03", "Optimize", "Refine clarity, speed, and flow."],
+            ["03", "Optimize", "Refine speed, flow, and usability."],
             ["04", "Iterate", "Improve based on real results."],
           ].map(([num, title, text], i) => (
             <div key={i} data-animate="fade-left" data-delay-cards={i + 1}>
@@ -159,17 +160,17 @@ export default function ServicesPage() {
       </section>
 
       <section className="services-structure" data-animate-section>
-        <h2 data-animate="fade-down">How My Services Are Structured</h2>
+        <h2 data-animate="fade-down">How I Run a Project</h2>
 
         <p className="services-structure-intro" data-animate="fade-up" data-delay="1">
-          Every service follows a clear structure designed to reduce confusion
-          and deliver usable results.
+          Every project follows a clear process, designed to cut confusion
+          and deliver something you can actually use.
         </p>
 
         <div className="services-structure-grid" data-stagger>
           {[
             ["Clear Scope", "You know exactly what’s being built and why."],
-            ["Structured Execution", "Work moves through defined phases."],
+            ["A Defined Process", "Work moves through set phases, not chaos."],
             ["Measured Outcomes", "Decisions guided by real data."],
           ].map(([title, text], i) => (
             <div key={i} data-animate="fade-right" data-delay-cards={3 - i}>
@@ -187,7 +188,7 @@ export default function ServicesPage() {
           {[
             ["No More Guesswork", "You’re not left wondering what matters."],
             ["Clear Technical Direction", "Decisions are made with purpose."],
-            ["A Website That Actually Works", "Fast, structured, behavior-driven."],
+            ["A Website That Actually Works", "Fast, intentional, built around how people actually use it."],
             ["Less Back-and-Forth", "Clear scope means fewer revisions."],
             ["Confidence in What You’re Shipping", "You can defend every choice."],
             ["Something You Can Build On", "Your site is designed to grow."],

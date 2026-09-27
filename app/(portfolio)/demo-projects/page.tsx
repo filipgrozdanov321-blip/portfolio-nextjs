@@ -7,37 +7,37 @@ import "../../../styles/pages/demo-projects.css";
 const demoProjects = [
   {
     title: "Habit Tracker App",
-    description: "Track daily habits with streaks, progress stats, and a clean, intuitive UI built for staying consistent over time.",
+    description: "Track daily habits with streaks and progress stats — simple enough that people actually stick with it.",
     tech: "React · CSS",
     link: "/demo-projects/habit-tracker",
   },
   {
     title: "Sales Analytics Dashboard",
-    description: "Interactive dashboard with charts and filters for revenue, orders, and top products.",
+    description: "Interactive revenue dashboard with live filtering — built so decisions come from data, not guesswork.",
     tech: "React · Recharts",
     link: "/demo-projects/sales-analytics-dashboard",
   },
   {
     title: "Task Board (Kanban)",
-    description: "Drag-and-drop task management board with To Do, In Progress, and Done columns.",
+    description: "Drag-and-drop board for To Do, In Progress, and Done — simple enough that teams actually use it.",
     tech: "React · Drag & Drop",
     link: "/demo-projects/task-board",
   },
   {
     title: "Appointment Booking App",
-    description: "Service and time-slot booking flow, ideal for salons, clinics, and consultants.",
+    description: "Full booking flow — service, time, confirmation — built for salons, clinics, and consultants.",
     tech: "React · State Management",
-    link: "/demo-projects/appointment-booking",
+    link: "/demo-projects/appointment-booking-app",
   },
   {
     title: "AI Content Generator",
-    description: "Generate blog intros, product descriptions, and captions using the Claude API.",
+    description: "Generates blog intros, product copy, and captions in seconds — no more blank-page syndrome.",
     tech: "React · Claude API",
     link: "/demo-projects/ai-content-generator",
   },
   {
     title: "E-commerce Demo",
-    description: "Product browsing, cart, and checkout flow with clean, conversion-focused UX.",
+    description: "Browse, cart, checkout — a purchase flow built around one thing: getting to checkout without friction.",
     tech: "React · UI/UX",
     link: "/demo-projects/ecommerce-demo",
   },
@@ -89,8 +89,8 @@ export default function DemoProjects() {
           Demo Projects
         </h1>
         <p data-animate="fade-up" data-delay="1">
-          Concept-driven demo projects built to demonstrate performance,
-          usability, and conversion-focused development.
+          Fully interactive apps, not mockups — built to show how I handle
+          real performance, usability, and user flows.
         </p>
       </section>
 
@@ -124,10 +124,10 @@ export default function DemoProjects() {
 
         <div className="projects-proof-grid">
           {[
-            ["Performance-First Development", "Optimized layouts and scalable code."],
-            ["Conversion-Focused UX", "Clear hierarchy and intent-driven design."],
-            ["Reusable Architecture", "Components built for long-term growth."],
-            ["SEO & Accessibility", "Semantic HTML and best practices."],
+            ["Performance-First Development", "Optimized layouts and code that stays fast under real use."],
+            ["UX Built With Intent", "Clear hierarchy that guides people toward action."],
+            ["Reusable Architecture", "Components built to scale, not get rebuilt next year."],
+            ["SEO & Accessibility", "Semantic HTML and practices that hold up to a real audit."],
           ].map(([title, text], i, arr) => (
             <div
               key={i}
@@ -144,14 +144,14 @@ export default function DemoProjects() {
 
       <section className="projects-process" data-animate-section>
         <h2 data-animate="fade-up" data-delay="1">
-          How I Approach These Projects
+          From Goal to Launch
         </h2>
 
         <div className="process-grid">
           {[
             ["01", "Define the Goal", "Clarify objective, audience, and success metric."],
             ["02", "Build the System", "Clean structure, scalable components, performance first."],
-            ["03", "Optimize for Results", "Refine UX, flow, and conversion details."],
+            ["03", "Optimize for Results", "Refine UX, flow, and every friction point."],
           ].map(([num, title, text], i) => (
             <div
               key={i}
