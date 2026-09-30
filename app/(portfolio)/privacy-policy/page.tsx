@@ -8,7 +8,7 @@ const PrivacyPolicy = () => {
         <header className="privacy-policy__header">
           <h1 className="privacy-policy__title">Privacy Policy</h1>
           <p className="privacy-policy__effective-date">
-            Effective date: January 1, 2026
+            Effective date: September 28, 2026
           </p>
         </header>
 
@@ -31,10 +31,10 @@ const PrivacyPolicy = () => {
             <li>Website: filipgrozdanov.com</li>
             <li>Location: Slovenia and North Macedonia</li>
             <li>
-              Contact email: <span className="privacy-policy__email">test@gmail.com</span>
+              Contact email: <span className="privacy-policy__email">filip.grozdanov.web@gmail.com</span>
             </li>
             <li>
-              Privacy contact: <span className="privacy-policy__email">test@gmail.com</span>
+              Privacy contact: <span className="privacy-policy__email">filip.grozdanov.web@gmail.com</span>
             </li>
           </ul>
           <p className="privacy-policy__text">
@@ -63,14 +63,15 @@ const PrivacyPolicy = () => {
           </h2>
           <ul className="privacy-policy__list">
             <li>
-              Contact form submissions sent directly to my email inbox
+              Contact form submissions, delivered to my email inbox through an
+              email delivery service
             </li>
             <li>
               Direct email communication
             </li>
-            <li>
+            {/* <li>
               Meeting scheduling through Calendly
-            </li>
+            </li> */}
           </ul>
           <p className="privacy-policy__text">
             I do not store contact form submissions in a database on this
@@ -114,9 +115,10 @@ const PrivacyPolicy = () => {
             6. Third-Party Services
           </h2>
           <ul className="privacy-policy__list">
-            <li>Calendly (meeting scheduling)</li>
+            {/* <li>Calendly (meeting scheduling)</li> */}
+            <li>Vercel (website hosting)</li>
             <li>Google Fonts (website typography)</li>
-            <li>Website hosting and email services</li>
+            <li>An email delivery service (to deliver contact form messages to my inbox)</li>
           </ul>
           <p className="privacy-policy__text">
             These services may process limited technical data such as IP
@@ -141,7 +143,7 @@ const PrivacyPolicy = () => {
 
         <section className="privacy-policy__section">
           <h2 className="privacy-policy__heading">
-            8. Testimonials and Portfolio Content
+            8. Testimonials, Demos and Portfolio Content
           </h2>
           <p className="privacy-policy__text">
             Testimonials and project references are displayed only with explicit
@@ -150,6 +152,16 @@ const PrivacyPolicy = () => {
           <p className="privacy-policy__text">
             Any personal or business information shown is published with
             consent.
+          </p>
+          <p className="privacy-policy__text">
+            The template and demo projects showcased on this website use
+            fictional brands, people, and sample data created purely for
+            demonstration purposes.
+          </p>
+          <p className="privacy-policy__text">
+            Interactive demos such as the booking app and the e-commerce
+            checkout run in your browser and do not send what you type to me.
+            Please do not enter real personal or payment details into them.
           </p>
         </section>
 
@@ -175,12 +187,22 @@ const PrivacyPolicy = () => {
               law)
             </li>
             <li>
+              The Law on Personal Data Protection of North Macedonia, which is
+              closely aligned with the GDPR
+            </li>
+            <li>
               CCPA (California Consumer Privacy Act – United States privacy law)
             </li>
           </ul>
           <p className="privacy-policy__text">
             You may request access, correction, or deletion of your personal
-            data by contacting <span className="privacy-policy__email">test@gmail.com</span>.
+            data by contacting <span className="privacy-policy__email">filip.grozdanov.web@gmail.com</span>.
+          </p>
+          <p className="privacy-policy__text">
+            You also have the right to lodge a complaint with the data
+            protection authority in your country, for example the Information
+            Commissioner in Slovenia or the personal data protection agency in
+            North Macedonia.
           </p>
         </section>
 

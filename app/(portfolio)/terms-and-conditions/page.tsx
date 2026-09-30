@@ -168,7 +168,7 @@ const TermsAndConditions = () => {
           <h2 className="terms__heading">13. Contact</h2>
           <p className="terms__text">
             For questions regarding these Terms, you may contact me at{" "}
-            <span className="terms__email">test@gmail.com</span>.
+            <span className="terms__email">filip.grozdanov.web@gmail.com</span>.
           </p>
         </section>
       </section>
