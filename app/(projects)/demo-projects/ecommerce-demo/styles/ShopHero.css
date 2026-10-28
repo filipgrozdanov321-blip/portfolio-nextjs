@@ -1,106 +1,129 @@
 .shop-hero {
-    position: relative;
-    width: 100%;
-    height: 68vh;
-    min-height: 440px;
-    max-height: 680px;
-    overflow: hidden;
-  }
+  position: relative;
+  width: 100%;
+  /* 68% of the screen height, kept between 440px and 680px (same as before).
+     "dvh" follows the phone's moving address bar, so the hero doesn't jump
+     when it hides; browsers that don't know dvh use the vh line. It's also
+     a MIN-height now (not a fixed height), so on a phone turned sideways the
+     text can't be clipped at the top: the hero grows to fit it. */
+  min-height: 440px;
+  min-height: clamp(440px, 68vh, 680px);
+  min-height: clamp(440px, 68dvh, 680px);
+  overflow: hidden;
+  display: flex;
+}
 
-  .shop-hero-overlay {
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(180deg, rgba(26, 26, 24, 0.05) 0%, rgba(26, 26, 24, 0.55) 100%),
-      linear-gradient(90deg, rgba(26, 26, 24, 0.5) 0%, rgba(26, 26, 24, 0.15) 45%, rgba(26, 26, 24, 0) 100%);
-  }
-  
-  .shop-hero-image-wrapper {
-    position: absolute;
-    inset: 0;
-  }
-  
-  .shop-hero-image {
-    object-fit: cover;
-  }
-  
-  .shop-hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(26, 26, 24, 0.05) 0%,
-      rgba(26, 26, 24, 0.35) 100%
-    );
-  }
-  
-  .shop-hero-content {
-    position: relative;
-    z-index: 1;
-    height: 100%;
-    max-width: 1240px;
-    margin: 0 auto;
-    padding: 0 32px 64px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-    color: var(--shop-white);
-  }
-  
-  .shop-hero-eyebrow {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-    opacity: 0.9;
-  }
-  
-  .shop-hero-heading {
-    font-size: 42px;
-    font-weight: 700;
-    line-height: 1.15;
-    max-width: 560px;
-    margin-bottom: 16px;
-  }
-  
-  .shop-hero-subtext {
-    font-size: 15px;
-    font-weight: 400;
-    max-width: 420px;
-    margin-bottom: 28px;
-    opacity: 0.92;
-  }
-  
-  .shop-hero-cta {
-    display: inline-flex;
-    align-items: center;
-    padding: 14px 28px;
-    background-color: var(--shop-white);
-    color: var(--shop-black);
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 2px;
-    transition: background-color 0.2s ease, color 0.2s ease;
-  }
-  
+/* The old CSS had the dark overlay defined twice (the first, heavier one was
+   overridden by the second, lighter one further down). Only the version that
+   was actually showing is kept, so nothing looks different. */
+
+.shop-hero-image-wrapper {
+  position: absolute;
+  inset: 0;
+}
+
+.shop-hero-image {
+  object-fit: cover;
+}
+
+.shop-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 26, 24, 0.05) 0%,
+    rgba(26, 26, 24, 0.35) 100%
+  );
+}
+
+.shop-hero-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  /* 32px sides and 64px bottom on desktop (same as before), less on phones.
+     The top padding keeps the text clear of the top edge if the hero grows. */
+  padding: 48px clamp(20px, 4vw, 32px) clamp(40px, 6vw, 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  color: var(--shop-white);
+}
+
+.shop-hero-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  opacity: 0.9;
+}
+
+.shop-hero-heading {
+  /* 42px from about 920px up (same as before), 30px on small phones, changing
+     smoothly instead of jumping at 640px */
+  font-size: clamp(1.875rem, 1.35rem + 2.3vw, 2.625rem);
+  font-weight: 700;
+  line-height: 1.15;
+  max-width: 560px;
+  margin-bottom: 16px;
+}
+
+.shop-hero-subtext {
+  font-size: 15px;
+  font-weight: 400;
+  max-width: 420px;
+  margin-bottom: 28px;
+  opacity: 0.92;
+}
+
+.shop-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  /* About 47px tall already; this makes the 44px touch minimum explicit */
+  min-height: 44px;
+  background-color: var(--shop-white);
+  color: var(--shop-black);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 2px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Mouse only, so the color doesn't stay stuck after a tap on phones */
+@media (hover: hover) {
   .shop-hero-cta:hover {
     background-color: var(--shop-accent);
     color: var(--shop-white);
   }
-  
-  @media (max-width: 640px) {
-    .shop-hero {
-      height: 56vh;
-      min-height: 380px;
-    }
-  
-    .shop-hero-content {
-      padding: 0 20px 40px;
-    }
-  
-    .shop-hero-heading {
-      font-size: 30px;
-    }
+}
+
+.shop-hero-cta:active {
+  background-color: var(--shop-accent);
+  color: var(--shop-white);
+}
+
+.shop-hero-cta:focus-visible {
+  outline: 2px solid var(--shop-white);
+  outline-offset: 3px;
+}
+
+/* Phones: the hero is a little shorter (56% of the screen height, at least
+   380px), same as before */
+@media (max-width: 640px) {
+  .shop-hero {
+    min-height: 380px;
+    min-height: max(380px, 56vh);
+    min-height: max(380px, 56dvh);
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+.shop-hero-cta {
+  transition: none;
+}
+}

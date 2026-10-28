@@ -1,10 +1,18 @@
-.shop-checkout-page {
-    padding: 48px 32px 96px;
+/* The doubled selector (.shop-checkout-page.shop-container) makes this padding
+   and width win over the shared .shop-container rules, no matter which file
+   loads first. */
+   .shop-checkout-page.shop-container {
+    /* 48px top, 32px sides and 96px bottom on desktop (same as before), less on
+       phones. It used to jump at 640px; now it changes smoothly. */
+    padding:
+      clamp(2rem, 5vw, 3rem)
+      clamp(20px, 4vw, 32px)
+      clamp(4rem, 8vw, 6rem);
     max-width: 720px;
   }
   
   .shop-checkout-page-heading {
-    font-size: 24px;
+    font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.5rem);
     font-weight: 700;
     margin-bottom: 28px;
   }
@@ -14,7 +22,7 @@
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    padding: 80px 24px;
+    padding: clamp(3rem, 9vw, 5rem) 24px;
     text-align: center;
     color: var(--shop-gray);
     font-size: 14px;
@@ -24,10 +32,13 @@
     font-weight: 600;
     color: var(--shop-accent);
     text-decoration: underline;
+    /* A 44px tap target */
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
-  
-  @media (max-width: 640px) {
-    .shop-checkout-page {
-      padding: 32px 20px 64px;
-    }
+
+  .shop-checkout-empty-link:focus-visible {
+    outline: 2px solid var(--shop-accent);
+    outline-offset: 2px;
   }

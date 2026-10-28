@@ -1,36 +1,83 @@
 .generator-type-selector {
-    display: flex;
-    gap: 4px;
-    background-color: var(--generator-card-bg);
-    border: 1px solid var(--generator-border);
-    border-radius: 10px;
-    padding: 4px;
-    width: fit-content;
-  }
-  
-  .generator-type-tab {
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--generator-text-secondary);
-    background-color: transparent;
-    border: none;
-    border-radius: 7px;
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: background-color 0.15s ease, color 0.15s ease;
-    white-space: nowrap;
-  }
-  
+  display: flex;
+  gap: 4px;
+  background-color: var(--generator-card-bg);
+  border: 1px solid var(--generator-border);
+  border-radius: 10px;
+  padding: 4px;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.generator-type-tab {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--generator-text-secondary);
+  background-color: transparent;
+  border: none;
+  border-radius: 7px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Mouse only, so the color doesn't stay stuck after a tap on phones */
+@media (hover: hover) {
   .generator-type-tab:hover {
     color: var(--generator-text);
   }
-  
-  .generator-type-tab-active {
-    color: #ffffff;
-    background-color: var(--generator-primary);
+}
+
+.generator-type-tab:focus-visible {
+  outline: 2px solid var(--generator-primary);
+  outline-offset: 2px;
+}
+
+.generator-type-tab-active {
+  color: #ffffff;
+  background-color: var(--generator-primary);
+}
+
+.generator-type-tab-active:hover {
+  color: #ffffff;
+}
+
+/* Touch screens: each tab is at least 44px tall (about 32px now) */
+@media (pointer: coarse) {
+  .generator-type-tab {
+    min-height: 44px;
   }
-  
-  .generator-type-tab-active:hover {
-    color: #ffffff;
+}
+
+/* Phones: the three tabs share the full width, as equal columns, and their
+   names wrap onto two lines when they need to. The old bar was one unbroken
+   row about 420px wide, so on a 320px phone "Social Caption" ran off the
+   right edge of the screen. */
+@media (max-width: 560px) {
+  .generator-type-selector {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
   }
+
+  .generator-type-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 8px 6px;
+    font-size: 12.5px;
+    line-height: 1.25;
+    text-align: center;
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+.generator-type-tab {
+  transition: none;
+}
+}

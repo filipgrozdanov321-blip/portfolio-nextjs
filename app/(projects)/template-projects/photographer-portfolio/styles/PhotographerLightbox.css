@@ -1,84 +1,147 @@
 .portfolio-lightbox {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    background-color: rgba(20, 19, 15, 0.94);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .portfolio-lightbox-image-wrap {
-    position: relative;
-    width: 80vw;
-    height: 85vh;
-    max-width: 1100px;
-  }
-  
-  .portfolio-lightbox-image {
-    object-fit: contain;
-  }
-  
-  .portfolio-lightbox-close {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: none;
-    border: none;
-    color: var(--portfolio-white);
-    cursor: pointer;
-    z-index: 101;
-    opacity: 0.85;
-    transition: opacity 0.2s ease;
-  }
-  
-  .portfolio-lightbox-close:hover {
-    opacity: 1;
-  }
-  
-  .portfolio-lightbox-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: var(--portfolio-white);
-    cursor: pointer;
-    z-index: 101;
-    opacity: 0.75;
-    transition: opacity 0.2s ease;
-    padding: 0.5rem;
-  }
-  
+  position: fixed;
+  inset: 0;
+  /* Above the Back button (which floats at z-index 999). It used to be 100,
+     so on phones the Back button sat on top of the photo. */
+  z-index: 1000;
+  background-color: rgba(20, 19, 15, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Vertical movement is ignored; a sideways swipe changes the photo */
+  touch-action: pan-y;
+}
+
+.portfolio-lightbox-image-wrap {
+  position: relative;
+  width: 80vw;
+  /* 85% of the screen height, as before, but never so tall that the buttons
+     and counter fall off a short screen (a phone turned sideways).
+     dvh = the screen height without the phone's moving address bar;
+     browsers that don't know dvh use the vh line. */
+  height: 85vh;
+  height: min(85dvh, calc(100dvh - 7rem));
+  max-width: 1100px;
+}
+
+.portfolio-lightbox-image {
+  object-fit: contain;
+}
+
+/* The close button is now a 44x44px target (the icon alone was 26px). The top
+   and right offsets are 9px smaller to compensate, so the icon stays exactly
+   where it was. */
+.portfolio-lightbox-close {
+  position: absolute;
+  top: calc(1.5rem - 9px);
+  right: calc(1.5rem - 9px);
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--portfolio-white);
+  cursor: pointer;
+  z-index: 101;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.portfolio-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--portfolio-white);
+  cursor: pointer;
+  z-index: 101;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+  padding: 0.5rem;
+}
+
+/* Mouse only, so the buttons don't stay "lit" after a tap */
+@media (hover: hover) {
+  .portfolio-lightbox-close:hover,
   .portfolio-lightbox-nav:hover {
     opacity: 1;
   }
-  
+}
+
+.portfolio-lightbox-close:focus-visible,
+.portfolio-lightbox-nav:focus-visible {
+  opacity: 1;
+  outline: 2px solid var(--portfolio-white);
+  outline-offset: 2px;
+}
+
+.portfolio-lightbox-nav-prev {
+  left: 1.5rem;
+}
+
+.portfolio-lightbox-nav-next {
+  right: 1.5rem;
+}
+
+.portfolio-lightbox-counter {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: rgba(250, 249, 246, 0.7);
+}
+
+/* Touch screens (any width): 44px buttons */
+@media (pointer: coarse) {
+  .portfolio-lightbox-nav {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* PHONES: the photo takes almost the whole width, so the arrows float over
+   its left and right edges. White arrows would disappear on a bright photo,
+   so each button gets a dark round background. The close button and counter
+   keep clear of the notch and the home bar. */
+@media (max-width: 768px) {
+  .portfolio-lightbox-image-wrap {
+    width: 92vw;
+    height: 70vh;
+    height: min(70dvh, calc(100dvh - 7rem));
+  }
+
+  .portfolio-lightbox-close,
+  .portfolio-lightbox-nav {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(20, 19, 15, 0.6);
+    border-radius: 50%;
+  }
+
+  .portfolio-lightbox-close {
+    top: max(0.5rem, env(safe-area-inset-top));
+    right: max(0.5rem, env(safe-area-inset-right));
+  }
+
   .portfolio-lightbox-nav-prev {
-    left: 1.5rem;
+    left: max(0.5rem, env(safe-area-inset-left));
   }
-  
+
   .portfolio-lightbox-nav-next {
-    right: 1.5rem;
+    right: max(0.5rem, env(safe-area-inset-right));
   }
-  
+
   .portfolio-lightbox-counter {
-    position: absolute;
-    bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
-    color: rgba(250, 249, 246, 0.7);
+    bottom: max(1rem, env(safe-area-inset-bottom));
   }
-  
-  @media (max-width: 768px) {
-    .portfolio-lightbox-image-wrap {
-      width: 92vw;
-      height: 70vh;
-    }
-  
-    .portfolio-lightbox-nav {
-      padding: 0.25rem;
-    }
-  }
+}

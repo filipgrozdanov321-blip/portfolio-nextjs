@@ -1,6 +1,7 @@
 .saas-hero {
   background-color: var(--bg-secondary);
-  padding: 5rem 1.5rem;
+  /* 5rem top and bottom on desktop (same as before), less on phones */
+  padding: clamp(2.5rem, 7.3vw, 5rem) clamp(1rem, 4vw, 1.5rem);
   text-align: center;
 }
 
@@ -10,18 +11,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: clamp(1.1rem, 2.5vw, 1.5rem);
 }
 
 .saas-hero-title {
-  font-size: 3rem;
+  /* 3rem from about 800px up (same as before). Before, it sat at 3rem all
+     the way down to 641px and then jumped to 2.2rem; now it shrinks smoothly. */
+  font-size: clamp(2rem, 1.33rem + 3.33vw, 3rem);
   font-weight: 800;
   color: var(--text-primary);
   line-height: 1.15;
 }
 
 .saas-hero-subtitle {
-  font-size: 1.15rem;
+  font-size: clamp(1rem, 0.9rem + 0.45vw, 1.15rem);
   color: var(--text-secondary);
   max-width: 600px;
   line-height: 1.6;
@@ -29,6 +32,8 @@
 
 .saas-hero-actions {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
   margin-top: 0.5rem;
 }
@@ -44,10 +49,6 @@
   transition: background-color 0.2s ease;
 }
 
-.saas-hero-cta-primary:hover {
-  background-color: var(--accent-hover);
-}
-
 .saas-hero-cta-secondary {
   background-color: transparent;
   color: var(--text-primary);
@@ -60,8 +61,21 @@
   transition: background-color 0.2s ease;
 }
 
-.saas-hero-cta-secondary:hover {
-  background-color: var(--bg-primary);
+/* Mouse only, so the colors don't stay stuck after a tap on phones */
+@media (hover: hover) {
+  .saas-hero-cta-primary:hover {
+    background-color: var(--accent-hover);
+  }
+
+  .saas-hero-cta-secondary:hover {
+    background-color: var(--bg-primary);
+  }
+}
+
+.saas-hero-cta-primary:focus-visible,
+.saas-hero-cta-secondary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 /* Product mockup — replaces the old image placeholder */
@@ -126,18 +140,23 @@
 
 .saas-mockup-main {
   flex: 1;
-  padding: 1.25rem 1.5rem;
+  min-width: 0; /* lets the dashboard shrink instead of stretching the page */
+  padding: 1.25rem clamp(1rem, 4vw, 1.5rem);
   background-color: var(--bg-primary);
 }
 
+/* The 3 stat boxes wrap instead of getting crushed: each one wants at least
+   7rem. On desktop all three fit on one row, same as before. */
 .saas-mockup-stats {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
 .saas-mockup-stat {
-  flex: 1;
+  flex: 1 1 7rem;
+  min-width: 0;
   background-color: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -181,13 +200,13 @@
 
 .saas-mockup-appt-name {
   color: var(--text-primary);
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
+/* Phones: the buttons stack full width and the dashboard loses its sidebar
+   (the title is now fluid above, so it's no longer set here) */
 @media (max-width: 640px) {
-  .saas-hero-title {
-    font-size: 2.2rem;
-  }
-
   .saas-hero-actions {
     flex-direction: column;
     width: 100%;

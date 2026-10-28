@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { FormEvent } from "react";
 import { properties } from "../data/listings";
 import "../styles/RealEstateContactForm.css";
 
@@ -13,19 +14,34 @@ export default function RealEstateContactForm() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const successRef = useRef<HTMLDivElement>(null);
 
   function handleChange(field: keyof typeof formData, value: string) {
     setFormData((prev) => ({ ...prev, [field]: value }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitted(true);
   }
 
+  // After sending, the long form is replaced by a short message. On a phone you
+  // would be left scrolled to the middle of nothing, so this brings the message
+  // into view (and lets screen readers announce it).
+  useEffect(() => {
+    if (!submitted) return;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    successRef.current?.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "center",
+    });
+  }, [submitted]);
+
   if (submitted) {
     return (
-      <div className="realestate-contactform-success">
+      <div className="realestate-contactform-success" ref={successRef} role="status">
         <h3>Message sent</h3>
         <p>
           Thanks, {formData.name.split(" ")[0] || "there"} — this is a static template, so
@@ -44,6 +60,7 @@ export default function RealEstateContactForm() {
           <input
             id="contact-name"
             type="text"
+            autoComplete="name"
             value={formData.name}
             onChange={(e) => handleChange("name", e.target.value)}
             required
@@ -55,6 +72,7 @@ export default function RealEstateContactForm() {
           <input
             id="contact-email"
             type="email"
+            autoComplete="email"
             value={formData.email}
             onChange={(e) => handleChange("email", e.target.value)}
             required
@@ -68,6 +86,7 @@ export default function RealEstateContactForm() {
           <input
             id="contact-phone"
             type="tel"
+            autoComplete="tel"
             value={formData.phone}
             onChange={(e) => handleChange("phone", e.target.value)}
           />

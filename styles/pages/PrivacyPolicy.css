@@ -1,83 +1,74 @@
 /* Root container */
 .privacy-policy {
-    background-color: #fcfcfc;
-    color: #111;
-    width: 100%;
-  }
-  
-  /* Content wrapper */
-  .privacy-policy__container {
-    max-width: 880px;
-    margin: 0 auto;
-    padding: 96px 24px;
-  }
-  
-  /* Header */
-  .privacy-policy__header {
-    margin-bottom: 64px;
-  }
-  
-  .privacy-policy__title {
-    font-size: 2.5rem;
-    font-weight: 600;
-    line-height: 1.2;
-    margin-bottom: 12px;
-  }
-  
-  .privacy-policy__effective-date {
-    font-size: 0.95rem;
-    opacity: 0.7;
-  }
-  
-  /* Sections */
-  .privacy-policy__section {
-    margin-bottom: 56px;
-  }
-  
-  /* Headings */
-  .privacy-policy__heading {
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-bottom: 16px;
-  }
-  
-  /* Text */
-  .privacy-policy__text {
-    font-size: 1rem;
-    line-height: 1.75;
-    margin-bottom: 14px;
-  }
-  
-  /* Lists */
-  .privacy-policy__list {
-    padding-left: 20px;
-    margin-bottom: 16px;
-  }
-  
-  .privacy-policy__list li {
-    font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 8px;
-  }
-  
-  /* Email styling */
-  .privacy-policy__email {
-    font-weight: 500;
-    word-break: break-all;
-  }
-  
-  /* Subtle visual rhythm on large screens */
-  @media (min-width: 768px) {
-    .privacy-policy__container {
-      padding: 120px 32px;
-    }
-  
-    .privacy-policy__title {
-      font-size: 2.8rem;
-    }
-  
-    .privacy-policy__heading {
-      font-size: 1.5rem;
-    }
-  }
-  
+  background-color: #fcfcfc;
+  color: #111;
+  width: 100%;
+}
+
+/* Content wrapper */
+.privacy-policy__container {
+  max-width: 880px;
+  margin: 0 auto;
+  /* 120px top and bottom, 32px sides, from 768px up (same as before).
+     Smaller on phones, growing smoothly instead of jumping at 768px. */
+  padding: clamp(3rem, 15.6vw, 7.5rem) clamp(1.25rem, 4.2vw, 2rem);
+}
+
+/* Header */
+.privacy-policy__header {
+  margin-bottom: clamp(2rem, 8.3vw, 4rem);
+}
+
+.privacy-policy__title {
+  /* 2.8rem from about 750px up (same as before) */
+  font-size: clamp(2rem, 1.4rem + 3vw, 2.8rem);
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.privacy-policy__effective-date {
+  font-size: 0.95rem;
+  opacity: 0.7;
+}
+
+/* Sections */
+.privacy-policy__section {
+  margin-bottom: clamp(2rem, 7.3vw, 3.5rem);
+}
+
+/* Headings */
+.privacy-policy__heading {
+  /* 1.5rem from 600px up (same as before at 768px and up) */
+  font-size: clamp(1.25rem, 0.9rem + 1.6vw, 1.5rem);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* Text */
+.privacy-policy__text {
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+
+/* Lists */
+.privacy-policy__list {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+
+.privacy-policy__list li {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+/* Email styling
+   Before: word-break: break-all, which could split an address in the middle
+   even when there was room to move it to the next line. Now it only breaks
+   when the address really is wider than the screen (narrow phones). */
+.privacy-policy__email {
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}

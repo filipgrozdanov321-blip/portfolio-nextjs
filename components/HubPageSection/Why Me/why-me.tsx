@@ -3,6 +3,12 @@
 import { useEffect, useRef } from "react";
 import "./why-me.css";
 
+// How much of an element must be on screen before it animates in.
+// 0.9 was far too strict: the cards start 60px off to the side, so on a
+// phone they are partly outside the screen (or clipped by the section) and
+// could never reach 90% visible. They stayed at opacity 0 forever.
+const REVEAL_THRESHOLD = 0.15;
+
 export default function WhyMeSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
 
@@ -18,7 +24,7 @@ export default function WhyMeSection() {
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.9 }
+      { threshold: REVEAL_THRESHOLD }
     );
 
     elements.forEach((el) => {

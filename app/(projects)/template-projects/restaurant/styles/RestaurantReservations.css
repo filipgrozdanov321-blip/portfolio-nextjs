@@ -1,148 +1,170 @@
 .restaurant-reservations {
-    min-height: 100vh;
-    background-color: var(--restaurant-cream);
-    padding: 7rem 2rem;
-  }
-  
-  .restaurant-reservations-inner {
-    max-width: 780px;
-    margin: 0 auto;
-  }
-  
-  .restaurant-reservations-header {
-    text-align: center;
-    margin-bottom: 3.5rem;
-  }
-  
-  .restaurant-reservations-eyebrow {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--restaurant-gold);
-    margin-bottom: 0.75rem;
-  }
-  
-  .restaurant-reservations-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
-    color: var(--restaurant-charcoal);
-    margin-bottom: 1rem;
-  }
-  
-  .restaurant-reservations-subtitle {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 400;
-    line-height: 1.8;
-    color: rgba(28, 26, 26, 0.65);
-    max-width: 520px;
-    margin: 0 auto;
-  }
-  
-  /* Form */
-  .restaurant-reservations-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    background-color: #fff;
-    border: 1px solid var(--restaurant-border);
-    border-radius: 2px;
-    padding: 3rem;
-  }
-  
-  .restaurant-reservations-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-  }
-  
-  .restaurant-reservations-field {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .restaurant-reservations-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--restaurant-charcoal);
-  }
-  
-  .restaurant-reservations-input {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.92rem;
-    font-weight: 400;
-    color: var(--restaurant-charcoal);
-    background-color: var(--restaurant-cream);
-    border: 1px solid rgba(28, 26, 26, 0.15);
-    border-radius: 2px;
-    padding: 0.8rem 1rem;
-    outline: none;
-    transition: border-color 0.2s ease;
-    width: 100%;
-    appearance: none;
-    -webkit-appearance: none;
-  }
-  
-  .restaurant-reservations-input::placeholder {
-    color: rgba(28, 26, 26, 0.35);
-  }
-  
-  .restaurant-reservations-input:focus {
-    border-color: var(--restaurant-gold);
-  }
-  
-  .restaurant-reservations-select {
-    cursor: pointer;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%231C1A1A' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    padding-right: 2.5rem;
-  }
-  
-  .restaurant-reservations-textarea {
-    resize: vertical;
-    min-height: 120px;
-    line-height: 1.6;
-  }
-  
-  .restaurant-reservations-submit {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--restaurant-charcoal);
-    background-color: var(--restaurant-gold);
-    border: none;
-    border-radius: 2px;
-    padding: 1rem 2rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    margin-top: 0.5rem;
-    width: 100%;
-  }
-  
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--restaurant-cream);
+  /* 7rem top/bottom and 2rem sides on desktop (same as before), less on phones */
+  padding: clamp(3.5rem, 10.2vw, 7rem) clamp(1.25rem, 4vw, 2rem);
+}
+
+.restaurant-reservations-inner {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.restaurant-reservations-header {
+  text-align: center;
+  margin-bottom: clamp(2rem, 5.1vw, 3.5rem);
+}
+
+.restaurant-reservations-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--restaurant-gold);
+  margin-bottom: 0.75rem;
+}
+
+.restaurant-reservations-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--restaurant-charcoal);
+  margin-bottom: 1rem;
+}
+
+.restaurant-reservations-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.8;
+  color: rgba(28, 26, 26, 0.65);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* Form */
+.restaurant-reservations-form {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.1rem, 2.2vw, 1.5rem);
+  background-color: #fff;
+  border: 1px solid var(--restaurant-border);
+  border-radius: 2px;
+  /* 3rem from about 700px up (same as before), down to 1.25rem on phones */
+  padding: clamp(1.25rem, 6.9vw, 3rem);
+}
+
+/* Two fields side by side while each has at least 14rem, then stacked. The
+   switch happens by itself instead of at a fixed 700px. */
+.restaurant-reservations-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: clamp(1.1rem, 2.2vw, 1.5rem);
+}
+
+.restaurant-reservations-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.restaurant-reservations-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--restaurant-charcoal);
+}
+
+.restaurant-reservations-input {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 400;
+  color: var(--restaurant-charcoal);
+  background-color: var(--restaurant-cream);
+  border: 1px solid rgba(28, 26, 26, 0.15);
+  border-radius: 2px;
+  padding: 0.8rem 1rem;
+  /* Already about 45px tall on desktop; this makes it a guaranteed 44px
+     minimum for the date field on iPhone, which can render shorter */
+  min-height: 44px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.restaurant-reservations-input::placeholder {
+  color: rgba(28, 26, 26, 0.35);
+}
+
+/* The gold border alone is hard to see on a cream background, so the focused
+   field also gets a soft gold glow */
+.restaurant-reservations-input:focus {
+  border-color: var(--restaurant-gold);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25);
+}
+
+/* iPhone draws date fields in its own way when the browser look is removed:
+   this keeps the text left-aligned and the field the same size as the others */
+.restaurant-reservations-input[type="date"] {
+  display: block;
+  text-align: left;
+}
+
+.restaurant-reservations-select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%231C1A1A' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.restaurant-reservations-textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+.restaurant-reservations-submit {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--restaurant-charcoal);
+  background-color: var(--restaurant-gold);
+  border: none;
+  border-radius: 2px;
+  padding: 1rem 2rem;
+  min-height: 44px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+/* Mouse only, so the color doesn't stay stuck after a tap on phones */
+@media (hover: hover) {
   .restaurant-reservations-submit:hover {
     background-color: var(--restaurant-gold-hover);
   }
-  
-  @media (max-width: 700px) {
-    .restaurant-reservations-form {
-      padding: 2rem 1.5rem;
-    }
-  
-    .restaurant-reservations-row {
-      grid-template-columns: 1fr;
-    }
+}
+
+.restaurant-reservations-submit:focus-visible {
+  outline: 2px solid var(--restaurant-charcoal);
+  outline-offset: 3px;
+}
+
+/* Phones and touch screens: fields at 16px or larger stop iOS from zooming the
+   page in when one is tapped. (Desktop with a mouse keeps 0.92rem.) */
+@media (pointer: coarse), (max-width: 700px) {
+  .restaurant-reservations-input {
+    font-size: 16px;
   }
-  
-  @media (max-width: 600px) {
-    .restaurant-reservations {
-      padding: 5rem 1.5rem;
-    }
-  }
+}

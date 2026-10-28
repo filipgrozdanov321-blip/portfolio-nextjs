@@ -1,84 +1,130 @@
 .agency-contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.75rem;
-  }
-  
-  .agency-contact-form-row {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-  
-  .agency-contact-form-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--agency-gray);
-  }
-  
-  .agency-contact-form-input,
-  .agency-contact-form-select,
-  .agency-contact-form-textarea {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    color: var(--agency-off-white);
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid var(--agency-border);
-    padding: 0.75rem 0;
-    outline: none;
-    transition: border-color 0.2s ease;
-  }
-  
-  .agency-contact-form-input:focus,
-  .agency-contact-form-select:focus,
-  .agency-contact-form-textarea:focus {
-    border-color: var(--agency-accent);
-  }
-  
-  .agency-contact-form-select option {
-    background: var(--agency-black);
-    color: var(--agency-off-white);
-  }
-  
-  .agency-contact-form-textarea {
-    resize: vertical;
-  }
-  
-  .agency-contact-form-submit {
-    align-self: flex-start;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--agency-black);
-    background: var(--agency-accent);
-    padding: 0.9rem 2.25rem;
-    border-radius: 2px;
-    margin-top: 0.5rem;
-    transition: transform 0.15s ease, opacity 0.15s ease;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+.agency-contact-form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.agency-contact-form-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--agency-gray);
+}
+
+.agency-contact-form-input,
+.agency-contact-form-select,
+.agency-contact-form-textarea {
+  font-family: 'Inter', sans-serif;
+  /* 1rem is already 16px, which is the size that stops iOS from zooming in
+     on focus. It is pinned at 16px so it can't drop below that if the page's
+     base font size is ever changed. */
+  font-size: max(1rem, 16px);
+  color: var(--agency-off-white);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--agency-border);
+  /* 0.75rem top/bottom, which with the line height makes each field about
+     47px tall (already above the 44px touch minimum) */
+  padding: 0.75rem 0;
+  outline: none;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 0;
+  transition: border-color 0.2s ease;
+}
+
+/* Inputs have no box here (only an underline), so removing the browser's own
+   look keeps the select from showing a grey rounded box on iPhone */
+.agency-contact-form-select {
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  padding-right: 1.75rem;
+  /* A small down arrow, drawn as a background image (the browser one is gone) */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238C8C88' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.25rem center;
+}
+
+.agency-contact-form-input:focus,
+.agency-contact-form-select:focus,
+.agency-contact-form-textarea:focus {
+  border-color: var(--agency-accent);
+}
+
+/* Keyboard focus gets a clearer marker than a 1px line: the line thickens */
+.agency-contact-form-input:focus-visible,
+.agency-contact-form-select:focus-visible,
+.agency-contact-form-textarea:focus-visible {
+  box-shadow: 0 1px 0 0 var(--agency-accent);
+}
+
+.agency-contact-form-select option {
+  background: var(--agency-black);
+  color: var(--agency-off-white);
+}
+
+.agency-contact-form-textarea {
+  resize: vertical;
+  min-height: 8rem;
+}
+
+.agency-contact-form-submit {
+  align-self: flex-start;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--agency-black);
+  background: var(--agency-accent);
+  padding: 0.9rem 2.25rem;
+  min-height: 44px;
+  border-radius: 2px;
+  margin-top: 0.5rem;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+/* Mouse only, so the button doesn't stay "lifted" after a tap on phones */
+@media (hover: hover) {
   .agency-contact-form-submit:hover {
     transform: translateY(-2px);
     opacity: 0.9;
   }
-  
-  .agency-contact-form-success {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    padding: 2rem 0;
+}
+
+.agency-contact-form-submit:focus-visible {
+  outline: 2px solid var(--agency-off-white);
+  outline-offset: 4px;
+}
+
+.agency-contact-form-success {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 2rem 0;
+}
+
+.agency-contact-form-success .agency-contact-form-success-title {
+  font-size: clamp(1.4rem, 1.1rem + 1.4vw, 1.75rem);
+  font-weight: 700;
+  color: var(--agency-off-white);
+}
+
+.agency-contact-form-success-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: var(--agency-gray);
+}
+
+/* Phones: the Send button goes full width, which is easier to tap */
+@media (max-width: 640px) {
+  .agency-contact-form-submit {
+    align-self: stretch;
   }
-  
-  .agency-contact-form-success .agency-contact-form-success-title {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--agency-off-white);
-  }
-  
-  .agency-contact-form-success-text {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    color: var(--agency-gray);
-  }
+}

@@ -14,50 +14,57 @@ export default function BookingStepIndicator({
 }: BookingStepIndicatorProps) {
   return (
     <nav className="booking-step-indicator" aria-label="Booking progress">
-      {STEP_LABELS.map((label, index) => {
-        const stepNumber = index + 1;
-        const isCompleted = stepNumber < currentStep;
-        const isActive = stepNumber === currentStep;
-        const isLast = stepNumber === STEP_LABELS.length;
+      <ol className="booking-step-indicator-list">
+        {STEP_LABELS.map((label, index) => {
+          const stepNumber = index + 1;
+          const isCompleted = stepNumber < currentStep;
+          const isActive = stepNumber === currentStep;
+          const isLast = stepNumber === STEP_LABELS.length;
 
-        return (
-          <div key={label} className="booking-step-indicator-item">
-            <div
-              className={[
-                "booking-step-indicator-circle",
-                isCompleted ? "booking-step-indicator-circle--completed" : "",
-                isActive ? "booking-step-indicator-circle--active" : "",
-              ]
-                .filter(Boolean)
-                .join(" ")}
+          return (
+            <li
+              key={label}
+              className="booking-step-indicator-item"
+              aria-current={isActive ? "step" : undefined}
             >
-              {isCompleted ? <Check size={14} /> : stepNumber}
-            </div>
-            <span
-              className={[
-                "booking-step-indicator-label",
-                isActive ? "booking-step-indicator-label--active" : "",
-              ]
-                .filter(Boolean)
-                .join(" ")}
-            >
-              {label}
-            </span>
-            {!isLast && (
               <div
                 className={[
-                  "booking-step-indicator-connector",
-                  isCompleted
-                    ? "booking-step-indicator-connector--completed"
-                    : "",
+                  "booking-step-indicator-circle",
+                  isCompleted ? "booking-step-indicator-circle--completed" : "",
+                  isActive ? "booking-step-indicator-circle--active" : "",
                 ]
                   .filter(Boolean)
                   .join(" ")}
-              />
-            )}
-          </div>
-        );
-      })}
+              >
+                {isCompleted ? <Check size={14} aria-hidden="true" /> : stepNumber}
+              </div>
+              <span
+                className={[
+                  "booking-step-indicator-label",
+                  isActive ? "booking-step-indicator-label--active" : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+              >
+                {label}
+              </span>
+              {!isLast && (
+                <div
+                  aria-hidden="true"
+                  className={[
+                    "booking-step-indicator-connector",
+                    isCompleted
+                      ? "booking-step-indicator-connector--completed"
+                      : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                />
+              )}
+            </li>
+          );
+        })}
+      </ol>
     </nav>
   );
 }

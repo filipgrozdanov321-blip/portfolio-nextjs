@@ -1,71 +1,101 @@
 .portfolio-featured {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 3rem 2rem 5rem 2rem;
-  }
-  
-  .portfolio-featured-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 2.5rem;
-  }
-  
-  .portfolio-featured-title {
-    font-size: 2rem;
-    margin: 0;
-  }
-  
-  .portfolio-featured-link {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    color: var(--portfolio-accent);
-    text-decoration: none;
-    border-bottom: 1px solid var(--portfolio-accent);
-    padding-bottom: 2px;
-    white-space: nowrap;
-  }
-  
+  max-width: 1200px;
+  margin: 0 auto;
+  /* 3rem top, 2rem sides and 5rem bottom on desktop (same as before), less on phones */
+  padding:
+    clamp(2rem, 4.4vw, 3rem)
+    clamp(1.25rem, 4vw, 2rem)
+    clamp(3rem, 7.3vw, 5rem);
+}
+
+/* The title and "View Full Portfolio" sit on one row while they fit. If they
+   don't, the link wraps under the title (before, it was squeezed until 560px
+   and then forced into a column). */
+.portfolio-featured-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 2rem;
+  margin-bottom: clamp(1.5rem, 3.6vw, 2.5rem);
+}
+
+.portfolio-featured-title {
+  font-size: clamp(1.6rem, 1.3rem + 1.4vw, 2rem);
+  margin: 0;
+}
+
+.portfolio-featured-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: var(--portfolio-accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--portfolio-accent);
+  padding-bottom: 2px;
+  white-space: nowrap;
+}
+
+@media (hover: hover) {
   .portfolio-featured-link:hover {
     opacity: 0.75;
   }
-  
-  .portfolio-featured-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
-  }
-  
-  .portfolio-featured-item {
-    position: relative;
-    aspect-ratio: 4 / 5;
-    overflow: hidden;
-    background-color: var(--portfolio-border);
-  }
-  
-  .portfolio-featured-image {
-    object-fit: cover;
-    transition: transform 0.4s ease;
-  }
-  
+}
+
+.portfolio-featured-link:focus-visible {
+  outline: 2px solid var(--portfolio-accent);
+  outline-offset: 4px;
+}
+
+/* 6 photos: 3 across (never more), then 2, then 1, with no fixed breakpoints.
+   Each photo is at least 15rem wide. The "(100% - 2 gaps) / 3" part is what
+   caps it at 3 columns: without it, a 1200px container would fit 4 or 5 in a
+   row. With 6 photos, 3, 2 and 1 columns always fill every row evenly (no lone
+   photo). Desktop (1100px and wider) is the same 3 columns as before. */
+.portfolio-featured-grid {
+  --portfolio-featured-gap: clamp(0.75rem, 1.8vw, 1.25rem);
+
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(
+      min(100%, max(15rem, (100% - 2 * var(--portfolio-featured-gap)) / 3)),
+      1fr
+    )
+  );
+  gap: var(--portfolio-featured-gap);
+}
+
+.portfolio-featured-item {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background-color: var(--portfolio-border);
+}
+
+.portfolio-featured-image {
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+/* Mouse only, so the photo doesn't stay zoomed after a tap on phones */
+@media (hover: hover) {
   .portfolio-featured-item:hover .portfolio-featured-image {
     transform: scale(1.03);
   }
-  
-  @media (max-width: 900px) {
-    .portfolio-featured-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+}
+
+/* Touch screens: the link is a 44px tap target */
+@media (pointer: coarse) {
+  .portfolio-featured-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    border-bottom: none;
   }
-  
-  @media (max-width: 560px) {
-    .portfolio-featured-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.75rem;
-    }
-  
-    .portfolio-featured-grid {
-      grid-template-columns: 1fr;
-    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-featured-image {
+    transition: none;
   }
+}

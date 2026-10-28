@@ -1,6 +1,14 @@
 .services {
+  /* How far the elements slide in from the sides (shorter on phones) */
+  --sv-shift: 60px;
+
+  /* The home page centers its sections, so give this one a real width */
+  width: 100%;
+  box-sizing: border-box;
+
   background-color: #fcfcfc;
-  padding: 6rem 1.5rem;
+  /* 6rem / 1.5rem on desktop (same as before), smaller on phones */
+  padding: clamp(3rem, 8.75vw, 6rem) clamp(1rem, 4vw, 1.5rem);
   padding-bottom: 0rem;
   color: #111;
   overflow: hidden;
@@ -12,19 +20,19 @@
 }
 
 .services-title {
-  font-size: clamp(2.2rem, 4vw, 2.8rem);
+  font-size: clamp(1.75rem, 4vw, 2.8rem);
   font-weight: 700;
   text-align: center;
-  margin-bottom: 5rem;
+  margin-bottom: clamp(2rem, 7.3vw, 5rem);
 }
 
 /* Layout */
 .service-row {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
-  gap: 3rem;
+  gap: clamp(1.5rem, 4.4vw, 3rem);
   align-items: center;
-  margin-bottom: 5rem;
+  margin-bottom: clamp(2rem, 7.3vw, 5rem);
 }
 
 .service-row.reverse {
@@ -33,7 +41,7 @@
 
 /* Headings */
 .service-heading {
-  padding-left: 2rem;
+  padding-left: clamp(1.25rem, 4vw, 2rem);
 }
 
 .service-heading.web {
@@ -45,7 +53,7 @@
 }
 
 .service-heading h3 {
-  font-size: 1.75rem;
+  font-size: clamp(1.4rem, 1rem + 2vw, 1.75rem);
   font-weight: 600;
   margin-bottom: 0.75rem;
 }
@@ -93,38 +101,67 @@
 
 /* =========================
    ANIMATIONS
+   (every selector starts with ".services" so these rules can't clash with
+   the .animate classes in the Why Me section's CSS; Next.js CSS is global)
    ========================= */
 
-.animate {
+.services .animate {
   opacity: 0;
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.animate-down {
+.services .animate-down {
   transform: translateY(-40px);
 }
 
-.animate-left {
-  transform: translateX(-60px);
+.services .animate-left {
+  transform: translateX(calc(var(--sv-shift) * -1));
 }
 
-.animate-right {
-  transform: translateX(60px);
+.services .animate-right {
+  transform: translateX(var(--sv-shift));
 }
 
-.animate.in-view {
+.services .animate.in-view {
   opacity: 1;
   transform: translate(0, 0);
 }
 
 /* Responsive */
-@media (max-width: 900px) {
+
+/* Below 1100px the two columns share the row and wrap into one column by
+   themselves when there isn't room for both (about 600px wide), instead of
+   switching at a fixed 900px. */
+@media (max-width: 1099px) {
   .service-row,
   .service-row.reverse {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .service-heading {
-    padding-left: 1.25rem;
+    flex: 1 1 15rem;
+    min-width: 0;
+  }
+
+  .service-content {
+    flex: 1.2 1 18rem;
+    min-width: 0;
+  }
+}
+
+/* Phones: shorter slide-in so nothing gets clipped by the section */
+@media (max-width: 768px) {
+  .services {
+    --sv-shift: 24px;
+  }
+}
+
+/* "Reduce motion" setting: everything shows immediately, no sliding */
+@media (prefers-reduced-motion: reduce) {
+  .services .animate {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

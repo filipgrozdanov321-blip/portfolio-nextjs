@@ -50,7 +50,9 @@ export default function RealEstateListingsGrid({ initialFilters }: RealEstateLis
       <RealEstateFilterPanel filters={filters} onChange={setFilters} onClear={handleClear} />
 
       <div className="realestate-listingsgrid-results">
-        <p className="realestate-listingsgrid-count">
+        {/* aria-live: a screen reader announces the new count when a filter
+            changes, so the change isn't silent */}
+        <p className="realestate-listingsgrid-count" role="status">
           {filteredProperties.length}{" "}
           {filteredProperties.length === 1 ? "property" : "properties"} found
         </p>
@@ -64,7 +66,11 @@ export default function RealEstateListingsGrid({ initialFilters }: RealEstateLis
         ) : (
           <div className="realestate-listingsgrid-empty">
             <p>No properties match your filters.</p>
-            <button onClick={handleClear} className="realestate-btn realestate-btn-outline">
+            <button
+              type="button"
+              onClick={handleClear}
+              className="realestate-btn realestate-btn-outline"
+            >
               Clear Filters
             </button>
           </div>

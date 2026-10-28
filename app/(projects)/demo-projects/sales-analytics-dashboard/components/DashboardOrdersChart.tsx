@@ -10,6 +10,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import type { SalesDataPoint } from "../data/salesData";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 import "../styles/DashboardOrdersChart.css";
 
 interface DashboardOrdersChartProps {
@@ -24,6 +25,11 @@ function formatDateLabel(dateString: string) {
 }
 
 export default function DashboardOrdersChart({ data }: DashboardOrdersChartProps) {
+  // On a phone the chart is a little shorter and the order-count axis narrower,
+  // so the bars keep most of the width
+  const isCompact = useMediaQuery("(max-width: 520px)");
+  const reduceMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
+
   return (
     <div className="dashboard-orders-chart dashboard-card">
       <div className="dashboard-orders-chart-header">
@@ -31,23 +37,23 @@ export default function DashboardOrdersChart({ data }: DashboardOrdersChartProps
         <p className="dashboard-orders-chart-subtitle">Daily order volume for the selected period</p>
       </div>
 
-      <ResponsiveContainer width="100%" height={260}>
+      <ResponsiveContainer width="100%" height={isCompact ? 220 : 260}>
         <BarChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
           <CartesianGrid stroke="#E5E7EB" vertical={false} />
           <XAxis
             dataKey="date"
             tickFormatter={formatDateLabel}
-            tick={{ fontSize: 12, fill: "#6B7280" }}
+            tick={{ fontSize: isCompact ? 11 : 12, fill: "#6B7280" }}
             axisLine={{ stroke: "#E5E7EB" }}
             tickLine={false}
-            minTickGap={32}
+            minTickGap={isCompact ? 24 : 32}
           />
           <YAxis
             tickFormatter={(value: number) => numberFormatter.format(value)}
-            tick={{ fontSize: 12, fill: "#6B7280" }}
+            tick={{ fontSize: isCompact ? 11 : 12, fill: "#6B7280" }}
             axisLine={false}
             tickLine={false}
-            width={48}
+            width={isCompact ? 36 : 48}
           />
           <Tooltip
             formatter={(value) => [numberFormatter.format(Number(value)), "Orders"] as [string, string]}
@@ -60,7 +66,13 @@ export default function DashboardOrdersChart({ data }: DashboardOrdersChartProps
             }}
             cursor={{ fill: "#F8F9FB" }}
           />
-          <Bar dataKey="orders" fill="#F59E0B" radius={[4, 4, 0, 0]} maxBarSize={28} />
+          <Bar
+            dataKey="orders"
+            fill="#F59E0B"
+            radius={[4, 4, 0, 0]}
+            maxBarSize={28}
+            isAnimationActive={!reduceMotion}
+          />
         </BarChart>
       </ResponsiveContainer>
     </div>

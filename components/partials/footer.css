@@ -1,12 +1,14 @@
 #footer {
   background-color: #111;
   color: #fcfcfc;
-  padding: 4rem 0rem 0.5rem;
+  padding: clamp(2.5rem, 6vw, 4rem) 0rem 0.5rem;
   width: 100%;
 }
 
 .footer-container {
   max-width: 1200px;
+  /* 1200px on desktop (same as before), but never touches the screen edges on small screens */
+  width: min(1200px, 100% - 2rem);
   margin: 0 auto;
 }
 
@@ -60,9 +62,18 @@
   transition: color 0.2s ease;
 }
 
-.footer-section a:hover {
+@media (hover: hover) {
+  .footer-section a:hover {
+    color: #ffffff;
+    border-radius: 4px; /* Optional border radius for smoother hover */
+  }
+}
+
+.footer-section a:focus-visible {
   color: #ffffff;
-  border-radius: 4px; /* Optional border radius for smoother hover */
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 /* Icons */
@@ -75,36 +86,79 @@
   border-top: 1px solid #2a2a2a;
   padding-top: 0.5rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 0.5rem 1rem;
   font-size: 0.85rem;
   color: #888;
   position: relative;  /* Ensure relative positioning for absolute positioning of Back to Top link */
 }
 
-  .back-to-top {
-    background: none;
-    border: none;
-  
-    color: #888;
-    font-size: 1rem;
-    font-family: inherit;
-    cursor: pointer;
-  
-    transition: color 0.2s ease, transform 0.3s ease;
-  }
+.back-to-top {
+  background: none;
+  border: none;
 
+  color: #888;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
 
-.back-to-top:hover {
-  color: #ffffff;
-  transform: translateY(-3px); /* Slight lift effect on hover */
+  transition: color 0.2s ease, transform 0.3s ease;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
+@media (hover: hover) {
+  .back-to-top:hover {
+    color: #ffffff;
+    transform: translateY(-3px); /* Slight lift effect on hover */
+  }
+}
+
+.back-to-top:focus-visible {
+  color: #ffffff;
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* Touch screens: bigger tap targets */
+@media (pointer: coarse) {
+  .footer-section a {
+    padding: 0.7rem 0;
+  }
+
+  .footer-section li {
+    margin-bottom: 0;
+  }
+
+  .back-to-top {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+/* Tablet and small laptop: the brand takes its own row, and the three
+   link sections share the next row and wrap by themselves as the screen
+   narrows (3 across, then 2, then 1). */
+@media (max-width: 1099px) {
   .footer-main {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  .footer-brand {
+    flex: 1 1 100%;
+  }
+
+  .footer-section {
+    flex: 1 1 11rem;
+  }
+}
+
+/* Phones: centered, like before */
+@media (max-width: 640px) {
+  .footer-main {
     text-align: center;
   }
 

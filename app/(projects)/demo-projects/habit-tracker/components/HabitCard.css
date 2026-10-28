@@ -35,11 +35,13 @@
   contain: layout paint;
 }
 
+/* Long habit names and descriptions wrap instead of stretching the card */
 .habit-card h3 {
     margin: 0;
     font-size: 1.2rem;
     color: #000;
     align-self: self-start;
+    overflow-wrap: anywhere;
 }
 
 .habit-card .paragraph {
@@ -47,6 +49,7 @@
     font-size: 0.9rem;
     color: #555;
     align-self: self-start;
+    overflow-wrap: anywhere;
 }
 
 /* =====================
@@ -92,9 +95,17 @@
         border-color 0.25s ease;
 }
 
-.add-day-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+/* Mouse only, so the button doesn't stay "lifted" after a tap on phones */
+@media (hover: hover) {
+  .add-day-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  }
+}
+
+.add-day-button:focus-visible {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
 }
 
 .add-day-button:disabled {
@@ -152,6 +163,7 @@
   
   .buttons-swap {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     width: 100%;
   }
@@ -172,25 +184,42 @@
       transform 0.2s ease,
       opacity 0.2s ease;
   }
-  
-  .buttons-swap button:hover {
-    transform: translateY(-1px);
-  }
 
   .btn-primary {
     background-color: #1976d2;
   }
   
-  .btn-primary:hover {
-    background-color: #1565c0;
-  }
-  
   .btn-danger {
     background-color: #e53935;
   }
-  
-  .btn-danger:hover {
+
+  /* Mouse only, so the colors don't stay stuck after a tap on phones.
+     (The pressed colors, for touch, are the :active rules.) */
+  @media (hover: hover) {
+    .buttons-swap button:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:hover {
+      background-color: #1565c0;
+    }
+
+    .btn-danger:hover {
+      background-color: #c62828;
+    }
+  }
+
+  .btn-primary:active {
+    background-color: #1565c0;
+  }
+
+  .btn-danger:active {
     background-color: #c62828;
+  }
+
+  .buttons-swap button:focus-visible {
+    outline: 2px solid #111;
+    outline-offset: 2px;
   }
   
 
@@ -293,16 +322,31 @@
     background-color: #28a745;
 }
 
-.popup button:first-of-type:hover {
-    background-color: #078f26;
-}
-
 .popup button:last-of-type {
     background-color: #dc3545;
 }
 
-.popup button:last-of-type:hover {
+@media (hover: hover) {
+  .popup button:first-of-type:hover {
+      background-color: #078f26;
+  }
+
+  .popup button:last-of-type:hover {
+      background-color: #b41525;
+  }
+}
+
+.popup button:first-of-type:active {
+    background-color: #078f26;
+}
+
+.popup button:last-of-type:active {
     background-color: #b41525;
+}
+
+.popup button:focus-visible {
+    outline: 2px solid #111;
+    outline-offset: 2px;
 }
 
 /* =====================
@@ -340,9 +384,16 @@
     border-radius: 10px;
     border: 1px solid #e0e0e0;
 
-    font-size: 1rem;
+    /* 1rem is already 16px, which is the size that stops iOS from zooming in on
+       focus. It is pinned at 16px so it can't drop below that. */
+    font-size: max(1rem, 16px);
     background-color: #f7f9fc;
     color: #333;
+}
+
+.edit-form input:focus-visible {
+    outline: 2px solid #1976d2;
+    outline-offset: 1px;
 }
 
 .edit-form input[type="number"] {
@@ -388,7 +439,36 @@
     margin-top: 12px;
   }
   
+@media (hover: hover) {
   .habit-card--completed .btn-danger:hover {
     background-color: #c62828;
   }
-  
+}
+
+.habit-card--completed .btn-danger:active {
+    background-color: #c62828;
+}
+
+/* Touch screens: every button and field is at least 44px tall (the buttons are
+   about 40-43px now) */
+@media (pointer: coarse) {
+  .add-day-button,
+  .buttons-swap button,
+  .popup button {
+    min-height: 44px;
+  }
+
+  .edit-form input {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress-bar,
+  .add-day-button,
+  .buttons-swap button,
+  .popup,
+  .edit-form {
+    transition: none;
+  }
+}

@@ -1,475 +1,545 @@
 .services-page {
-    background: #fcfcfc;
-    color: #111;
-  }
-  
-  .services-hero {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    position: relative;
-    min-height: 80vh;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    background: url("../../public/images/service-page.jpg") center / cover no-repeat;
-    color: white;
-    overflow: hidden;
-  }
-  
-  
-  .services-hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: url("../../public/images/service-page.jpg") center / cover no-repeat;
-    filter: blur(4px);
-    transform: scale(1.1); /* prevents blur edges */
-    z-index: 0;
-  }
-  
-  /* BLURRED BACKGROUND IMAGE LAYER */
-  
-  /* DARK OVERLAY */
-  .services-hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.45);
-    z-index: 1;
-  }
-  
-  .services-hero h1,
-  .services-hero p,
-  .services-hero a {
-    position: relative;
-    z-index: 2;
-  }
+  background: #fcfcfc;
+  color: #111;
 
-  .services-hero > div {
-    position: relative;
-    z-index: 2;
-  }
-  
-  
-  .services-hero h1 {
-    font-size: clamp(3rem, 6vw, 4rem);
-    margin: 0;
-    color: #fff;
-    letter-spacing: -0.03em;
-    text-align: center;
-  }
-  
-  .services-hero p {
-    text-align: center;
-    font-size: 1.15rem;
-    color: #fff;
-    max-width: 720px;
-    line-height: 1.65;
-    margin: 0;
-  }
-  
-  .services-hero-cta {
-    display: inline-block;
-    background: linear-gradient(135deg, #FFEB3B, #FFB300);
-    color: #111;
-    padding: 0.8rem 2.9rem;
-    border-radius: 8px;
-    font-weight: 700;
-    text-decoration: none;
-  
-    transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease,
-      background 0.3s ease,
-      color 0.3s ease;
-  }  
-  
+  /* Cards start 32px off to the side before they animate in. On a phone that
+     pushed the page wider than the screen (sideways scroll). "clip" hides it
+     without turning this into a scroll container. */
+  overflow-x: clip;
+}
+
+/* ---------- HERO ---------- */
+
+.services-hero {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.75rem, 5vw, 3rem);
+  position: relative;
+  /* vh first, dvh second: dvh = screen height without the phone's moving
+     address bar. Browsers that don't know dvh use the vh line. */
+  min-height: 80vh;
+  min-height: 80dvh;
+  width: 100%;
+  box-sizing: border-box;
+  /* Keeps text off the screen edges and gives breathing room if the content
+     is taller than the hero (phone turned sideways). border-box means this
+     doesn't make the hero taller on desktop. */
+  padding: 3rem clamp(1rem, 4vw, 2rem);
+  align-items: center;
+  justify-content: center;
+  background: url("../../public/images/service-page.jpg") center / cover no-repeat;
+  color: white;
+  overflow: hidden;
+}
+
+.services-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../../public/images/service-page.jpg") center / cover no-repeat;
+  filter: blur(4px);
+  transform: scale(1.1); /* prevents blur edges */
+  z-index: 0;
+}
+
+/* DARK OVERLAY */
+.services-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+.services-hero h1,
+.services-hero p,
+.services-hero a {
+  position: relative;
+  z-index: 2;
+}
+
+.services-hero > div {
+  position: relative;
+  z-index: 2;
+}
+
+.services-hero h1 {
+  /* 4rem on desktop (reached at about 1070px), shrinking smoothly to 2.1rem on phones */
+  font-size: clamp(2.1rem, 6vw, 4rem);
+  margin: 0;
+  color: #fff;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+.services-hero p {
+  text-align: center;
+  font-size: clamp(1.05rem, 1rem + 0.4vw, 1.15rem);
+  color: #fff;
+  max-width: 720px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.services-hero-cta {
+  display: inline-block;
+  background: linear-gradient(135deg, #FFEB3B, #FFB300);
+  color: #111;
+  padding: 0.8rem 2.9rem;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Mouse only, so the button doesn't stay "lifted" after a tap on phones */
+@media (hover: hover) {
   .services-hero-cta:hover {
     background: linear-gradient(135deg, #FFB300, #FFEB3B);
     transform: translateY(-3px);
     box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
     color: #fcfcfc;
   }
+}
 
-  
-  .services-overview {
-    max-width: 900px;
-    margin: 0 auto;
-    padding-bottom: 3rem;
-  }
-  
-  .services-overview-header {
-    text-align: center;
-    margin-bottom: 4.5rem;
-  }
-  
-  .services-overview-header h2 {
-    font-size: 2.6rem;
-    margin-bottom: 1rem;
-    letter-spacing: -0.03em;
-    padding-top: 1rem;
-  }
-  
-  .services-overview-header p {
-    max-width: 680px;
-    margin: 0 auto;
-    color: #111;
-    line-height: 1.6;
-  }
-  
-  .services-overview-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 3.5rem;
-    justify-content: center;
-  }
-  
-  .services-overview-item {
-    background: #fff;
-    padding: 4.5rem;
-    border-radius: 22px;
-  
-    transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease;
-    will-change: transform, box-shadow;
-  }
-   
-  .services-overview-item-wrapper {
-    transition: transform 0.3s ease;
-    will-change: transform;
-  }
-  
+.services-hero-cta:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 3px;
+}
+
+/* On the dark hero the outline must be light to be visible */
+.services-hero .services-hero-cta:focus-visible {
+  outline-color: #fff;
+}
+
+/* ---------- CORE SERVICES (two cards) ---------- */
+
+.services-overview {
+  /* 900px on desktop (same as before), but never touches the screen edges */
+  width: min(900px, 100% - 2rem);
+  margin: 0 auto;
+  padding-bottom: clamp(2rem, 4.4vw, 3rem);
+}
+
+.services-overview-header {
+  text-align: center;
+  margin-bottom: clamp(2rem, 6.55vw, 4.5rem);
+}
+
+.services-overview-header h2 {
+  font-size: clamp(1.9rem, 1.1rem + 2.8vw, 2.6rem);
+  margin-bottom: 1rem;
+  letter-spacing: -0.03em;
+  padding-top: 1rem;
+}
+
+.services-overview-header p {
+  max-width: 680px;
+  margin: 0 auto;
+  color: #111;
+  line-height: 1.6;
+}
+
+/* Two cards side by side while there is room, one column when there isn't.
+   The switch happens by itself (at about 800px) instead of at a fixed 768px. */
+.services-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: clamp(1.5rem, 5.1vw, 3.5rem);
+  justify-content: center;
+}
+
+.services-overview-item {
+  background: #fff;
+  /* 4.5rem on desktop; the old fixed 72px left only ~170px for text on a phone */
+  padding: clamp(1.5rem, 6.55vw, 4.5rem);
+  border-radius: 22px;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  will-change: transform, box-shadow;
+}
+
+.services-overview-item-wrapper {
+  min-width: 0;
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+@media (hover: hover) {
   .services-overview-item-wrapper:hover {
     transform: translateY(-8px);
   }
-  
-  
-  @media (max-width: 768px) {
-    .services-overview-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  .web-dev-card {
-    box-shadow:
-      0 20px 45px rgba(0, 123, 255, 0.28),
-      0 8px 18px rgba(0, 0, 0, 0.14);
-  }
-  
+}
+
+.web-dev-card {
+  box-shadow:
+    0 20px 45px rgba(0, 123, 255, 0.28),
+    0 8px 18px rgba(0, 0, 0, 0.14);
+}
+
+@media (hover: hover) {
   .web-dev-card:hover {
     box-shadow:
       0 38px 85px rgba(0, 123, 255, 0.42),
       0 18px 35px rgba(0, 0, 0, 0.22);
-      transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease;
   }
-  
-  
-  .digital-marketing-card {
-    box-shadow:
-      0 20px 45px rgba(34, 197, 94, 0.28),
-      0 8px 18px rgba(0, 0, 0, 0.14);
-  }
-  
+}
+
+.digital-marketing-card {
+  box-shadow:
+    0 20px 45px rgba(34, 197, 94, 0.28),
+    0 8px 18px rgba(0, 0, 0, 0.14);
+}
+
+@media (hover: hover) {
   .digital-marketing-card:hover {
     box-shadow:
       0 38px 85px rgba(34, 197, 94, 0.42),
       0 18px 35px rgba(0, 0, 0, 0.22);
-      transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease;
   }
-  
-  .services-overview-item h3 {
-    font-size: 1.7rem;
-    margin-bottom: 1rem;
-    letter-spacing: -0.02em;
-  }
-  
-  .services-overview-item p {
-    color: #111;
-    line-height: 1.7;
-  }
-  
-  .service-detail {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 4.5rem 2rem;
-  }
-  
-  .service-detail.alt {
-    background: linear-gradient(180deg, #f6f6f6, #fcfcfc);
-  }
-  
-  .service-detail h2 {
-    font-size: 2.7rem;
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.03em;
-  }
-  
-  .service-description {
-    color: #111;
-    max-width: 740px;
-    margin-bottom: 2.75rem;
-    line-height: 1.7;
-  }
-  
-  .service-points {
-    margin-bottom: 3.5rem;
-    padding-left: 1.2rem;
-  }
-  
-  .service-points li {
-    position: relative;
-    padding-left: 1rem;
-    margin-bottom: 1rem;
-    color: #111;
-  }
-  
-  .web-dev-li li::before {
-    content: "→";
-    position: absolute;
-    left: -22px;
-    color: #007bff;
-    font-weight: 700;
-  }
-  
-  .digital-marketing-li li::before {
-    content: "→";
-    position: absolute;
-    left: -22px;
-    color: #22c55e;
-    font-weight: 700;
-  }
-  
-  .service-cta {
-    font-weight: 700;
-    color: #111;
-    text-decoration: none;
-    position: relative;
-  }
-  
-  .service-cta::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 100%;
-    height: 2px;
-    background: #111;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.25s ease;
-  }
-  
+}
+
+.services-overview-item h3 {
+  font-size: clamp(1.4rem, 1rem + 2vw, 1.7rem);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.services-overview-item p {
+  color: #111;
+  line-height: 1.7;
+}
+
+/* ---------- SERVICE DETAIL (Web Development / Digital Marketing) ---------- */
+
+.service-detail {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6.55vw, 4.5rem) clamp(1rem, 4vw, 2rem);
+}
+
+.service-detail.alt {
+  background: linear-gradient(180deg, #f6f6f6, #fcfcfc);
+}
+
+.service-detail h2 {
+  font-size: clamp(1.9rem, 1.2rem + 2.8vw, 2.7rem);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.03em;
+}
+
+.service-description {
+  color: #111;
+  max-width: 740px;
+  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+  line-height: 1.7;
+}
+
+.service-points {
+  margin-bottom: clamp(2rem, 5.1vw, 3.5rem);
+  padding-left: 1.2rem;
+}
+
+.service-points li {
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+  color: #111;
+}
+
+.web-dev-li li::before {
+  content: "→";
+  position: absolute;
+  left: -22px;
+  color: #007bff;
+  font-weight: 700;
+}
+
+.digital-marketing-li li::before {
+  content: "→";
+  position: absolute;
+  left: -22px;
+  color: #22c55e;
+  font-weight: 700;
+}
+
+.service-cta {
+  font-weight: 700;
+  color: #111;
+  text-decoration: none;
+  position: relative;
+}
+
+.service-cta::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background: #111;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+/* Mouse only, so the underline doesn't stay stuck after a tap on phones */
+@media (hover: hover) {
   .service-cta:hover::after {
     transform: scaleX(1);
   }
-  
-  .services-process {
-    padding: 3rem 0rem;
-    max-width: 1100px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  
-  .services-process h2 {
-    font-size: 2.7rem;
-    margin-bottom: 1rem;
-  }
-  
-  .services-process p {
-    max-width: 720px;
-    margin: 0 auto;
-    color: #111;
-  }
-  
-  .process-steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 3rem;
-    margin-top: 4.5rem;
-  }
-  
-  .process-steps div {
-    background: #fff;
-    padding: 2.75rem;
-    border-radius: 22px;
-    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.08);
-  }
-  
-  .process-steps span {
-    font-weight: 700;
-    color: #007bff;
-    font-size: 1.15rem;
-    display: block;
-    margin-bottom: 0.75rem;
-  }
+}
 
-  .services-structure {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 3rem 0rem;
-    text-align: center;
+/* Keyboard focus gets the same underline */
+.service-cta:focus-visible {
+  outline: none;
+}
+
+.service-cta:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* ---------- HOW I WORK (4 steps) ---------- */
+
+.services-process {
+  /* 1100px on desktop (same as before), but never touches the screen edges */
+  width: min(1100px, 100% - 2rem);
+  margin: 0 auto;
+  padding: clamp(2rem, 4.4vw, 3rem) 0rem;
+  text-align: center;
+}
+
+.services-process h2 {
+  font-size: clamp(1.9rem, 1.2rem + 2.8vw, 2.7rem);
+  margin-bottom: 1rem;
+}
+
+.services-process p {
+  max-width: 720px;
+  margin: 0 auto;
+  color: #111;
+}
+
+/* 4 cards: 4 across, then 2 + 2, then 1. (The old auto-fit left a lone card
+   on its own row at some widths: 3 + 1.) */
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1.25rem, 4.4vw, 3rem);
+  margin-top: clamp(2rem, 6.55vw, 4.5rem);
+}
+
+@media (max-width: 1099px) {
+  .process-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  
-  .services-structure h2 {
-    font-size: 2.7rem;
-    margin-bottom: 1rem;
-    letter-spacing: -0.03em;
+}
+
+@media (max-width: 560px) {
+  .process-steps {
+    grid-template-columns: minmax(0, 1fr);
   }
-  
-  .services-structure-intro {
-    max-width: 720px;
-    margin: 0 auto 4.5rem;
-    color: #111;
-    line-height: 1.7;
-  }
-  
-  .services-structure-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 3rem;
-    margin-top: 4.5rem;
-  }
-  
-  .services-structure-grid div {
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 22px;
-    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.08);
-  }
-  
-  
-  .services-structure-grid h4 {
-    font-size: 1.3rem;
-    margin-bottom: 0.75rem;
-    letter-spacing: -0.02em;
-  }
-  
-  .services-structure-grid p {
-    color: #111;
-    line-height: 1.65;
-  }
-  
-  .services-outcomes {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 3rem 0rem;
-    text-align: center;
-  }  
-  
-  .services-outcomes h2 {
-    text-align: center;
-    font-size: 2.7rem;
-    margin-bottom: 4.5rem;
-    letter-spacing: -0.03em;
-  }
-  
-  .services-outcomes-grid {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 3rem;
-  }
-  
-  .services-outcomes-grid div {
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 22px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
-    text-align: center;
-  }
-  
-  .services-outcomes-grid h4 {
-    font-size: 1.3rem;
-    margin-bottom: 0.75rem;
-    letter-spacing: -0.02em;
-  }
-  
-  .services-outcomes-grid p {
-    color: #111;
-    line-height: 1.65;
-  }
-  
-  @media (max-width: 768px) {
-    .services-structure,
-    .services-outcomes {
-      padding: 5.5rem 1.5rem;
-    }
-  
-    .services-structure h2,
-    .services-outcomes h2 {
-      font-size: 2.4rem;
-    }
-  }
-  
-  
-  .services-final-cta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  
-    padding: 4rem 0;
-    gap: 1.5rem;
-  }
-  
-  .services-final-cta h2 {
-    font-size: 2.9rem;
-    letter-spacing: -0.03em;
-    margin: 0; /* removed margin */
-  }
-  
-  .services-final-cta p {
-    color: #111;
-    max-width: 650px;
-    line-height: 1.7;
-    margin: 0; /* removed margin */
-  }
-  
-  .final-cta-button {
-    background: linear-gradient(135deg, #FFEB3B, #FFB300);
-    padding: 1rem 3.2rem;
-    border-radius: 10px;
-    font-weight: 700;
-    text-decoration: none;
-    color: #111;
-    transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease,
-      background 0.3s ease,
-      color 0.3s ease;
-  }
-  
+}
+
+.process-steps div {
+  background: #fff;
+  padding: clamp(1.5rem, 4vw, 2.75rem);
+  border-radius: 22px;
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.08);
+}
+
+.process-steps span {
+  font-weight: 700;
+  color: #007bff;
+  font-size: 1.15rem;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+/* ---------- HOW I RUN A PROJECT (3 cards) ---------- */
+
+.services-structure {
+  width: min(1100px, 100% - 2rem);
+  margin: 0 auto;
+  padding: clamp(2rem, 4.4vw, 3rem) 0rem;
+  text-align: center;
+}
+
+.services-structure h2 {
+  font-size: clamp(1.9rem, 1.2rem + 2.8vw, 2.7rem);
+  margin-bottom: 1rem;
+  letter-spacing: -0.03em;
+}
+
+.services-structure-intro {
+  max-width: 720px;
+  margin: 0 auto clamp(2rem, 6.55vw, 4.5rem);
+  color: #111;
+  line-height: 1.7;
+}
+
+.services-structure-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: clamp(1.25rem, 4.4vw, 3rem);
+  margin-top: clamp(2rem, 6.55vw, 4.5rem);
+}
+
+.services-structure-grid div {
+  background: #ffffff;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  border-radius: 22px;
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.08);
+}
+
+.services-structure-grid h4 {
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.services-structure-grid p {
+  color: #111;
+  line-height: 1.65;
+}
+
+/* ---------- WHAT THIS SOLVES FOR YOU (6 cards) ---------- */
+
+.services-outcomes {
+  width: min(1100px, 100% - 2rem);
+  margin: 0 auto;
+  padding: clamp(2rem, 4.4vw, 3rem) 0rem;
+  text-align: center;
+}
+
+.services-outcomes h2 {
+  text-align: center;
+  font-size: clamp(1.9rem, 1.2rem + 2.8vw, 2.7rem);
+  margin-bottom: clamp(2rem, 6.55vw, 4.5rem);
+  letter-spacing: -0.03em;
+}
+
+.services-outcomes-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: clamp(1.25rem, 4.4vw, 3rem);
+}
+
+.services-outcomes-grid div {
+  background: #ffffff;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  border-radius: 22px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.services-outcomes-grid h4 {
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.services-outcomes-grid p {
+  color: #111;
+  line-height: 1.65;
+}
+
+/* ---------- FINAL CTA ---------- */
+
+.services-final-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  padding: clamp(2.5rem, 5.9vw, 4rem) clamp(1rem, 4vw, 1.5rem);
+  gap: clamp(1rem, 2.2vw, 1.5rem);
+}
+
+.services-final-cta h2 {
+  font-size: clamp(1.9rem, 1rem + 3.9vw, 2.9rem);
+  letter-spacing: -0.03em;
+  margin: 0; /* removed margin */
+}
+
+.services-final-cta p {
+  color: #111;
+  max-width: 650px;
+  line-height: 1.7;
+  margin: 0; /* removed margin */
+}
+
+.final-cta-button {
+  background: linear-gradient(135deg, #FFEB3B, #FFB300);
+  padding: 1rem 3.2rem;
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #111;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+@media (hover: hover) {
   .final-cta-button:hover {
     background: linear-gradient(135deg, #FFB300, #FFEB3B);
     transform: translateY(-4px);
     box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
     color: #fcfcfc;
   }
-  
-  
-  @media (max-width: 768px) {
-    .services-overview {
-      grid-template-columns: 1fr;
-    }
-  
-    .services-hero {
-      min-height: 70vh;
-    }
-  
-    .services-hero h1 {
-      font-size: 2.6rem;
-    }
+}
+
+/* ---------- TOUCH SCREENS ---------- */
+
+/* Every button and link is at least 44px tall */
+@media (pointer: coarse) {
+  .services-hero-cta,
+  .final-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    box-sizing: border-box;
   }
+
+  .service-cta {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+/* ---------- PHONES ---------- */
+
+@media (max-width: 768px) {
+  .services-hero {
+    min-height: 70vh;
+    min-height: 70dvh;
+  }
+}
 
 /* =========================================================
    GLOBAL SCROLL REVEAL ANIMATIONS
    Transition-based (NO keyframes)
+
+   Keep this block IDENTICAL in about-me.css and services-page.css.
+   Next.js CSS is global, so both pages share these rules.
    ========================================================= */
 
-/* BASE STATE — hidden */
 [data-animate] {
   opacity: 0;
   transform: translate(0, 0);
@@ -478,10 +548,6 @@
     transform 0.7s ease;
   will-change: opacity, transform;
 }
-
-/* =========================================================
-   DIRECTIONS (starting offset)
-   ========================================================= */
 
 [data-animate="fade-up"] {
   transform: translateY(24px);
@@ -499,19 +565,10 @@
   transform: translateX(32px);
 }
 
-/* =========================================================
-   FINAL STATE — when element enters viewport
-   JS adds `.in-view`
-   ========================================================= */
-
 [data-animate].in-view {
   opacity: 1;
   transform: translate(0, 0);
 }
-
-/* =========================================================
-   DELAYS (mapped from data-delay)
-   ========================================================= */
 
 [data-delay="1"] { transition-delay: 0.3s; }
 [data-delay="2"] { transition-delay: 0.5s; }
@@ -527,10 +584,6 @@
 [data-delay-cards="5"] { transition-delay: 1.5s; }
 [data-delay-cards="6"] { transition-delay: 1.8s; }
 
-/* =========================================================
-   OPTIONAL: accessibility (reduced motion)
-   ========================================================= */
-
 @media (prefers-reduced-motion: reduce) {
   [data-animate] {
     transition: none;
@@ -539,11 +592,6 @@
   }
 }
 
-/* =========================================================
-   END GLOBAL ANIMATIONS
-   ========================================================= */
-
-   section[data-animate] {
-    will-change: opacity, transform;
-  }
-  
+section[data-animate] {
+  will-change: opacity, transform;
+}

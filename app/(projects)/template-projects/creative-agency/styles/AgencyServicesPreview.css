@@ -1,69 +1,86 @@
 .agency-services-preview {
-    padding: 6rem 2rem;
-    max-width: 1440px;
-    margin: 0 auto;
-  }
-  
-  .agency-services-preview-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-  }
-  
-  .agency-services-preview-title {
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
-    font-weight: 700;
-    color: var(--agency-off-white);
-  }
-  
-  .agency-services-preview-link {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--agency-gray);
-    transition: color 0.2s ease;
-  }
-  
+  /* 6rem top/bottom and 2rem sides on desktop (same as before), less on phones */
+  padding: clamp(3rem, 8.75vw, 6rem) clamp(1.25rem, 4vw, 2rem);
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* If the title and the link don't fit side by side, the link wraps under it */
+.agency-services-preview-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.agency-services-preview-title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--agency-off-white);
+}
+
+.agency-services-preview-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--agency-gray);
+  transition: color 0.2s ease;
+}
+
+/* Mouse only, so the color doesn't stay stuck after a tap on phones */
+@media (hover: hover) {
   .agency-services-preview-link:hover {
     color: var(--agency-accent);
   }
-  
-  .agency-services-preview-list {
-    border-top: 1px solid var(--agency-border);
+}
+
+.agency-services-preview-link:focus-visible {
+  color: var(--agency-accent);
+  outline: 2px solid var(--agency-accent);
+  outline-offset: 4px;
+}
+
+.agency-services-preview-list {
+  border-top: 1px solid var(--agency-border);
+}
+
+.agency-services-preview-item {
+  display: grid;
+  /* Same 1 : 2 split as before. minmax(0, ...) = long words can't stretch it. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: clamp(1rem, 2.9vw, 2rem);
+  padding: clamp(1.25rem, 2.9vw, 2rem) 0;
+  border-bottom: 1px solid var(--agency-border);
+}
+
+.agency-services-preview-name {
+  font-size: clamp(1.3rem, 1.1rem + 0.9vw, 1.5rem);
+  font-weight: 600;
+  color: var(--agency-off-white);
+}
+
+.agency-services-preview-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: var(--agency-gray);
+  line-height: 1.6;
+  max-width: 480px;
+}
+
+/* Touch screens: the "View All Services" link is a 44px tap target */
+@media (pointer: coarse) {
+  .agency-services-preview-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
-  
+}
+
+@media (max-width: 640px) {
   .agency-services-preview-item {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 2rem;
-    padding: 2rem 0;
-    border-bottom: 1px solid var(--agency-border);
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
   }
-  
-  .agency-services-preview-name {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--agency-off-white);
-  }
-  
-  .agency-services-preview-description {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    color: var(--agency-gray);
-    line-height: 1.6;
-    max-width: 480px;
-  }
-  
-  @media (max-width: 640px) {
-    .agency-services-preview-item {
-      grid-template-columns: 1fr;
-      gap: 0.75rem;
-    }
-  
-    .agency-services-preview-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-  }
+}

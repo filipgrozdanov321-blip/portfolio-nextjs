@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
-:root {
+/* The color variables used to live on :root, which meant every page of the
+   whole site got them as soon as this file loaded (Next.js CSS is global).
+   Their names start with "--startup-", so a clash was unlikely, but scoping
+   them to the shell (the div in layout.tsx that wraps this whole template)
+   keeps them from leaking out at all. */
+.startup-shell {
   --startup-black: #0B0C10;
   --startup-white: #F4F5F7;
   --startup-accent: #6C5CE7;
@@ -22,7 +27,11 @@
   color: var(--startup-white);
   font-family: "Inter", sans-serif;
   min-height: 100vh;
+  min-height: 100dvh;
   -webkit-font-smoothing: antialiased;
+  /* Long words, emails and URLs wrap instead of pushing the page sideways on
+     phones. It does nothing unless a word would overflow. */
+  overflow-wrap: break-word;
 }
 
 .startup-shell h1,
@@ -55,12 +64,23 @@
 .startup-container {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 0 24px;
+  /* 24px sides from 600px up (same as before), 16px on small phones */
+  padding: 0 clamp(16px, 4vw, 24px);
 }
 
 .startup-mono {
   font-family: "JetBrains Mono", monospace;
   letter-spacing: 0.04em;
+}
+
+/* The navbar is sticky and about 64px tall on phones. When the navbar's
+   "Product", "Proof" or "Get Early Access" scrolls to a section, this keeps the
+   section's top just below it instead of underneath it. (Desktop is left as it
+   was: the sections there have enough space above their headings.) */
+@media (max-width: 780px) {
+  .startup-shell [id] {
+    scroll-margin-top: 4.5rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

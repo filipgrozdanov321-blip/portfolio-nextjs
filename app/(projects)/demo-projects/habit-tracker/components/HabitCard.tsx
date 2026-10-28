@@ -124,7 +124,14 @@ export default function HabitCard({
           {habit.completedDays} / {habit.totalDays} Days
         </p>
 
-        <div className="progress-container">
+        <div
+          className="progress-container"
+          role="progressbar"
+          aria-label={`${habit.name} progress`}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={Math.round(progressPercent)}
+        >
           <div
             className="progress-bar"
             style={{ width: `${progressPercent}%` }}
@@ -132,7 +139,7 @@ export default function HabitCard({
         </div>
 
         {mode === "active" && !isDisabledToday && (
-          <button className="add-day-button" onClick={openPopup}>
+          <button type="button" className="add-day-button" onClick={openPopup}>
             Add Day
           </button>
         )}
@@ -149,8 +156,12 @@ export default function HabitCard({
           <div className={`popup ${isPopupOpen ? "popup--open" : ""}`}>
             <div className="popup__inner">
               <p>Are you sure you want to add a day?</p>
-              <button onClick={handleConfirmAddDay}>Confirm</button>
-              <button onClick={closePopup}>Cancel</button>
+              <button type="button" onClick={handleConfirmAddDay}>
+                Confirm
+              </button>
+              <button type="button" onClick={closePopup}>
+                Cancel
+              </button>
             </div>
           </div>
         )}
@@ -159,6 +170,7 @@ export default function HabitCard({
           <div className={`edit-form ${isEditOpen ? "edit-form--open" : ""}`}>
             <input
               type="text"
+              aria-label="Habit name"
               value={updatedHabit.name}
               onChange={(e) =>
                 setUpdatedHabit({ ...updatedHabit, name: e.target.value })
@@ -167,6 +179,7 @@ export default function HabitCard({
 
             <input
               type="text"
+              aria-label="Habit description"
               value={updatedHabit.description}
               onChange={(e) =>
                 setUpdatedHabit({
@@ -178,7 +191,9 @@ export default function HabitCard({
 
             <input
               type="number"
+              inputMode="numeric"
               min={1}
+              aria-label="Total days"
               value={updatedHabit.totalDays}
               onChange={(e) =>
                 setUpdatedHabit({
@@ -193,6 +208,7 @@ export default function HabitCard({
         <div className="buttons-swap">
           {mode === "active" && (
             <button
+              type="button"
               className="btn-primary"
               onClick={isEditOpen ? handleEditSubmit : openEdit}
             >
@@ -201,6 +217,7 @@ export default function HabitCard({
           )}
 
           <button
+            type="button"
             className="btn-danger"
             onClick={isEditOpen ? closeEdit : () => onDelete(habit.id)}
           >

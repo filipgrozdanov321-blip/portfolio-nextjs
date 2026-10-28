@@ -1,40 +1,46 @@
 .saas-features {
-  padding: 5rem 1.5rem;
+  /* 5rem top/bottom and 1.5rem sides on desktop (same as before), less on phones */
+  padding: clamp(2.5rem, 7.3vw, 5rem) clamp(1rem, 4vw, 1.5rem);
   background-color: var(--bg-primary);
 }
 
 .saas-features-header {
   max-width: 600px;
-  margin: 0 auto 3rem;
+  margin: 0 auto clamp(1.75rem, 4.4vw, 3rem);
   text-align: center;
 }
 
 .saas-features-title {
-  font-size: 2.2rem;
+  /* 2.2rem from about 800px up (same as before). Before, it sat at 2.2rem down
+     to 641px and then jumped to 1.8rem; now it shrinks smoothly. */
+  font-size: clamp(1.7rem, 1.1rem + 2.2vw, 2.2rem);
   font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 0.75rem;
 }
 
 .saas-features-subtitle {
-  font-size: 1.05rem;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.05rem);
   color: var(--text-secondary);
   line-height: 1.6;
 }
 
+/* 4 cards: 4 across, then 2 + 2, then 1. (auto-fit would sometimes leave a
+   lone card on its own row: 3 + 1.) The gap and padding shrink smoothly
+   in between. */
 .saas-features-grid {
   max-width: 1100px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1rem, 2.2vw, 1.5rem);
 }
 
 .saas-feature-card {
   background-color: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 1.75rem;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
   text-align: left;
 }
 
@@ -65,16 +71,21 @@
 
 @media (max-width: 1024px) {
   .saas-features-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 640px) {
   .saas-features-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
+}
 
-  .saas-features-title {
-    font-size: 1.8rem;
+/* The navbar is sticky (about 60px tall on phones) and the section's top
+   padding is smaller on phones, so when a navbar link scrolls here the
+   title would end up hidden under the navbar. This leaves room for it. */
+@media (max-width: 768px) {
+  .saas-features {
+    scroll-margin-top: 3.5rem;
   }
 }

@@ -1,59 +1,93 @@
 .portfolio-contact-page {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 4rem 2rem 6rem;
-  }
-  
-  .portfolio-contact-page-inner {
-    display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    gap: 4rem;
-    align-items: start;
-  }
-  
-  .portfolio-contact-page-title {
-    font-size: 2.5rem;
-    margin: 0 0 1.25rem;
-  }
-  
-  .portfolio-contact-page-text {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 300;
-    line-height: 1.7;
-    color: var(--portfolio-gray);
-    margin: 0 0 2rem;
-    max-width: 380px;
-  }
-  
-  .portfolio-contact-page-direct {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .portfolio-contact-page-direct-link {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    color: var(--portfolio-black);
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-  
+  max-width: 1100px;
+  margin: 0 auto;
+  /* 4rem top, 2rem sides and 6rem bottom on desktop (same as before), less on phones */
+  padding:
+    clamp(2rem, 5.8vw, 4rem)
+    clamp(1.25rem, 4vw, 2rem)
+    clamp(3rem, 8.75vw, 6rem);
+}
+
+.portfolio-contact-page-inner {
+  display: grid;
+  /* The same 0.8 : 1.2 split as before. minmax(0, ...) = a long email address
+     can't stretch a column. 4rem gap from about 1100px up (same as before). */
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 5.8vw, 4rem);
+  align-items: start;
+}
+
+.portfolio-contact-page-title {
+  /* 2.5rem from about 720px up (same as before). Before, it jumped from 2.5rem
+     to 2rem at 768px; now it shrinks smoothly. */
+  font-size: clamp(1.9rem, 1.2rem + 2.9vw, 2.5rem);
+  margin: 0 0 1.25rem;
+}
+
+.portfolio-contact-page-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--portfolio-gray);
+  margin: 0 0 2rem;
+  max-width: 380px;
+}
+
+.portfolio-contact-page-direct {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.portfolio-contact-page-direct-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: var(--portfolio-black);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.portfolio-contact-page-direct-link svg {
+  flex-shrink: 0;
+}
+
+/* A long email address wraps instead of overflowing on narrow phones */
+.portfolio-contact-page-direct-link span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Mouse only, so the color doesn't stay stuck after a tap on phones */
+@media (hover: hover) {
   .portfolio-contact-page-direct-link:hover {
     color: var(--portfolio-accent);
   }
-  
-  @media (max-width: 768px) {
-    .portfolio-contact-page-inner {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-  
-    .portfolio-contact-page-title {
-      font-size: 2rem;
-    }
+}
+
+.portfolio-contact-page-direct-link:focus-visible {
+  color: var(--portfolio-accent);
+  outline: 2px solid var(--portfolio-accent);
+  outline-offset: 4px;
+}
+
+/* Touch screens: each link is a 44px tap target */
+@media (pointer: coarse) {
+  .portfolio-contact-page-direct {
+    gap: 0;
   }
+
+  .portfolio-contact-page-direct-link {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-contact-page-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+  }
+}

@@ -1,6 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
 
-:root {
+/* Everything in this file is scoped to .realestate-root (the div in
+   layout.tsx). Next.js CSS is global, so the old bare selectors (*, body, a,
+   button, h1...) could restyle the rest of the site.
+
+   Element rules use :where(.realestate-root) on purpose. :where() adds no
+   specificity, so "a" inside the template is still as weak as the old bare
+   "a" was, and class rules like .realestate-navbar-link still win over it.
+   (A plain ".realestate-root a" would be stronger than a class and would break
+   link colors.) */
+
+.realestate-root {
   --realestate-navy: #1B2A41;
   --realestate-white: #FFFFFF;
   --realestate-offwhite: #F7F8FA;
@@ -17,58 +27,75 @@
   --realestate-radius-lg: 20px;
 
   --realestate-container-width: 1240px;
-  --realestate-section-padding: 96px 24px;
-}
+  /* 96px 24px on desktop (same as before) and 64px 20px on phones. It used to
+     jump between the two at 768px; now it shrinks smoothly. */
+  --realestate-section-padding: clamp(4rem, 8.75vw, 6rem) clamp(1.25rem, 4vw, 1.5rem);
 
-* {
-  box-sizing: border-box;
-}
+  /* Was set inline on the layout's div and on <main> */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-}
-
-body {
+  /* These used to be set on <body> */
   background-color: var(--realestate-offwhite);
   color: var(--realestate-navy);
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  /* Long words, emails and addresses wrap instead of pushing the page sideways
+     on phones. It does nothing unless a word would overflow. */
+  overflow-wrap: break-word;
 }
 
-h1, h2, h3, h4, h5, h6 {
+.realestate-main {
+  flex: 1;
+}
+
+:where(.realestate-root),
+:where(.realestate-root) *,
+:where(.realestate-root) *::before,
+:where(.realestate-root) *::after {
+  box-sizing: border-box;
+}
+
+:where(.realestate-root) h1,
+:where(.realestate-root) h2,
+:where(.realestate-root) h3,
+:where(.realestate-root) h4,
+:where(.realestate-root) h5,
+:where(.realestate-root) h6 {
   font-family: 'Plus Jakarta Sans', sans-serif;
   color: var(--realestate-navy);
   margin: 0;
   line-height: 1.2;
 }
 
-p {
+:where(.realestate-root) p {
   margin: 0;
 }
 
-a {
+:where(.realestate-root) a {
   color: inherit;
   text-decoration: none;
 }
 
-button {
+:where(.realestate-root) button {
   font-family: 'Inter', sans-serif;
   cursor: pointer;
   border: none;
   background: none;
 }
 
-ul, ol {
+:where(.realestate-root) ul,
+:where(.realestate-root) ol {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-img {
+:where(.realestate-root) img {
   max-width: 100%;
   display: block;
 }
@@ -78,7 +105,7 @@ img {
   width: 100%;
   max-width: var(--realestate-container-width);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 clamp(1.25rem, 4vw, 1.5rem);
 }
 
 .realestate-section {
@@ -101,6 +128,10 @@ img {
   justify-content: center;
   gap: 8px;
   padding: 14px 28px;
+  /* 14px of padding plus a 24px line is already about 52px tall; this makes
+     the 44px touch minimum explicit */
+  min-height: 44px;
+  max-width: 100%;
   border-radius: var(--realestate-radius-sm);
   font-size: 15px;
   font-weight: 600;
@@ -114,17 +145,9 @@ img {
   color: var(--realestate-navy);
 }
 
-.realestate-btn-primary:hover {
-  background-color: #b8925a;
-}
-
 .realestate-btn-secondary {
   background-color: var(--realestate-navy);
   color: var(--realestate-white);
-}
-
-.realestate-btn-secondary:hover {
-  background-color: #14202f;
 }
 
 .realestate-btn-outline {
@@ -133,13 +156,50 @@ img {
   border: 1.5px solid var(--realestate-navy);
 }
 
-.realestate-btn-outline:hover {
-  background-color: var(--realestate-navy);
-  color: var(--realestate-white);
+/* Mouse only, so the colors don't stay stuck after a tap on phones */
+@media (hover: hover) {
+  .realestate-btn-primary:hover {
+    background-color: #b8925a;
+  }
+
+  .realestate-btn-secondary:hover {
+    background-color: #14202f;
+  }
+
+  .realestate-btn-outline:hover {
+    background-color: var(--realestate-navy);
+    color: var(--realestate-white);
+  }
 }
 
-@media (max-width: 768px) {
-  :root {
-    --realestate-section-padding: 64px 20px;
+/* Touch screens: the same colors while the button is pressed */
+@media (hover: none) {
+  .realestate-btn-primary:active {
+    background-color: #b8925a;
+  }
+
+  .realestate-btn-secondary:active {
+    background-color: #14202f;
+  }
+
+  .realestate-btn-outline:active {
+    background-color: var(--realestate-navy);
+    color: var(--realestate-white);
+  }
+}
+
+/* Keyboard focus: a navy ring with a white ring around it, so it shows on
+   both light and navy backgrounds */
+.realestate-btn:focus-visible {
+  outline: 2px solid var(--realestate-navy);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px var(--realestate-white);
+}
+
+/* Small phones: a long label may wrap instead of overflowing the screen */
+@media (max-width: 480px) {
+  .realestate-btn {
+    white-space: normal;
+    text-align: center;
   }
 }

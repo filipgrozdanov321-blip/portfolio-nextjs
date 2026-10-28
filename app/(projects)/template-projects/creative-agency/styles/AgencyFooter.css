@@ -6,15 +6,23 @@
 .agency-footer-inner {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 4rem 2rem 2rem;
+  /* 4rem top and 2rem sides on desktop (same as before), less on phones */
+  padding: clamp(2.5rem, 5.8vw, 4rem) clamp(1.25rem, 4vw, 2rem) 2rem;
 }
 
+/* Three columns: brand, numbered links, contact. */
 .agency-footer-top {
   display: grid;
   grid-template-columns: 1.1fr 1fr 1.2fr;
-  gap: 5rem;
-  padding-bottom: 3rem;
+  /* 5rem from about 1100px up (same as before). Between 769 and 1100px the gap
+     shrinks smoothly so the big numbered links still fit in their column. */
+  gap: clamp(1.5rem, 4.6vw, 5rem);
+  padding-bottom: clamp(2rem, 4.4vw, 3rem);
   border-bottom: 1px solid var(--agency-border);
+}
+
+.agency-footer-top > * {
+  min-width: 0;
 }
 
 .agency-footer-logo {
@@ -120,14 +128,30 @@
   opacity: 0;
   transform: translate(-6px, 6px);
   transition: opacity 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
 }
 
-.agency-footer-nav-list .agency-footer-nav-link:hover {
+/* Mouse only, so the colors and arrows don't stay stuck after a tap on phones */
+@media (hover: hover) {
+  .agency-footer-nav-list .agency-footer-nav-link:hover {
+    color: var(--agency-accent);
+    gap: 1.4rem;
+  }
+
+  .agency-footer-nav-list .agency-footer-nav-link:hover .agency-footer-nav-arrow {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+/* Keyboard focus gets the same highlight plus an outline */
+.agency-footer-nav-list .agency-footer-nav-link:focus-visible {
   color: var(--agency-accent);
-  gap: 1.4rem;
+  outline: 2px solid var(--agency-accent);
+  outline-offset: 2px;
 }
 
-.agency-footer-nav-list .agency-footer-nav-link:hover .agency-footer-nav-arrow {
+.agency-footer-nav-list .agency-footer-nav-link:focus-visible .agency-footer-nav-arrow {
   opacity: 1;
   transform: translate(0, 0);
 }
@@ -146,17 +170,16 @@
   color: var(--agency-off-white);
   border-bottom: 1px solid var(--agency-border);
   width: fit-content;
+  max-width: 100%;
   padding-bottom: 2px;
+  overflow-wrap: anywhere;
   transition: border-color 0.2s ease;
-}
-
-.agency-footer-email:hover {
-  border-color: var(--agency-accent);
 }
 
 .agency-footer-socials {
   display: flex;
-  gap: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
 }
 
 .agency-footer-social {
@@ -166,8 +189,20 @@
   transition: color 0.2s ease;
 }
 
-.agency-footer-social:hover {
-  color: var(--agency-accent);
+@media (hover: hover) {
+  .agency-footer-email:hover {
+    border-color: var(--agency-accent);
+  }
+
+  .agency-footer-social:hover {
+    color: var(--agency-accent);
+  }
+}
+
+.agency-footer-email:focus-visible,
+.agency-footer-social:focus-visible {
+  outline: 2px solid var(--agency-accent);
+  outline-offset: 3px;
 }
 
 .agency-footer-bottom {
@@ -180,11 +215,52 @@
   font-family: 'Inter', sans-serif;
   font-size: 0.8rem;
   color: var(--agency-gray);
+  text-align: center;
+}
+
+/* Touch screens (any width): every link is a 44px tap target */
+@media (pointer: coarse) {
+  .agency-footer-nav-list .agency-footer-nav-link {
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+
+  .agency-footer-email {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    border-bottom: none;
+  }
+
+  .agency-footer-social {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+/* Below 1400px the Back button floats in the bottom-left corner. This extra
+   space at the bottom means it never sits on top of the copyright line when
+   you scroll all the way down. */
+@media (max-width: 1399px) {
+  .agency-footer-inner {
+    padding-bottom: calc(2rem + 3.5rem);
+  }
 }
 
 @media (max-width: 768px) {
   .agency-footer-top {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 2.5rem;
+  }
+
+  /* On a phone the numbered links use the whole width, not 75% of it */
+  .agency-footer-nav-item::before,
+  .agency-footer-nav-item:last-child::after {
+    width: 100%;
+  }
+
+  .agency-footer-nav-list .agency-footer-nav-link {
+    max-width: 100%;
   }
 }

@@ -1,26 +1,28 @@
 .dashboard-revenue-chart {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    min-width: 0; /* keeps ResponsiveContainer from overflowing its grid track */
-  }
-  
-  .dashboard-revenue-chart-header {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  
-  .dashboard-revenue-chart-title {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--dashboard-text);
-  }
-  
-  .dashboard-revenue-chart-subtitle {
-    margin: 0;
-    font-size: 13px;
-    color: var(--dashboard-text-secondary);
-  }
+  /* 20px from about 520px up (same as before), 14px on small phones, which
+     gives the chart more room */
+  padding: clamp(14px, 3.9vw, 20px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0; /* keeps ResponsiveContainer from overflowing its grid track */
+}
+
+.dashboard-revenue-chart-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dashboard-revenue-chart-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dashboard-text);
+}
+
+.dashboard-revenue-chart-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: var(--dashboard-text-secondary);
+}

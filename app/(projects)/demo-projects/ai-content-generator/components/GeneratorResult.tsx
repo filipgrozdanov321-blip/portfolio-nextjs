@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Copy, Check, RefreshCw } from "lucide-react";
 import "../styles/GeneratorResult.css";
 
@@ -18,8 +18,32 @@ export default function GeneratorResult({
   onRegenerate,
 }: GeneratorResultProps) {
   const [copied, setCopied] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const copyTimer = useRef<number | undefined>(undefined);
 
-  if (!isLoading && !error && !result) {
+  const hasContent = isLoading || Boolean(error) || Boolean(result);
+
+  // On a phone the Generate button is near the bottom of the form, so the result
+  // appears BELOW the screen and nothing seems to happen. This brings it into
+  // view when it starts loading and when it arrives ("nearest" means the page
+  // doesn't move if it's already visible).
+  useEffect(() => {
+    if (!hasContent) return;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    wrapperRef.current?.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "nearest",
+    });
+  }, [hasContent, isLoading, error, result]);
+
+  // Stop the "Copied!" timer if the component goes away
+  useEffect(() => {
+    return () => window.clearTimeout(copyTimer.current);
+  }, []);
+
+  if (!hasContent) {
     return null;
   }
 
@@ -28,14 +52,15 @@ export default function GeneratorResult({
     try {
       await navigator.clipboard.writeText(result);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      window.clearTimeout(copyTimer.current);
+      copyTimer.current = window.setTimeout(() => setCopied(false), 2000);
     } catch {
       // clipboard write failed silently — no action needed
     }
   };
 
   return (
-    <div className="generator-result">
+    <div className="generator-result" ref={wrapperRef}>
       {isLoading && (
         <div className="generator-result-skeleton" aria-live="polite" aria-busy="true">
           <div className="generator-result-skeleton-line" style={{ width: "90%" }} />
@@ -59,7 +84,11 @@ export default function GeneratorResult({
               className="generator-result-btn"
               onClick={handleCopy}
             >
-              {copied ? <Check size={16} /> : <Copy size={16} />}
+              {copied ? (
+                <Check size={16} aria-hidden="true" />
+              ) : (
+                <Copy size={16} aria-hidden="true" />
+              )}
               {copied ? "Copied!" : "Copy"}
             </button>
             <button
@@ -67,7 +96,7 @@ export default function GeneratorResult({
               className="generator-result-btn generator-result-btn-secondary"
               onClick={onRegenerate}
             >
-              <RefreshCw size={16} />
+              <RefreshCw size={16} aria-hidden="true" />
               Regenerate
             </button>
           </div>

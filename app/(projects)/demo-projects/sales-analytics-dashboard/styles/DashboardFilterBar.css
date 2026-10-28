@@ -1,101 +1,80 @@
 .dashboard-filter-bar {
-    display: inline-flex;
-    gap: 4px;
-    padding: 4px;
-    background-color: var(--dashboard-card);
-    border: 1px solid var(--dashboard-border);
-    border-radius: 10px;
-    box-shadow: var(--dashboard-shadow);
-  }
-  
-  .dashboard-filter-option {
-    appearance: none;
-    border: none;
-    background: transparent;
-    padding: 8px 16px;
-    font-family: var(--dashboard-font);
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--dashboard-text-secondary);
-    border-radius: var(--dashboard-radius-sm);
-    cursor: pointer;
-    transition: background-color 0.15s ease, color 0.15s ease;
-    white-space: nowrap;
-  }
-  
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  max-width: 100%;
+  background-color: var(--dashboard-card);
+  border: 1px solid var(--dashboard-border);
+  border-radius: 10px;
+  box-shadow: var(--dashboard-shadow);
+}
+
+.dashboard-filter-option {
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 8px 16px;
+  font-family: var(--dashboard-font);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--dashboard-text-secondary);
+  border-radius: var(--dashboard-radius-sm);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+
+/* Mouse only, so the highlight doesn't stay stuck after a tap on phones. The
+   active option's hover comes after, so it stays green. */
+@media (hover: hover) {
   .dashboard-filter-option:hover {
     color: var(--dashboard-text);
     background-color: var(--dashboard-bg);
   }
-  
-  .dashboard-filter-option:focus-visible {.dashboard-filter-bar {
-    display: inline-flex;
-    gap: 4px;
-    padding: 4px;
-    background-color: var(--dashboard-card);
-    border: 1px solid var(--dashboard-border);
-    border-radius: 10px;
-    box-shadow: var(--dashboard-shadow);
+}
+
+.dashboard-filter-option:focus-visible {
+  outline: 2px solid var(--dashboard-primary);
+  outline-offset: 2px;
+}
+
+.dashboard-filter-option-active {
+  color: #FFFFFF;
+  background-color: var(--dashboard-primary);
+}
+
+@media (hover: hover) {
+  .dashboard-filter-option-active:hover {
+    color: #FFFFFF;
+    background-color: var(--dashboard-primary);
   }
-  
+}
+
+/* Touch screens: every option is at least 44px tall */
+@media (pointer: coarse) {
   .dashboard-filter-option {
-    appearance: none;
-    border: none;
-    background: transparent;
-    padding: 8px 16px;
-    font-family: var(--dashboard-font);
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--dashboard-text-secondary);
-    border-radius: var(--dashboard-radius-sm);
-    cursor: pointer;
-    transition: background-color 0.15s ease, color 0.15s ease;
-    white-space: nowrap;
+    min-height: 44px;
   }
-  
-  .dashboard-filter-option:hover {
-    color: var(--dashboard-text);
-    background-color: var(--dashboard-bg);
+}
+
+/* Phones: the four options become a 2 x 2 grid across the full width, so all
+   four are visible at once. Before, the bar scrolled sideways inside itself,
+   which hid "All Time" off the edge on a small phone. */
+@media (max-width: 520px) {
+  .dashboard-filter-bar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
   }
-  
-  .dashboard-filter-option:focus-visible {
-    outline: 2px solid var(--dashboard-primary);
-    outline-offset: 2px;
+
+  .dashboard-filter-option {
+    min-height: 44px;
+    text-align: center;
   }
-  
-  .dashboard-filter-option-active {
-    color: #FFFFFF;
-    background-color: var(--dashboard-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-filter-option {
+    transition: none;
   }
-  
-  .dashboard-filter-option-active:hover {
-    color: #FFFFFF;
-    background-color: var(--dashboard-primary);
-  }
-  
-  @media (max-width: 520px) {
-    .dashboard-filter-bar {
-      width: 100%;
-      overflow-x: auto;
-    }
-  }
-    outline: 2px solid var(--dashboard-primary);
-    outline-offset: 2px;
-  }
-  
-  .dashboard-filter-option-active {
-    color: #FFFFFF;
-    background-color: var(--dashboard-primary);
-  }
-  
-  .dashboard-filter-option-active:hover {
-    color: #FFFFFF;
-    background-color: var(--dashboard-primary);
-  }
-  
-  @media (max-width: 520px) {
-    .dashboard-filter-bar {
-      width: 100%;
-      overflow-x: auto;
-    }
-  }
+}

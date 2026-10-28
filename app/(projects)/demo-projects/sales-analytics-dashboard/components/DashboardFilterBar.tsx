@@ -25,8 +25,11 @@ export default function DashboardFilterBar({
   selectedRange,
   onRangeChange,
 }: DashboardFilterBarProps) {
+  // This was role="tablist" / role="tab", which promises arrow-key navigation
+  // and a matching tab panel that don't exist here. It's a group of toggle
+  // buttons instead, which is what it actually is.
   return (
-    <div className="dashboard-filter-bar" role="tablist" aria-label="Date range">
+    <div className="dashboard-filter-bar" role="group" aria-label="Date range">
       {DASHBOARD_FILTER_OPTIONS.map((option) => {
         const isActive = option.value === selectedRange;
 
@@ -34,8 +37,7 @@ export default function DashboardFilterBar({
           <button
             key={option.value}
             type="button"
-            role="tab"
-            aria-selected={isActive}
+            aria-pressed={isActive}
             className={
               isActive
                 ? "dashboard-filter-option dashboard-filter-option-active"

@@ -1,16 +1,28 @@
-.shop-products-page {
-    padding: 48px 32px 80px;
+/* The doubled selector (.shop-products-page.shop-container) makes this padding
+   win over the shared .shop-container padding no matter which file loads first. */
+   .shop-products-page.shop-container {
+    /* 48px top, 32px sides and 80px bottom on desktop (same as before), less on
+       phones. It used to jump to 32px / 20px / 56px at 640px; now it changes
+       smoothly. */
+    padding:
+      clamp(2rem, 5vw, 3rem)
+      clamp(20px, 4vw, 32px)
+      clamp(3.5rem, 7vw, 5rem);
   }
   
+  /* "Shop All" on the left and the product count on the right. If they don't
+     fit side by side, the count wraps under the title. */
   .shop-products-page-header {
     display: flex;
+    flex-wrap: wrap;
     align-items: baseline;
     justify-content: space-between;
-    margin-bottom: 40px;
+    gap: 6px 16px;
+    margin-bottom: clamp(24px, 4vw, 40px);
   }
   
   .shop-products-page-heading {
-    font-size: 28px;
+    font-size: clamp(1.5rem, 1.3rem + 0.9vw, 1.75rem);
     font-weight: 700;
   }
   
@@ -19,20 +31,22 @@
     color: var(--shop-gray);
   }
   
+  /* The filter sidebar (220px) on the left and the products on the right */
   .shop-products-page-layout {
     display: flex;
-    gap: 40px;
+    gap: clamp(24px, 4.4vw, 40px);
     align-items: flex-start;
   }
   
+  /* Phones and small tablets: the filters sit above the products, and BOTH take
+     the full width. The old rule left "align-items: flex-start" in place for the
+     stacked layout, which makes each child only as wide as its content, so the
+     product grid could end up narrower than the screen and pushed to the left.
+     "stretch" fixes that. */
   @media (max-width: 900px) {
     .shop-products-page-layout {
       flex-direction: column;
-    }
-  }
-  
-  @media (max-width: 640px) {
-    .shop-products-page {
-      padding: 32px 20px 56px;
+      align-items: stretch;
+      gap: 28px;
     }
   }

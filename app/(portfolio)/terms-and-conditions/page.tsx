@@ -8,7 +8,7 @@ const TermsAndConditions = () => {
         <header className="terms__header">
           <h1 className="terms__title">Terms and Conditions</h1>
           <p className="terms__effective-date">
-            Effective date: January 1, 2026
+            Effective date: September 28, 2026
           </p>
         </header>
 
@@ -89,6 +89,12 @@ const TermsAndConditions = () => {
             production-ready solutions.
           </p>
           <p className="terms__text">
+            Some demo and template projects feature fictional brands, people,
+            testimonials, and sample data created purely for demonstration
+            purposes, and do not represent real clients or businesses unless
+            explicitly stated otherwise.
+          </p>
+          <p className="terms__text">
             All demo and template projects are provided “as is” and may not be
             reused or deployed without explicit permission.
           </p>
@@ -110,7 +116,7 @@ const TermsAndConditions = () => {
           <h2 className="terms__heading">7. Third-Party Services</h2>
           <p className="terms__text">
             This website may reference or integrate third-party services such as
-            hosting providers, email services, or scheduling tools.
+            hosting providers and email delivery services.
           </p>
           <p className="terms__text">
             I am not responsible for the content, availability, or practices of
@@ -151,8 +157,9 @@ const TermsAndConditions = () => {
         <section className="terms__section">
           <h2 className="terms__heading">11. Governing Law</h2>
           <p className="terms__text">
-            These Terms are governed by and interpreted in accordance with
-            applicable European Union laws and regulations.
+            These Terms are governed by and interpreted in accordance with the
+            laws of Slovenia and North Macedonia, without regard to
+            conflict-of-law principles.
           </p>
         </section>
 

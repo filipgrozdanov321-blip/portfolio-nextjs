@@ -17,10 +17,16 @@
 .portfolio-footer-inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 4.5rem 2rem 3rem;
+  /* 4.5rem top, 2rem sides and 3rem bottom on desktop (same as before), less
+     on phones */
+  padding:
+    clamp(3rem, 6.5vw, 4.5rem)
+    clamp(1.25rem, 4vw, 2rem)
+    clamp(2rem, 4.4vw, 3rem);
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr);
+  /* 3rem from about 1100px up (same as before) */
+  gap: clamp(2rem, 4.4vw, 3rem);
 }
 
 .portfolio-footer-logo {
@@ -45,7 +51,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
-  padding-left: 2.5rem;
+  /* 2.5rem from about 1100px up (same as before) */
+  padding-left: clamp(1.25rem, 3.6vw, 2.5rem);
   border-left: 1px solid rgba(250, 249, 246, 0.12);
 }
 
@@ -75,20 +82,11 @@
   transition: width 0.25s ease;
 }
 
-.portfolio-footer-link:hover {
-  opacity: 1;
-  color: var(--portfolio-accent);
-}
-
-.portfolio-footer-link:hover::after {
-  width: 100%;
-}
-
 .portfolio-footer-contact {
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
-  padding-left: 2.5rem;
+  padding-left: clamp(1.25rem, 3.6vw, 2.5rem);
   border-left: 1px solid rgba(250, 249, 246, 0.12);
 }
 
@@ -102,18 +100,50 @@
   text-decoration: none;
   opacity: 0.75;
   width: fit-content;
+  max-width: 100%;
   transition: opacity 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
-.portfolio-footer-icon-link:hover {
+/* A long email address wraps instead of overflowing on narrow phones */
+.portfolio-footer-icon-link span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Mouse only, so colors and the nudge don't stay stuck after a tap on phones */
+@media (hover: hover) {
+  .portfolio-footer-link:hover {
+    opacity: 1;
+    color: var(--portfolio-accent);
+  }
+
+  .portfolio-footer-link:hover::after {
+    width: 100%;
+  }
+
+  .portfolio-footer-icon-link:hover {
+    opacity: 1;
+    color: var(--portfolio-accent);
+    transform: translateX(3px);
+  }
+}
+
+/* Keyboard focus gets the same highlight plus an outline */
+.portfolio-footer-link:focus-visible,
+.portfolio-footer-icon-link:focus-visible {
   opacity: 1;
   color: var(--portfolio-accent);
-  transform: translateX(3px);
+  outline: 2px solid var(--portfolio-accent);
+  outline-offset: 4px;
+}
+
+.portfolio-footer-link:focus-visible::after {
+  width: 100%;
 }
 
 .portfolio-footer-bottom {
   border-top: 1px solid rgba(250, 249, 246, 0.1);
-  padding: 1.5rem 2rem;
+  padding: 1.5rem clamp(1.25rem, 4vw, 2rem);
   text-align: center;
 }
 
@@ -125,12 +155,53 @@
   margin: 0;
 }
 
+/* Touch screens (any width): every link is a 44px tap target */
+@media (pointer: coarse) {
+  .portfolio-footer-links,
+  .portfolio-footer-contact {
+    gap: 0;
+  }
+
+  .portfolio-footer-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-bottom: 0;
+  }
+
+  .portfolio-footer-icon-link {
+    min-height: 44px;
+  }
+}
+
+/* Below 1400px the Back button floats in the bottom-left corner. This extra
+   space at the bottom means it never sits on top of the copyright line when
+   you scroll all the way down. */
+@media (max-width: 1399px) {
+  .portfolio-footer-bottom {
+    padding-bottom: calc(1.5rem + 3.5rem);
+  }
+}
+
+/* Tablet and small laptop (769 to 1000px): three columns get too tight for
+   the email address, so the brand takes its own row and the links and contact
+   share the next one. */
+@media (max-width: 1000px) {
+  .portfolio-footer-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .portfolio-footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Phones: a single centered column, as before */
 @media (max-width: 768px) {
   .portfolio-footer-inner {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 2.5rem;
     text-align: center;
-    padding: 3.5rem 1.5rem 2.5rem;
   }
 
   .portfolio-footer-tagline {
@@ -143,5 +214,13 @@
     border-left: none;
     padding-left: 0;
     align-items: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-footer-link,
+  .portfolio-footer-link::after,
+  .portfolio-footer-icon-link {
+    transition: none;
   }
 }

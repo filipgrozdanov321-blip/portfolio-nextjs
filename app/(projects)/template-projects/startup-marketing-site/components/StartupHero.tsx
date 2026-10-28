@@ -51,26 +51,44 @@ export default function StartupHero() {
       });
     }, 1800);
 
-    const incidentInterval = setInterval(() => {
-      setIncidentActive((prevActive) => {
-        const nextActive = !prevActive;
-        setIncidentTime(
-          nextActive
-            ? new Date().toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit",
-              })
-            : null
-        );
-        return nextActive;
-      });
-    }, 7000);
-
     return () => {
       clearInterval(jitterInterval);
-      clearInterval(incidentInterval);
     };
+  }, [incidentActive]);
+
+  // The incident timer has its own effect with no dependencies, so it keeps
+  // ticking every 7 seconds. It used to be in the effect above, which re-ran
+  // (and restarted this 7-second timer from zero) every time an incident
+  // started or ended. That made the first "incident" appear after 7 seconds
+  // but the "all clear" after another 7 seconds, and reset the jitter timer
+  // as well. Stopping and starting a timer inside a state update is also
+  // something React warns about.
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReducedMotion) return;
+
+    const incidentInterval = setInterval(() => {
+      setIncidentActive((prevActive) => !prevActive);
+    }, 7000);
+
+    return () => clearInterval(incidentInterval);
+  }, []);
+
+  // The time stamp is set when an incident starts and cleared when it ends.
+  // It depends only on incidentActive, not on a state update callback, so
+  // React doesn't run it twice in development.
+  useEffect(() => {
+    setIncidentTime(
+      incidentActive
+        ? new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          })
+        : null
+    );
   }, [incidentActive]);
 
   function handleCtaClick() {

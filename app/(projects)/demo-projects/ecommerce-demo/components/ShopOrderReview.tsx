@@ -34,10 +34,12 @@ export default function ShopOrderReview({
             key={`${item.product.slug}-${item.variant ?? "default"}`}
             className="shop-order-review-item"
           >
+            {/* alt="" because the product name is written right next to the
+                photo, so a screen reader would otherwise read it twice */}
             <div className="shop-order-review-item-image-wrapper">
               <Image
                 src={item.product.images[0]}
-                alt={item.product.name}
+                alt=""
                 fill
                 className="shop-order-review-item-image"
                 sizes="64px"

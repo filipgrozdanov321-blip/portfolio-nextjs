@@ -51,15 +51,28 @@ export default function FAQ() {
           return (
             <div key={faq.question} className="saas-faq-item">
               <button
+                type="button"
+                id={`faq-question-${index}`}
                 className="saas-faq-question"
                 onClick={() => toggle(index)}
                 aria-expanded={isOpen}
+                aria-controls={`faq-answer-${index}`}
               >
                 {faq.question}
-                <span className={`saas-faq-icon ${isOpen ? "saas-faq-icon-open" : ""}`}>+</span>
+                <span
+                  className={`saas-faq-icon ${isOpen ? "saas-faq-icon-open" : ""}`}
+                  aria-hidden="true"
+                >
+                  +
+                </span>
               </button>
 
-              <div className={`saas-faq-answer-wrapper ${isOpen ? "saas-faq-answer-open" : ""}`}>
+              <div
+                id={`faq-answer-${index}`}
+                role="region"
+                aria-labelledby={`faq-question-${index}`}
+                className={`saas-faq-answer-wrapper ${isOpen ? "saas-faq-answer-open" : ""}`}
+              >
                 <p className="saas-faq-answer">{faq.answer}</p>
               </div>
             </div>

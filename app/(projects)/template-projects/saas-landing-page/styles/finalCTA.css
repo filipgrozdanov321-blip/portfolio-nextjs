@@ -1,48 +1,64 @@
 .final-cta {
-    padding: 5rem 1.5rem;
-    background-color: var(--accent);
-    text-align: center;
-  }
-  
-  .final-cta-container {
-    max-width: 600px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
-  
-  .final-cta-title {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: #ffffff;
-  }
-  
-  .final-cta-subtitle {
-    font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.85);
-    line-height: 1.6;
-  }
-  
-  .final-cta-button {
-    margin: 0;
-    background-color: #ffffff;
-    color: var(--accent);
-    padding: 0.85rem 1.8rem;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 1rem;
-    text-decoration: none;
-    transition: background-color 0.2s ease, color 0.2s ease;
-  }
-  
+  padding: clamp(2.5rem, 7.3vw, 5rem) clamp(1rem, 4vw, 1.5rem);
+  background-color: var(--accent);
+  text-align: center;
+}
+
+.final-cta-container {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.1rem, 2.2vw, 1.5rem);
+}
+
+.final-cta-title {
+  /* 2.2rem from about 800px up (same as before). Before, it sat at 2.2rem down
+     to 641px and then jumped to 1.8rem; now it shrinks smoothly. */
+  font-size: clamp(1.7rem, 1.1rem + 2.2vw, 2.2rem);
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.final-cta-subtitle {
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.05rem);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+}
+
+.final-cta-button {
+  margin: 0;
+  background-color: #ffffff;
+  color: var(--accent);
+  padding: 0.85rem 1.8rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Mouse only, so the color doesn't stay stuck after a tap on phones */
+@media (hover: hover) {
   .final-cta-button:hover {
     background-color: var(--bg-secondary);
   }
-  
-  @media (max-width: 640px) {
-    .final-cta-title {
-      font-size: 1.8rem;
-    }
+}
+
+/* A white outline, because the section's background is the blue accent color */
+.final-cta-button:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+/* Touch screens: the button is at least 44px tall (it was about 52px already) */
+@media (pointer: coarse) {
+  .final-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    box-sizing: border-box;
   }
+}

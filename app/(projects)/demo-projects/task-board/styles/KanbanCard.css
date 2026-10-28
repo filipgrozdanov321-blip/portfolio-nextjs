@@ -1,111 +1,143 @@
 .kanban-card {
-    background: var(--kanban-card-bg);
-    border-radius: 8px;
-    padding: 12px 14px;
-    margin-bottom: 8px;
-    box-shadow: 0 1px 2px rgba(9, 30, 66, 0.25);
-    cursor: pointer;
-    user-select: none;
-    transition: box-shadow 0.15s ease;
-  }
-  
+  background: var(--kanban-card-bg);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 2px rgba(9, 30, 66, 0.25);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: box-shadow 0.15s ease;
+
+  /* THE TOUCH FIX. On a touch screen the browser decides, in the first few
+     milliseconds of a finger touching a card, whether you're scrolling or
+     dragging. "touch-action: manipulation" keeps normal scrolling and
+     tapping (and removes the 300ms tap delay and double-tap zoom), and the
+     250ms press-and-hold in KanbanBoard.tsx is what starts a drag.
+     (The usual drag-and-drop advice is "touch-action: none", but that
+     would stop the page from scrolling whenever your finger touches a
+     card, which on a phone is almost everywhere. While a card is actually
+     being dragged, dnd-kit locks scrolling itself.) */
+  touch-action: manipulation;
+
+  /* Stops iOS from showing the copy / lookup menu when you press and hold,
+     which would fight the 250ms hold that picks the card up */
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Mouse only, so the shadow doesn't stay stuck after a tap on phones */
+@media (hover: hover) {
   .kanban-card:hover {
     box-shadow: 0 2px 6px rgba(9, 30, 66, 0.3);
   }
-  
-  .kanban-card:focus-visible {
-    outline: 2px solid var(--kanban-accent);
-    outline-offset: 2px;
-  }
-  
-  .kanban-card-top {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 6px;
-  }
-  
-  .kanban-priority-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 10px;
-    background: rgba(9, 30, 66, 0.06);
-    color: var(--kanban-text-secondary);
-  }
-  
-  .kanban-priority-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    display: inline-block;
-    flex-shrink: 0;
-  }
-  
-  .kanban-priority-low .kanban-priority-dot {
-    background: var(--kanban-priority-low);
-  }
-  
-  .kanban-priority-medium .kanban-priority-dot {
-    background: var(--kanban-priority-medium);
-  }
-  
-  .kanban-priority-high .kanban-priority-dot {
-    background: var(--kanban-priority-high);
-  }
-  
-  .kanban-card-title {
-    margin: 0 0 4px;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--kanban-text);
-    line-height: 1.3;
-  }
-  
-  .kanban-card-description {
-    margin: 0 0 10px;
-    font-size: 12.5px;
-    color: var(--kanban-text-secondary);
-    line-height: 1.4;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  
-  .kanban-card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .kanban-card-assignee {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: var(--kanban-accent);
-    color: #ffffff;
-    font-size: 10.5px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  
-  .kanban-card-due {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 11.5px;
-    color: var(--kanban-text-secondary);
-  }
+}
 
-  .kanban-card-overlay {
-    cursor: grabbing;
-    box-shadow: 0 10px 24px rgba(9, 30, 66, 0.35);
-    transform: rotate(2deg);
-  }
+.kanban-card:focus-visible {
+  outline: 2px solid var(--kanban-accent);
+  outline-offset: 2px;
+}
+
+.kanban-card-top {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 6px;
+}
+
+.kanban-priority-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(9, 30, 66, 0.06);
+  color: var(--kanban-text-secondary);
+}
+
+.kanban-priority-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.kanban-priority-low .kanban-priority-dot {
+  background: var(--kanban-priority-low);
+}
+
+.kanban-priority-medium .kanban-priority-dot {
+  background: var(--kanban-priority-medium);
+}
+
+.kanban-priority-high .kanban-priority-dot {
+  background: var(--kanban-priority-high);
+}
+
+.kanban-card-title {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--kanban-text);
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.kanban-card-description {
+  margin: 0 0 10px;
+  font-size: 12.5px;
+  color: var(--kanban-text-secondary);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+.kanban-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.kanban-card-assignee {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--kanban-accent);
+  color: #ffffff;
+  font-size: 10.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.kanban-card-due {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+  color: var(--kanban-text-secondary);
+}
+
+/* The copy that follows your finger while dragging. Its size is set in
+   JavaScript by the library (the same size as the card you picked up), and it
+   has no touch behavior of its own. */
+.kanban-card-overlay {
+  cursor: grabbing;
+  box-shadow: 0 10px 24px rgba(9, 30, 66, 0.35);
+  transform: rotate(2deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+.kanban-card {
+  transition: none;
+}
+}

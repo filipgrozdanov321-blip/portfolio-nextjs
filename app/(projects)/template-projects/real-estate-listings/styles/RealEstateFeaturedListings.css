@@ -1,12 +1,17 @@
-.realestate-featured-header {
+/* "Featured Listings" on the left and "View All Listings" on the right. If they
+   don't fit side by side, the link wraps under the title (before, it was
+   squeezed until 640px and then forced into a column). */
+   .realestate-featured-header {
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-end;
     justify-content: space-between;
-    margin-bottom: 40px;
+    gap: 16px 24px;
+    margin-bottom: clamp(1.5rem, 3.6vw, 2.5rem);
   }
   
   .realestate-featured-title {
-    font-size: 30px;
+    font-size: clamp(1.6rem, 1.3rem + 1.4vw, 1.875rem);
     font-weight: 700;
     margin-top: 8px;
   }
@@ -23,26 +28,39 @@
     white-space: nowrap;
   }
   
+  .realestate-featured-link:focus-visible {
+    outline: 2px solid var(--realestate-gold);
+    outline-offset: 4px;
+  }
+  
+  /* Touch screens: the link is a 44px tap target. Its underline moves from a
+     border to a text underline, so it stays right under the words. */
+  @media (pointer: coarse) {
+    .realestate-featured-link {
+      min-height: 44px;
+      border-bottom: none;
+      text-decoration: underline;
+      text-decoration-color: var(--realestate-gold);
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 5px;
+    }
+  }
+  
+  /* 6 listings: 3 across (never more), then 2, then 1, with no fixed
+     breakpoints. Each card is at least 17rem wide. The "(100% - 2 gaps) / 3"
+     part is what caps it at 3 columns: without it, a 1240px container would fit
+     4 cards in a row. With 6 listings, 3, 2 and 1 columns always fill every row
+     evenly (no lone card). Desktop (1100px and wider) is the same 3 columns. */
   .realestate-featured-grid {
+    --realestate-featured-gap: clamp(1.25rem, 2.5vw, 1.75rem);
+  
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
-  }
-  
-  @media (max-width: 960px) {
-    .realestate-featured-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  @media (max-width: 640px) {
-    .realestate-featured-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 16px;
-    }
-  
-    .realestate-featured-grid {
-      grid-template-columns: 1fr;
-    }
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(
+        min(100%, max(17rem, (100% - 2 * var(--realestate-featured-gap)) / 3)),
+        1fr
+      )
+    );
+    gap: var(--realestate-featured-gap);
   }

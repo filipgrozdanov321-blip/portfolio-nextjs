@@ -7,13 +7,23 @@ type AppRouter = ReturnType<typeof useRouter>;
 export const STARTUP_HOME_PATH = "/template-projects/startup-marketing-site";
 export const STARTUP_STORY_PATH = `${STARTUP_HOME_PATH}/story`;
 
+// Visitors who turned on "reduce motion" jump instead of gliding
+function getScrollBehavior(): ScrollBehavior {
+  if (typeof window === "undefined") return "auto";
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ? "auto"
+    : "smooth";
+}
+
 /**
  * Scrolls to a section id if already on the Rivet homepage.
  * Otherwise navigates to the Rivet homepage with a hash.
  */
 export function scrollToSection(id: string, pathname: string, router: AppRouter) {
   if (pathname === STARTUP_HOME_PATH) {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    document
+      .getElementById(id)
+      ?.scrollIntoView({ behavior: getScrollBehavior(), block: "start" });
   } else {
     router.push(`${STARTUP_HOME_PATH}#${id}`);
   }
@@ -30,7 +40,9 @@ export function scrollToHashOnLoad() {
 
   requestAnimationFrame(() => {
     setTimeout(() => {
-      document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      document
+        .getElementById(hash)
+        ?.scrollIntoView({ behavior: getScrollBehavior(), block: "start" });
     }, 60);
   });
 }

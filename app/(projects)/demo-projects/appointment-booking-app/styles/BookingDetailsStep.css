@@ -12,6 +12,9 @@
 
 .booking-form-field input,
 .booking-form-field textarea {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   font-family: inherit;
   font-size: 0.95rem;
   padding: 10px 12px;
@@ -26,9 +29,24 @@
 .booking-form-field textarea:focus {
   outline: none;
   border-color: var(--booking-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 .booking-form-error {
   font-size: 0.78rem;
   color: #DC2626;
+}
+
+/* Phones and touch screens: 16px or larger stops iOS from zooming the page in
+   when a field is tapped, and each field is at least 44px tall.
+   (Desktop with a mouse keeps 0.95rem.) */
+@media (pointer: coarse), (max-width: 768px) {
+  .booking-form-field input,
+  .booking-form-field textarea {
+    font-size: 16px;
+  }
+
+  .booking-form-field input {
+    min-height: 44px;
+  }
 }

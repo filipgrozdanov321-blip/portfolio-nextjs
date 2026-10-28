@@ -1,76 +1,79 @@
 .agency-about-page {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 6rem 2rem 2rem;
-  }
-  
-  .agency-about-page-header {
-    max-width: 800px;
-    margin-bottom: 5rem;
-  }
-  
-  .agency-about-page-header .agency-about-page-title {
-    font-size: clamp(2.25rem, 5vw, 3.5rem);
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    color: var(--agency-off-white);
-  }
-  
-  .agency-about-page-mission {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.1rem;
-    color: var(--agency-gray);
-    margin-top: 1.5rem;
-    line-height: 1.6;
-  }
-  
-  .agency-about-page-values {
-    margin-bottom: 5rem;
-  }
-  
-  .agency-about-page-values .agency-about-page-values-title {
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
-    font-weight: 700;
-    color: var(--agency-off-white);
-    margin-bottom: 2rem;
-  }
-  
-  .agency-about-page-values-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem 2rem;
-  }
-  
-  .agency-about-page-values-item {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--agency-off-white);
-    padding: 1.25rem 0;
-    border-top: 1px solid var(--agency-border);
-  }
-  
-  .agency-about-page-team {
-    padding-bottom: 6rem;
-  }
-  
-  .agency-about-page-team .agency-about-page-team-title {
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
-    font-weight: 700;
-    color: var(--agency-off-white);
-    margin-bottom: 2.5rem;
-  }
-  
-  @media (max-width: 640px) {
-    .agency-about-page-values-list {
-      grid-template-columns: 1fr;
-    }
-  
-    .agency-about-page {
-      padding: 5rem 1.5rem 2rem;
-    }
-  }
+  max-width: 1440px;
+  margin: 0 auto;
+  /* 6rem top, 2rem sides and 2rem bottom on desktop (same as before), less on
+     phones. The old version jumped to 5rem/1.5rem at 640px; now it shrinks
+     smoothly. */
+  padding:
+    clamp(3rem, 8.75vw, 6rem)
+    clamp(1.25rem, 4vw, 2rem)
+    2rem;
+}
+
+.agency-about-page-header {
+  max-width: 800px;
+  margin-bottom: clamp(2.5rem, 7.3vw, 5rem);
+}
+
+.agency-about-page-header .agency-about-page-title {
+  /* The 5vw part and the 3.5rem cap are the same as before (so desktop is
+     identical). Only the minimum is lower, so on small phones the headline
+     takes fewer lines. */
+  font-size: clamp(1.9rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--agency-off-white);
+}
+
+.agency-about-page-mission {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1rem, 0.9rem + 0.45vw, 1.1rem);
+  color: var(--agency-gray);
+  margin-top: clamp(1rem, 2.2vw, 1.5rem);
+  line-height: 1.6;
+}
+
+.agency-about-page-values {
+  margin-bottom: clamp(2.5rem, 7.3vw, 5rem);
+}
+
+.agency-about-page-values .agency-about-page-values-title {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 700;
+  color: var(--agency-off-white);
+  margin-bottom: clamp(1.25rem, 2.9vw, 2rem);
+}
+
+/* 4 values: 2 across, then 1 on narrow screens. The switch happens by itself
+   when each value would be narrower than 16rem (about 560px wide), instead of
+   at a fixed 640px. (A 3-across step would leave a lone value, and 4 across
+   would be too tight for these long phrases.) */
+.agency-about-page-values-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 1.25rem clamp(1.25rem, 2.9vw, 2rem);
+}
+
+.agency-about-page-values-item {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.1rem, 1rem + 0.5vw, 1.25rem);
+  font-weight: 600;
+  color: var(--agency-off-white);
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--agency-border);
+}
+
+.agency-about-page-team {
+  padding-bottom: clamp(3rem, 8.75vw, 6rem);
+}
+
+.agency-about-page-team .agency-about-page-team-title {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 700;
+  color: var(--agency-off-white);
+  margin-bottom: clamp(1.5rem, 3.6vw, 2.5rem);
+}

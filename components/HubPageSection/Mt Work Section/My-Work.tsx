@@ -1,8 +1,18 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import type { TransitionEvent } from "react";
+import type { TransitionEvent, TouchEvent } from "react";
+import Image from "next/image";
 import "./My-Work.css";
+
+// How much of an element must be on screen before it fades in.
+// The old code watched the whole section at 0.7, but on phones the section
+// (title + 480px+ slider + dots) is taller than the screen, so it could never
+// be 70% visible and the slider stayed at opacity 0.
+const REVEAL_THRESHOLD = 0.15;
+
+// Minimum finger movement (px) that counts as a swipe
+const SWIPE_DISTANCE = 50;
 
 const slides = [
   {
@@ -12,7 +22,7 @@ const slides = [
     tag: "Demo Project",
     image: "/images/sales-analytics-dashboard.jpg",
     linkText: "View Project →",
-    link: "/demo-projects/sales-analytic-dashboard",
+    link: "/demo-projects/sales-analytics-dashboard",
   },
   {
     title: "Task Board (Kanban)",
@@ -30,7 +40,7 @@ const slides = [
     tag: "Template",
     image: "/images/photographer-portfolio.jpg",
     linkText: "View Template →",
-    link: "/demo-projects/photographer-portfolio",
+    link: "/template-projects/photographer-portfolio",
   },
   {
     title: "Restaurant Website",
@@ -86,38 +96,38 @@ export default function MyWorkSection() {
   const [slideSettled, setSlideSettled] = useState(false);
   const [firstSlideLoaded, setFirstSlideLoaded] = useState(false);
 
-  const sectionRef = useRef<HTMLElement | null>(null);
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
 
-  const prevSlide = () => setCurrent((prev) => prev - 1);
-  const nextSlide = () => setCurrent((prev) => prev + 1);
-
-  // Title — 0.3 viewport
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        setTitleInView(true);
-        observer.disconnect();
-      },
-      { threshold: 0.3 }
+  // Ignore clicks while we're sitting on a clone slide (waiting to snap back).
+  // Without this, clicking fast could push the track past the last slide.
+  const prevSlide = () => setCurrent((prev) => (prev <= 0 ? prev : prev - 1));
+  const nextSlide = () =>
+    setCurrent((prev) =>
+      prev >= extendedSlides.length - 1 ? prev : prev + 1
     );
 
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  // Slider wrapper — 0.7 viewport
+  // Reveal the title and the slider when each one itself is on screen
   useEffect(() => {
+    const title = titleRef.current;
+    const wrapper = wrapperRef.current;
+    if (!title || !wrapper) return;
+
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        setSliderInView(true);
-        observer.disconnect();
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          if (entry.target === title) setTitleInView(true);
+          if (entry.target === wrapper) setSliderInView(true);
+          observer.unobserve(entry.target);
+        });
       },
-      { threshold: 0.7 }
+      { threshold: REVEAL_THRESHOLD }
     );
 
-    if (sectionRef.current) observer.observe(sectionRef.current);
+    observer.observe(title);
+    observer.observe(wrapper);
     return () => observer.disconnect();
   }, []);
 
@@ -151,6 +161,28 @@ export default function MyWorkSection() {
     return () => cancelAnimationFrame(id);
   }, [instant]);
 
+  // Swipe left / right on touch screens
+  const handleTouchStart = (e: TouchEvent<HTMLDivElement>) => {
+    const t = e.touches[0];
+    touchStart.current = { x: t.clientX, y: t.clientY };
+  };
+
+  const handleTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
+    const start = touchStart.current;
+    touchStart.current = null;
+    if (!start) return;
+
+    const t = e.changedTouches[0];
+    const dx = t.clientX - start.x;
+    const dy = t.clientY - start.y;
+
+    // Ignore short moves and mostly-vertical moves (those are page scrolling)
+    if (Math.abs(dx) < SWIPE_DISTANCE || Math.abs(dx) < Math.abs(dy)) return;
+
+    if (dx < 0) nextSlide();
+    else prevSlide();
+  };
+
   const realIndex =
     current === 0
       ? slides.length - 1
@@ -159,12 +191,16 @@ export default function MyWorkSection() {
       : current - 1;
 
   return (
-    <section id="my-work" ref={sectionRef} className="my-work">
-      <h2 className={`my-work-title ${titleInView ? "animate" : ""}`}>
+    <section id="my-work" className="my-work">
+      <h2
+        ref={titleRef}
+        className={`my-work-title ${titleInView ? "animate" : ""}`}
+      >
         My Work in Action
       </h2>
 
       <div
+        ref={wrapperRef}
         className={`my-work-slider-wrapper ${sliderInView ? "animate" : ""}`}
         onTransitionEnd={(e) => {
           if (e.target !== e.currentTarget) return;
@@ -172,24 +208,32 @@ export default function MyWorkSection() {
           setFirstSlideLoaded(true);
         }}
       >
-        <button className="slider-arrow left" onClick={prevSlide}>
+        <button
+          type="button"
+          className="slider-arrow left"
+          aria-label="Previous project"
+          onClick={prevSlide}
+        >
           ‹
         </button>
 
         <div
-          className="my-work-slider"
-          style={{
-            transform: `translateX(-${current * 100}%)`,
-            transition: instant ? "none" : "transform 0.6s ease",
-          }}
+          className={`my-work-slider ${instant ? "is-instant" : ""}`}
+          style={{ transform: `translateX(-${current * 100}%)` }}
           onTransitionEnd={handleTrackTransitionEnd}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
           {extendedSlides.map((slide, index) => (
-            <div
-              key={index}
-              className="my-work-slide"
-              style={{ backgroundImage: `url(${slide.image})` }}
-            >
+            <div key={index} className="my-work-slide">
+              <Image
+                src={slide.image}
+                alt=""
+                fill
+                sizes="(max-width: 768px) 100vw, 80vw"
+                className="my-work-slide-img"
+              />
+
               {index === current && (
                 <div
                   className={`my-work-overlay ${
@@ -208,16 +252,24 @@ export default function MyWorkSection() {
           ))}
         </div>
 
-        <button className="slider-arrow right" onClick={nextSlide}>
+        <button
+          type="button"
+          className="slider-arrow right"
+          aria-label="Next project"
+          onClick={nextSlide}
+        >
           ›
         </button>
       </div>
 
       <div className="slider-dots">
-        {slides.map((_, index) => (
+        {slides.map((slide, index) => (
           <button
+            type="button"
             key={index}
             className={`dot ${index === realIndex ? "active" : ""}`}
+            aria-label={`Show ${slide.title}`}
+            aria-current={index === realIndex}
             onClick={() => setCurrent(index + 1)}
           />
         ))}

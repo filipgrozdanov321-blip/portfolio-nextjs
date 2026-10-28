@@ -1,30 +1,43 @@
-.shop-product-grid {
-    flex: 1;
+/* The products: 3 across next to the sidebar on desktop (the same as before),
+   then 2, flowing by themselves instead of switching at a fixed 900px. Each
+   card wants at least 12rem; the "(100% - 2 gaps) / 3" part caps it at 3
+   columns. (Beside the 220px sidebar, 3 cards at 901px would be only about
+   176px wide; now it goes to 2 columns until there's room.) */
+   .shop-product-grid {
+    --shop-grid-gap: clamp(16px, 2.4vw, 24px);
+
+    flex: 1 1 0%;
+    width: 100%;
+    min-width: 0;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px 24px;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(
+        min(100%, max(12rem, (100% - 2 * var(--shop-grid-gap)) / 3)),
+        1fr
+      )
+    );
+    gap: 32px var(--shop-grid-gap);
     align-content: start;
   }
   
   .shop-product-grid-empty {
-    flex: 1;
+    flex: 1 1 0%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 300px;
     color: var(--shop-gray);
     font-size: 14px;
+    text-align: center;
   }
   
-  @media (max-width: 900px) {
+  /* Phones: 2 across, as before. (The auto-fit formula above would give one wide
+     column on a phone, so this keeps your 2-column phone layout.) */
+  @media (max-width: 640px) {
     .shop-product-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .shop-product-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 20px 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px 14px;
     }
   }

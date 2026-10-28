@@ -1,120 +1,203 @@
 .realestate-footer {
-    background-color: var(--realestate-navy);
-    color: var(--realestate-white);
-    margin-top: auto;
-  }
-  
-  .realestate-footer-inner {
-    max-width: var(--realestate-container-width);
-    margin: 0 auto;
-    padding: 64px 24px 48px;
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1.2fr;
-    gap: 48px;
-  }
-  
-  .realestate-footer-logo {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--realestate-white);
-  }
-  
-  .realestate-footer-logo span {
-    color: var(--realestate-gold);
-  }
-  
-  .realestate-footer-tagline {
-    margin-top: 16px;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.65);
-    max-width: 320px;
-    line-height: 1.6;
-  }
-  
-  .realestate-footer-socials {
-    display: flex;
-    gap: 14px;
-    margin-top: 24px;
-  }
-  
-  .realestate-footer-socials a {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.08);
-    color: var(--realestate-white);
-    transition: background-color 0.15s ease;
-  }
-  
+  background-color: var(--realestate-navy);
+  color: var(--realestate-white);
+  margin-top: auto;
+}
+
+.realestate-footer-inner {
+  max-width: var(--realestate-container-width);
+  margin: 0 auto;
+  /* 64px 24px 48px on desktop (same as before), less on phones */
+  padding:
+    clamp(3rem, 5.8vw, 4rem)
+    clamp(1.25rem, 4vw, 1.5rem)
+    clamp(2rem, 4.4vw, 3rem);
+  display: grid;
+  /* The same 1.5 : 1 : 1.2 split as before. minmax(0, ...) = a long address
+     can't stretch a column. */
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1.2fr);
+  /* 48px from about 1100px up (same as before) */
+  gap: clamp(2rem, 4.4vw, 3rem);
+}
+
+.realestate-footer-logo {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--realestate-white);
+}
+
+.realestate-footer-logo span {
+  color: var(--realestate-gold);
+}
+
+.realestate-footer-tagline {
+  margin-top: 16px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.65);
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+.realestate-footer-socials {
+  display: flex;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.realestate-footer-socials a {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--realestate-white);
+  transition: background-color 0.15s ease;
+}
+
+.realestate-footer-column h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--realestate-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+}
+
+.realestate-footer-column ul li {
+  margin-bottom: 12px;
+}
+
+.realestate-footer-column ul li a {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.75);
+  transition: color 0.15s ease;
+}
+
+.realestate-footer-contact li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.realestate-footer-contact li svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--realestate-gold);
+}
+
+/* A long address or email wraps instead of overflowing on narrow phones */
+.realestate-footer-contact li span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Mouse only, so colors don't stay stuck after a tap on phones */
+@media (hover: hover) {
   .realestate-footer-socials a:hover {
     background-color: var(--realestate-gold);
     color: var(--realestate-navy);
   }
-  
-  .realestate-footer-column h4 {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--realestate-gold);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 20px;
-  }
-  
-  .realestate-footer-column ul li {
-    margin-bottom: 12px;
-  }
-  
-  .realestate-footer-column ul li a {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.75);
-    transition: color 0.15s ease;
-  }
-  
+
   .realestate-footer-column ul li a:hover {
     color: var(--realestate-white);
   }
-  
-  .realestate-footer-contact li {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.75);
+}
+
+/* Keyboard focus gets the same highlight plus an outline */
+.realestate-footer-logo:focus-visible,
+.realestate-footer-socials a:focus-visible,
+.realestate-footer-column ul li a:focus-visible {
+  outline: 2px solid var(--realestate-gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.realestate-footer-socials a:focus-visible {
+  background-color: var(--realestate-gold);
+  color: var(--realestate-navy);
+  border-radius: 50%;
+}
+
+.realestate-footer-column ul li a:focus-visible {
+  color: var(--realestate-white);
+}
+
+.realestate-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.realestate-footer-bottom-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 20px clamp(1.25rem, 4vw, 1.5rem);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Touch screens (any width): every link is a 44px tap target */
+@media (pointer: coarse) {
+  .realestate-footer-socials a {
+    width: 44px;
+    height: 44px;
   }
-  
-  .realestate-footer-contact li svg {
-    flex-shrink: 0;
-    margin-top: 2px;
-    color: var(--realestate-gold);
+
+  .realestate-footer-column ul li {
+    margin-bottom: 0;
   }
-  
-  .realestate-footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  .realestate-footer-bottom-inner {
+
+  .realestate-footer-column ul li a {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 20px 24px;
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.5);
+    min-height: 44px;
   }
-  
-  @media (max-width: 768px) {
-    .realestate-footer-inner {
-      grid-template-columns: 1fr;
-      gap: 36px;
-      padding: 48px 24px 32px;
-    }
-  
-    .realestate-footer-bottom-inner {
-      flex-direction: column;
-      gap: 8px;
-      text-align: center;
-    }
+
+  .realestate-footer-logo {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
+}
+
+/* Below 1400px the Back button floats in the bottom-left corner. This extra
+   space at the bottom means it never sits on top of the copyright line when
+   you scroll all the way down. */
+@media (max-width: 1399px) {
+  .realestate-footer-bottom-inner {
+    padding-bottom: calc(20px + 3.5rem);
+  }
+}
+
+/* Tablet and small laptop (769 to 1000px): the brand takes its own row and the
+   two link columns share the next one, so the office address isn't squeezed */
+@media (max-width: 1000px) {
+  .realestate-footer-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .realestate-footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .realestate-footer-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+    padding-top: 48px;
+    padding-bottom: 32px;
+  }
+
+  .realestate-footer-bottom-inner {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}

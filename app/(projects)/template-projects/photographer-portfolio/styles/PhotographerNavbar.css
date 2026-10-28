@@ -1,120 +1,206 @@
 .portfolio-navbar {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background-color: var(--portfolio-white);
-    border-bottom: 1px solid var(--portfolio-border);
-  }
-  
-  .portfolio-navbar-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1.25rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .portfolio-navbar-logo {
-    font-family: 'Fraunces', serif;
-    font-size: 1.35rem;
-    font-weight: 500;
-    color: var(--portfolio-black);
-    letter-spacing: 0.02em;
-    text-decoration: none;
-  }
-  
-  .portfolio-navbar-links-desktop {
-    display: flex;
-    align-items: center;
-    gap: 2.25rem;
-  }
-  
-  .portfolio-navbar-link {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    color: var(--portfolio-black);
-    text-decoration: none;
-    position: relative;
-    padding-bottom: 0.25rem;
-    transition: color 0.2s ease;
-  }
-  
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: var(--portfolio-white);
+  border-bottom: 1px solid var(--portfolio-border);
+}
+
+.portfolio-navbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  /* 2rem sides from about 1100px up (same as before), shrinking smoothly
+     between 769 and 1100px so everything still fits on one row */
+  padding: 1.25rem clamp(1.25rem, 2.9vw, 2rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.portfolio-navbar-logo {
+  font-family: 'Fraunces', serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--portfolio-black);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.portfolio-navbar-links-desktop {
+  display: flex;
+  align-items: center;
+  /* 2.25rem from about 1100px up (same as before) */
+  gap: clamp(1.25rem, 3.3vw, 2.25rem);
+}
+
+.portfolio-navbar-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: var(--portfolio-black);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 0.25rem;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+/* Mouse only, so the color doesn't stay stuck after a tap on touch screens */
+@media (hover: hover) {
   .portfolio-navbar-link:hover {
     color: var(--portfolio-accent);
   }
-  
-  .portfolio-navbar-link-active {
-    color: var(--portfolio-accent);
-  }
-  
-  .portfolio-navbar-link-active::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 1px;
-    background-color: var(--portfolio-accent);
-  }
-  
-  .portfolio-navbar-cta {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--portfolio-white);
-    background-color: var(--portfolio-accent);
-    padding: 0.65rem 1.4rem;
-    border-radius: 2px;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-    white-space: nowrap;
-  }
-  
+}
+
+.portfolio-navbar-link-active {
+  color: var(--portfolio-accent);
+}
+
+.portfolio-navbar-link-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--portfolio-accent);
+}
+
+.portfolio-navbar-cta {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--portfolio-white);
+  background-color: var(--portfolio-accent);
+  padding: 0.65rem 1.4rem;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (hover: hover) {
   .portfolio-navbar-cta:hover {
     background-color: #97663f;
   }
-  
-  .portfolio-navbar-cta-mobile {
-    display: inline-block;
-    margin-top: 1rem;
+}
+
+/* Visible keyboard focus */
+.portfolio-navbar-logo:focus-visible,
+.portfolio-navbar-link:focus-visible,
+.portfolio-navbar-mobile-link:focus-visible,
+.portfolio-navbar-cta:focus-visible,
+.portfolio-navbar-toggle:focus-visible {
+  outline: 2px solid var(--portfolio-accent);
+  outline-offset: 4px;
+}
+
+.portfolio-navbar-cta-mobile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* Hamburger button: hidden on desktop, shown in the mobile media query */
+.portfolio-navbar-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  border-radius: 2px;
+  color: var(--portfolio-black);
+  cursor: pointer;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: hover) {
+  .portfolio-navbar-toggle:hover {
+    background-color: rgba(20, 19, 15, 0.05);
   }
-  
-  .portfolio-navbar-toggle {
+}
+
+.portfolio-navbar-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0.5rem clamp(1.25rem, 4vw, 2rem) 1.5rem;
+  border-top: 1px solid var(--portfolio-border);
+  /* A short phone (turned sideways) scrolls the menu instead of cutting it */
+  max-height: calc(100vh - 4.25rem);
+  max-height: calc(100dvh - 4.25rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Links become 44px-tall rows (the old rows were about 24px tall) */
+.portfolio-navbar-mobile-link {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: var(--portfolio-black);
+  text-decoration: none;
+}
+
+/* Touch screens with the full desktop layout (tablets in landscape): bigger
+   tap areas without changing how anything looks. Each link gets an invisible
+   44px-tall touch area drawn by ::before. */
+@media (pointer: coarse) {
+  .portfolio-navbar-link::before {
+    content: "";
+    position: absolute;
+    inset: -10px -4px;
+  }
+
+  .portfolio-navbar-cta-desktop {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-navbar-links-desktop,
+  .portfolio-navbar-cta-desktop {
     display: none;
-    background: none;
-    border: none;
-    color: var(--portfolio-black);
-    cursor: pointer;
-    padding: 0.25rem;
   }
-  
+
+  .portfolio-navbar-toggle {
+    display: inline-flex;
+  }
+
+  .portfolio-navbar-inner {
+    padding: 0.6rem 1.25rem;
+  }
+
+  /* The active link's underline sits at the left edge of its row text only */
+  .portfolio-navbar-mobile .portfolio-navbar-link-active::after {
+    content: none;
+  }
+}
+
+/* A little fade-in so the menu doesn't just pop into existence. Skipped when
+   the visitor turned on "reduce motion". */
+@media (prefers-reduced-motion: no-preference) {
   .portfolio-navbar-mobile {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem 2rem 1.5rem;
-    border-top: 1px solid var(--portfolio-border);
+    animation: portfolio-navbar-mobile-in 0.2s ease;
   }
-  
-  .portfolio-navbar-mobile-link {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    color: var(--portfolio-black);
-    text-decoration: none;
+
+  @keyframes portfolio-navbar-mobile-in {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
-  
-  @media (max-width: 768px) {
-    .portfolio-navbar-links-desktop,
-    .portfolio-navbar-cta-desktop {
-      display: none;
-    }
-  
-    .portfolio-navbar-toggle {
-      display: block;
-    }
-  
-    .portfolio-navbar-inner {
-      padding: 1.1rem 1.25rem;
-    }
-  }
+}

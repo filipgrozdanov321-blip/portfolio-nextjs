@@ -12,6 +12,7 @@ export default function PhotographerAboutPreview() {
           src="/images/photographer/wren-portrait.jpg"
           alt="Wren Ashby, photographer"
           fill
+          sizes="(max-width: 768px) 100vw, 480px"
           className="portfolio-about-preview-image"
         />
       </div>

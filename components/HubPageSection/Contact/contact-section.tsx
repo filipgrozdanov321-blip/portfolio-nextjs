@@ -4,6 +4,11 @@ import { useEffect, useRef } from "react";
 import ContactForm from "../../ComponentsUsedAroundTheWebSite/ContactForm/ContactFrom";
 import "./contact-section.css";
 
+// How much of an element must be on screen before it animates in.
+// 0.7 meant "70% visible". The form is taller than a phone screen, so the
+// form wrapper could never reach 70% and stayed at opacity 0 forever.
+const REVEAL_THRESHOLD = 0.15;
+
 export default function ContactSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
 
@@ -20,7 +25,7 @@ export default function ContactSection() {
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.7 }
+      { threshold: REVEAL_THRESHOLD }
     );
 
     elements.forEach((el) => {

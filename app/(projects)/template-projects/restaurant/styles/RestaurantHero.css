@@ -1,89 +1,131 @@
 .restaurant-hero {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    min-height: 600px;
-    background-color: var(--restaurant-charcoal);
-    background-image: url("/images/restaurant/hero-bg.jpg");
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-  
-  .restaurant-hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(28, 26, 26, 0.55) 0%,
-      rgba(88, 17, 26, 0.45) 100%
-    );
-  }
-  
-  .restaurant-hero-content {
-    position: relative;
-    z-index: 1;
-    max-width: 780px;
-    padding: 0 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
-  
-  .restaurant-hero-eyebrow {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--restaurant-gold);
-  }
-  
-  .restaurant-hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    font-weight: 800;
-    line-height: 1.15;
-    color: var(--restaurant-cream);
-  }
-  
-  .restaurant-hero-subtitle {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    font-weight: 300;
-    line-height: 1.8;
-    color: rgba(253, 251, 247, 0.75);
-    max-width: 540px;
-  }
-  
-  .restaurant-hero-cta {
-    display: inline-block;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--restaurant-charcoal);
-    background-color: var(--restaurant-gold);
-    padding: 0.9rem 2.2rem;
-    border-radius: 2px;
-    text-decoration: none;
-    margin-top: 0.5rem;
-    transition: background-color 0.2s ease;
-  }
-  
+  position: relative;
+  width: 100%;
+  /* Same size as before: 100vh, but never shorter than 600px. Written as
+     min-height (not height) so it can grow if the text is ever taller than
+     the screen, for example a phone turned sideways. dvh = the screen height
+     without the phone's moving address bar; browsers that don't know dvh use
+     the vh line. */
+  min-height: 600px;
+  min-height: max(600px, 100vh);
+  min-height: max(600px, 100dvh);
+  padding: 3rem 0;
+  background-color: var(--restaurant-charcoal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* The photo (next/image fills the section; the old CSS used
+   background-size: cover + background-position: center) */
+.restaurant-hero-bg {
+  object-fit: cover;
+  object-position: center;
+}
+
+.restaurant-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(28, 26, 26, 0.55) 0%,
+    rgba(88, 17, 26, 0.45) 100%
+  );
+}
+
+.restaurant-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
+  padding: 0 clamp(1.25rem, 4vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.restaurant-hero-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--restaurant-gold);
+}
+
+.restaurant-hero-title {
+  font-family: 'Playfair Display', serif;
+  /* The 6vw part and the 4.5rem cap are the same as before (so desktop is
+     identical). Only the minimum is lower, so on small phones the headline
+     takes fewer lines. */
+  font-size: clamp(2.1rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--restaurant-cream);
+}
+
+.restaurant-hero-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(253, 251, 247, 0.75);
+  max-width: 540px;
+}
+
+.restaurant-hero-cta {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--restaurant-charcoal);
+  background-color: var(--restaurant-gold);
+  padding: 0.9rem 2.2rem;
+  border-radius: 2px;
+  text-decoration: none;
+  margin-top: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+/* Mouse only, so the color doesn't stay stuck after a tap on phones */
+@media (hover: hover) {
   .restaurant-hero-cta:hover {
     background-color: var(--restaurant-gold-hover);
   }
-  
-  @media (max-width: 768px) {
-    .restaurant-hero-subtitle br {
-      display: none;
-    }
-  
-    .restaurant-hero-title br {
-      display: none;
-    }
+}
+
+.restaurant-hero-cta:focus-visible {
+  outline: 2px solid var(--restaurant-cream);
+  outline-offset: 3px;
+}
+
+/* Touch screens: the button is at least 44px tall */
+@media (pointer: coarse) {
+  .restaurant-hero-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
   }
+}
+
+@media (max-width: 768px) {
+  /* The navbar is about 70px tall on phones. Subtracting it makes the hero fill
+     exactly the rest of the screen, so the first thing you see is the whole
+     hero (before, it was a full screen tall and the bottom hid under the fold). */
+  .restaurant-hero {
+    min-height: 480px;
+    min-height: max(480px, calc(100vh - 4.5rem));
+    min-height: max(480px, calc(100dvh - 4.5rem));
+  }
+
+  .restaurant-hero-subtitle br {
+    display: none;
+  }
+
+  .restaurant-hero-title br {
+    display: none;
+  }
+}

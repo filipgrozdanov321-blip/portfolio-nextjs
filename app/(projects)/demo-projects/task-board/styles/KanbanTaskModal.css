@@ -1,153 +1,247 @@
 .kanban-modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(9, 30, 66, 0.54);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    z-index: 100;
-  }
-  
-  .kanban-modal {
-    background: var(--kanban-card-bg);
-    border-radius: 10px;
-    width: 100%;
-    max-width: 480px;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 12px 32px rgba(9, 30, 66, 0.35);
-  }
-  
-  .kanban-modal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 18px 20px;
-    border-bottom: 1px solid rgba(9, 30, 66, 0.08);
-  }
-  
-  .kanban-modal-title {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--kanban-text);
-  }
-  
-  .kanban-modal-close {
-    background: none;
-    border: none;
-    color: var(--kanban-text-secondary);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4px;
-    border-radius: 6px;
-  }
-  
+  position: fixed;
+  inset: 0;
+  background: rgba(9, 30, 66, 0.54);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  /* Above the Back button (which floats at z-index 999). It used to be 100,
+     so on phones the Back button sat on top of the dialog. */
+  z-index: 1000;
+}
+
+.kanban-modal {
+  background: var(--kanban-card-bg);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  max-height: 90dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  box-shadow: 0 12px 32px rgba(9, 30, 66, 0.35);
+}
+
+.kanban-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(9, 30, 66, 0.08);
+}
+
+.kanban-modal-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--kanban-text);
+}
+
+.kanban-modal-close {
+  background: none;
+  border: none;
+  color: var(--kanban-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* A 44x44px tap target (the icon plus its padding was only 26px) */
+  width: 44px;
+  height: 44px;
+  margin: -10px -10px -10px 0;
+  padding: 0;
+  border-radius: 6px;
+}
+
+/* Mouse only, so the highlight doesn't stay stuck after a tap */
+@media (hover: hover) {
   .kanban-modal-close:hover {
     background: rgba(9, 30, 66, 0.06);
   }
-  
-  .kanban-modal-form {
-    padding: 18px 20px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  
-  .kanban-field {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    flex: 1;
-  }
-  
-  .kanban-field-row {
-    display: flex;
-    gap: 14px;
-  }
-  
-  .kanban-field-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--kanban-text-secondary);
-  }
-  
-  .kanban-field-input,
-  .kanban-field-textarea {
-    font-family: inherit;
-    font-size: 13.5px;
-    color: var(--kanban-text);
-    background: var(--kanban-bg);
-    border: 1px solid rgba(9, 30, 66, 0.12);
-    border-radius: 6px;
-    padding: 8px 10px;
-  }
-  
-  .kanban-field-textarea {
-    resize: vertical;
-  }
-  
-  .kanban-field-input:focus,
-  .kanban-field-textarea:focus {
-    outline: none;
-    border-color: var(--kanban-accent);
-    box-shadow: 0 0 0 1px var(--kanban-accent);
-  }
-  
-  .kanban-field-error {
-    margin: -4px 0 0;
-    font-size: 12.5px;
-    color: var(--kanban-priority-high);
-  }
-  
-  .kanban-modal-actions {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 6px;
-  }
-  
-  .kanban-modal-actions-right {
-    display: flex;
-    gap: 8px;
-    margin-left: auto;
-  }
-  
-  .kanban-btn {
-    font-size: 13px;
-    font-weight: 600;
-    padding: 8px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    border: none;
-  }
-  
-  .kanban-btn-cancel {
-    background: rgba(9, 30, 66, 0.06);
-    color: var(--kanban-text);
-  }
-  
+}
+
+.kanban-modal-close:focus-visible {
+  outline: 2px solid var(--kanban-accent);
+  outline-offset: 2px;
+}
+
+.kanban-modal-form {
+  /* 20px sides from about 420px up (same as before) */
+  padding: 18px clamp(16px, 4.8vw, 20px) 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.kanban-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Two fields side by side while they fit; each wants at least 10rem, so on a
+   phone they stack by themselves. (Before, they stayed side by side, which
+   left each about 130px wide on a 320px phone, too narrow for "Select a
+   date".) */
+.kanban-field-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.kanban-field-row .kanban-field {
+  flex: 1 1 10rem;
+}
+
+.kanban-field-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--kanban-text-secondary);
+}
+
+.kanban-field-input,
+.kanban-field-textarea {
+  font-family: inherit;
+  font-size: 13.5px;
+  color: var(--kanban-text);
+  background: var(--kanban-bg);
+  border: 1px solid rgba(9, 30, 66, 0.12);
+  border-radius: 6px;
+  padding: 8px 10px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.kanban-field-textarea {
+  resize: vertical;
+}
+
+.kanban-field-input:focus,
+.kanban-field-textarea:focus {
+  outline: none;
+  border-color: var(--kanban-accent);
+  box-shadow: 0 0 0 1px var(--kanban-accent);
+}
+
+.kanban-field-error {
+  margin: -4px 0 0;
+  font-size: 12.5px;
+  color: var(--kanban-priority-high);
+}
+
+.kanban-modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.kanban-modal-actions-right {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.kanban-btn {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+}
+
+.kanban-btn-cancel {
+  background: rgba(9, 30, 66, 0.06);
+  color: var(--kanban-text);
+}
+
+.kanban-btn-save {
+  background: var(--kanban-accent);
+  color: #ffffff;
+}
+
+.kanban-btn-delete {
+  background: rgba(222, 53, 11, 0.1);
+  color: var(--kanban-priority-high);
+}
+
+/* Mouse only, so the colors don't stay stuck after a tap on phones. The
+   pressed colors, for touch, are the :active rules below. */
+@media (hover: hover) {
   .kanban-btn-cancel:hover {
     background: rgba(9, 30, 66, 0.1);
   }
-  
-  .kanban-btn-save {
-    background: var(--kanban-accent);
-    color: #ffffff;
-  }
-  
+
   .kanban-btn-save:hover {
     background: #0047b3;
   }
-  
-  .kanban-btn-delete {
-    background: rgba(222, 53, 11, 0.1);
-    color: var(--kanban-priority-high);
-  }
-  
+
   .kanban-btn-delete:hover {
     background: rgba(222, 53, 11, 0.18);
   }
+}
+
+.kanban-btn-cancel:active {
+  background: rgba(9, 30, 66, 0.1);
+}
+
+.kanban-btn-save:active {
+  background: #0047b3;
+}
+
+.kanban-btn-delete:active {
+  background: rgba(222, 53, 11, 0.18);
+}
+
+.kanban-btn:focus-visible {
+  outline: 2px solid var(--kanban-accent);
+  outline-offset: 2px;
+}
+
+/* Phones and touch screens: 16px or larger stops iOS from zooming the page in
+   when a field is tapped, and fields and buttons are at least 44px tall.
+   (Desktop with a mouse keeps 13.5px.) */
+@media (pointer: coarse), (max-width: 600px) {
+  .kanban-field-input,
+  .kanban-field-textarea {
+    font-size: 16px;
+  }
+
+  .kanban-field-input {
+    min-height: 44px;
+  }
+
+  .kanban-btn {
+    min-height: 44px;
+  }
+}
+
+/* Touch screens: iPhone draws a dropdown in its own grey style, so it looks
+   out of place next to the text fields. This removes the browser's own look
+   and draws a small down arrow instead. */
+@media (pointer: coarse) {
+  select.kanban-field-input {
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    padding-right: 2.25rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235E6C84' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+  }
+}
+
+/* Small phones: Delete, Cancel and Save wrap by themselves if they don't fit
+   on one row, and the dialog hugs the screen edges a little more */
+@media (max-width: 420px) {
+  .kanban-modal-overlay {
+    padding: 12px;
+  }
+}

@@ -5,11 +5,16 @@ import { usePathname } from "next/navigation";
 import BackButton from "@/components/ComponentsUsedAroundTheWebSite/BackButton/BackButton";
 import "./header.css";
 
+const NAV_LINKS = [
+  { href: "/demo-projects/habit-tracker", label: "Home" },
+  { href: "/demo-projects/habit-tracker/add-habit", label: "Add Habit" },
+  { href: "/demo-projects/habit-tracker/completed", label: "Completed" },
+];
+
 export default function Header() {
   const pathname = usePathname();
 
-  const isActive = (href: string) =>
-    pathname === href ? "is-active" : "";
+  const isActive = (href: string) => pathname === href;
 
   return (
     <header className="header-habit-tracker">
@@ -17,27 +22,17 @@ export default function Header() {
         <BackButton />
       </div>
 
-      <nav className="header-habit-tracker__nav">
-        <Link
-          href="/demo-projects/habit-tracker"
-          className={isActive("/demo-projects/habit-tracker")}
-        >
-          Home
-        </Link>
-
-        <Link
-          href="/demo-projects/habit-tracker/add-habit"
-          className={isActive("/demo-projects/habit-tracker/add-habit")}
-        >
-          Add Habit
-        </Link>
-
-        <Link
-          href="/demo-projects/habit-tracker/completed"
-          className={isActive("/demo-projects/habit-tracker/completed")}
-        >
-          Completed
-        </Link>
+      <nav className="header-habit-tracker__nav" aria-label="Habit tracker">
+        {NAV_LINKS.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={isActive(link.href) ? "is-active" : ""}
+            aria-current={isActive(link.href) ? "page" : undefined}
+          >
+            {link.label}
+          </Link>
+        ))}
       </nav>
     </header>
   );

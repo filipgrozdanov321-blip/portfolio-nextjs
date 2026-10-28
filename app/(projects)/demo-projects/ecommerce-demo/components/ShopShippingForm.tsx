@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState } from "react";
+import type { FormEvent, InputHTMLAttributes } from "react";
 import "../styles/ShopShippingForm.css";
 
 export interface ShippingData {
@@ -20,6 +21,18 @@ const EMPTY_SHIPPING_DATA: ShippingData = {
   postalCode: "",
   country: "",
 };
+
+// The order the fields appear in, so a failed submit can jump to the first one
+const FIELD_ORDER: (keyof ShippingData)[] = [
+  "fullName",
+  "email",
+  "address",
+  "city",
+  "postalCode",
+  "country",
+];
+
+const fieldId = (field: keyof ShippingData) => `shop-shipping-${field}`;
 
 type ShippingErrors = Partial<Record<keyof ShippingData, string>>;
 
@@ -41,7 +54,7 @@ export default function ShopShippingForm({
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const validate = (): boolean => {
+  const validate = (): ShippingErrors => {
     const nextErrors: ShippingErrors = {};
 
     if (!formData.fullName.trim()) nextErrors.fullName = "Full name is required";
@@ -55,118 +68,99 @@ export default function ShopShippingForm({
     if (!formData.postalCode.trim()) nextErrors.postalCode = "Postal code is required";
     if (!formData.country.trim()) nextErrors.country = "Country is required";
 
-    setErrors(nextErrors);
-    return Object.keys(nextErrors).length === 0;
+    return nextErrors;
   };
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (validate()) {
-      onNext(formData);
+
+    const nextErrors = validate();
+    setErrors(nextErrors);
+
+    // On a phone the first problem can be scrolled out of sight, so the first
+    // invalid field gets the focus (and the phone scrolls to it)
+    const firstInvalid = FIELD_ORDER.find((field) => nextErrors[field]);
+    if (firstInvalid) {
+      document.getElementById(fieldId(firstInvalid))?.focus();
+      return;
     }
+
+    onNext(formData);
+  };
+
+  // One labeled field. The markup is the same as before; it was written out six
+  // times. autoComplete lets the phone offer to fill the field in.
+  const renderField = (
+    field: keyof ShippingData,
+    label: string,
+    inputProps: Pick<
+      InputHTMLAttributes<HTMLInputElement>,
+      "type" | "autoComplete" | "inputMode"
+    >
+  ) => {
+    const error = errors[field];
+    return (
+      <div className="shop-shipping-form-field">
+        <label htmlFor={fieldId(field)} className="shop-shipping-form-label">
+          {label}
+        </label>
+        <input
+          id={fieldId(field)}
+          className="shop-shipping-form-input"
+          value={formData[field]}
+          onChange={(e) => handleChange(field, e.target.value)}
+          aria-invalid={Boolean(error)}
+          aria-describedby={error ? `${fieldId(field)}-error` : undefined}
+          {...inputProps}
+        />
+        {error && (
+          <span
+            id={`${fieldId(field)}-error`}
+            className="shop-shipping-form-error"
+            role="alert"
+          >
+            {error}
+          </span>
+        )}
+      </div>
+    );
   };
 
   return (
     <form className="shop-shipping-form" onSubmit={handleSubmit} noValidate>
       <h2 className="shop-shipping-form-heading">Shipping Information</h2>
 
-      <div className="shop-shipping-form-field">
-        <label htmlFor="fullName" className="shop-shipping-form-label">
-          Full Name
-        </label>
-        <input
-          id="fullName"
-          type="text"
-          className="shop-shipping-form-input"
-          value={formData.fullName}
-          onChange={(e) => handleChange("fullName", e.target.value)}
-        />
-        {errors.fullName && (
-          <span className="shop-shipping-form-error">{errors.fullName}</span>
-        )}
-      </div>
+      {renderField("fullName", "Full Name", {
+        type: "text",
+        autoComplete: "name",
+      })}
 
-      <div className="shop-shipping-form-field">
-        <label htmlFor="email" className="shop-shipping-form-label">
-          Email
-        </label>
-        <input
-          id="email"
-          type="email"
-          className="shop-shipping-form-input"
-          value={formData.email}
-          onChange={(e) => handleChange("email", e.target.value)}
-        />
-        {errors.email && (
-          <span className="shop-shipping-form-error">{errors.email}</span>
-        )}
-      </div>
+      {renderField("email", "Email", {
+        type: "email",
+        autoComplete: "email",
+        inputMode: "email",
+      })}
 
-      <div className="shop-shipping-form-field">
-        <label htmlFor="address" className="shop-shipping-form-label">
-          Address
-        </label>
-        <input
-          id="address"
-          type="text"
-          className="shop-shipping-form-input"
-          value={formData.address}
-          onChange={(e) => handleChange("address", e.target.value)}
-        />
-        {errors.address && (
-          <span className="shop-shipping-form-error">{errors.address}</span>
-        )}
-      </div>
+      {renderField("address", "Address", {
+        type: "text",
+        autoComplete: "street-address",
+      })}
 
       <div className="shop-shipping-form-row">
-        <div className="shop-shipping-form-field">
-          <label htmlFor="city" className="shop-shipping-form-label">
-            City
-          </label>
-          <input
-            id="city"
-            type="text"
-            className="shop-shipping-form-input"
-            value={formData.city}
-            onChange={(e) => handleChange("city", e.target.value)}
-          />
-          {errors.city && (
-            <span className="shop-shipping-form-error">{errors.city}</span>
-          )}
-        </div>
-
-        <div className="shop-shipping-form-field">
-          <label htmlFor="postalCode" className="shop-shipping-form-label">
-            Postal Code
-          </label>
-          <input
-            id="postalCode"
-            type="text"
-            className="shop-shipping-form-input"
-            value={formData.postalCode}
-            onChange={(e) => handleChange("postalCode", e.target.value)}
-          />
-          {errors.postalCode && (
-            <span className="shop-shipping-form-error">{errors.postalCode}</span>
-          )}
-        </div>
+        {renderField("city", "City", {
+          type: "text",
+          autoComplete: "address-level2",
+        })}
+        {renderField("postalCode", "Postal Code", {
+          type: "text",
+          autoComplete: "postal-code",
+        })}
       </div>
 
-      <div className="shop-shipping-form-field">
-        <label htmlFor="country" className="shop-shipping-form-label">
-          Country
-        </label>
-        <input
-          id="country"
-          type="text"
-          className="shop-shipping-form-input"
-          value={formData.country}
-          onChange={(e) => handleChange("country", e.target.value)}
-        />
-        {errors.country && (
-          <span className="shop-shipping-form-error">{errors.country}</span>
-        )}
-      </div>
+      {renderField("country", "Country", {
+        type: "text",
+        autoComplete: "country-name",
+      })}
 
       <button type="submit" className="shop-shipping-form-submit">
         Continue to Payment

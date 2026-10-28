@@ -1,7 +1,10 @@
 .hero {
   position: relative;
   min-height: 80vh;
+  min-height: 80dvh;
   width: 100%;
+  box-sizing: border-box;
+  padding: 3rem 0; /* breathing room if the content is taller than the screen */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,6 +23,14 @@
   z-index: 0;
 }
 
+/* iOS Safari ignores "fixed" backgrounds (they render zoomed or jumpy),
+   so touch devices and small screens use a normal background instead */
+@media (pointer: coarse), (max-width: 768px) {
+  .hero::before {
+    background-attachment: scroll;
+  }
+}
+
 .hero::after {
   content: "";
   position: absolute;
@@ -34,7 +45,7 @@
   z-index: 2;
   text-align: center;
   max-width: 700px;
-  padding: 0 1.5rem;
+  padding: 0 clamp(1rem, 4vw, 1.5rem);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -42,7 +53,7 @@
 
 .hero-h1-title {
   margin: 0;
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-size: clamp(1.9rem, 4vw, 3.2rem);
   line-height: 1.2;
   text-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
   opacity: 0;
@@ -81,17 +92,24 @@
     color 0.3s ease;
 }
 
-.contact-button-hero:hover {
-  transform: translateY(-3px);
-  background: linear-gradient(135deg, #FFB300, #FFEB3B);
-  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
-  color: #fcfcfc;
+@media (hover: hover) {
+  .contact-button-hero:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #FFB300, #FFEB3B);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
+    color: #fcfcfc;
+  }
 }
 
 .contact-button-hero:active {
   transform: translateY(0);
   background-color: white;
   color: black;
+}
+
+.contact-button-hero:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
 }
 
 /* Fade-in and slide-up animation */
@@ -103,5 +121,16 @@
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* "Reduce motion" setting: show everything straight away */
+@media (prefers-reduced-motion: reduce) {
+  .hero-h1-title,
+  .hero-content p,
+  .hero-cta-anim {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }

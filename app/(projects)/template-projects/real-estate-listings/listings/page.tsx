@@ -1,13 +1,24 @@
 import RealEstateListingsGrid from "../components/RealEstateListingsGrid";
 
+type SearchParams = { [key: string]: string | string[] | undefined };
+
 interface RealEstateListingsPageProps {
-  searchParams: { [key: string]: string | string[] | undefined };
+  // Next.js 15 (and 16) hands searchParams to a page as a PROMISE. The old
+  // code read it as a plain object, so on those versions every search would
+  // have been ignored (the hero's search bar would land on an unfiltered
+  // list). It also fails the build with a type error on Next 15+. This works
+  // for both: "await" on a plain object just returns it.
+  searchParams: Promise<SearchParams> | SearchParams;
 }
 
-export default function RealEstateListingsPage({ searchParams }: RealEstateListingsPageProps) {
-  const location = typeof searchParams.location === "string" ? searchParams.location : "";
-  const propertyType = typeof searchParams.type === "string" ? searchParams.type : "";
-  const priceRange = typeof searchParams.price === "string" ? searchParams.price : "";
+export default async function RealEstateListingsPage({
+  searchParams,
+}: RealEstateListingsPageProps) {
+  const params = await searchParams;
+
+  const location = typeof params.location === "string" ? params.location : "";
+  const propertyType = typeof params.type === "string" ? params.type : "";
+  const priceRange = typeof params.price === "string" ? params.price : "";
 
   return (
     <>

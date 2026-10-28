@@ -72,9 +72,15 @@ export default function ShopFilterBar({
   const minThumbOnTop = filters.minPrice > minPriceBound + range / 2;
 
   return (
-    <aside className="shop-filter-bar">
-      <div className="shop-filter-bar-section">
-        <h3 className="shop-filter-bar-heading">Category</h3>
+    <aside className="shop-filter-bar" aria-label="Filter and sort products">
+      <div
+        className="shop-filter-bar-section"
+        role="group"
+        aria-labelledby="shop-filter-category-heading"
+      >
+        <h3 id="shop-filter-category-heading" className="shop-filter-bar-heading">
+          Category
+        </h3>
         <div className="shop-filter-bar-checkboxes">
           {ALL_CATEGORIES.map((category) => (
             <label key={category} className="shop-filter-bar-checkbox-label">
@@ -90,9 +96,15 @@ export default function ShopFilterBar({
         </div>
       </div>
 
-      <div className="shop-filter-bar-section">
+      <div
+        className="shop-filter-bar-section"
+        role="group"
+        aria-labelledby="shop-filter-price-heading"
+      >
         <div className="shop-filter-bar-price-header">
-          <h3 className="shop-filter-bar-heading">Price</h3>
+          <h3 id="shop-filter-price-heading" className="shop-filter-bar-heading">
+            Price
+          </h3>
           <span className="shop-filter-bar-price-value">
             ${filters.minPrice} – ${filters.maxPrice}
           </span>
@@ -135,6 +147,7 @@ export default function ShopFilterBar({
           value={filters.sort}
           onChange={handleSortChange}
           className="shop-filter-bar-sort-select"
+          aria-label="Sort products"
         >
           <option value="newest">Newest</option>
           <option value="price-asc">Price: Low to High</option>

@@ -1,8 +1,11 @@
-.agency-service-detail {
+/* Name on the left, details on the right. The 1 : 2 split is the same as
+   before; minmax(0, ...) means long words can't stretch a column, and the gap
+   and padding shrink smoothly instead of staying fixed until 900px. */
+   .agency-service-detail {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 2rem;
-    padding: 3rem 0;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: clamp(1.25rem, 2.9vw, 2rem);
+    padding: clamp(2rem, 4.4vw, 3rem) 0;
     border-top: 1px solid var(--agency-border);
   }
   
@@ -14,12 +17,15 @@
     font-size: clamp(1.75rem, 3vw, 2.25rem);
     font-weight: 700;
     color: var(--agency-off-white);
+    overflow-wrap: anywhere;
   }
   
+  /* Text on the left, "what's included" list on the right (1.2 : 1, same as
+     before). The 3rem gap is the same from about 1100px up. */
   .agency-service-detail-body {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 3rem;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4.4vw, 3rem);
   }
   
   .agency-service-detail-text {
@@ -68,14 +74,15 @@
     background: var(--agency-accent);
   }
   
+  /* Below 900px everything stacks into a single column, as before */
   @media (max-width: 900px) {
     .agency-service-detail {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 1.5rem;
     }
   
     .agency-service-detail-body {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 1.5rem;
     }
   }

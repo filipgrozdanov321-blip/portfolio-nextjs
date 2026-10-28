@@ -11,8 +11,14 @@ export default function ScrollManager() {
       history.scrollRestoration = "manual";
     }
 
-    // ALWAYS instant on route change
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    // behavior: "auto" means "obey the CSS", and index.css sets
+    // html { scroll-behavior: smooth }, so the old code actually scrolled
+    // smoothly. Switch smooth scrolling off for just this one jump.
+    const root = document.documentElement;
+    const previous = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    root.style.scrollBehavior = previous;
   }, [pathname]);
 
   return null;

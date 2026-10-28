@@ -10,11 +10,14 @@
 .restaurant-navbar-inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1.25rem 2rem;
+  /* 2rem sides and 2rem gaps from 1100px up (same as before). Between 961 and
+     1100px they shrink smoothly so the six links, the logo and the button all
+     still fit on one row. */
+  padding: 1.25rem clamp(1rem, 2.91vw, 2rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  gap: clamp(1rem, 2.91vw, 2rem);
 }
 
 .restaurant-navbar-logo {
@@ -24,14 +27,16 @@
   color: var(--restaurant-burgundy);
   text-decoration: none;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .restaurant-navbar-links {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: clamp(1rem, 2.91vw, 2rem);
   flex: 1;
   justify-content: center;
+  min-width: 0;
 }
 
 .restaurant-navbar-link {
@@ -42,6 +47,7 @@
   text-decoration: none;
   position: relative;
   padding-bottom: 4px;
+  white-space: nowrap;
   transition: color 0.2s ease;
 }
 
@@ -56,12 +62,32 @@
   transition: width 0.2s ease;
 }
 
-.restaurant-navbar-link:hover {
-  color: var(--restaurant-burgundy);
+/* Mouse only, so the color and underline don't stay stuck after a tap */
+@media (hover: hover) {
+  .restaurant-navbar-link:hover {
+    color: var(--restaurant-burgundy);
+  }
+
+  .restaurant-navbar-link:hover::after {
+    width: 100%;
+  }
 }
 
-.restaurant-navbar-link:hover::after {
+.restaurant-navbar-link:focus-visible {
+  color: var(--restaurant-burgundy);
+  outline: 2px solid var(--restaurant-gold);
+  outline-offset: 4px;
+}
+
+.restaurant-navbar-link:focus-visible::after {
   width: 100%;
+}
+
+.restaurant-navbar-logo:focus-visible,
+.restaurant-navbar-cta:focus-visible,
+.restaurant-navbar-toggle:focus-visible {
+  outline: 2px solid var(--restaurant-gold);
+  outline-offset: 3px;
 }
 
 .restaurant-navbar-cta {
@@ -74,60 +100,149 @@
   border-radius: 2px;
   text-decoration: none;
   white-space: nowrap;
+  flex-shrink: 0;
   transition: background-color 0.2s ease;
 }
 
-.restaurant-navbar-cta:hover {
-  background-color: var(--restaurant-gold-hover);
+@media (hover: hover) {
+  .restaurant-navbar-cta:hover {
+    background-color: var(--restaurant-gold-hover);
+  }
 }
 
 .restaurant-navbar-cta-mobile {
   display: none;
 }
 
+/* Hamburger button: hidden on desktop, shown in the mobile media query */
 .restaurant-navbar-toggle {
   display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
   background: none;
   border: none;
+  border-radius: 4px;
   color: var(--restaurant-charcoal);
   cursor: pointer;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
-@media (max-width: 768px) {
+@media (hover: hover) {
+  .restaurant-navbar-toggle:hover {
+    background-color: rgba(212, 175, 55, 0.15);
+  }
+}
+
+/* Touch screens with the full desktop layout (tablets in landscape): bigger
+   tap areas without changing how anything looks. Each link gets an invisible
+   44px-tall touch area drawn by ::before. */
+@media (pointer: coarse) {
+  .restaurant-navbar-link::before {
+    content: "";
+    position: absolute;
+    inset: -12px -6px;
+  }
+
+  .restaurant-navbar-cta {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+}
+
+/* =========================================================
+   MOBILE (960px and narrower): hamburger + slide-down panel
+   The six links, the logo and the button need about 925px to fit on one
+   row, so the hamburger starts at 960px instead of 768px. Before, the row
+   overflowed on tablets between 769px and about 925px.
+   ========================================================= */
+@media (max-width: 960px) {
+  .restaurant-navbar-inner {
+    padding: 0.75rem 1rem;
+  }
+
   .restaurant-navbar-cta-desktop {
     display: none;
   }
 
   .restaurant-navbar-toggle {
-    display: flex;
-    align-items: center;
+    display: inline-flex;
   }
 
+  /* The panel: sits right under the navbar, closed by default */
   .restaurant-navbar-links {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
+    flex: none;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5rem;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0.25rem;
     background-color: var(--restaurant-cream);
     border-bottom: 1px solid var(--restaurant-border);
-    padding: 1.5rem 2rem;
-    max-height: 0;
-    overflow: hidden;
+    box-shadow: 0 12px 16px -8px rgba(0, 0, 0, 0.2);
+    padding: 0.75rem 1rem 1.25rem;
+    max-height: calc(100vh - 4.5rem);
+    max-height: calc(100dvh - 4.5rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    /* Closed: hidden from sight AND from the keyboard and screen readers.
+       (max-height: 0 alone left the links tabbable.) */
     opacity: 0;
-    transition: max-height 0.3s ease, opacity 0.3s ease;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      visibility 0s linear 0.25s;
   }
 
   .restaurant-navbar-links-open {
-    max-height: 500px;
     opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      visibility 0s;
+  }
+
+  /* Links become 44px-tall rows (the touch areas from above aren't needed) */
+  .restaurant-navbar-link {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.5rem 0.25rem;
+  }
+
+  .restaurant-navbar-link::before {
+    content: none;
   }
 
   .restaurant-navbar-cta-mobile {
-    display: inline-block;
-    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    box-sizing: border-box;
+    margin-top: 0.75rem;
+    text-align: center;
+  }
+}
+
+/* Respect "reduce motion" system setting */
+@media (prefers-reduced-motion: reduce) {
+  .restaurant-navbar-links,
+  .restaurant-navbar-links-open,
+  .restaurant-navbar-link,
+  .restaurant-navbar-link::after {
+    transition: none;
   }
 }

@@ -6,15 +6,17 @@ import {
   DragEndEvent,
   DragOverlay,
   DragStartEvent,
-  PointerSensor,
+  KeyboardSensor,
+  MouseSensor,
+  TouchSensor,
   closestCorners,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
-import { arrayMove } from "@dnd-kit/sortable";
+import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import { COLUMNS, ColumnId, Task } from "../data/tasks";
 import KanbanColumn from "./KanbanColumn";
-import KanbanCard, { KanbanCardOverlay } from "./KanbanCard";
+import { KanbanCardOverlay } from "./KanbanCard";
 import "../styles/KanbanBoard.css";
 
 interface KanbanBoardProps {
@@ -28,8 +30,26 @@ const COLUMN_IDS: string[] = COLUMNS.map((c) => c.id);
 export default function KanbanBoard({ tasks, setTasks, onCardSelect }: KanbanBoardProps) {
   const [activeTask, setActiveTask] = useState<Task | null>(null);
 
+  // Three sensors instead of one PointerSensor:
+  //
+  // - MouseSensor: a mouse drag starts after moving 8px (same as before), so a
+  //   plain click still opens the edit dialog.
+  // - TouchSensor: a finger drag starts after HOLDING for 250ms. That's the key
+  //   change for phones. With a plain pointer sensor, a drag starts the moment a
+  //   finger moves, which means you could never scroll the page or the board
+  //   with a finger that landed on a card (the card grabbed it). Now a quick
+  //   swipe scrolls as normal, and a short press-and-hold picks the card up.
+  //   "tolerance" lets the finger wiggle 8px during that hold without cancelling.
+  // - KeyboardSensor: Space picks a card up, arrow keys move it, Space drops it,
+  //   Escape cancels. The board was not usable without a mouse before.
   const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 8 } })
+    useSensor(MouseSensor, { activationConstraint: { distance: 8 } }),
+    useSensor(TouchSensor, {
+      activationConstraint: { delay: 250, tolerance: 8 },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
   );
 
   function handleDragStart(event: DragStartEvent) {

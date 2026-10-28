@@ -25,6 +25,11 @@ export default function ShopProductInfo({ product }: ShopProductInfoProps) {
     // addItem opens the cart drawer automatically as confirmation
   };
 
+  const variantLabel =
+    product.variants && /^(small|medium|large)/i.test(product.variants[0])
+      ? "Size"
+      : "Color";
+
   return (
     <div className="shop-product-info">
       <span className="shop-product-info-category">{product.category}</span>
@@ -35,12 +40,12 @@ export default function ShopProductInfo({ product }: ShopProductInfoProps) {
 
       {product.variants && product.variants.length > 0 && (
         <div className="shop-product-info-variants">
-          <span className="shop-product-info-label">
-            {/^(small|medium|large)/i.test(product.variants[0])
-              ? "Size"
-              : "Color"}
-          </span>
-          <div className="shop-product-info-variant-options">
+          <span className="shop-product-info-label">{variantLabel}</span>
+          <div
+            className="shop-product-info-variant-options"
+            role="group"
+            aria-label={variantLabel}
+          >
             {product.variants.map((variant) => (
               <button
                 key={variant}
@@ -51,6 +56,7 @@ export default function ShopProductInfo({ product }: ShopProductInfoProps) {
                     : ""
                 }`}
                 onClick={() => setSelectedVariant(variant)}
+                aria-pressed={selectedVariant === variant}
               >
                 {variant}
               </button>
@@ -61,23 +67,29 @@ export default function ShopProductInfo({ product }: ShopProductInfoProps) {
 
       <div className="shop-product-info-quantity">
         <span className="shop-product-info-label">Quantity</span>
-        <div className="shop-product-info-stepper">
+        <div
+          className="shop-product-info-stepper"
+          role="group"
+          aria-label="Quantity"
+        >
           <button
             type="button"
             className="shop-product-info-stepper-button"
             onClick={handleDecrease}
             aria-label="Decrease quantity"
           >
-            <Minus size={14} strokeWidth={2} />
+            <Minus size={14} strokeWidth={2} aria-hidden="true" />
           </button>
-          <span className="shop-product-info-quantity-value">{quantity}</span>
+          <span className="shop-product-info-quantity-value" aria-live="polite">
+            {quantity}
+          </span>
           <button
             type="button"
             className="shop-product-info-stepper-button"
             onClick={handleIncrease}
             aria-label="Increase quantity"
           >
-            <Plus size={14} strokeWidth={2} />
+            <Plus size={14} strokeWidth={2} aria-hidden="true" />
           </button>
         </div>
       </div>

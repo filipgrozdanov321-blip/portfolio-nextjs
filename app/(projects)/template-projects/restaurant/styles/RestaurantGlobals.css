@@ -27,3 +27,12 @@
 .restaurant-root h4 {
   font-family: 'Playfair Display', serif;
 }
+
+/* Footer links jump straight to a section. The sticky navbar is about 69px
+   tall when the hamburger layout is showing (960px and narrower), so this
+   leaves room for it. (The navbar's own links handle this in JavaScript.) */
+   @media (max-width: 960px) {
+    .restaurant-root section[id] {
+      scroll-margin-top: 4.5rem;
+    }
+  }

@@ -1,56 +1,67 @@
 .startup-testimonials {
-    padding: 88px 0;
-    border-top: 1px solid var(--startup-border);
-  }
-  
-  .startup-testimonials-eyebrow {
-    display: inline-block;
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    color: var(--startup-gray);
-    margin-bottom: 16px;
-  }
-  
-  .startup-testimonials-headline {
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    line-height: 1.25;
-    font-weight: 700;
-    max-width: 620px;
-    margin-bottom: 40px;
-  }
-  
+  /* 88px top and bottom on desktop (same as before), less on phones */
+  padding: clamp(3rem, 8vw, 5.5rem) 0;
+  border-top: 1px solid var(--startup-border);
+}
+
+.startup-testimonials-eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--startup-gray);
+  margin-bottom: 16px;
+}
+
+.startup-testimonials-headline {
+  /* Only the minimum changed (1.6rem -> 1.45rem), for small phones */
+  font-size: clamp(1.45rem, 3vw, 2.2rem);
+  line-height: 1.25;
+  font-weight: 700;
+  max-width: 620px;
+  margin-bottom: clamp(1.75rem, 3.6vw, 2.5rem);
+}
+
+/* 3 cards: side by side down to 861px, then a single column (the same
+   breakpoint as before). A middle step of 2 + 1 would leave a lone card. The
+   gap shrinks smoothly, and minmax(0, 1fr) means a long word can't stretch a
+   column. */
+.startup-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 2.3vw, 20px);
+}
+
+.startup-testimonials-card {
+  margin: 0;
+  border: 1px solid var(--startup-border);
+  border-radius: 10px;
+  /* 24px 22px from about 1000px up (same as before). The sides tighten below
+     that so the quote isn't squeezed in a narrow 3-across card. */
+  padding: clamp(18px, 2.4vw, 24px) clamp(16px, 2.2vw, 22px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background: rgba(244, 245, 247, 0.02);
+}
+
+.startup-testimonials-quote {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--startup-white);
+  margin: 0;
+}
+
+/* The name and role line (monospace, with a "//" in front) wraps instead of
+   overflowing on a narrow card */
+.startup-testimonials-attribution {
+  font-size: 0.72rem;
+  color: var(--startup-accent);
+  letter-spacing: 0.02em;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 860px) {
   .startup-testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: minmax(0, 1fr);
   }
-  
-  .startup-testimonials-card {
-    margin: 0;
-    border: 1px solid var(--startup-border);
-    border-radius: 10px;
-    padding: 24px 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    background: rgba(244, 245, 247, 0.02);
-  }
-  
-  .startup-testimonials-quote {
-    font-size: 0.92rem;
-    line-height: 1.65;
-    color: var(--startup-white);
-    margin: 0;
-  }
-  
-  .startup-testimonials-attribution {
-    font-size: 0.72rem;
-    color: var(--startup-accent);
-    letter-spacing: 0.02em;
-  }
-  
-  @media (max-width: 860px) {
-    .startup-testimonials-grid {
-      grid-template-columns: 1fr;
-    }
-  }
+}

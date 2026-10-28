@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { BedDouble, Bath, Ruler } from "lucide-react";
 import type { Property } from "../data/listings";
 import "../styles/RealEstateListingCard.css";
@@ -20,7 +21,17 @@ export default function RealEstateListingCard({ property }: { property: Property
       className="realestate-listing-card"
     >
       <div className="realestate-listing-card-image-wrap">
-        <img src={property.images[0]} alt={property.address} className="realestate-listing-card-image" />
+        {/* Was a plain <img>, which always downloaded the full-size file. The
+            sizes line matches the card grids: 1 column on phones, 2, then 3.
+            alt="" because the address is written right below the photo, so a
+            screen reader would otherwise read it twice. */}
+        <Image
+          src={property.images[0]}
+          alt=""
+          fill
+          sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, (max-width: 1264px) 33vw, 400px"
+          className="realestate-listing-card-image"
+        />
         <span className="realestate-listing-card-type">{property.propertyType}</span>
         {property.featured && <span className="realestate-listing-card-featured">Featured</span>}
       </div>
@@ -34,17 +45,17 @@ export default function RealEstateListingCard({ property }: { property: Property
           {!isLand && (
             <>
               <span>
-                <BedDouble size={15} />
+                <BedDouble size={15} aria-hidden="true" />
                 {property.beds} bd
               </span>
               <span>
-                <Bath size={15} />
+                <Bath size={15} aria-hidden="true" />
                 {property.baths} ba
               </span>
             </>
           )}
           <span>
-            <Ruler size={15} />
+            <Ruler size={15} aria-hidden="true" />
             {property.sqft.toLocaleString()} {isLand ? "sqft lot" : "sqft"}
           </span>
         </div>

@@ -1,83 +1,123 @@
 .realestate-agentpreview-inner {
-    display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: 56px;
-    align-items: center;
-  }
-  
-  .realestate-agentpreview-image-wrap {
-    border-radius: var(--realestate-radius-lg);
-    overflow: hidden;
-    aspect-ratio: 4 / 5;
-  }
-  
-  .realestate-agentpreview-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
-  }
-  
-  .realestate-agentpreview-title {
-    font-size: 28px;
-    font-weight: 700;
-    margin-top: 8px;
-    max-width: 480px;
-  }
-  
-  .realestate-agentpreview-text {
-    font-size: 15.5px;
-    color: var(--realestate-gray);
-    line-height: 1.7;
-    margin-top: 20px;
-    max-width: 480px;
-  }
-  
-  .realestate-agentpreview-link {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    width: fit-content;
-    margin-top: 28px;
-    font-size: 14.5px;
-    font-weight: 600;
-    color: var(--realestate-navy);
-    padding-bottom: 4px;
-  }
-  
-  .realestate-agentpreview-link::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 1.5px;
-    background-color: var(--realestate-gold);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-  }
-  
+  display: grid;
+  /* The same 0.9 : 1.1 split as before. minmax(0, ...) = long words can't
+     stretch a column. 56px gap from about 1100px up (same as before). */
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 5.1vw, 3.5rem);
+  align-items: center;
+}
+
+/* "position: relative" is what lets the photo (next/image "fill") position
+   itself inside this box */
+.realestate-agentpreview-image-wrap {
+  position: relative;
+  border-radius: var(--realestate-radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+}
+
+.realestate-agentpreview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.realestate-agentpreview-title {
+  font-size: clamp(1.5rem, 1.2rem + 1.4vw, 1.75rem);
+  font-weight: 700;
+  margin-top: 8px;
+  max-width: 480px;
+}
+
+.realestate-agentpreview-text {
+  font-size: 15.5px;
+  color: var(--realestate-gray);
+  line-height: 1.7;
+  margin-top: 20px;
+  max-width: 480px;
+}
+
+.realestate-agentpreview-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  margin-top: 28px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--realestate-navy);
+  padding-bottom: 4px;
+}
+
+.realestate-agentpreview-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1.5px;
+  background-color: var(--realestate-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.realestate-agentpreview-link svg {
+  transition: transform 0.25s ease;
+}
+
+/* Mouse only, so the underline and arrow don't stay stuck after a tap */
+@media (hover: hover) {
   .realestate-agentpreview-link:hover::after {
     transform: scaleX(1);
   }
-  
-  .realestate-agentpreview-link svg {
-    transition: transform 0.25s ease;
-  }
-  
+
   .realestate-agentpreview-link:hover svg {
     transform: translateX(4px);
   }
-  
-  @media (max-width: 860px) {
-    .realestate-agentpreview-inner {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-  
-    .realestate-agentpreview-image-wrap {
-      max-width: 340px;
-    }
+}
+
+/* Keyboard focus gets the same underline plus an outline */
+.realestate-agentpreview-link:focus-visible {
+  outline: 2px solid var(--realestate-gold);
+  outline-offset: 4px;
+}
+
+.realestate-agentpreview-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* Touch screens: the link is a 44px tap target. Its animated underline never
+   shows there (hover doesn't exist), so a plain one is drawn instead, which
+   also tells the reader it's a link. */
+@media (pointer: coarse) {
+  .realestate-agentpreview-link {
+    min-height: 44px;
+    padding-bottom: 0;
   }
+
+  .realestate-agentpreview-link::after {
+    transform: scaleX(1);
+    bottom: 10px;
+  }
+}
+
+@media (max-width: 860px) {
+  .realestate-agentpreview-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .realestate-agentpreview-image-wrap {
+    max-width: 340px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .realestate-agentpreview-link::after,
+  .realestate-agentpreview-link svg {
+    transition: none;
+  }
+}

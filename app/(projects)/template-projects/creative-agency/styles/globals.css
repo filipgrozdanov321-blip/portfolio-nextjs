@@ -17,6 +17,10 @@
   color: var(--agency-off-white);
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
+  min-height: 100dvh;
+  /* Long words, emails and URLs wrap instead of pushing the page sideways
+     on phones. It does nothing unless a word would overflow. */
+  overflow-wrap: break-word;
 }
 
 .agency-layout h1,

@@ -1,4 +1,8 @@
-:root {
+/* The color variables used to live on :root, which meant every page of the
+   whole site got them as soon as this file loaded (Next.js CSS is global).
+   Scoped to .generator-page (the div in page.tsx that wraps everything) they
+   can't leak out. Every component is inside it. */
+   .generator-page {
     --generator-bg: #FAFAFA;
     --generator-card-bg: #FFFFFF;
     --generator-text: #18181B;
@@ -8,14 +12,32 @@
     --generator-border: #E4E4E7;
     --generator-success: #16A34A;
     --generator-error: #DC2626;
-  }
   
-  .generator-page {
     font-family: 'Inter', sans-serif;
     background-color: var(--generator-bg);
     color: var(--generator-text);
     min-height: 100vh;
-    padding: 40px 24px;
+    min-height: 100dvh;
+    /* 40px 24px on desktop (same as before), less on phones */
+    padding: clamp(24px, 5vw, 40px) clamp(16px, 4vw, 24px);
+    /* A long generated word or URL wraps instead of pushing the page sideways */
+    overflow-wrap: break-word;
+  }
+  
+  /* :where() adds no specificity, so these rules can't override anything */
+  :where(.generator-page) *,
+  :where(.generator-page) *::before,
+  :where(.generator-page) *::after {
+    box-sizing: border-box;
+  }
+  
+  /* Below 1400px the Back button floats in the bottom-left corner. This extra
+     space at the bottom means it never sits on top of the History list when you
+     scroll all the way down. */
+  @media (max-width: 1399px) {
+    .generator-page {
+      padding-bottom: calc(clamp(24px, 5vw, 40px) + 3.5rem);
+    }
   }
   
   .generator-container {

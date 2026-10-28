@@ -29,12 +29,16 @@ export default function RealEstateFilterPanel({
     filters.location || filters.propertyType || filters.priceRange || filters.bedrooms;
 
   return (
-    <aside className="realestate-filterpanel">
+    <aside className="realestate-filterpanel" aria-label="Filter listings">
       <div className="realestate-filterpanel-header">
         <h3>Filters</h3>
         {hasActiveFilters && (
-          <button className="realestate-filterpanel-clear" onClick={onClear}>
-            <X size={14} />
+          <button
+            type="button"
+            className="realestate-filterpanel-clear"
+            onClick={onClear}
+          >
+            <X size={14} aria-hidden="true" />
             Clear
           </button>
         )}
@@ -46,6 +50,7 @@ export default function RealEstateFilterPanel({
           id="filter-location"
           type="text"
           placeholder="Neighborhood or city"
+          autoComplete="off"
           value={filters.location}
           onChange={(e) => update("location", e.target.value)}
         />

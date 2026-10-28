@@ -1,54 +1,78 @@
 .portfolio-about-preview {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 4rem 2rem 6rem;
-    display: grid;
-    grid-template-columns: 0.85fr 1.15fr;
-    gap: 3.5rem;
-    align-items: center;
-  }
-  
-  .portfolio-about-preview-image-wrap {
-    position: relative;
-    aspect-ratio: 4 / 5;
-    overflow: hidden;
-  }
-  
-  .portfolio-about-preview-image {
-    object-fit: cover;
-  }
-  
-  .portfolio-about-preview-title {
-    font-size: 2rem;
-    margin: 0 0 1.25rem;
-  }
-  
-  .portfolio-about-preview-text {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    font-weight: 300;
-    line-height: 1.75;
-    color: var(--portfolio-gray);
-    margin: 0 0 1.5rem;
-    max-width: 460px;
-  }
-  
-  .portfolio-about-preview-link {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    color: var(--portfolio-accent);
-    text-decoration: none;
-    border-bottom: 1px solid var(--portfolio-accent);
-    padding-bottom: 2px;
-  }
-  
+  max-width: 1200px;
+  margin: 0 auto;
+  /* 4rem top, 2rem sides and 6rem bottom on desktop (same as before), less on phones */
+  padding:
+    clamp(2.5rem, 5.8vw, 4rem)
+    clamp(1.25rem, 4vw, 2rem)
+    clamp(3rem, 8.75vw, 6rem);
+  display: grid;
+  /* The same 0.85 : 1.15 split as before. minmax(0, ...) = long words can't
+     stretch a column. */
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  /* 3.5rem from about 1100px up (same as before), tighter below */
+  gap: clamp(2rem, 5.1vw, 3.5rem);
+  align-items: center;
+}
+
+.portfolio-about-preview-image-wrap {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.portfolio-about-preview-image {
+  object-fit: cover;
+}
+
+.portfolio-about-preview-title {
+  font-size: clamp(1.6rem, 1.3rem + 1.4vw, 2rem);
+  margin: 0 0 1.25rem;
+}
+
+.portfolio-about-preview-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--portfolio-gray);
+  margin: 0 0 1.5rem;
+  max-width: 460px;
+}
+
+.portfolio-about-preview-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: var(--portfolio-accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--portfolio-accent);
+  padding-bottom: 2px;
+}
+
+@media (hover: hover) {
   .portfolio-about-preview-link:hover {
     opacity: 0.75;
   }
-  
-  @media (max-width: 768px) {
-    .portfolio-about-preview {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
+}
+
+.portfolio-about-preview-link:focus-visible {
+  outline: 2px solid var(--portfolio-accent);
+  outline-offset: 4px;
+}
+
+/* Touch screens: the link is a 44px tap target */
+@media (pointer: coarse) {
+  .portfolio-about-preview-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    border-bottom: none;
   }
+}
+
+@media (max-width: 768px) {
+  .portfolio-about-preview {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+}

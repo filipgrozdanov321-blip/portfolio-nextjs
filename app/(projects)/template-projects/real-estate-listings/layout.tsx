@@ -14,10 +14,14 @@ export default function RealEstateLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // The flex column + full-height styles that used to be inline now live in
+  // RealEstateGlobals.css (.realestate-root and .realestate-main). The
+  // "realestate-root" class is also what keeps all of this template's global
+  // styles from leaking onto the rest of the site.
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+    <div className="realestate-root">
       <RealEstateNavbar />
-      <main style={{ flex: 1 }}>{children}</main>
+      <main className="realestate-main">{children}</main>
       <RealEstateFooter />
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState } from "react";
+import type { FormEvent } from "react";
 import Link from "next/link";
 import "../styles/ShopFooter.css";
 
@@ -10,7 +11,7 @@ export default function ShopFooter() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
-  const handleSubscribe = (event: FormEvent) => {
+  const handleSubscribe = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!email.trim()) return;
     setSubscribed(true);
@@ -28,7 +29,7 @@ export default function ShopFooter() {
           </p>
         </div>
 
-        <div className="shop-footer-links">
+        <nav className="shop-footer-links" aria-label="Shop links">
           <span className="shop-footer-heading">Shop</span>
           <Link href={BASE_PATH} className="shop-footer-link">
             Home
@@ -36,12 +37,12 @@ export default function ShopFooter() {
           <Link href={`${BASE_PATH}/products`} className="shop-footer-link">
             All Products
           </Link>
-        </div>
+        </nav>
 
         <div className="shop-footer-newsletter">
           <span className="shop-footer-heading">Stay in the loop</span>
           {subscribed ? (
-            <p className="shop-footer-newsletter-success">
+            <p className="shop-footer-newsletter-success" role="status">
               You're on the list — thank you.
             </p>
           ) : (
@@ -50,6 +51,8 @@ export default function ShopFooter() {
                 type="email"
                 required
                 placeholder="Your email"
+                autoComplete="email"
+                inputMode="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="shop-footer-newsletter-input"

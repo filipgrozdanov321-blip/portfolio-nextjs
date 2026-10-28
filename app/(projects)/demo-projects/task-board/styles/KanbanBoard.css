@@ -1,15 +1,36 @@
-.kanban-board {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 20px 24px 32px;
-  overflow-x: auto;
-}
-
-@media (min-width: 1000px) {
-  .kanban-board {
-    justify-content: center;
+/* The three columns. On a wide screen they're centered and fit side by side
+   (3 x 300px + gaps = 932px). On a narrower screen they scroll sideways inside
+   this box, one column at a time, instead of the whole page scrolling. */
+   .kanban-board {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    max-width: 1100px;
+    margin: 0 auto;
+    /* 24px sides from about 600px up (same as before), 16px on small phones */
+    padding: 20px clamp(16px, 4vw, 24px) 32px;
+    overflow-x: auto;
+  
+    /* The next column snaps into place as you swipe, and you can see a bit of it
+       peeking in from the right, which signals there's more to scroll to */
+    scroll-snap-type: x proximity;
+    scroll-padding-inline: clamp(16px, 4vw, 24px);
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
   }
-}
+  
+  @media (min-width: 1000px) {
+    .kanban-board {
+      justify-content: center;
+    }
+  }
+  
+  /* Phones: each column takes most of the screen, so one fits at a time with a
+     sliver of the next showing. (Before, a column was a fixed 300px, which left
+     the board a mix of one full column and half a second one on a 375px screen.)
+     The 85% cap leaves room for the next column's edge. */
+  @media (max-width: 720px) {
+    .kanban-board {
+      gap: 12px;
+    }
+  }

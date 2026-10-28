@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 import "../styles/RealEstateSearchBar.css";
@@ -23,7 +24,7 @@ export default function RealEstateSearchBar({
   const [propertyType, setPropertyType] = useState(initialPropertyType);
   const [priceRange, setPriceRange] = useState(initialPriceRange);
 
-  function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const params = new URLSearchParams();
     if (location.trim()) params.set("location", location.trim());
@@ -37,6 +38,7 @@ export default function RealEstateSearchBar({
     <form
       className={`realestate-searchbar realestate-searchbar-${variant}`}
       onSubmit={handleSubmit}
+      role="search"
     >
       <div className="realestate-searchbar-field realestate-searchbar-location">
         <label htmlFor="realestate-search-location">Location</label>
@@ -44,6 +46,8 @@ export default function RealEstateSearchBar({
           id="realestate-search-location"
           type="text"
           placeholder="Neighborhood or city"
+          autoComplete="off"
+          enterKeyHint="search"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         />
@@ -80,7 +84,7 @@ export default function RealEstateSearchBar({
       </div>
 
       <button type="submit" className="realestate-searchbar-submit">
-        <Search size={17} />
+        <Search size={17} aria-hidden="true" />
         <span>Search</span>
       </button>
     </form>

@@ -1,5 +1,6 @@
 .shop-footer {
-  margin-top: 120px;
+  /* 120px on desktop (same as before), less on phones */
+  margin-top: clamp(64px, 12vw, 120px);
   border-top: 1px solid var(--shop-border);
   background-color: var(--shop-white);
 }
@@ -8,9 +9,12 @@
   max-width: 1240px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1.2fr;
-  gap: 56px;
-  padding: 72px 32px 48px;
+  /* The same 1.4 : 1 : 1.2 split as before. minmax(0, ...) = a long word can't
+     stretch a column. The 56px gap shrinks smoothly below about 1100px. */
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: clamp(32px, 5vw, 56px);
+  /* 72px 32px 48px on desktop (same as before), less on phones */
+  padding: clamp(48px, 7vw, 72px) clamp(20px, 4vw, 32px) clamp(36px, 4.5vw, 48px);
 }
 
 .shop-footer-brand {
@@ -36,6 +40,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-width: 0;
 }
 
 .shop-footer-heading {
@@ -54,17 +59,34 @@
   transition: color 0.2s ease;
 }
 
-.shop-footer-link:hover {
-  color: var(--shop-accent);
+/* Mouse only, so the color doesn't stay stuck after a tap on phones */
+@media (hover: hover) {
+  .shop-footer-link:hover {
+    color: var(--shop-accent);
+  }
+
+  .shop-footer-newsletter-button:hover {
+    background-color: var(--shop-accent);
+  }
 }
 
+.shop-footer-link:focus-visible {
+  color: var(--shop-accent);
+  outline: 2px solid var(--shop-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* The email field and the Subscribe button sit side by side while they fit, and
+   the button wraps under the field when they don't */
 .shop-footer-newsletter-form {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
 .shop-footer-newsletter-input {
-  flex: 1;
+  flex: 1 1 10rem;
   min-width: 0;
   padding: 10px 12px;
   font-size: 13px;
@@ -73,15 +95,18 @@
   border-radius: 2px;
   background-color: var(--shop-cream);
   color: var(--shop-black);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .shop-footer-newsletter-input:focus {
   outline: none;
   border-color: var(--shop-black);
+  box-shadow: 0 0 0 3px rgba(74, 93, 78, 0.18);
 }
 
 .shop-footer-newsletter-button {
   padding: 10px 16px;
+  min-height: 44px;
   font-size: 13px;
   font-weight: 600;
   white-space: nowrap;
@@ -91,8 +116,13 @@
   transition: background-color 0.2s ease;
 }
 
-.shop-footer-newsletter-button:hover {
+.shop-footer-newsletter-button:active {
   background-color: var(--shop-accent);
+}
+
+.shop-footer-newsletter-button:focus-visible {
+  outline: 2px solid var(--shop-accent);
+  outline-offset: 3px;
 }
 
 .shop-footer-newsletter-success {
@@ -105,9 +135,12 @@
   max-width: 1240px;
   margin: 0 auto;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 28px 32px 40px;
+  gap: 8px 16px;
+  /* 28px 32px 40px on desktop (same as before), less on phones */
+  padding: clamp(20px, 3vw, 28px) clamp(20px, 4vw, 32px) clamp(32px, 4vw, 40px);
   border-top: 1px solid var(--shop-border);
 }
 
@@ -117,17 +150,72 @@
   color: var(--shop-gray);
 }
 
+/* Phones and touch screens: 16px or larger stops iOS from zooming the page in
+   when the email field is tapped, and it is at least 44px tall.
+   (Desktop with a mouse keeps 13px.) */
+@media (pointer: coarse), (max-width: 768px) {
+  .shop-footer-newsletter-input {
+    font-size: 16px;
+    min-height: 44px;
+  }
+}
+
+/* Touch screens (any width): each footer link is a 44px tap target. The gap
+   between the links moves into their own height, so the footer doesn't grow. */
+@media (pointer: coarse) {
+  .shop-footer-links {
+    gap: 0;
+  }
+
+  .shop-footer-heading {
+    margin-bottom: 8px;
+  }
+
+  .shop-footer-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+/* Below 1400px the Back button floats in the bottom-left corner. This extra
+   space at the very bottom of the page means it never sits on top of the
+   copyright line when you scroll all the way down. */
+@media (max-width: 1399px) {
+  .shop-footer-bottom {
+    padding-bottom: calc(clamp(32px, 4vw, 40px) + 3.5rem);
+  }
+}
+
+/* Tablet (769 to 1000px): the brand takes its own row, and the links and the
+   newsletter share the next one, so the Subscribe field isn't squeezed to about
+   100px wide */
+@media (max-width: 1000px) {
+  .shop-footer-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .shop-footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
 @media (max-width: 768px) {
   .shop-footer-inner {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 36px;
-    padding: 56px 20px 40px;
   }
 
   .shop-footer-bottom {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
-    padding: 20px 20px 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shop-footer-link,
+  .shop-footer-newsletter-input,
+  .shop-footer-newsletter-button {
+    transition: none;
   }
 }

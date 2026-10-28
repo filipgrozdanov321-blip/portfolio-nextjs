@@ -1,121 +1,137 @@
-.realestate-listingdetail-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 20px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid var(--realestate-border);
-  }
-  
-  .realestate-listingdetail-type {
-    display: inline-block;
-    background-color: var(--realestate-gold-soft);
-    color: var(--realestate-navy);
-    font-size: 12.5px;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: var(--realestate-radius-sm);
-    margin-bottom: 12px;
-  }
-  
-  .realestate-listingdetail-address {
-    font-size: 26px;
-    font-weight: 700;
-  }
-  
-  .realestate-listingdetail-city {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 14.5px;
-    color: var(--realestate-gray);
-    margin-top: 8px;
-  }
-  
-  .realestate-listingdetail-city svg {
-    color: var(--realestate-gold);
-  }
-  
-  .realestate-listingdetail-price {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--realestate-navy);
-    white-space: nowrap;
-  }
-  
-  .realestate-listingdetail-specs {
-    display: flex;
-    gap: 28px;
-    padding: 24px 0;
-    border-bottom: 1px solid var(--realestate-border);
-  }
-  
-  .realestate-listingdetail-spec {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14.5px;
-    font-weight: 500;
-    color: var(--realestate-navy);
-  }
-  
-  .realestate-listingdetail-spec svg {
-    color: var(--realestate-gold);
-  }
-  
-  .realestate-listingdetail-section {
-    padding: 28px 0;
-    border-bottom: 1px solid var(--realestate-border);
-  }
-  
-  .realestate-listingdetail-section:last-child {
-    border-bottom: none;
-  }
-  
-  .realestate-listingdetail-section h2 {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 14px;
-  }
-  
-  .realestate-listingdetail-section p {
-    font-size: 15px;
-    color: var(--realestate-gray);
-    line-height: 1.75;
-  }
-  
-  .realestate-listingdetail-amenities {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px 20px;
-  }
-  
-  .realestate-listingdetail-amenities li {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    color: var(--realestate-navy);
-  }
-  
-  .realestate-listingdetail-amenities svg {
-    color: var(--realestate-gold);
-    flex-shrink: 0;
-  }
-  
-  @media (max-width: 640px) {
-    .realestate-listingdetail-header {
-      flex-direction: column;
-    }
-  
-    .realestate-listingdetail-amenities {
-      grid-template-columns: 1fr;
-    }
-  }
+.realestate-listingdetail {
+  min-width: 0;
+}
 
-  @media (max-width: 860px) {
-    .realestate-detail-layout {
-      grid-template-columns: 1fr;
-    }
+/* Address on the left and the price on the right. If they don't fit side by
+   side, the price wraps under the address (before, it was forced into a column
+   at 640px). The price can't break across two lines. */
+.realestate-listingdetail-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px 20px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--realestate-border);
+}
+
+.realestate-listingdetail-header > div {
+  min-width: 0;
+}
+
+.realestate-listingdetail-type {
+  display: inline-block;
+  background-color: var(--realestate-gold-soft);
+  color: var(--realestate-navy);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--realestate-radius-sm);
+  margin-bottom: 12px;
+}
+
+.realestate-listingdetail-address {
+  font-size: clamp(1.4rem, 1.2rem + 1vw, 1.625rem);
+  font-weight: 700;
+  /* A long address such as "1600 South Congress Ave, Unit 702" wraps instead
+     of overflowing */
+  overflow-wrap: anywhere;
+}
+
+.realestate-listingdetail-city {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14.5px;
+  color: var(--realestate-gray);
+  margin-top: 8px;
+}
+
+.realestate-listingdetail-city svg {
+  color: var(--realestate-gold);
+  flex-shrink: 0;
+}
+
+.realestate-listingdetail-price {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(1.5rem, 1.25rem + 1.2vw, 1.75rem);
+  font-weight: 800;
+  color: var(--realestate-navy);
+  white-space: nowrap;
+}
+
+/* The facts (beds, baths, size) wrap onto a second line if they don't fit in
+   one. At 320px they need about 380px in one row. */
+.realestate-listingdetail-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--realestate-border);
+}
+
+.realestate-listingdetail-spec {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--realestate-navy);
+}
+
+.realestate-listingdetail-spec svg {
+  color: var(--realestate-gold);
+  flex-shrink: 0;
+}
+
+.realestate-listingdetail-section {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--realestate-border);
+}
+
+.realestate-listingdetail-section:last-child {
+  border-bottom: none;
+}
+
+.realestate-listingdetail-section h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.realestate-listingdetail-section p {
+  font-size: 15px;
+  color: var(--realestate-gray);
+  line-height: 1.75;
+}
+
+/* Amenities: 2 columns while each has room (at least 11rem), then 1. They
+   switch by themselves instead of at a fixed 640px. */
+.realestate-listingdetail-amenities {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+  gap: 12px 20px;
+}
+
+.realestate-listingdetail-amenities li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--realestate-navy);
+}
+
+.realestate-listingdetail-amenities svg {
+  color: var(--realestate-gold);
+  flex-shrink: 0;
+}
+
+/* The page layout (image gallery and details on one side, agent card on the
+   other) is in listings/[slug]/page.tsx, which I haven't seen. This rule was
+   in this file before; I left it, but if the layout lives in a different file
+   it can't take effect here. */
+@media (max-width: 860px) {
+  .realestate-detail-layout {
+    grid-template-columns: 1fr;
   }
+}

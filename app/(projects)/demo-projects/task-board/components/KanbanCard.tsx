@@ -1,5 +1,6 @@
 "use client";
 
+import type { KeyboardEvent } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Calendar } from "lucide-react";
@@ -50,7 +51,7 @@ function CardBody({ task }: { task: Task }) {
         </div>
         {task.dueDate && (
           <div className="kanban-card-due">
-            <Calendar size={12} />
+            <Calendar size={12} aria-hidden="true" />
             <span>{formatDueDate(task.dueDate)}</span>
           </div>
         )}
@@ -69,12 +70,23 @@ export default function KanbanCard({ task, onSelect }: KanbanCardProps) {
     opacity: isDragging ? 0.5 : 1,
   };
 
+  // dnd-kit's keyboard sensor uses Space to pick up a card. Enter opens the
+  // edit dialog (a click already does, but a keyboard user can't click).
+  function handleKeyDown(e: KeyboardEvent<HTMLDivElement>) {
+    listeners?.onKeyDown?.(e);
+    if (e.key === "Enter") {
+      e.preventDefault();
+      onSelect(task);
+    }
+  }
+
   return (
     <div
       ref={setNodeRef}
       style={style}
       {...attributes}
       {...listeners}
+      onKeyDown={handleKeyDown}
       className="kanban-card"
       onClick={() => onSelect(task)}
     >

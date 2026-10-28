@@ -12,6 +12,7 @@ export default function PhotographerHero() {
         alt="Wren Ashby Photography — featured portrait"
         fill
         priority
+        sizes="100vw"
         className="portfolio-hero-image"
       />
       <div className="portfolio-hero-overlay" />

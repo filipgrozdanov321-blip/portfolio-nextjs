@@ -22,7 +22,7 @@ export default function ShopNavbar() {
           Norrland
         </Link>
 
-        <nav className="shop-navbar-links">
+        <nav className="shop-navbar-links" aria-label="Main navigation">
           <Link href={`${BASE_PATH}/products`} className="shop-navbar-link">
             Shop
           </Link>
@@ -32,11 +32,17 @@ export default function ShopNavbar() {
           type="button"
           className="shop-navbar-cart-button"
           onClick={openDrawer}
-          aria-label="Open cart"
+          aria-label={
+            itemCount > 0
+              ? `Open cart, ${itemCount} ${itemCount === 1 ? "item" : "items"}`
+              : "Open cart"
+          }
         >
-          <ShoppingBag size={20} strokeWidth={1.75} />
+          <ShoppingBag size={20} strokeWidth={1.75} aria-hidden="true" />
           {itemCount > 0 && (
-            <span className="shop-navbar-cart-badge">{itemCount}</span>
+            <span className="shop-navbar-cart-badge" aria-hidden="true">
+              {itemCount}
+            </span>
           )}
         </button>
       </div>

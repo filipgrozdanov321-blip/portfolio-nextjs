@@ -1,6 +1,15 @@
 .why-me {
+  /* How far the cards slide in from the sides. On phones this is shortened
+     to match the section's side padding so nothing gets clipped. */
+  --wm-shift: 60px;
+
+  /* The home page centers its sections, so give this one a real width */
+  width: 100%;
+  box-sizing: border-box;
+
   background-color: #fcfcfc;
-  padding: 3rem 1.5rem;
+  /* 3rem / 1.5rem on desktop (same as before), smaller on phones */
+  padding: clamp(2rem, 6vw, 3rem) clamp(1rem, 4vw, 1.5rem);
   color: #111;
   overflow: hidden;
 }
@@ -11,7 +20,7 @@
 }
 
 .why-me-title {
-  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
   font-weight: 700;
   text-align: center;
   margin-bottom: 1rem;
@@ -19,22 +28,24 @@
 
 .why-me-intro {
   max-width: 760px;
-  margin: 0 auto 4rem;
+  margin: 0 auto clamp(2rem, 6vw, 4rem);
   text-align: center;
-  font-size: 1.125rem;
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
   line-height: 1.7;
   color: #333;
 }
 
-/* Grid */
+/* Grid: two columns while there is room, then one. The switch happens
+   smoothly by itself instead of at a fixed 900px. */
 .why-me-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: clamp(1.5rem, 4.4vw, 3rem);
 }
 
 /* Card wrapper (ENTRANCE ONLY) */
 .why-me-item {
+  min-width: 0;
   border-left: 3px solid #007bff;
 }
 
@@ -45,7 +56,7 @@
 
 /* Inner card (HOVER ONLY) */
 .why-me-item-inner {
-  padding: 2.25rem;
+  padding: clamp(1.25rem, 5vw, 2.25rem);
   background: #ffffff;
   box-shadow:
     0 10px 24px rgba(0, 0, 0, 0.12),
@@ -58,11 +69,14 @@
   will-change: transform, box-shadow;
 }
 
-.why-me-item:hover .why-me-item-inner {
-  transform: translateY(-6px);
-  box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.18),
-    0 8px 20px rgba(0, 0, 0, 0.12);
+/* Mouse only, so the lift doesn't stick after a tap on phones */
+@media (hover: hover) {
+  .why-me-item:hover .why-me-item-inner {
+    transform: translateY(-6px);
+    box-shadow:
+      0 18px 40px rgba(0, 0, 0, 0.18),
+      0 8px 20px rgba(0, 0, 0, 0.12);
+  }
 }
 
 /* Text */
@@ -95,37 +109,53 @@
 
 /* =========================
    ENTRANCE ANIMATIONS
+   (every selector starts with ".why-me" so these rules can't clash with
+   the .animate rules in services.css and contact-section.css; Next.js CSS
+   is global)
    ========================= */
 
-.animate {
+.why-me .animate {
   opacity: 0;
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.animate-down {
+.why-me .animate-down {
   transform: translateY(-40px);
 }
 
-.animate-up {
+.why-me .animate-up {
   transform: translateY(40px);
 }
 
-.animate-left {
-  transform: translateX(-60px);
+.why-me .animate-left {
+  transform: translateX(calc(var(--wm-shift) * -1));
 }
 
-.animate-right {
-  transform: translateX(60px);
+.why-me .animate-right {
+  transform: translateX(var(--wm-shift));
 }
 
-.animate.in-view {
+.why-me .animate.in-view {
   opacity: 1;
-  transform: translate(0, 0);
+  transform: none;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .why-me-list {
-    grid-template-columns: 1fr;
+/* Phones: shorter slide-in */
+@media (max-width: 768px) {
+  .why-me {
+    --wm-shift: 24px;
+  }
+}
+
+/* "Reduce motion" setting: everything shows immediately, no sliding */
+@media (prefers-reduced-motion: reduce) {
+  .why-me .animate {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .why-me-item-inner {
+    transition: none;
   }
 }

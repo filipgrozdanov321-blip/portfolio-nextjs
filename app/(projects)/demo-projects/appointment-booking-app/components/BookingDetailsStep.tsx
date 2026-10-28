@@ -73,13 +73,18 @@ export default function BookingDetailsStep({
         <input
           id="booking-name"
           type="text"
+          autoComplete="name"
           value={form.name}
           onChange={(e) => handleChange("name", e.target.value)}
           onBlur={() => handleBlur("name")}
           placeholder="Jordan Smith"
+          aria-invalid={Boolean(touched.name && errors.name)}
+          aria-describedby={touched.name && errors.name ? "booking-name-error" : undefined}
         />
         {touched.name && errors.name && (
-          <span className="booking-form-error">{errors.name}</span>
+          <span id="booking-name-error" className="booking-form-error" role="alert">
+            {errors.name}
+          </span>
         )}
       </div>
 
@@ -88,13 +93,19 @@ export default function BookingDetailsStep({
         <input
           id="booking-email"
           type="email"
+          autoComplete="email"
+          inputMode="email"
           value={form.email}
           onChange={(e) => handleChange("email", e.target.value)}
           onBlur={() => handleBlur("email")}
           placeholder="jordan@example.com"
+          aria-invalid={Boolean(touched.email && errors.email)}
+          aria-describedby={touched.email && errors.email ? "booking-email-error" : undefined}
         />
         {touched.email && errors.email && (
-          <span className="booking-form-error">{errors.email}</span>
+          <span id="booking-email-error" className="booking-form-error" role="alert">
+            {errors.email}
+          </span>
         )}
       </div>
 
@@ -103,13 +114,19 @@ export default function BookingDetailsStep({
         <input
           id="booking-phone"
           type="tel"
+          autoComplete="tel"
+          inputMode="tel"
           value={form.phone}
           onChange={(e) => handleChange("phone", e.target.value)}
           onBlur={() => handleBlur("phone")}
           placeholder="(555) 123-4567"
+          aria-invalid={Boolean(touched.phone && errors.phone)}
+          aria-describedby={touched.phone && errors.phone ? "booking-phone-error" : undefined}
         />
         {touched.phone && errors.phone && (
-          <span className="booking-form-error">{errors.phone}</span>
+          <span id="booking-phone-error" className="booking-form-error" role="alert">
+            {errors.phone}
+          </span>
         )}
       </div>
 

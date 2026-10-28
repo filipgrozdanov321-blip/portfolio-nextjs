@@ -1,5 +1,10 @@
 .booking-datetime-section {
   margin-bottom: var(--booking-space-5);
+  /* Lets the date row scroll sideways INSIDE its section. Without min-width: 0
+     a flex or grid parent can refuse to shrink below the row's total width
+     (14 days x 64px = about 900px), which would push the whole page wider than
+     a phone. */
+  min-width: 0;
 }
 
 .booking-datetime-section-title {
@@ -9,4 +14,14 @@
   text-transform: uppercase;
   letter-spacing: 0.04em;
   margin-bottom: var(--booking-space-3);
+  /* "Times for Wednesday, Oct 21" wraps instead of overflowing a narrow phone */
+  overflow-wrap: anywhere;
+}
+
+/* The date row is the only place on this page that is wider than a phone, so
+   it needs a width to scroll inside. Its parent chain (the step card, then the
+   page grid) already has min-width: 0 from the globals, and this makes sure the
+   row itself can't claim more than its container. */
+.booking-datetime-section .booking-date-grid {
+  max-width: 100%;
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { MouseEvent } from "react";
 import "../styles/RestaurantMenu.css";
 
 const MENU_TABS = ["Starters", "Mains", "Desserts", "Wine", "Cocktails"] as const;
@@ -69,6 +70,25 @@ const MENU_ITEMS: Record<MenuTab, { name: string; description: string; price: st
 export default function RestaurantMenu() {
   const [activeTab, setActiveTab] = useState<MenuTab>("Starters");
 
+  const handleTabClick = (
+    e: MouseEvent<HTMLButtonElement>,
+    tab: MenuTab
+  ) => {
+    setActiveTab(tab);
+
+    // On a phone the tab bar scrolls sideways. Bring the tapped tab into view
+    // (centered) so the one next to it is visible, too. "nearest" for the
+    // vertical direction means the page itself never jumps.
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    e.currentTarget.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  };
+
   return (
     <section id="restaurant-menu" className="restaurant-menu">
       <div className="restaurant-menu-inner">
@@ -78,12 +98,18 @@ export default function RestaurantMenu() {
           <h2 className="restaurant-menu-title">Our Menu</h2>
         </div>
 
-        <div className="restaurant-menu-tabs">
+        <div
+          className="restaurant-menu-tabs"
+          role="group"
+          aria-label="Menu categories"
+        >
           {MENU_TABS.map((tab) => (
             <button
               key={tab}
+              type="button"
               className={`restaurant-menu-tab ${activeTab === tab ? "restaurant-menu-tab-active" : ""}`}
-              onClick={() => setActiveTab(tab)}
+              aria-pressed={activeTab === tab}
+              onClick={(e) => handleTabClick(e, tab)}
             >
               {tab}
             </button>

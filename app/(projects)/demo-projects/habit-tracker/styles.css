@@ -3,17 +3,21 @@
   margin: 0 auto;
   background-color: #fcfcfc;
   min-height: 100vh;
+  min-height: 100dvh;
   text-align: left;
 }
 
-/* Headings */
+/* The page wrapper. It was "height: 100vh; overflow: hidden", which cut off
+   anything taller than the screen with no way to scroll to it: a long habit
+   list on any device, or the Create Habit form on a phone with the keyboard
+   open. "min-height" keeps the same look when the content is short (the wrapper
+   fills the screen) and lets it grow and scroll when the content is long. */
 .habit-tracker-main {
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
-
 
 /* Page containers */
 .home-page,
@@ -27,19 +31,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 3rem 1rem;
+    /* 3rem top/bottom on desktop (same as before), less on phones */
+    padding: clamp(2rem, 6vw, 3rem) 1rem;
   }
-  
-  .habit-list {
+
+/* One column, as it has always been (the old 1024px and 640px breakpoints
+   also said "1 column", so they did nothing and are removed).
+   minmax(0, 1fr) means a long habit name can't stretch the column. */
+.habit-list {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     text-align: center;
-    gap: 24px;
-  
+    gap: clamp(1rem, 3vw, 1.5rem);
+
     max-width: 1200px;
     width: 100%;
   }
-  
 
 /* Loading / messages */
 .habit-tracker-app p {
@@ -62,28 +69,33 @@
     align-items: center;
 }
 
-/* .habit-tracker-app button:hover {
-    background-color: #0056b3;
-} */
-
 /* Completed Page */
 
 .page {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 24px;
+  /* 24px from about 730px up (same as before), less on phones */
+  padding: clamp(1rem, 3.3vw, 1.5rem);
 }
 
+/* 3 cards across on desktop (same as before), then 2, then 1. Before, this grid
+   had no breakpoints at all, so a phone showed 3 columns about 90px wide.
+   The page box shrinks to fit its content (it is centered with "margin: auto"
+   inside a flex column), which makes percentage-based "auto-fit" columns
+   unreliable here, so these are plain breakpoints. The gap shrinks smoothly. */
 .habit-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  gap: clamp(14px, 2vw, 20px);
   align-items: start;
 }
 
 .page-title {
   color: #111;
   text-align: center;
+  /* 2rem (the browser default for an h1) from about 520px up, smaller on
+     small phones so "Your Completed Habits" wraps less */
+  font-size: clamp(1.6rem, 0.9rem + 3.4vw, 2rem);
 }
 
 .empty-state {
@@ -92,15 +104,13 @@
 }
 
 @media (max-width: 1024px) {
-    .habit-list {
-      grid-template-columns: repeat(1, 1fr);
-    }
+  .habit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  
-  @media (max-width: 640px) {
-    .habit-list {
-      grid-template-columns: 1fr;
-    }
+}
+
+@media (max-width: 640px) {
+  .habit-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
-  
-  
+}

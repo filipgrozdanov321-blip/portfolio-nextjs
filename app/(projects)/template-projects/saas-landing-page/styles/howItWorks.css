@@ -1,70 +1,71 @@
 .how-it-works {
-    padding: 5rem 1.5rem;
-    background-color: var(--bg-secondary);
+  padding: clamp(2.5rem, 7.3vw, 5rem) clamp(1rem, 4vw, 1.5rem);
+  background-color: var(--bg-secondary);
+}
+
+.how-it-works-header {
+  max-width: 600px;
+  margin: 0 auto clamp(1.75rem, 4.4vw, 3rem);
+  text-align: center;
+}
+
+.how-it-works-title {
+  font-size: clamp(1.7rem, 1.1rem + 2.2vw, 2.2rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.how-it-works-subtitle {
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.05rem);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* 3 across while each card has at least 15rem, then it wraps by itself
+   (3 -> 2 + 1 -> 1) instead of switching at a fixed 768px. At 1000px and
+   wider it is the same three equal columns as before. */
+.how-it-works-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+.step-card {
+  min-width: 0;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: clamp(1.5rem, 4vw, 2rem);
+  text-align: left;
+}
+
+.step-number {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.step-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.step-description {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Leaves room for the sticky navbar when a link scrolls here (phones) */
+@media (max-width: 768px) {
+  .how-it-works {
+    scroll-margin-top: 3.5rem;
   }
-  
-  .how-it-works-header {
-    max-width: 600px;
-    margin: 0 auto 3rem;
-    text-align: center;
-  }
-  
-  .how-it-works-title {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: var(--text-primary);
-    margin-bottom: 0.75rem;
-  }
-  
-  .how-it-works-subtitle {
-    font-size: 1.05rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-  }
-  
-  .how-it-works-grid {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
-  
-  .step-card {
-    background-color: var(--bg-primary);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 2rem;
-    text-align: left;
-  }
-  
-  .step-number {
-    display: inline-block;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--accent);
-    margin-bottom: 0.75rem;
-  }
-  
-  .step-title {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 0.5rem;
-  }
-  
-  .step-description {
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-    line-height: 1.5;
-  }
-  
-  @media (max-width: 768px) {
-    .how-it-works-grid {
-      grid-template-columns: 1fr;
-    }
-  
-    .how-it-works-title {
-      font-size: 1.8rem;
-    }
-  }
+}

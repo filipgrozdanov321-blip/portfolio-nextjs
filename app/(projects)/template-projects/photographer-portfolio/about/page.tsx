@@ -17,6 +17,8 @@ export default function PhotographerAboutPage() {
             src="/images/photographer/wren-about.jpg"
             alt="Wren Ashby, photographer, in the studio"
             fill
+            priority
+            sizes="(max-width: 768px) 100vw, 450px"
             className="portfolio-about-hero-image"
           />
         </div>

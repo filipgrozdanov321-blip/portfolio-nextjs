@@ -1,80 +1,124 @@
-.booking-step-indicator {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding-bottom: 36px;
-}
-
-.booking-step-indicator-item {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  position: relative;
-}
-
-.booking-step-indicator-item:last-child {
-  flex: 0;
-}
-
-.booking-step-indicator-circle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  min-width: 32px;
-  border-radius: 50%;
-  background: var(--booking-card-bg);
-  border: 2px solid var(--booking-border);
-  color: var(--booking-text-secondary);
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-
-.booking-step-indicator-circle--active {
-  border-color: var(--booking-primary);
-  color: var(--booking-primary);
-}
-
-.booking-step-indicator-circle--completed {
-  border-color: var(--booking-primary);
-  background: var(--booking-primary);
-  color: #FFFFFF;
-}
-
-.booking-step-indicator-label {
-  position: absolute;
-  top: 40px;
-  left: 0;
-  white-space: nowrap;
-  font-size: 0.8rem;
-  color: var(--booking-text-secondary);
-}
-
-.booking-step-indicator-label--active {
-  color: var(--booking-text);
-  font-weight: 600;
-}
-
-.booking-step-indicator-connector {
-  flex: 1;
-  height: 2px;
-  background: var(--booking-border);
-  margin: 0 var(--booking-space-2);
-}
-
-.booking-step-indicator-connector--completed {
-  background: var(--booking-primary);
-}
-
-@media (max-width: 480px) {
-  .booking-step-indicator-label {
-    font-size: 0.65rem;
+/* The five-step progress bar. Each step is a circle with its label under it,
+   and a connector line fills the space to the next circle. */
+   .booking-step-indicator {
+    padding-bottom: 36px;
   }
+  
+  /* The list (new wrapper). The same flex row the old <nav> was. */
+  .booking-step-indicator-list {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .booking-step-indicator-item {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    position: relative;
+    min-width: 0;
+  }
+  
+  .booking-step-indicator-item:last-child {
+    flex: 0;
+  }
+  
   .booking-step-indicator-circle {
-    width: 26px;
-    height: 26px;
-    min-width: 26px;
-    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 50%;
+    background: var(--booking-card-bg);
+    border: 2px solid var(--booking-border);
+    color: var(--booking-text-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
   }
-}
+  
+  .booking-step-indicator-circle--active {
+    border-color: var(--booking-primary);
+    color: var(--booking-primary);
+  }
+  
+  .booking-step-indicator-circle--completed {
+    border-color: var(--booking-primary);
+    background: var(--booking-primary);
+    color: #FFFFFF;
+  }
+  
+  /* The label sits under its circle. The old rule was "left: 0" with
+     "white-space: nowrap", so "Service" (the first, leftmost label) started at the
+     circle's left edge and the last label ("Confirm", about 56px wide) ran past
+     the right edge of a narrow phone. Now every label is centered under its own
+     circle, and the last one is aligned to the circle's right edge so it can't
+     spill out of the screen. */
+  .booking-step-indicator-label {
+    position: absolute;
+    top: 40px;
+    left: 16px;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 0.8rem;
+    color: var(--booking-text-secondary);
+  }
+  
+  .booking-step-indicator-item:first-child .booking-step-indicator-label {
+    left: 0;
+    transform: none;
+  }
+  
+  .booking-step-indicator-item:last-child .booking-step-indicator-label {
+    left: auto;
+    right: 0;
+    transform: none;
+  }
+  
+  .booking-step-indicator-label--active {
+    color: var(--booking-text);
+    font-weight: 600;
+  }
+  
+  .booking-step-indicator-connector {
+    flex: 1;
+    height: 2px;
+    background: var(--booking-border);
+    margin: 0 var(--booking-space-2);
+    min-width: 8px;
+  }
+  
+  .booking-step-indicator-connector--completed {
+    background: var(--booking-primary);
+  }
+  
+  /* Phones: smaller circles and labels, and a tighter connector gap, so all five
+     steps fit on one row at 320px. (At 320px with 16px page padding the row is
+     288px wide; five 26px circles take 130px, leaving about 158px for four
+     connectors.) */
+  @media (max-width: 480px) {
+    .booking-step-indicator-label {
+      font-size: 0.65rem;
+      top: 34px;
+      left: 13px;
+    }
+  
+    .booking-step-indicator-circle {
+      width: 26px;
+      height: 26px;
+      min-width: 26px;
+      font-size: 0.75rem;
+    }
+  
+    .booking-step-indicator-connector {
+      margin: 0 4px;
+    }
+  
+    .booking-step-indicator {
+      padding-bottom: 30px;
+    }
+  }

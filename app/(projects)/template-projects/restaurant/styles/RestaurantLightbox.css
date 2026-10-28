@@ -1,126 +1,203 @@
 .restaurant-lightbox {
-    position: fixed;
-    inset: 0;
-    z-index: 999;
-    background-color: rgba(28, 26, 26, 0.95);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    animation: restaurant-lightbox-fade 0.2s ease;
-  }
-  
-  @keyframes restaurant-lightbox-fade {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  .restaurant-lightbox-inner {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 900px;
-    gap: 1rem;
-  }
-  
-  .restaurant-lightbox-close {
-    position: absolute;
-    top: -3rem;
-    right: 0;
-    background: none;
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    border-radius: 2px;
-    color: var(--restaurant-cream);
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
-  }
-  
-  .restaurant-lightbox-close:hover {
-    background-color: var(--restaurant-gold);
-    border-color: var(--restaurant-gold);
-    color: var(--restaurant-charcoal);
-  }
-  
-  .restaurant-lightbox-arrow {
-    background: none;
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    border-radius: 2px;
-    color: var(--restaurant-cream);
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
-  }
-  
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background-color: rgba(28, 26, 26, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  animation: restaurant-lightbox-fade 0.2s ease;
+}
+
+@keyframes restaurant-lightbox-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.restaurant-lightbox-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 900px;
+  gap: 1rem;
+}
+
+.restaurant-lightbox-close {
+  position: absolute;
+  top: -3rem;
+  right: 0;
+  background: none;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 2px;
+  color: var(--restaurant-cream);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.restaurant-lightbox-arrow {
+  background: none;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 2px;
+  color: var(--restaurant-cream);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Mouse only, so the gold color doesn't stay stuck after a tap */
+@media (hover: hover) {
+  .restaurant-lightbox-close:hover,
   .restaurant-lightbox-arrow:hover {
     background-color: var(--restaurant-gold);
     border-color: var(--restaurant-gold);
     color: var(--restaurant-charcoal);
   }
-  
+}
+
+.restaurant-lightbox-close:focus-visible,
+.restaurant-lightbox-arrow:focus-visible {
+  outline: 2px solid var(--restaurant-gold);
+  outline-offset: 3px;
+}
+
+.restaurant-lightbox-image-wrapper {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* The photo's box: 70% of the screen height on desktop (same as before), but
+   never so tall that the caption and dots fall off a short screen (a phone
+   turned sideways). "touch-action: pan-y" lets a sideways swipe change the
+   photo. */
+.restaurant-lightbox-image-box {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  height: min(70dvh, calc(100dvh - 11rem));
+  touch-action: pan-y;
+}
+
+.restaurant-lightbox-image {
+  object-fit: contain;
+  border-radius: 2px;
+}
+
+.restaurant-lightbox-caption {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(253, 251, 247, 0.45);
+  text-align: center;
+}
+
+.restaurant-lightbox-dots {
+  position: absolute;
+  bottom: -2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.restaurant-lightbox-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: rgba(253, 251, 247, 0.25);
+  transition: background-color 0.2s ease;
+}
+
+.restaurant-lightbox-dot-active {
+  background-color: var(--restaurant-gold);
+}
+
+/* Touch screens (any width): 44px buttons */
+@media (pointer: coarse) {
+  .restaurant-lightbox-close,
+  .restaurant-lightbox-arrow {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* PHONES: the photo gets the whole width. Before, the two arrows sat on the
+   left and right of the photo, so at 320px the photo was only about 190px
+   wide. Now the arrows float over the photo's left and right edges, the close
+   button sits in the top corner of the screen, and the dots sit at the bottom.
+   (The inner box is "static" here on purpose: that makes those buttons position
+   themselves against the whole screen, not against the photo.) */
+@media (max-width: 700px) {
+  .restaurant-lightbox {
+    padding: 0;
+  }
+
+  .restaurant-lightbox-inner {
+    position: static;
+    display: block;
+    max-width: none;
+  }
+
   .restaurant-lightbox-image-wrapper {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .restaurant-lightbox-image {
     width: 100%;
-    max-height: 70vh;
-    object-fit: contain;
-    border-radius: 2px;
   }
-  
-  .restaurant-lightbox-caption {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(253, 251, 247, 0.45);
+
+  .restaurant-lightbox-image-box {
+    height: 70vh;
+    height: min(70dvh, calc(100dvh - 12rem));
   }
-  
-  .restaurant-lightbox-dots {
+
+  .restaurant-lightbox-close {
+    top: max(0.75rem, env(safe-area-inset-top));
+    right: max(0.75rem, env(safe-area-inset-right));
+    width: 44px;
+    height: 44px;
+    background-color: rgba(28, 26, 26, 0.6);
+  }
+
+  .restaurant-lightbox-arrow {
     position: absolute;
-    bottom: -2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background-color: rgba(28, 26, 26, 0.6);
   }
-  
-  .restaurant-lightbox-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: rgba(253, 251, 247, 0.25);
-    transition: background-color 0.2s ease;
+
+  .restaurant-lightbox-arrow-left {
+    left: max(0.5rem, env(safe-area-inset-left));
   }
-  
-  .restaurant-lightbox-dot-active {
-    background-color: var(--restaurant-gold);
+
+  .restaurant-lightbox-arrow-right {
+    right: max(0.5rem, env(safe-area-inset-right));
   }
-  
-  @media (max-width: 600px) {
-    .restaurant-lightbox-arrow {
-      width: 36px;
-      height: 36px;
-    }
-  
-    .restaurant-lightbox {
-      padding: 1rem;
-    }
+
+  .restaurant-lightbox-dots {
+    bottom: max(1.25rem, env(safe-area-inset-bottom));
   }
+}
+
+/* "Reduce motion" setting: no fade-in */
+@media (prefers-reduced-motion: reduce) {
+  .restaurant-lightbox {
+    animation: none;
+  }
+}

@@ -1,5 +1,6 @@
 .restaurant-menu {
-  padding: 7rem 2rem;
+  /* 7rem top/bottom and 2rem sides on desktop (same as before), less on phones */
+  padding: clamp(3.5rem, 10.2vw, 7rem) clamp(1.25rem, 4vw, 2rem);
   background-color: var(--restaurant-burgundy);
 }
 
@@ -10,7 +11,7 @@
 
 .restaurant-menu-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: clamp(1.75rem, 4.4vw, 3rem);
 }
 
 .restaurant-menu-eyebrow {
@@ -25,32 +26,53 @@
 
 .restaurant-menu-title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.75rem, 4vw, 3rem);
   font-weight: 700;
   color: var(--restaurant-cream);
 }
 
+/* The 5-tab bar. It is as wide as its tabs (centered) when there's room, and
+   when there isn't (phones, small tablets) it stops at the screen width and
+   scrolls sideways INSIDE itself, so the page never scrolls sideways.
+   (There is no "justify-content: center" here on purpose: centered content
+   that overflows gets cut off on the left with no way to scroll to it.) */
 .restaurant-menu-tabs {
   display: flex;
-  justify-content: center;
   gap: 0;
-  margin-bottom: 3.5rem;
+  margin: 0 auto clamp(2rem, 5.1vw, 3.5rem);
   border: 1px solid var(--restaurant-border);
   border-radius: 2px;
-  overflow: hidden;
   width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--restaurant-gold) transparent;
+}
+
+.restaurant-menu-tabs::-webkit-scrollbar {
+  height: 4px;
+}
+
+.restaurant-menu-tabs::-webkit-scrollbar-thumb {
+  background-color: var(--restaurant-gold);
+  border-radius: 2px;
 }
 
 .restaurant-menu-tab {
+  flex-shrink: 0;
+  white-space: nowrap;
+  min-height: 44px;
   font-family: 'Inter', sans-serif;
-  font-size: 0.85rem;
+  /* 0.85rem from about 600px up (same as before at that size) */
+  font-size: clamp(0.8rem, 0.7rem + 0.4vw, 0.85rem);
   font-weight: 500;
   color: rgba(253, 251, 247, 0.6);
   background: transparent;
   border: none;
-  padding: 0.75rem 2rem;
+  /* 2rem sides from 800px up (same as before), tighter on phones */
+  padding: 0.75rem clamp(1.1rem, 4vw, 2rem);
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease;
   border-right: 1px solid var(--restaurant-border);
@@ -60,8 +82,12 @@
   border-right: none;
 }
 
-.restaurant-menu-tab:hover {
-  color: var(--restaurant-cream);
+/* Mouse only, so a tapped tab doesn't stay "hovered" on phones.
+   Order matters: the active-tab hover comes after the active-tab rule. */
+@media (hover: hover) {
+  .restaurant-menu-tab:hover {
+    color: var(--restaurant-cream);
+  }
 }
 
 .restaurant-menu-tab-active {
@@ -70,8 +96,20 @@
   font-weight: 600;
 }
 
-.restaurant-menu-tab-active:hover {
-  color: var(--restaurant-charcoal);
+@media (hover: hover) {
+  .restaurant-menu-tab-active:hover {
+    color: var(--restaurant-charcoal);
+  }
+}
+
+/* Inside the tab (negative offset): the bar clips anything drawn outside it */
+.restaurant-menu-tab:focus-visible {
+  outline: 2px solid var(--restaurant-cream);
+  outline-offset: -4px;
+}
+
+.restaurant-menu-tab-active:focus-visible {
+  outline-color: var(--restaurant-charcoal);
 }
 
 .restaurant-menu-list {
@@ -91,17 +129,24 @@
   border-top: 1px solid rgba(212, 175, 55, 0.12);
 }
 
+/* The name and description column used to be "flex-shrink: 0", which meant it
+   could never get narrower than its longest line. A 70-character description
+   was wider than a phone and pushed the whole page sideways. Now it is allowed
+   to shrink (and the description wraps) only when it has to; when there's room
+   it looks exactly the same as before. */
 .restaurant-menu-item-left {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  flex-shrink: 0;
+  flex: 0 1 auto;
+  min-width: 0;
 }
 
 .restaurant-menu-item-name-row {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
 }
 
 .restaurant-menu-item-name {
@@ -147,19 +192,16 @@
   flex-shrink: 0;
 }
 
+/* Phones: the dotted line is hidden and the price sits at the top right,
+   level with the dish name (before, it dropped to its own line below the
+   description). */
 @media (max-width: 600px) {
-  .restaurant-menu {
-    padding: 5rem 1.5rem;
-  }
-
-  .restaurant-menu-tab {
-    padding: 0.75rem 1.25rem;
-    font-size: 0.8rem;
-  }
-
   .restaurant-menu-item {
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .restaurant-menu-item-left {
+    flex: 1 1 auto;
   }
 
   .restaurant-menu-item-dots {

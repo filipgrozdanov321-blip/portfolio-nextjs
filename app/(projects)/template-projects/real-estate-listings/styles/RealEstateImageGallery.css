@@ -1,5 +1,11 @@
-.realestate-gallery-main {
+/* The big photo is a <button> now (the keyboard can reach it). The first few
+   lines reset the browser's own button look so it matches the old <div>. */
+   .realestate-gallery-main {
     position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
     border-radius: var(--realestate-radius-lg);
     overflow: hidden;
     aspect-ratio: 16 / 10;
@@ -7,10 +13,13 @@
     background-color: var(--realestate-offwhite);
   }
   
-  .realestate-gallery-main img {
-    width: 100%;
-    height: 100%;
+  .realestate-gallery-main-image {
     object-fit: cover;
+  }
+  
+  .realestate-gallery-main:focus-visible {
+    outline: 3px solid var(--realestate-gold);
+    outline-offset: 3px;
   }
   
   .realestate-gallery-expand {
@@ -28,6 +37,8 @@
     border-radius: var(--realestate-radius-sm);
   }
   
+  /* Thumbnails: as many as fit, each at least 90px wide, same as before. On a
+     320px phone the three photos fill the width instead of leaving gaps. */
   .realestate-gallery-thumbs {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
@@ -36,6 +47,7 @@
   }
   
   .realestate-gallery-thumb {
+    position: relative;
     aspect-ratio: 4 / 3;
     border-radius: var(--realestate-radius-sm);
     overflow: hidden;
@@ -45,14 +57,21 @@
     transition: opacity 0.15s ease, border-color 0.15s ease;
   }
   
-  .realestate-gallery-thumb img {
-    width: 100%;
-    height: 100%;
+  .realestate-gallery-thumb-image {
     object-fit: cover;
   }
   
-  .realestate-gallery-thumb:hover {
+  /* Mouse only, so a tapped thumbnail doesn't stay "lit" on phones */
+  @media (hover: hover) {
+    .realestate-gallery-thumb:hover {
+      opacity: 1;
+    }
+  }
+  
+  .realestate-gallery-thumb:focus-visible {
     opacity: 1;
+    outline: 2px solid var(--realestate-gold);
+    outline-offset: 2px;
   }
   
   .realestate-gallery-thumb-active {
@@ -60,27 +79,57 @@
     opacity: 1;
   }
   
+  /* Phones: the "View full size" label shrinks so it doesn't cover much of the
+     photo, and sits a little closer to the corner */
+  @media (max-width: 640px) {
+    .realestate-gallery-expand {
+      bottom: 10px;
+      right: 10px;
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+  }
+  
   .realestate-gallery-lightbox {
     position: fixed;
     inset: 0;
-    z-index: 100;
+    /* Above the Back button (which floats at z-index 999). It used to be 100, so
+       on phones the Back button sat on top of the photo. */
+    z-index: 1000;
     background-color: rgba(10, 16, 26, 0.94);
     display: flex;
     align-items: center;
     justify-content: center;
+    /* Vertical movement is ignored; a sideways swipe changes the photo */
+    touch-action: pan-y;
+  }
+  
+  /* The photo's box: 85% of the screen width and height, as before. The photo
+     fits inside it (object-fit: contain), so a wide photo is wide and a tall
+     photo is tall. */
+  .realestate-gallery-lightbox-image-box {
+    position: relative;
+    width: 85vw;
+    height: 85vh;
+    height: min(85dvh, calc(100dvh - 7rem));
   }
   
   .realestate-gallery-lightbox-image {
-    max-width: 85vw;
-    max-height: 85vh;
     object-fit: contain;
     border-radius: var(--realestate-radius-sm);
   }
   
+  /* The close button is a 44x44px target (the icon was 26px), offset so the icon
+     stays exactly where it was */
   .realestate-gallery-lightbox-close {
     position: absolute;
-    top: 24px;
-    right: 24px;
+    top: 15px;
+    right: 15px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: var(--realestate-white);
   }
   
@@ -98,8 +147,17 @@
     justify-content: center;
   }
   
-  .realestate-gallery-lightbox-nav:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+  /* Mouse only, so the buttons don't stay "lit" after a tap */
+  @media (hover: hover) {
+    .realestate-gallery-lightbox-nav:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+  
+  .realestate-gallery-lightbox-close:focus-visible,
+  .realestate-gallery-lightbox-nav:focus-visible {
+    outline: 2px solid var(--realestate-white);
+    outline-offset: 2px;
   }
   
   .realestate-gallery-lightbox-prev {
@@ -119,17 +177,37 @@
     font-size: 13px;
   }
   
+  /* PHONES: the photo takes the whole width, so the arrows float over its left
+     and right edges. They have a dark round background so they stay visible on
+     a bright photo (the old 10% white one disappeared). The close button and
+     counter keep clear of the notch and the home bar. */
   @media (max-width: 640px) {
+    .realestate-gallery-lightbox-image-box {
+      width: 100vw;
+      height: 70vh;
+      height: min(70dvh, calc(100dvh - 8rem));
+    }
+  
+    .realestate-gallery-lightbox-close {
+      top: max(8px, env(safe-area-inset-top));
+      right: max(8px, env(safe-area-inset-right));
+      background-color: rgba(10, 16, 26, 0.6);
+      border-radius: 50%;
+    }
+  
     .realestate-gallery-lightbox-nav {
-      width: 38px;
-      height: 38px;
+      background-color: rgba(10, 16, 26, 0.6);
     }
   
     .realestate-gallery-lightbox-prev {
-      left: 10px;
+      left: max(8px, env(safe-area-inset-left));
     }
   
     .realestate-gallery-lightbox-next {
-      right: 10px;
+      right: max(8px, env(safe-area-inset-right));
+    }
+  
+    .realestate-gallery-lightbox-count {
+      bottom: max(16px, env(safe-area-inset-bottom));
     }
   }

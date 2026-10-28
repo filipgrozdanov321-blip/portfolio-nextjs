@@ -4,10 +4,15 @@ import "./footer.css";
 
 export default function Footer() {
   const scrollToTop = () => {
+    // Skip the smooth animation for people who turned on "reduce motion"
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: "smooth",
+      behavior: reduceMotion ? "auto" : "smooth",
     });
   };
 

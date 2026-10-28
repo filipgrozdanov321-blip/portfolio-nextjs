@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { ChangeEvent, FormEvent } from "react";
 import "../styles/PhotographerContactForm.css";
 
 const SESSION_TYPES = [
@@ -29,10 +30,10 @@ const INITIAL_STATE: FormState = {
 export default function PhotographerContactForm() {
   const [formState, setFormState] = useState<FormState>(INITIAL_STATE);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const successRef = useRef<HTMLDivElement>(null);
 
-  // FIXED LINE BELOW: Added the missing '<' before HTMLInputElement
   const handleChange = (
-    event: React.ChangeEvent<
+    event: ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ) => {
@@ -40,22 +41,41 @@ export default function PhotographerContactForm() {
     setFormState((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // No backend — this is a UI showcase only.
     setIsSubmitted(true);
     setFormState(INITIAL_STATE);
   };
 
+  // After sending, the long form is replaced by a short message. On a phone
+  // you would be left scrolled to the middle of nothing, so this brings the
+  // message into view.
+  useEffect(() => {
+    if (!isSubmitted) return;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    successRef.current?.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "center",
+    });
+  }, [isSubmitted]);
+
   if (isSubmitted) {
     return (
-      <div className="portfolio-contact-success">
+      <div
+        className="portfolio-contact-success"
+        ref={successRef}
+        role="status"
+      >
         <h3 className="portfolio-contact-success-title">Thank you</h3>
         <p className="portfolio-contact-success-text">
           Your message has been received. Wren will get back to you within
           1-2 business days.
         </p>
         <button
+          type="button"
           className="portfolio-contact-success-button"
           onClick={() => setIsSubmitted(false)}
         >
@@ -68,13 +88,14 @@ export default function PhotographerContactForm() {
   return (
     <form className="portfolio-contact-form" onSubmit={handleSubmit}>
       <div className="portfolio-contact-field">
-        <label htmlFor="name" className="portfolio-contact-label">
+        <label htmlFor="portfolio-contact-name" className="portfolio-contact-label">
           Name
         </label>
         <input
-          id="name"
+          id="portfolio-contact-name"
           name="name"
           type="text"
+          autoComplete="name"
           required
           value={formState.name}
           onChange={handleChange}
@@ -84,13 +105,14 @@ export default function PhotographerContactForm() {
       </div>
 
       <div className="portfolio-contact-field">
-        <label htmlFor="email" className="portfolio-contact-label">
+        <label htmlFor="portfolio-contact-email" className="portfolio-contact-label">
           Email
         </label>
         <input
-          id="email"
+          id="portfolio-contact-email"
           name="email"
           type="email"
+          autoComplete="email"
           required
           value={formState.email}
           onChange={handleChange}
@@ -100,11 +122,11 @@ export default function PhotographerContactForm() {
       </div>
 
       <div className="portfolio-contact-field">
-        <label htmlFor="sessionType" className="portfolio-contact-label">
+        <label htmlFor="portfolio-contact-session" className="portfolio-contact-label">
           Session Type
         </label>
         <select
-          id="sessionType"
+          id="portfolio-contact-session"
           name="sessionType"
           value={formState.sessionType}
           onChange={handleChange}
@@ -119,11 +141,11 @@ export default function PhotographerContactForm() {
       </div>
 
       <div className="portfolio-contact-field">
-        <label htmlFor="preferredDate" className="portfolio-contact-label">
+        <label htmlFor="portfolio-contact-date" className="portfolio-contact-label">
           Preferred Date
         </label>
         <input
-          id="preferredDate"
+          id="portfolio-contact-date"
           name="preferredDate"
           type="date"
           value={formState.preferredDate}
@@ -133,11 +155,11 @@ export default function PhotographerContactForm() {
       </div>
 
       <div className="portfolio-contact-field">
-        <label htmlFor="message" className="portfolio-contact-label">
+        <label htmlFor="portfolio-contact-message" className="portfolio-contact-label">
           Message
         </label>
         <textarea
-          id="message"
+          id="portfolio-contact-message"
           name="message"
           required
           rows={5}

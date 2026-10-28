@@ -1,84 +1,161 @@
 .realestate-navbar {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background-color: var(--realestate-white);
-    border-bottom: 1px solid var(--realestate-border);
-  }
-  
-  .realestate-navbar-inner {
-    max-width: var(--realestate-container-width);
-    margin: 0 auto;
-    padding: 18px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .realestate-navbar-logo {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--realestate-navy);
-    letter-spacing: -0.01em;
-  }
-  
-  .realestate-navbar-logo span {
-    color: var(--realestate-gold);
-    font-weight: 600;
-  }
-  
-  .realestate-navbar-links-desktop {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-  }
-  
-  .realestate-navbar-link {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--realestate-gray);
-    transition: color 0.15s ease;
-  }
-  
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: var(--realestate-white);
+  border-bottom: 1px solid var(--realestate-border);
+}
+
+.realestate-navbar-inner {
+  max-width: var(--realestate-container-width);
+  margin: 0 auto;
+  /* 24px sides from 600px up (same as before), 16px on small phones */
+  padding: 18px clamp(16px, 4vw, 24px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.realestate-navbar-logo {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--realestate-navy);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.realestate-navbar-logo span {
+  color: var(--realestate-gold);
+  font-weight: 600;
+}
+
+.realestate-navbar-links-desktop {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.realestate-navbar-link {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--realestate-gray);
+  transition: color 0.15s ease;
+}
+
+/* Mouse only, so the color doesn't stay stuck after a tap on touch screens */
+@media (hover: hover) {
   .realestate-navbar-link:hover {
     color: var(--realestate-navy);
   }
-  
-  .realestate-navbar-toggle {
+}
+
+/* Visible keyboard focus */
+.realestate-navbar-logo:focus-visible,
+.realestate-navbar-link:focus-visible,
+.realestate-navbar-toggle:focus-visible {
+  outline: 2px solid var(--realestate-gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Hamburger button: hidden on desktop, shown in the mobile media query. It is
+   a 44x44px target now (the icon alone was 24px). The negative right margin
+   keeps the icon exactly where it was, lined up with the page edge. */
+.realestate-navbar-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
+  padding: 0;
+  border-radius: var(--realestate-radius-sm);
+  color: var(--realestate-navy);
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: hover) {
+  .realestate-navbar-toggle:hover {
+    background-color: var(--realestate-offwhite);
+  }
+}
+
+.realestate-navbar-links-mobile {
+  display: none;
+}
+
+/* Touch screens with the full desktop layout (tablets in landscape): the
+   text links get a 44px tap height */
+@media (pointer: coarse) {
+  .realestate-navbar-links-desktop .realestate-navbar-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+@keyframes realestate-navbar-mobile-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 860px) {
+  /* The toggle is 44px tall, so the bar's own padding shrinks to keep it the
+     same height as before (about 60px) */
+  .realestate-navbar-inner {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .realestate-navbar-links-desktop {
     display: none;
+  }
+
+  .realestate-navbar-toggle {
+    display: flex;
+  }
+
+  .realestate-navbar-links-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 8px clamp(16px, 4vw, 24px) 24px;
+    border-top: 1px solid var(--realestate-border);
+    /* A short phone (turned sideways) scrolls the menu instead of cutting it */
+    max-height: calc(100vh - 4rem);
+    max-height: calc(100dvh - 4rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .realestate-navbar-links-mobile .realestate-navbar-link {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 12px 0;
+    width: 100%;
+  }
+
+  /* Tap feedback (hover is mouse-only) */
+  .realestate-navbar-links-mobile .realestate-navbar-link:active {
     color: var(--realestate-navy);
   }
-  
+
+  .realestate-navbar-links-mobile .realestate-btn {
+    margin-top: 12px;
+    width: 100%;
+  }
+}
+
+/* A little fade-in so the menu doesn't just pop into existence. Skipped when
+   the visitor turned on "reduce motion". */
+@media (max-width: 860px) and (prefers-reduced-motion: no-preference) {
   .realestate-navbar-links-mobile {
-    display: none;
+    animation: realestate-navbar-mobile-in 0.2s ease;
   }
-  
-  @media (max-width: 860px) {
-    .realestate-navbar-links-desktop {
-      display: none;
-    }
-  
-    .realestate-navbar-toggle {
-      display: flex;
-    }
-  
-    .realestate-navbar-links-mobile {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 4px;
-      padding: 8px 24px 24px;
-      border-top: 1px solid var(--realestate-border);
-    }
-  
-    .realestate-navbar-links-mobile .realestate-navbar-link {
-      padding: 12px 0;
-      width: 100%;
-    }
-  
-    .realestate-navbar-links-mobile .realestate-btn {
-      margin-top: 12px;
-      width: 100%;
-    }
-  }
+}

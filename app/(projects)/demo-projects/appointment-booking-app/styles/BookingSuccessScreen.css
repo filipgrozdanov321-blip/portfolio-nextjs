@@ -6,10 +6,19 @@
   background: var(--booking-card-bg);
   border: 1px solid var(--booking-border);
   border-radius: var(--booking-radius-lg);
-  padding: 64px var(--booking-space-5);
-  margin: var(--booking-space-6) auto 64px;
+  /* 64px 24px on desktop (same as before), less on phones */
+  padding: clamp(2.5rem, 8vw, 4rem) clamp(var(--booking-space-4), 4vw, var(--booking-space-5));
+  margin: clamp(20px, 4vw, var(--booking-space-6)) auto 64px;
   max-width: 1080px;
   width: calc(100% - 32px);
+}
+
+/* Below 1400px the Back button floats in the bottom-left corner; this space
+   keeps it off the "Book another appointment" button */
+@media (max-width: 1399px) {
+  .booking-success-screen {
+    margin-bottom: calc(64px + 3.5rem);
+  }
 }
 
 .booking-success-icon {
@@ -32,4 +41,11 @@
 
 .booking-success-screen .booking-btn-primary {
   margin-top: var(--booking-space-6);
+}
+
+/* Small phones: the button goes full width, which is easier to tap */
+@media (max-width: 480px) {
+  .booking-success-screen .booking-btn-primary {
+    width: 100%;
+  }
 }

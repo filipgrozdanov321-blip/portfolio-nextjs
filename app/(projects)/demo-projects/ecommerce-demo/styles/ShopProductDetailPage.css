@@ -1,23 +1,27 @@
-.shop-product-detail-page {
-    padding: 40px 32px 88px;
+/* The doubled selector (.shop-product-detail-page.shop-container) makes this
+   padding win over the shared .shop-container padding. */
+   .shop-product-detail-page.shop-container {
+    /* 40px top, 32px sides and 88px bottom on desktop (same as before), less on
+       phones. It used to jump at 640px; now it changes smoothly. */
+    padding:
+      clamp(24px, 4vw, 40px)
+      clamp(20px, 4vw, 32px)
+      clamp(3.5rem, 8vw, 5.5rem);
   }
   
+  /* The gallery (left) and the product info (right): the same 1.1 : 1 split as
+     before. minmax(0, ...) means a long product name can't stretch a column. The
+     56px gap shrinks smoothly below about 1100px. */
   .shop-product-detail-layout {
     display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 56px;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 56px);
     align-items: start;
   }
   
   @media (max-width: 900px) {
     .shop-product-detail-layout {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 28px;
-    }
-  }
-  
-  @media (max-width: 640px) {
-    .shop-product-detail-page {
-      padding: 24px 20px 56px;
     }
   }

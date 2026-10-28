@@ -14,11 +14,14 @@ export default function ShopOrderConfirmation({
   email,
 }: ShopOrderConfirmationProps) {
   return (
-    <div className="shop-order-confirmation">
+    // role="status": the checkout is replaced by this screen, so a screen reader
+    // announces "Order Placed" instead of staying silent
+    <div className="shop-order-confirmation" role="status">
       <CheckCircle2
         size={48}
         strokeWidth={1.5}
         className="shop-order-confirmation-icon"
+        aria-hidden="true"
       />
       <h1 className="shop-order-confirmation-heading">Order Placed</h1>
       <p className="shop-order-confirmation-text">

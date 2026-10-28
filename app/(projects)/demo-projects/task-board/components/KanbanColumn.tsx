@@ -26,7 +26,10 @@ export default function KanbanColumn({ column, tasks, onCardSelect }: KanbanColu
   const wipStatus = getWipStatus(tasks.length, column.wipLimit);
 
   return (
-    <div className={`kanban-column${isOver ? " kanban-column-over" : ""}`}>
+    <section
+      className={`kanban-column${isOver ? " kanban-column-over" : ""}`}
+      aria-label={`${column.title}, ${tasks.length} ${tasks.length === 1 ? "task" : "tasks"}`}
+    >
       <div className="kanban-column-header">
         <div className="kanban-column-title-row">
           <h2 className="kanban-column-title">{column.title}</h2>
@@ -48,6 +51,6 @@ export default function KanbanColumn({ column, tasks, onCardSelect }: KanbanColu
           {tasks.length === 0 && <div className="kanban-column-empty">No tasks here — drag one in</div>}
         </SortableContext>
       </div>
-    </div>
+    </section>
   );
 }

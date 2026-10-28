@@ -1,26 +1,35 @@
 .realestate-cta {
-    background-color: var(--realestate-navy);
-    padding: 80px 24px;
-  }
-  
-  .realestate-cta-inner {
-    text-align: center;
-    max-width: 560px;
-  }
-  
-  .realestate-cta-title {
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--realestate-white);
-  }
-  
-  .realestate-cta-text {
-    font-size: 15.5px;
-    color: rgba(255, 255, 255, 0.75);
-    margin-top: 16px;
-    line-height: 1.6;
-  }
-  
-  .realestate-cta-btn {
-    margin-top: 28px;
-  }
+  background-color: var(--realestate-navy);
+  /* 80px 24px on desktop (same as before), less on phones */
+  padding: clamp(3rem, 7.3vw, 5rem) clamp(1.25rem, 4vw, 1.5rem);
+}
+
+.realestate-cta-inner {
+  text-align: center;
+  max-width: 560px;
+}
+
+.realestate-cta-title {
+  font-size: clamp(1.5rem, 1.2rem + 1.4vw, 1.875rem);
+  font-weight: 700;
+  color: var(--realestate-white);
+}
+
+.realestate-cta-text {
+  font-size: clamp(0.95rem, 0.9rem + 0.25vw, 0.97rem);
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 16px;
+  line-height: 1.6;
+}
+
+.realestate-cta-btn {
+  margin-top: 28px;
+}
+
+/* The button sits on a navy background, so the shared focus ring (navy with
+   a white halo) is replaced by a white one that's visible there */
+.realestate-cta-btn:focus-visible {
+  outline: 2px solid var(--realestate-white);
+  outline-offset: 3px;
+  box-shadow: none;
+}

@@ -1,8 +1,16 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import "../../../styles/pages/demo-projects.css";
+
+// How much of each ELEMENT must be on screen before it animates in.
+// It was 0.6, which made cards appear late on phones and could never be
+// reached in a short landscape window. 0.2 reveals them as they come in.
+const REVEAL_THRESHOLD = 0.2;
+
+// Desktop: every card waits (data-delay x 400ms) so a row cascades in.
+const STAGGER_MS = 400;
 
 const demoProjects = [
   {
@@ -44,46 +52,60 @@ const demoProjects = [
 ];
 
 export default function DemoProjects() {
+  const rootRef = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
     // Animate elements on initial load (above the fold)
-    document.querySelectorAll("[data-animate-load]").forEach(el => {
+    root.querySelectorAll("[data-animate-load]").forEach(el => {
       requestAnimationFrame(() => {
         el.classList.add("in-view");
       });
     });
-  
+
+    const timers: number[] = [];
+
     const observer = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach(entry => {
           if (!entry.isIntersecting) return;
-    
+
           const el = entry.target as HTMLElement;
-          const delay = Number(el.dataset.delay || 0);
-    
-          setTimeout(() => {
-            el.classList.add("in-view");
-          }, delay * 400); // 👈 stagger timing (tweak if needed)
-    
+          const step = Number(el.dataset.delay || 0);
+
+          // Below 1100px the cards are in 1 or 2 columns, so card number 6
+          // would sit invisible for almost 3 seconds while you're already
+          // looking at its spot. Keep the stagger short there.
+          const isSmall = window.matchMedia("(max-width: 1099px)").matches;
+          const delay = isSmall ? Math.min(step, 2) * 200 : step * STAGGER_MS;
+
+          timers.push(
+            window.setTimeout(() => {
+              el.classList.add("in-view");
+            }, delay)
+          );
+
           obs.unobserve(el);
         });
       },
-      {
-        threshold: 0.6,
-      }
+      { threshold: REVEAL_THRESHOLD }
     );
-    
-  
-    // 👇 Observe EACH animated element, not sections
-    document
+
+    // Observe EACH animated element, not sections
+    root
       .querySelectorAll("[data-animate]")
       .forEach(el => observer.observe(el));
-  
-    return () => observer.disconnect();
+
+    return () => {
+      observer.disconnect();
+      timers.forEach(id => window.clearTimeout(id));
+    };
   }, []);
-  
 
   return (
-    <main className="demo-projects">
+    <main className="demo-projects" ref={rootRef}>
       <section className="projects-intro" data-animate-section>
         <h1 data-animate="fade-down">
           Demo Projects

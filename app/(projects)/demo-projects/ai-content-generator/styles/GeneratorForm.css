@@ -1,69 +1,137 @@
 .generator-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    background-color: var(--generator-card-bg);
-    border: 1px solid var(--generator-border);
-    border-radius: 12px;
-    padding: 24px;
-  }
-  
-  .generator-form-field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  
-  .generator-form-field label {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--generator-text-secondary);
-  }
-  
-  .generator-form-field input,
-  .generator-form-field select,
-  .generator-form-field textarea {
-    font-family: inherit;
-    font-size: 14px;
-    color: var(--generator-text);
-    background-color: var(--generator-bg);
-    border: 1px solid var(--generator-border);
-    border-radius: 8px;
-    padding: 10px 12px;
-    outline: none;
-    transition: border-color 0.15s ease;
-  }
-  
-  .generator-form-field textarea {
-    min-height: 80px;
-    resize: vertical;
-  }
-  
-  .generator-form-field input:focus,
-  .generator-form-field select:focus,
-  .generator-form-field textarea:focus {
-    border-color: var(--generator-primary);
-  }
-  
-  .generator-form-submit {
-    align-self: flex-start;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ffffff;
-    background-color: var(--generator-primary);
-    border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.15s ease;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: var(--generator-card-bg);
+  border: 1px solid var(--generator-border);
+  border-radius: 12px;
+  /* 24px from about 540px up (same as before), 16px on small phones */
+  padding: clamp(16px, 4.5vw, 24px);
+}
+
+.generator-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.generator-form-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--generator-text-secondary);
+}
+
+.generator-form-field input,
+.generator-form-field select,
+.generator-form-field textarea {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--generator-text);
+  background-color: var(--generator-bg);
+  border: 1px solid var(--generator-border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.generator-form-field textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.generator-form-field input:focus,
+.generator-form-field select:focus,
+.generator-form-field textarea:focus {
+  border-color: var(--generator-primary);
+  box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.15);
+}
+
+.generator-form-submit {
+  align-self: flex-start;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: var(--generator-primary);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  /* About 40px tall now; 44px is the minimum comfortable touch target */
+  min-height: 44px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+/* Mouse only, so the color doesn't stay stuck after a tap on phones. The
+   pressed color, for touch, is the :active rule below. */
+@media (hover: hover) {
   .generator-form-submit:hover:not(:disabled) {
     background-color: var(--generator-primary-hover);
   }
-  
-  .generator-form-submit:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+}
+
+.generator-form-submit:active:not(:disabled) {
+  background-color: var(--generator-primary-hover);
+}
+
+.generator-form-submit:focus-visible {
+  outline: 2px solid var(--generator-text);
+  outline-offset: 3px;
+}
+
+.generator-form-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Phones and touch screens: 16px or larger stops iOS from zooming the page in
+   when a field is tapped, and fields are at least 44px tall.
+   (Desktop with a mouse keeps 14px.) */
+@media (pointer: coarse), (max-width: 768px) {
+  .generator-form-field input,
+  .generator-form-field select,
+  .generator-form-field textarea {
+    font-size: 16px;
   }
+
+  .generator-form-field input,
+  .generator-form-field select {
+    min-height: 44px;
+  }
+}
+
+/* Touch screens: iPhone draws a dropdown in its own grey style, so it looks
+   out of place next to the text fields. This removes the browser's own look
+   and draws a small down arrow instead. */
+@media (pointer: coarse) {
+  .generator-form-field select {
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    padding-right: 2.25rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2371717A' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+  }
+}
+
+/* Small phones: the Generate button goes full width, which is easier to tap */
+@media (max-width: 480px) {
+  .generator-form-submit {
+    align-self: stretch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+.generator-form-field input,
+.generator-form-field select,
+.generator-form-field textarea,
+.generator-form-submit {
+  transition: none;
+}
+}

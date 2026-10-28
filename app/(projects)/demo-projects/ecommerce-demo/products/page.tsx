@@ -48,7 +48,9 @@ function ShopProductsPageContent() {
     <div className="shop-products-page shop-container">
       <div className="shop-products-page-header">
         <h1 className="shop-products-page-heading">Shop All</h1>
-        <span className="shop-products-page-count">
+        {/* role="status": a screen reader announces the new count when a filter
+            changes, so the change isn't silent */}
+        <span className="shop-products-page-count" role="status">
           {filteredProducts.length} products
         </span>
       </div>

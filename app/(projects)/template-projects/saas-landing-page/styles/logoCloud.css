@@ -1,5 +1,5 @@
 .saas-logo-cloud {
-  padding: 3.5rem 0;
+  padding: clamp(2.5rem, 6vw, 3.5rem) 0;
   background-color: var(--bg-primary);
   overflow: hidden;
 }
@@ -7,11 +7,13 @@
 .saas-logo-cloud-label {
   text-align: center;
   color: var(--text-secondary);
-  font-size: 1rem;
+  /* 1rem from about 960px up (same as before), smaller on phones */
+  font-size: clamp(0.8rem, 0.7rem + 0.5vw, 1rem);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  margin-bottom: 2rem;
+  margin-bottom: clamp(1.25rem, 3.5vw, 2rem);
+  padding: 0 1.5rem;
 }
 
 .saas-logo-marquee-wrapper {
@@ -20,12 +22,14 @@
   overflow: hidden;
 }
 
+/* The fades were a fixed 150px each. On a 320px phone that's 300px of fade,
+   so nearly every name was hidden. 150px from 1000px wide up (same as before). */
 .saas-logo-marquee-fade-left,
 .saas-logo-marquee-fade-right {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 150px;
+  width: min(150px, 15vw);
   z-index: 2;
   pointer-events: none;
 }
@@ -41,13 +45,26 @@
 }
 
 .saas-logo-marquee-track {
+  /* 5rem on desktop (same as before), tighter on phones */
+  --saas-marquee-gap: clamp(2.5rem, 8vw, 5rem);
+
   display: flex;
-  gap: 5rem;
+  gap: var(--saas-marquee-gap);
+  /* One extra gap at the end. That makes the track exactly two equal halves,
+     so sliding it by 50% lines the copy up perfectly and the loop has no hitch.
+     (Before, the loop jumped about 40px every time it restarted.) */
+  padding-right: var(--saas-marquee-gap);
   width: max-content;
+  will-change: transform;
+  animation: saas-marquee 25s linear infinite reverse;
 }
 
-.saas-logo-marquee-track:hover {
-  animation-play-state: paused;
+/* Replaces the <style> tag the old component injected from JavaScript.
+   It also works before the page finishes loading and never goes stale if a
+   font loads late or the window is resized. */
+@keyframes saas-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 .saas-logo-cloud-item {
@@ -60,7 +77,37 @@
   cursor: default;
 }
 
-.saas-logo-cloud-item:hover {
-  opacity: 1;
-  color: var(--text-primary);
+/* Mouse only. On touch screens a tap would leave the marquee frozen. */
+@media (hover: hover) {
+  .saas-logo-marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  .saas-logo-cloud-item:hover {
+    opacity: 1;
+    color: var(--text-primary);
+  }
+}
+
+/* "Reduce motion" setting: no scrolling. The names sit in a centered, wrapping
+   row instead (the repeated copy and the fades are hidden). */
+@media (prefers-reduced-motion: reduce) {
+  .saas-logo-marquee-track {
+    animation: none;
+    width: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem 2.5rem;
+    padding: 0 1.5rem;
+  }
+
+  .saas-logo-cloud-item {
+    opacity: 0.7;
+  }
+
+  .saas-logo-cloud-item[aria-hidden="true"],
+  .saas-logo-marquee-fade-left,
+  .saas-logo-marquee-fade-right {
+    display: none;
+  }
 }

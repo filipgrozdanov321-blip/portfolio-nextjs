@@ -1,13 +1,29 @@
-.agency-team-grid {
+/* 6 team members: 3 across (never more), then 2, then 1, with no fixed
+   breakpoints. Each card is at least 15rem wide. The "(100% - 2 gaps) / 3"
+   part is what caps it at 3 columns: without it, a 1440px screen would fit 5
+   or 6 cards in a row. With 6 members, 3, 2 and 1 columns always fill every
+   row evenly (no lone card). Desktop (1100px and wider) is the same 3
+   columns as before. */
+   .agency-team-grid {
+    --agency-team-gap: clamp(1rem, 2.9vw, 2rem);
+  
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem 2rem;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(
+        min(100%, max(15rem, (100% - 2 * var(--agency-team-gap)) / 3)),
+        1fr
+      )
+    );
+    /* Row gap 2.5rem and column gap 2rem on desktop (same as before) */
+    gap: clamp(1.75rem, 3.6vw, 2.5rem) var(--agency-team-gap);
   }
   
   .agency-team-card {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    min-width: 0;
   }
   
   .agency-team-card-image {
@@ -36,16 +52,4 @@
     font-size: 0.9rem;
     color: var(--agency-gray);
     line-height: 1.5;
-  }
-  
-  @media (max-width: 1024px) {
-    .agency-team-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  @media (max-width: 640px) {
-    .agency-team-grid {
-      grid-template-columns: 1fr;
-    }
   }

@@ -1,220 +1,272 @@
 .startup-hero {
-    padding: 96px 0 80px;
+  /* 96px top and 80px bottom on desktop (same as before), less on phones */
+  padding: clamp(3rem, 8.75vw, 6rem) 0 clamp(2.5rem, 7.3vw, 5rem);
+}
+
+.startup-hero-inner {
+  display: grid;
+  /* The same 1.1 : 0.9 split as before. minmax(0, ...) = long words can't
+     stretch a column. 56px gap from about 1100px up (same as before). */
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(2rem, 5.1vw, 3.5rem);
+  align-items: center;
+}
+
+.startup-hero-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-width: 0;
+}
+
+.startup-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  max-width: 100%;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--startup-success);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  background: rgba(52, 211, 153, 0.08);
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
+.startup-hero-eyebrow-dot {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--startup-success);
+  animation: startup-hero-pulse 2.4s ease-out infinite;
+}
+
+@keyframes startup-hero-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55);
   }
-  
-  .startup-hero-inner {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 56px;
-    align-items: center;
+  70% {
+    box-shadow: 0 0 0 7px rgba(52, 211, 153, 0);
   }
-  
-  .startup-hero-copy {
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
+  100% {
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
   }
-  
-  .startup-hero-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    width: fit-content;
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    color: var(--startup-success);
-    border: 1px solid rgba(52, 211, 153, 0.25);
-    background: rgba(52, 211, 153, 0.08);
-    padding: 6px 10px;
-    border-radius: 4px;
-  }
-  
-  .startup-hero-eyebrow-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--startup-success);
-    animation: startup-hero-pulse 2.4s ease-out infinite;
-  }
-  
-  @keyframes startup-hero-pulse {
-    0% {
-      box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55);
-    }
-    70% {
-      box-shadow: 0 0 0 7px rgba(52, 211, 153, 0);
-    }
-    100% {
-      box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
-    }
-  }
-  
-  .startup-hero-headline {
-    font-size: clamp(2.2rem, 4.2vw, 3.4rem);
-    line-height: 1.08;
-    font-weight: 700;
-  }
-  
-  .startup-hero-subhead {
-    font-size: 1.05rem;
-    line-height: 1.6;
-    color: var(--startup-gray);
-    max-width: 480px;
-  }
-  
-  .startup-hero-actions {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-top: 8px;
-  }
-  
-  .startup-hero-cta {
-    background: var(--startup-accent);
-    color: var(--startup-white);
-    border: none;
-    border-radius: 6px;
-    padding: 13px 26px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s ease, transform 0.15s ease;
-  }
-  
+}
+
+.startup-hero-headline {
+  /* The 4.2vw part and the 3.4rem cap are the same as before (so desktop is
+     identical). Only the minimum is lower, so on small phones the headline
+     takes fewer lines. */
+  font-size: clamp(1.9rem, 4.2vw, 3.4rem);
+  line-height: 1.08;
+  font-weight: 700;
+}
+
+.startup-hero-subhead {
+  font-size: clamp(1rem, 0.95rem + 0.2vw, 1.05rem);
+  line-height: 1.6;
+  color: var(--startup-gray);
+  max-width: 480px;
+}
+
+/* The button and its small note sit side by side while they fit, and the note
+   wraps under the button by itself when it doesn't (a 320px phone) */
+.startup-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin-top: 8px;
+}
+
+.startup-hero-cta {
+  background: var(--startup-accent);
+  color: var(--startup-white);
+  border: none;
+  border-radius: 6px;
+  padding: 13px 26px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+/* Mouse only, so the color doesn't stay stuck after a tap on phones */
+@media (hover: hover) {
   .startup-hero-cta:hover {
     background: var(--startup-accent-hover);
   }
-  
-  .startup-hero-cta:active {
-    transform: translateY(1px);
+}
+
+.startup-hero-cta:active {
+  background: var(--startup-accent-hover);
+  transform: translateY(1px);
+}
+
+.startup-hero-cta:focus-visible {
+  outline: 2px solid var(--startup-accent);
+  outline-offset: 3px;
+}
+
+/* Touch screens: the button is at least 44px tall (it is about 46px already) */
+@media (pointer: coarse) {
+  .startup-hero-cta {
+    min-height: 44px;
   }
-  
-  .startup-hero-cta:focus-visible {
-    outline: 2px solid var(--startup-accent);
-    outline-offset: 3px;
+}
+
+.startup-hero-actions-note {
+  font-size: 0.82rem;
+  color: var(--startup-gray);
+}
+
+.startup-hero-panel {
+  background: rgba(244, 245, 247, 0.03);
+  border: 1px solid var(--startup-border);
+  border-radius: 12px;
+  /* 18px from about 500px up (same as before), 14px on small phones */
+  padding: clamp(14px, 3.6vw, 18px);
+  min-width: 0;
+}
+
+.startup-hero-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--startup-border);
+  font-size: 0.72rem;
+  color: var(--startup-gray);
+}
+
+.startup-hero-panel-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--startup-success);
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: 0.04em;
+}
+
+.startup-hero-panel-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--startup-success);
+  animation: startup-hero-pulse 2.4s ease-out infinite;
+}
+
+.startup-hero-panel-list {
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Name, latency and status in three columns, as before. minmax(0, ...) = a
+   long service name wraps instead of stretching the row. */
+.startup-hero-panel-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: 8px;
+  padding: 9px 4px;
+  border-radius: 6px;
+}
+
+.startup-hero-panel-row-name {
+  font-size: 0.86rem;
+  color: var(--startup-white);
+  overflow-wrap: anywhere;
+}
+
+.startup-hero-panel-row-latency {
+  font-size: 0.78rem;
+  color: var(--startup-gray);
+}
+
+.startup-hero-panel-row-status {
+  justify-self: end;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 20px;
+  width: fit-content;
+  white-space: nowrap;
+}
+
+/* Amber here is a functional status color (degraded), not a brand accent */
+.startup-hero-panel-row-status.is-operational {
+  color: var(--startup-success);
+  background: rgba(52, 211, 153, 0.1);
+}
+
+.startup-hero-panel-row-status.is-degraded {
+  color: #f5a524;
+  background: rgba(245, 165, 36, 0.12);
+}
+
+.startup-hero-panel-feed {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.74rem;
+  color: var(--startup-gray);
+  padding-top: 12px;
+  border-top: 1px solid var(--startup-border);
+  min-height: 18px;
+  /* The incident line is longer than the "all checks passing" one. A fixed
+     height for two lines keeps the panel (and everything below it) from
+     jumping up and down when the incident starts and ends. */
+  min-height: 3.2em;
+  overflow-wrap: anywhere;
+}
+
+.startup-hero-panel-feed svg {
+  flex-shrink: 0;
+  margin-top: 0.15em;
+  color: var(--startup-success);
+}
+
+@media (max-width: 900px) {
+  .startup-hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
   }
-  
-  .startup-hero-actions-note {
-    font-size: 0.82rem;
-    color: var(--startup-gray);
-  }
-  
+
   .startup-hero-panel {
-    background: rgba(244, 245, 247, 0.03);
-    border: 1px solid var(--startup-border);
-    border-radius: 12px;
-    padding: 18px;
+    order: -1;
   }
-  
-  .startup-hero-panel-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 14px;
-    margin-bottom: 14px;
-    border-bottom: 1px solid var(--startup-border);
-    font-size: 0.72rem;
-    color: var(--startup-gray);
+
+  /* The headline's line break reads fine on a wide screen, but on a phone it
+     leaves a short, orphaned second line, so it flows naturally instead */
+  .startup-hero-headline br {
+    display: none;
   }
-  
-  .startup-hero-panel-live {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--startup-success);
-    font-family: "JetBrains Mono", monospace;
-    letter-spacing: 0.04em;
-  }
-  
-  .startup-hero-panel-live-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--startup-success);
-    animation: startup-hero-pulse 2.4s ease-out infinite;
-  }
-  
-  .startup-hero-panel-list {
-    list-style: none;
-    margin: 0 0 14px;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  
+}
+
+@media (max-width: 480px) {
   .startup-hero-panel-row {
-    display: grid;
-    grid-template-columns: 1.4fr 0.6fr 0.9fr;
-    align-items: center;
-    padding: 9px 4px;
-    border-radius: 6px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: 4px;
   }
-  
-  .startup-hero-panel-row-name {
-    font-size: 0.86rem;
-    color: var(--startup-white);
-  }
-  
+
   .startup-hero-panel-row-latency {
-    font-size: 0.78rem;
-    color: var(--startup-gray);
+    display: none;
   }
-  
-  .startup-hero-panel-row-status {
-    justify-self: end;
-    font-size: 0.72rem;
-    font-weight: 600;
-    padding: 3px 8px;
-    border-radius: 20px;
-    width: fit-content;
+}
+
+/* "Reduce motion" setting: the pulses stop. (StartupGlobals.css already makes
+   animations near-instant; this stops the glow from sitting half-drawn.) */
+@media (prefers-reduced-motion: reduce) {
+  .startup-hero-eyebrow-dot,
+  .startup-hero-panel-live-dot {
+    animation: none;
   }
-  
-  /* Amber here is a functional status color (degraded), not a brand accent */
-  .startup-hero-panel-row-status.is-operational {
-    color: var(--startup-success);
-    background: rgba(52, 211, 153, 0.1);
-  }
-  
-  .startup-hero-panel-row-status.is-degraded {
-    color: #f5a524;
-    background: rgba(245, 165, 36, 0.12);
-  }
-  
-  .startup-hero-panel-feed {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.74rem;
-    color: var(--startup-gray);
-    padding-top: 12px;
-    border-top: 1px solid var(--startup-border);
-    min-height: 18px;
-  }
-  
-  .startup-hero-panel-feed svg {
-    flex-shrink: 0;
-    color: var(--startup-success);
-  }
-  
-  @media (max-width: 900px) {
-    .startup-hero-inner {
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
-  
-    .startup-hero-panel {
-      order: -1;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .startup-hero-panel-row {
-      grid-template-columns: 1fr auto;
-      row-gap: 4px;
-    }
-  
-    .startup-hero-panel-row-latency {
-      display: none;
-    }
-  }
+}

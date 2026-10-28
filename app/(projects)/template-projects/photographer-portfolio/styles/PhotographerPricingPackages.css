@@ -1,107 +1,140 @@
 .portfolio-pricing {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 4rem 2rem 3rem;
-  }
-  
-  .portfolio-pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.75rem;
-  }
-  
-  .portfolio-pricing-card {
-    border: 1px solid var(--portfolio-border);
-    padding: 2.5rem 2rem;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .portfolio-pricing-name {
-    font-size: 1.4rem;
-    margin: 0 0 0.5rem;
-  }
-  
-  .portfolio-pricing-price {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--portfolio-accent);
-    margin: 0 0 0.25rem;
-  }
-  
-  .portfolio-pricing-duration {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
-    color: var(--portfolio-gray);
-    margin: 0 0 1.25rem;
-  }
-  
-  .portfolio-pricing-description {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 300;
-    line-height: 1.7;
-    color: var(--portfolio-gray);
-    margin: 0 0 1.5rem;
-  }
-  
-  .portfolio-pricing-includes {
-    list-style: none;
-    margin: 0 0 2rem;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    flex-grow: 1;
-  }
-  
-  .portfolio-pricing-includes-item {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
-    color: var(--portfolio-black);
-    padding-left: 1.25rem;
-    position: relative;
-  }
-  
-  .portfolio-pricing-includes-item::before {
-    content: "—";
-    position: absolute;
-    left: 0;
-    color: var(--portfolio-accent);
-  }
-  
-  .portfolio-pricing-cta {
-    text-align: center;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--portfolio-white);
-    background-color: var(--portfolio-accent);
-    padding: 0.8rem 1.5rem;
-    border-radius: 2px;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-  }
-  
+  max-width: 1200px;
+  margin: 0 auto;
+  /* 4rem top, 2rem sides and 3rem bottom on desktop (same as before), less on phones */
+  padding:
+    clamp(2rem, 5.8vw, 4rem)
+    clamp(1.25rem, 4vw, 2rem)
+    clamp(2rem, 4.4vw, 3rem);
+}
+
+/* 3 packages: side by side down to 901px, then a single centered column. A
+   middle step of 2 + 1 would leave a lone package. The gap shrinks smoothly,
+   and minmax(0, ...) means a long word can't stretch a column. */
+.portfolio-pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+.portfolio-pricing-card {
+  border: 1px solid var(--portfolio-border);
+  /* 2.5rem 2rem from about 1100px up (same as before). Between 901 and
+     1100px the sides tighten so the text isn't squeezed in a narrow card. */
+  padding: clamp(1.75rem, 3.6vw, 2.5rem) clamp(1.25rem, 2.9vw, 2rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-pricing-name {
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.4rem);
+  margin: 0 0 0.5rem;
+}
+
+.portfolio-pricing-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--portfolio-accent);
+  margin: 0 0 0.25rem;
+}
+
+.portfolio-pricing-duration {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: var(--portfolio-gray);
+  margin: 0 0 1.25rem;
+}
+
+.portfolio-pricing-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--portfolio-gray);
+  margin: 0 0 1.5rem;
+}
+
+.portfolio-pricing-includes {
+  list-style: none;
+  margin: 0 0 2rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex-grow: 1;
+}
+
+.portfolio-pricing-includes-item {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: var(--portfolio-black);
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.portfolio-pricing-includes-item::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--portfolio-accent);
+}
+
+.portfolio-pricing-cta {
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--portfolio-white);
+  background-color: var(--portfolio-accent);
+  padding: 0.8rem 1.5rem;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+/* Mouse only, so the color doesn't stay stuck after a tap on phones */
+@media (hover: hover) {
   .portfolio-pricing-cta:hover {
     background-color: #97663f;
   }
-  
-  .portfolio-pricing-note {
-    text-align: center;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
-    font-style: italic;
-    color: var(--portfolio-gray);
-    margin-top: 2.5rem;
-    max-width: 500px;
+}
+
+.portfolio-pricing-cta:focus-visible {
+  outline: 2px solid var(--portfolio-black);
+  outline-offset: 3px;
+}
+
+/* Touch screens: the button is at least 44px tall (it is about 43px now) */
+@media (pointer: coarse) {
+  .portfolio-pricing-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+}
+
+.portfolio-pricing-note {
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--portfolio-gray);
+  margin-top: clamp(1.75rem, 3.6vw, 2.5rem);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 900px) {
+  /* One column. The cards are capped at 34rem and centered, because a single
+     card stretched across a 900px-wide tablet screen looked empty. */
+  .portfolio-pricing-grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 34rem;
     margin-left: auto;
     margin-right: auto;
   }
-  
-  @media (max-width: 900px) {
-    .portfolio-pricing-grid {
-      grid-template-columns: 1fr;
-    }
-  }
+}

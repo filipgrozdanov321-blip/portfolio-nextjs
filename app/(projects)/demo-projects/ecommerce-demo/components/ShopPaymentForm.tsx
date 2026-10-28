@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState } from "react";
+import type { FormEvent } from "react";
 import { Lock } from "lucide-react";
 import "../styles/ShopPaymentForm.css";
 
@@ -15,6 +16,16 @@ type PaymentErrors = {
   expiry?: string;
   cvc?: string;
 };
+
+// The order the fields appear in, so a failed submit can jump to the first one
+const FIELD_ORDER: (keyof PaymentErrors)[] = [
+  "cardholderName",
+  "cardNumber",
+  "expiry",
+  "cvc",
+];
+
+const fieldId = (field: keyof PaymentErrors) => `shop-payment-${field}`;
 
 interface ShopPaymentFormProps {
   onNext: (data: PaymentData) => void;
@@ -39,7 +50,7 @@ export default function ShopPaymentForm({ onNext, onBack }: ShopPaymentFormProps
   const [cvc, setCvc] = useState("");
   const [errors, setErrors] = useState<PaymentErrors>({});
 
-  const validate = (): boolean => {
+  const validate = (): PaymentErrors => {
     const nextErrors: PaymentErrors = {};
     const digitsOnly = cardNumber.replace(/\D/g, "");
 
@@ -56,53 +67,79 @@ export default function ShopPaymentForm({ onNext, onBack }: ShopPaymentFormProps
       nextErrors.cvc = "Enter a valid CVC";
     }
 
-    setErrors(nextErrors);
-    return Object.keys(nextErrors).length === 0;
+    return nextErrors;
   };
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (validate()) {
-      const digitsOnly = cardNumber.replace(/\D/g, "");
-      onNext({
-        cardholderName,
-        cardNumberLast4: digitsOnly.slice(-4),
-      });
+
+    const nextErrors = validate();
+    setErrors(nextErrors);
+
+    // On a phone the first problem can be scrolled out of sight, so the first
+    // invalid field gets the focus (and the phone scrolls to it)
+    const firstInvalid = FIELD_ORDER.find((field) => nextErrors[field]);
+    if (firstInvalid) {
+      document.getElementById(fieldId(firstInvalid))?.focus();
+      return;
     }
+
+    const digitsOnly = cardNumber.replace(/\D/g, "");
+    onNext({
+      cardholderName,
+      cardNumberLast4: digitsOnly.slice(-4),
+    });
   };
+
+  // aria props shared by the four fields: mark a problem field and link it to
+  // its message
+  const a11y = (field: keyof PaymentErrors) => ({
+    "aria-invalid": Boolean(errors[field]),
+    "aria-describedby": errors[field] ? `${fieldId(field)}-error` : undefined,
+  });
+
+  const renderError = (field: keyof PaymentErrors) =>
+    errors[field] ? (
+      <span
+        id={`${fieldId(field)}-error`}
+        className="shop-payment-form-error"
+        role="alert"
+      >
+        {errors[field]}
+      </span>
+    ) : null;
 
   return (
     <form className="shop-payment-form" onSubmit={handleSubmit} noValidate>
       <h2 className="shop-payment-form-heading">Payment</h2>
 
       <div className="shop-payment-form-demo-note">
-        <Lock size={14} strokeWidth={2} />
+        <Lock size={14} strokeWidth={2} aria-hidden="true" />
         <span>Demo only — no real payment is processed.</span>
       </div>
 
       <div className="shop-payment-form-field">
-        <label htmlFor="cardholderName" className="shop-payment-form-label">
+        <label htmlFor={fieldId("cardholderName")} className="shop-payment-form-label">
           Name on Card
         </label>
         <input
-          id="cardholderName"
+          id={fieldId("cardholderName")}
           type="text"
           className="shop-payment-form-input"
           value={cardholderName}
           onChange={(e) => setCardholderName(e.target.value)}
           autoComplete="off"
+          {...a11y("cardholderName")}
         />
-        {errors.cardholderName && (
-          <span className="shop-payment-form-error">{errors.cardholderName}</span>
-        )}
+        {renderError("cardholderName")}
       </div>
 
       <div className="shop-payment-form-field">
-        <label htmlFor="cardNumber" className="shop-payment-form-label">
+        <label htmlFor={fieldId("cardNumber")} className="shop-payment-form-label">
           Card Number
         </label>
         <input
-          id="cardNumber"
+          id={fieldId("cardNumber")}
           type="text"
           inputMode="numeric"
           placeholder="0000 0000 0000 0000"
@@ -110,19 +147,18 @@ export default function ShopPaymentForm({ onNext, onBack }: ShopPaymentFormProps
           value={cardNumber}
           onChange={(e) => setCardNumber(formatCardNumber(e.target.value))}
           autoComplete="off"
+          {...a11y("cardNumber")}
         />
-        {errors.cardNumber && (
-          <span className="shop-payment-form-error">{errors.cardNumber}</span>
-        )}
+        {renderError("cardNumber")}
       </div>
 
       <div className="shop-payment-form-row">
         <div className="shop-payment-form-field">
-          <label htmlFor="expiry" className="shop-payment-form-label">
+          <label htmlFor={fieldId("expiry")} className="shop-payment-form-label">
             Expiry
           </label>
           <input
-            id="expiry"
+            id={fieldId("expiry")}
             type="text"
             inputMode="numeric"
             placeholder="MM/YY"
@@ -130,18 +166,17 @@ export default function ShopPaymentForm({ onNext, onBack }: ShopPaymentFormProps
             value={expiry}
             onChange={(e) => setExpiry(formatExpiry(e.target.value))}
             autoComplete="off"
+            {...a11y("expiry")}
           />
-          {errors.expiry && (
-            <span className="shop-payment-form-error">{errors.expiry}</span>
-          )}
+          {renderError("expiry")}
         </div>
 
         <div className="shop-payment-form-field">
-          <label htmlFor="cvc" className="shop-payment-form-label">
+          <label htmlFor={fieldId("cvc")} className="shop-payment-form-label">
             CVC
           </label>
           <input
-            id="cvc"
+            id={fieldId("cvc")}
             type="text"
             inputMode="numeric"
             placeholder="123"
@@ -149,8 +184,9 @@ export default function ShopPaymentForm({ onNext, onBack }: ShopPaymentFormProps
             value={cvc}
             onChange={(e) => setCvc(e.target.value.replace(/\D/g, "").slice(0, 4))}
             autoComplete="off"
+            {...a11y("cvc")}
           />
-          {errors.cvc && <span className="shop-payment-form-error">{errors.cvc}</span>}
+          {renderError("cvc")}
         </div>
       </div>
 

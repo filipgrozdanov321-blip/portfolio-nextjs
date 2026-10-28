@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Award, GraduationCap, MapPin } from "lucide-react";
 import "../styles/RealEstateAgentBio.css";
 
@@ -12,9 +13,16 @@ export default function RealEstateAgentBio() {
     <section className="realestate-section realestate-agentbio">
       <div className="realestate-container realestate-agentbio-inner">
         <div className="realestate-agentbio-image-wrap">
-          <img
+          {/* Was a plain <img>, which always downloaded the full-size file. On
+              desktop the photo is about 40% of the container (about 480px),
+              and on a phone it's at most 340px wide. "priority" because it is
+              the biggest thing on the first screen. */}
+          <Image
             src="/images/realestate/agent-headshot.jpg"
             alt="Portrait of Alex Whitfield, Meridian Realty agent"
+            fill
+            priority
+            sizes="(max-width: 860px) 340px, 480px"
             className="realestate-agentbio-image"
           />
         </div>
@@ -29,7 +37,7 @@ export default function RealEstateAgentBio() {
               const Icon = credential.icon;
               return (
                 <div key={credential.label} className="realestate-agentbio-credential">
-                  <Icon size={17} />
+                  <Icon size={17} aria-hidden="true" />
                   <span>{credential.label}</span>
                 </div>
               );

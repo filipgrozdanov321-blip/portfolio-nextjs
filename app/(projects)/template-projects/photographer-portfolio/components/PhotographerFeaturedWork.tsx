@@ -30,6 +30,7 @@ export default function PhotographerFeaturedWork() {
               src={image.src}
               alt={image.alt}
               fill
+              sizes="(max-width: 559px) 100vw, (max-width: 899px) 50vw, 33vw"
               className="portfolio-featured-image"
             />
           </div>

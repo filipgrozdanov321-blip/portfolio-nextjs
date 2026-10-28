@@ -1,6 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
 
-:root {
+/* Everything in this file is scoped to .shop-root (the div in layout.tsx).
+   Next.js CSS is global, so the old bare selectors (*, html, body, a, button,
+   img, ul, h1...) and the :root variables applied to the WHOLE site as soon as
+   this demo loaded. For example "button { background: none; border: none }"
+   would strip the style from every button on your main site, and the cream
+   body background would stay.
+
+   Element rules use :where(.shop-root), which adds no specificity, so "a"
+   inside the demo is still as weak as the old bare "a" was, and class rules
+   such as .shop-navbar-link still win over it. */
+
+.shop-root {
   --shop-black: #1A1A18;
   --shop-white: #FFFFFF;
   --shop-cream: #F5F3EF;
@@ -8,33 +19,40 @@
   --shop-gray: #8A8782;
   --shop-border: #E5E3DD;
   --shop-error: #C0392B;
-}
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  padding: 0;
-  margin: 0;
-}
-
-body {
+  /* These used to be set on <body> */
   font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--shop-cream);
   color: var(--shop-black);
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  /* Long words, product names and emails wrap instead of pushing the page
+     sideways on phones */
+  overflow-wrap: break-word;
 }
 
-a {
+/* The page content grows to fill the screen, so the footer sits at the bottom
+   even on a short page */
+.shop-main {
+  flex: 1;
+}
+
+:where(.shop-root),
+:where(.shop-root) *,
+:where(.shop-root) *::before,
+:where(.shop-root) *::after {
+  box-sizing: border-box;
+}
+
+:where(.shop-root) a {
   color: inherit;
   text-decoration: none;
 }
 
-button {
+:where(.shop-root) button {
   font-family: inherit;
   background: none;
   border: none;
@@ -42,23 +60,23 @@ button {
   padding: 0;
 }
 
-ul,
-ol {
+:where(.shop-root) ul,
+:where(.shop-root) ol {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-img {
+:where(.shop-root) img {
   max-width: 100%;
   display: block;
 }
 
-h1,
-h2,
-h3,
-h4,
-p {
+:where(.shop-root) h1,
+:where(.shop-root) h2,
+:where(.shop-root) h3,
+:where(.shop-root) h4,
+:where(.shop-root) p {
   margin: 0;
 }
 
@@ -66,11 +84,7 @@ p {
   width: 100%;
   max-width: 1240px;
   margin: 0 auto;
-  padding: 0 32px;
-}
-
-@media (max-width: 640px) {
-  .shop-container {
-    padding: 0 20px;
-  }
+  /* 32px from about 800px up (same as before), 20px on phones. It used to jump
+     between the two at 640px; now it changes smoothly. */
+  padding: 0 clamp(20px, 4vw, 32px);
 }

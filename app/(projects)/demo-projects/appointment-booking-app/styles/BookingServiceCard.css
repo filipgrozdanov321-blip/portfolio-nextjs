@@ -9,12 +9,22 @@
   border: 1.5px solid var(--booking-border);
   border-radius: var(--booking-radius-md);
   padding: var(--booking-space-4);
+  min-width: 0;
   cursor: pointer;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.booking-service-card:hover {
-  border-color: var(--booking-primary);
+/* Mouse only, so the border doesn't stay highlighted after a tap on phones */
+@media (hover: hover) {
+  .booking-service-card:hover {
+    border-color: var(--booking-primary);
+  }
+}
+
+.booking-service-card:focus-visible {
+  outline: 2px solid var(--booking-primary);
+  outline-offset: 2px;
 }
 
 .booking-service-card--selected {
@@ -52,4 +62,10 @@
   font-size: 0.85rem;
   color: var(--booking-text-secondary);
   line-height: 1.4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .booking-service-card {
+    transition: none;
+  }
 }

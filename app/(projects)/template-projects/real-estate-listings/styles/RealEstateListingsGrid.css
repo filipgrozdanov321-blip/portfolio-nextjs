@@ -1,70 +1,82 @@
 .realestate-listings-page-header {
-    background-color: var(--realestate-white);
-    border-bottom: 1px solid var(--realestate-border);
-    padding: 48px 24px;
-  }
-  
-  .realestate-listings-page-header h1 {
-    font-size: 34px;
-    font-weight: 700;
-  }
-  
-  .realestate-listings-page-header p {
-    font-size: 15px;
-    color: var(--realestate-gray);
-    margin-top: 10px;
-    max-width: 520px;
-  }
-  
+  background-color: var(--realestate-white);
+  border-bottom: 1px solid var(--realestate-border);
+  /* 48px 24px on desktop (same as before), less on phones */
+  padding: clamp(2rem, 4.4vw, 3rem) clamp(1.25rem, 4vw, 1.5rem);
+}
+
+.realestate-listings-page-header h1 {
+  font-size: clamp(1.75rem, 1.4rem + 1.7vw, 2.125rem);
+  font-weight: 700;
+}
+
+.realestate-listings-page-header p {
+  font-size: 15px;
+  color: var(--realestate-gray);
+  margin-top: 10px;
+  max-width: 520px;
+}
+
+/* Filter panel on the left (260px) and the results on the right. Between 861
+   and 1080px the old layout kept both a 260px sidebar and a 3 -> 2 column
+   grid, which left only about 180px per card at 861px. The sidebar now
+   shrinks a little there (from 260px at 1080px and up to 220px), and the
+   grid below makes its own decision about the number of columns.
+   minmax(0, 1fr) keeps the results column from stretching. */
+.realestate-listingsgrid-layout {
+  display: grid;
+  grid-template-columns: clamp(13.75rem, 20vw, 16.25rem) minmax(0, 1fr);
+  gap: clamp(1.25rem, 2.9vw, 2rem);
+  max-width: var(--realestate-container-width);
+  margin: 0 auto;
+  padding:
+    clamp(1.5rem, 3.6vw, 2.5rem)
+    clamp(1.25rem, 4vw, 1.5rem)
+    clamp(3rem, 7.3vw, 5rem);
+  align-items: start;
+}
+
+.realestate-listingsgrid-count {
+  font-size: 14px;
+  color: var(--realestate-gray);
+  margin-bottom: 20px;
+}
+
+/* Cards: up to 3 across, then 2, then 1, with no fixed breakpoints. Each card
+   is at least 15rem wide, so the results column decides how many fit (3 at
+   about 1080px and up, same as before). The "(100% - 2 gaps) / 3" part caps it
+   at 3 columns. The page has 10 listings, so 3 columns leave one card alone
+   on the last row (3 + 3 + 3 + 1), which is how it already was. */
+.realestate-listingsgrid-grid {
+  --realestate-listings-gap: clamp(1rem, 2.2vw, 1.5rem);
+
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(
+      min(100%, max(15rem, (100% - 2 * var(--realestate-listings-gap)) / 3)),
+      1fr
+    )
+  );
+  gap: var(--realestate-listings-gap);
+}
+
+.realestate-listingsgrid-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 48px 0;
+}
+
+.realestate-listingsgrid-empty p {
+  font-size: 15px;
+  color: var(--realestate-gray);
+}
+
+/* Phones and small tablets: the filter panel stacks above the results */
+@media (max-width: 860px) {
   .realestate-listingsgrid-layout {
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 32px;
-    max-width: var(--realestate-container-width);
-    margin: 0 auto;
-    padding: 40px 24px 80px;
-    align-items: start;
+    grid-template-columns: minmax(0, 1fr);
   }
-  
-  .realestate-listingsgrid-count {
-    font-size: 14px;
-    color: var(--realestate-gray);
-    margin-bottom: 20px;
-  }
-  
-  .realestate-listingsgrid-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-  
-  .realestate-listingsgrid-empty {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 48px 0;
-  }
-  
-  .realestate-listingsgrid-empty p {
-    font-size: 15px;
-    color: var(--realestate-gray);
-  }
-  
-  @media (max-width: 1080px) {
-    .realestate-listingsgrid-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  @media (max-width: 860px) {
-    .realestate-listingsgrid-layout {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  @media (max-width: 560px) {
-    .realestate-listingsgrid-grid {
-      grid-template-columns: 1fr;
-    }
-  }
+}

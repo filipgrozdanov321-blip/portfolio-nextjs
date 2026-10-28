@@ -1,21 +1,35 @@
 /* Base */
 .demo-projects {
-  background: var(--bg-main);
-  padding: 5rem 1.5rem;
+  /* How far animated items start away from their final place.
+     Shorter on phones (see the last media query in this file). */
+  --shift-x: 56px;
+  --shift-y: 48px;
+
+  /* --bg-main, --bg-soft and --accent are defined in styles/index.css, which
+     no layout imports. The fallbacks are the exact colors that file defines,
+     so they work either way. */
+  background: var(--bg-main, #fcfcfc);
+  padding: clamp(2.5rem, 7.3vw, 5rem) clamp(1rem, 4vw, 1.5rem);
   color: #111;
+
+  /* Items slide in from 56px outside their box. On a phone that made the
+     page scroll sideways. "clip" hides it without making a scroll container. */
+  overflow-x: clip;
 }
 
-/* ======================
-   REVEAL ANIMATIONS
-   ====================== */
-
 /* =========================================================
-   GLOBAL SCROLL + LOAD ANIMATIONS (DEMO PROJECTS)
+   SCROLL + LOAD ANIMATIONS (DEMO PROJECTS)
    Transition-based — NO keyframes
+
+   Every selector starts with ".demo-projects". Next.js CSS is global, and
+   about-me.css, services-page.css and template-projects.css each define their
+   own "[data-animate]" rules with different speeds and distances. With the
+   prefix this page always uses its own rules, and they can't leak onto the
+   other pages.
    ========================================================= */
 
 /* BASE STATE — hidden */
-[data-animate] {
+.demo-projects [data-animate] {
   opacity: 0;
   transform: translate(0, 0);
   transition:
@@ -24,85 +38,73 @@
   will-change: opacity, transform;
 }
 
-/* =========================================================
-   DIRECTIONS (starting offsets)
-   ========================================================= */
-
-[data-animate="fade-up"] {
-  transform: translateY(48px);
+/* DIRECTIONS (starting offsets) */
+.demo-projects [data-animate="fade-up"] {
+  transform: translateY(var(--shift-y));
 }
 
-[data-animate="fade-down"] {
-  transform: translateY(-48px);
+.demo-projects [data-animate="fade-down"] {
+  transform: translateY(calc(var(--shift-y) * -1));
 }
 
-[data-animate="fade-left"] {
-  transform: translateX(-56px);
+.demo-projects [data-animate="fade-left"] {
+  transform: translateX(calc(var(--shift-x) * -1));
 }
 
-[data-animate="fade-right"] {
-  transform: translateX(56px);
+.demo-projects [data-animate="fade-right"] {
+  transform: translateX(var(--shift-x));
 }
 
-/* =========================================================
-   FINAL STATE — when element enters viewport
-   JS adds `.in-view`
-   ========================================================= */
-
-[data-animate].in-view {
+/* FINAL STATE — JS adds `.in-view` */
+.demo-projects [data-animate].in-view {
   opacity: 1;
   transform: translate(0, 0);
 }
 
-.projects-intro[data-animate] {
-  transition:
-  opacity 1.1s ease-out,
-  transform 1.1s cubic-bezier(0.25, 1, 0.35, 1);
-}
-
-.project-card-wrap[data-animate] {
-  transition:
-    opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.proof-item[data-animate] {
-  transition:
-    opacity 0.9s ease-out,
-    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.process-card[data-animate] {
-  transition:     
-    opacity 0.9s ease-out,
-    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.projects-cta [data-animate] {
+.demo-projects .projects-intro[data-animate] {
   transition:
     opacity 1.1s ease-out,
     transform 1.1s cubic-bezier(0.25, 1, 0.35, 1);
 }
 
+.demo-projects .project-card-wrap[data-animate] {
+  transition:
+    opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
 
-/* =========================================================
-   DELAYS (mapped from data-delay)
-   ========================================================= */
+.demo-projects .proof-item[data-animate] {
+  transition:
+    opacity 0.9s ease-out,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
 
-[data-delay="1"] { transition-delay: 0.2s; }
-[data-delay="2"] { transition-delay: 0.4s; }
-[data-delay="3"] { transition-delay: 0.6s; }
-[data-delay="4"] { transition-delay: 0.8s; }
-[data-delay="5"] { transition-delay: 1s; }
-[data-delay="6"] { transition-delay: 1.2s; }
-[data-delay="7"] { transition-delay: 1.4s; }
+.demo-projects .process-card[data-animate] {
+  transition:
+    opacity 0.9s ease-out,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
 
-/* =========================================================
-   ACCESSIBILITY — reduced motion
-   ========================================================= */
+.demo-projects .projects-cta [data-animate] {
+  transition:
+    opacity 1.1s ease-out,
+    transform 1.1s cubic-bezier(0.25, 1, 0.35, 1);
+}
 
+/* DELAYS (mapped from data-delay) */
+.demo-projects [data-delay="1"] { transition-delay: 0.2s; }
+.demo-projects [data-delay="2"] { transition-delay: 0.4s; }
+.demo-projects [data-delay="3"] { transition-delay: 0.6s; }
+.demo-projects [data-delay="4"] { transition-delay: 0.8s; }
+.demo-projects [data-delay="5"] { transition-delay: 1s; }
+.demo-projects [data-delay="6"] { transition-delay: 1.2s; }
+.demo-projects [data-delay="7"] { transition-delay: 1.4s; }
+
+/* ACCESSIBILITY — reduced motion.
+   "[data-animate][data-animate]" is on purpose: it makes this rule strong
+   enough to beat the direction and transition rules above. */
 @media (prefers-reduced-motion: reduce) {
-  [data-animate] {
+  .demo-projects [data-animate][data-animate] {
     transition: none;
     opacity: 1;
     transform: none;
@@ -116,35 +118,39 @@
 /* Intro */
 .projects-intro {
   max-width: 1000px;
-  margin: 0 auto 5rem;
+  margin: 0 auto clamp(2.5rem, 7.3vw, 5rem);
   text-align: center;
 }
 
 .projects-intro h1 {
-  font-size: clamp(2.3rem, 4vw, 2.8rem);
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
   margin-bottom: 1rem;
 }
 
 .projects-intro p {
-  font-size: 1.125rem;
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
   line-height: 1.7;
   color: #333;
 }
 
-/* Projects Grid */
+/* Projects Grid
+   Cards are at least 18rem wide and the columns share the row evenly:
+   3 across on desktop (same as before), then 2, then 1, with no fixed
+   breakpoints. */
 .projects-grid {
   max-width: 1200px;
-  margin: 0 auto 7rem;
+  margin: 0 auto clamp(3rem, 10.2vw, 7rem);
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: clamp(1.25rem, 4vw, 2.75rem);
 }
 
-/* Project Cards */
-.project-card {
+/* Project Cards ("#.demo-projects" in front: ProjectCard.css also defines
+   .project-card, so this keeps that file from restyling these cards) */
+.demo-projects .project-card {
   background: #fff;
   border-radius: 18px;
-  padding: 2.25rem;
+  padding: clamp(1.25rem, 4vw, 2.25rem);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -159,87 +165,103 @@
     box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.project-card:hover {
-  transform: translateY(-12px);
-  box-shadow:
-    0 36px 80px rgba(0, 0, 0, 0.26),
-    0 18px 40px rgba(0, 0, 0, 0.18);
-}
-
-.project-card__content h3 {
+.demo-projects .project-card__content h3 {
   font-size: 1.25rem;
   margin-bottom: 0;
 }
 
-.project-card__content p {
+.demo-projects .project-card__content p {
   font-size: 1rem;
   line-height: 1.6;
   color: #444;
   margin-bottom: 1.25rem;
 }
 
-.project-card__tech {
+.demo-projects .project-card__tech {
   font-size: 0.85rem;
   color: #666;
 }
 
-.project-card-wrap {
+.demo-projects .project-card-wrap {
+  min-width: 0;
   transition: transform 0.3s ease;
   will-change: transform;
 }
 
-.project-card-wrap:hover {
-  transform: translateY(-8px);
-}
 /* ======================
    CTA (GLOBAL STYLE)
    ====================== */
 
-.project-card__cta {
+.demo-projects .project-card__cta {
   margin-top: 2rem;
   width: fit-content;
   font-weight: 600;
-  color: var(--accent);
+  color: var(--accent, #2563eb);
   text-decoration: none;
   position: relative;
 }
 
-.project-card__cta::after {
+.demo-projects .project-card__cta::after {
   content: "";
   position: absolute;
   left: 0;
   bottom: -5px;
   width: 100%;
   height: 2px;
-  background: var(--accent);
+  background: var(--accent, #2563eb);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.project-card__cta:hover::after {
+/* Mouse only, so cards don't stay lifted after a tap on phones */
+@media (hover: hover) {
+  .demo-projects .project-card:hover {
+    transform: translateY(-12px);
+    box-shadow:
+      0 36px 80px rgba(0, 0, 0, 0.26),
+      0 18px 40px rgba(0, 0, 0, 0.18);
+  }
+
+  .demo-projects .project-card-wrap:hover {
+    transform: translateY(-8px);
+  }
+
+  .demo-projects .project-card__cta:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+/* Keyboard focus gets the same underline */
+.demo-projects .project-card__cta:focus-visible {
+  outline: none;
+}
+
+.demo-projects .project-card__cta:focus-visible::after {
   transform: scaleX(1);
 }
 
 /* Proof */
 .projects-proof {
-  background: var(--bg-soft);
-  padding: 5rem 2rem;
-  border-radius: 28px;
+  background: var(--bg-soft, #f5f7fb);
+  padding: clamp(2.5rem, 7.3vw, 5rem) clamp(1.25rem, 4vw, 2rem);
+  border-radius: clamp(18px, 3vw, 28px);
   max-width: 1200px;
-  margin: 0 auto 7rem;
+  margin: 0 auto clamp(3rem, 10.2vw, 7rem);
 }
 
 .projects-proof h2 {
   text-align: center;
-  font-size: 2rem;
-  margin-bottom: 3.5rem;
+  font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2rem);
+  margin-bottom: clamp(2rem, 5.1vw, 3.5rem);
 }
 
+/* 4 items: 4 across, then 2 + 2, then 1. (auto-fit would sometimes leave a
+   lone card on its own row: 3 + 1.) The gap shrinks smoothly in between. */
 .projects-proof-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2.75rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1.5rem, 4vw, 2.75rem);
 }
 
 /* Process */
@@ -248,24 +270,27 @@
   flex-direction: column;
   gap: 2rem;
   max-width: 1100px;
-  margin: 0 auto 7rem;
+  margin: 0 auto clamp(3rem, 10.2vw, 7rem);
   text-align: center;
 }
 
 .projects-process h2 {
   margin-bottom: 2rem;
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2rem);
 }
 
-.process-grid {
+/* 3 across while each card has at least 15rem, then it wraps by itself.
+   (Before, it stayed at 3 narrow columns all the way down to 640px.) */
+.demo-projects .process-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: clamp(1.25rem, 4vw, 2.75rem);
 }
 
-.process-card {
+.demo-projects .process-card {
+  min-width: 0;
   background: #fff;
-  padding: 2.5rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
   border-radius: 20px;
   text-align: left;
 
@@ -278,6 +303,10 @@
     box-shadow 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.demo-projects .proof-item {
+  min-width: 0;
+}
+
 /* CTA Section */
 .projects-cta {
   display: flex;
@@ -285,12 +314,12 @@
   max-width: 900px;
   margin: 0 auto;
   text-align: center;
-  gap: 1.5rem;
+  gap: clamp(1rem, 2.2vw, 1.5rem);
 }
 
 .projects-cta h2 {
   margin: 0;
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2rem);
 }
 
 .projects-cta p {
@@ -313,25 +342,56 @@
     color 0.3s ease;
 }
 
-.projects-cta-link:hover {
-  background: linear-gradient(135deg, #FFB300, #FFEB3B);
-  transform: translateY(-3px);
-  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
-  color: #fcfcfc;
+@media (hover: hover) {
+  .projects-cta-link:hover {
+    background: linear-gradient(135deg, #FFB300, #FFEB3B);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
+    color: #fcfcfc;
+  }
+}
+
+.projects-cta-link:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 3px;
 }
 
 /* Responsive */
+
+/* Proof: 4 columns -> 2 -> 1 */
 @media (max-width: 1024px) {
-  .projects-grid,
   .projects-proof-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 640px) {
-  .projects-grid,
-  .projects-proof-grid,
-  .process-grid {
-    grid-template-columns: 1fr;
+  .projects-proof-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Touch screens: every link and button is at least 44px tall */
+@media (pointer: coarse) {
+  .demo-projects .project-card__cta {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .projects-cta-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 44px;
+  }
+}
+
+/* Phones: shorter slide-in */
+@media (max-width: 768px) {
+  .demo-projects {
+    --shift-x: 24px;
+    --shift-y: 32px;
   }
 }

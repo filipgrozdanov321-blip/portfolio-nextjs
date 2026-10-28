@@ -1,56 +1,83 @@
 .generator-history {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .generator-history-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--generator-text);
-    margin: 0;
-  }
-  
-  .generator-history-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .generator-history-item {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    width: 100%;
-    text-align: left;
-    font-family: inherit;
-    background-color: var(--generator-card-bg);
-    border: 1px solid var(--generator-border);
-    border-radius: 8px;
-    padding: 10px 12px;
-    cursor: pointer;
-    transition: border-color 0.15s ease;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.generator-history-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--generator-text);
+  margin: 0;
+}
+
+.generator-history-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+.generator-history-list > li {
+  min-width: 0;
+}
+
+.generator-history-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  background-color: var(--generator-card-bg);
+  border: 1px solid var(--generator-border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Mouse only, so the border doesn't stay highlighted after a tap on phones */
+@media (hover: hover) {
   .generator-history-item:hover {
     border-color: var(--generator-primary);
   }
-  
-  .generator-history-item-type {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    color: var(--generator-primary);
-  }
-  
-  .generator-history-item-preview {
-    font-size: 13px;
-    color: var(--generator-text-secondary);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+}
+
+.generator-history-item:active {
+  border-color: var(--generator-primary);
+}
+
+.generator-history-item:focus-visible {
+  outline: 2px solid var(--generator-primary);
+  outline-offset: 2px;
+}
+
+.generator-history-item-type {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--generator-primary);
+}
+
+/* One line with "..." at the end. min-width: 0 is what lets the text actually
+   shrink inside the button instead of stretching it. */
+.generator-history-item-preview {
+  min-width: 0;
+  font-size: 13px;
+  color: var(--generator-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+.generator-history-item {
+  transition: none;
+}
+}

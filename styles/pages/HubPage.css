@@ -1,6 +1,7 @@
 .hub-container {
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column; /* stack elements vertically */
   align-items: center;
@@ -10,7 +11,7 @@
 /* If you ever use hub-title again */
 .hub-title {
   margin: 40px 0;
-  font-size: 52px;
+  font-size: clamp(2rem, 1.2rem + 4vw, 52px);
   color: #fff;
 }
 
@@ -20,6 +21,14 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 25px;
-  padding: 3rem 0; /* space around cards */
+  gap: clamp(1rem, 3vw, 25px);
+  padding: clamp(2rem, 6vw, 3rem) 0; /* space around cards */
+}
+
+/* Phones and small tablets: keep cards off the screen edges */
+@media (max-width: 768px) {
+  .hub-grid {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }

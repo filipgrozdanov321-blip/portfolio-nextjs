@@ -1,3 +1,4 @@
+import Image from "next/image";
 import "../styles/RestaurantAbout.css";
 
 export default function RestaurantAbout() {
@@ -6,7 +7,18 @@ export default function RestaurantAbout() {
       <div className="restaurant-about-inner">
 
         <div className="restaurant-about-image-wrapper">
-          <div className="restaurant-about-image-placeholder" />
+          <div className="restaurant-about-image-placeholder">
+            {/* Was a CSS background-image (always the full-size file). With
+                next/image a phone downloads a much smaller one. Same look:
+                covers the box, centered. */}
+            <Image
+              src="/images/restaurant/about-bg.jpg"
+              alt=""
+              fill
+              sizes="(max-width: 900px) 100vw, (max-width: 1264px) 50vw, 600px"
+              className="restaurant-about-image"
+            />
+          </div>
           <div className="restaurant-about-image-accent" />
         </div>
 

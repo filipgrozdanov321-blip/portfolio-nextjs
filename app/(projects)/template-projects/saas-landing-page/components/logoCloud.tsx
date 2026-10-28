@@ -1,6 +1,3 @@
-"use client";
-
-import { useRef, useEffect } from "react";
 import "../styles/logoCloud.css";
 
 const logos = [
@@ -11,34 +8,6 @@ const logos = [
 ];
 
 export default function LogoCloud() {
-  const trackRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-  
-    requestAnimationFrame(() => {
-      const totalWidth = track.scrollWidth / 2;
-  
-      const styleId = "saas-marquee-style";
-      let styleEl = document.getElementById(styleId) as HTMLStyleElement;
-      if (!styleEl) {
-        styleEl = document.createElement("style");
-        styleEl.id = styleId;
-        document.head.appendChild(styleEl);
-      }
-  
-      styleEl.textContent = `
-        @keyframes saas-marquee {
-          0% { transform: translateX(0px); }
-          100% { transform: translateX(-${totalWidth}px); }
-        }
-      `;
-  
-      track.style.animation = "saas-marquee 25s linear infinite reverse";
-    });
-  }, []);
-
   return (
     <section className="saas-logo-cloud">
       <p className="saas-logo-cloud-label">Trusted by salons and studios everywhere</p>
@@ -47,9 +16,15 @@ export default function LogoCloud() {
         <div className="saas-logo-marquee-fade-left" />
         <div className="saas-logo-marquee-fade-right" />
 
-        <div className="saas-logo-marquee-track" ref={trackRef}>
+        <div className="saas-logo-marquee-track">
+          {/* The list is shown twice so the loop has no gap. The second copy
+              is hidden from screen readers so they don't read every name twice. */}
           {[...logos, ...logos].map((logo, i) => (
-            <span key={i} className="saas-logo-cloud-item">
+            <span
+              key={i}
+              className="saas-logo-cloud-item"
+              aria-hidden={i >= logos.length || undefined}
+            >
               {logo}
             </span>
           ))}

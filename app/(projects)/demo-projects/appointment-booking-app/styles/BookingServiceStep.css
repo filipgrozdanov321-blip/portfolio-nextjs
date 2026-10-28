@@ -1,15 +1,14 @@
-.booking-service-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: var(--booking-space-4);
-}
-
-@media (max-width: 480px) {
-  .booking-service-grid {
-    grid-template-columns: 1fr;
+/* Service cards: as many as fit on a row, each at least 220px wide, same as
+   before. The old "min(220px)" left a 220px minimum on a 256px-wide phone
+   screen, so it was one column anyway, but at 480px and under it forced "1fr"
+   with a rule. The min(100%, ...) here does that by itself and prevents the
+   card from being wider than the screen between 220px and 252px. */
+   .booking-service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+    gap: var(--booking-space-4);
   }
-}
-
-.booking-step-subtitle {
-  padding-bottom: 0.5rem;
-}
+  
+  .booking-step-subtitle {
+    padding-bottom: 0.5rem;
+  }

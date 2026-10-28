@@ -19,7 +19,7 @@ export default function KanbanHeader({ onAddTask }: KanbanHeaderProps) {
         </p>
       </div>
       <button type="button" className="kanban-add-button" onClick={onAddTask}>
-        <Plus size={16} />
+        <Plus size={16} aria-hidden="true" />
         Add Task
       </button>
     </header>

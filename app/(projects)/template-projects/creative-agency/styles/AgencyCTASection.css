@@ -1,41 +1,59 @@
 .agency-cta-section {
-    padding: 8rem 2rem;
-    max-width: 1440px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  
-  .agency-cta-section-title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--agency-off-white);
-    max-width: 700px;
-    margin: 0 auto 2.5rem;
-  }
-  
-  .agency-cta-section-button {
-    display: inline-block;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 1rem;
-    color: var(--agency-black) !important;
-    background: var(--agency-accent);
-    padding: 1rem 2.5rem;
-    border-radius: 2px;
-    transition: transform 0.15s ease, opacity 0.15s ease;
-  }
+  /* 8rem top/bottom and 2rem sides on desktop (same as before), less on phones */
+  padding: clamp(4rem, 11.6vw, 8rem) clamp(1.25rem, 4vw, 2rem);
+  max-width: 1440px;
+  margin: 0 auto;
+  text-align: center;
+}
 
-  .agency-cta-section-inner .agency-cta-section-title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--agency-off-white);
-    max-width: 700px;
-    margin: 0 auto 2.5rem;
-  }
-  
+.agency-cta-section-title {
+  /* Only the minimum changed (2rem -> 1.75rem), for small phones */
+  font-size: clamp(1.75rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--agency-off-white);
+  max-width: 700px;
+  margin: 0 auto clamp(1.75rem, 3.6vw, 2.5rem);
+}
+
+.agency-cta-section-button {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--agency-black) !important;
+  background: var(--agency-accent);
+  padding: 1rem 2.5rem;
+  border-radius: 2px;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.agency-cta-section-inner .agency-cta-section-title {
+  font-size: clamp(1.75rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--agency-off-white);
+  max-width: 700px;
+  margin: 0 auto clamp(1.75rem, 3.6vw, 2.5rem);
+}
+
+/* Mouse only, so the button doesn't stay "lifted" after a tap on phones */
+@media (hover: hover) {
   .agency-cta-section-button:hover {
     transform: translateY(-2px);
     opacity: 0.9;
   }
+}
+
+.agency-cta-section-button:focus-visible {
+  outline: 2px solid var(--agency-off-white);
+  outline-offset: 4px;
+}
+
+/* Touch screens: the button is at least 44px tall (it is about 56px already) */
+@media (pointer: coarse) {
+  .agency-cta-section-button {
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+}

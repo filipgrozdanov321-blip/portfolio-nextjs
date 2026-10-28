@@ -6,34 +6,26 @@
   border-bottom: 1px solid var(--shop-border);
 }
 
+/* The Back button used to be pinned over the left of the navbar with a
+   wrapper, and its own position was forced to "static" so it would obey that.
+   That worked on desktop, where there's blank space to its left. But the logo
+   starts at 32px from the left edge and the button is about 80px wide, so on
+   every screen narrower than about 1500px it sat ON TOP of "Norrland". The
+   shared Back button already knows how to place itself everywhere (it floats at
+   the bottom-left below 1400px and the top-left above), so this wrapper no
+   longer interferes with it. */
 .shop-navbar-back-wrapper {
-  position: absolute;
-  left: 24px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 5;
-  display: flex;
-  align-items: center;
-}
-
-/* Safety net: neutralizes fixed/absolute positioning or stray margin
-   that BackButton's own global CSS might carry, so it sits inline and
-   vertically centered here instead of floating independently. Harmless
-   no-op if BackButton is already a normal flow element. */
-.shop-navbar-back-wrapper > * {
-  position: static !important;
-  margin: 0 !important;
-  top: auto !important;
-  left: auto !important;
+  display: contents;
 }
 
 .shop-navbar-inner {
   max-width: 1240px;
   margin: 0 auto;
-  padding: 20px 32px;
+  /* 32px sides from about 800px up (same as before), 20px on phones */
+  padding: 20px clamp(20px, 4vw, 32px);
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: clamp(16px, 3.5vw, 28px);
 }
 
 .shop-navbar-logo {
@@ -53,8 +45,19 @@
   transition: color 0.2s ease;
 }
 
-.shop-navbar-link:hover {
-  color: var(--shop-accent);
+/* Mouse only, so the color doesn't stay stuck after a tap on touch screens */
+@media (hover: hover) {
+  .shop-navbar-link:hover {
+    color: var(--shop-accent);
+  }
+}
+
+.shop-navbar-logo:focus-visible,
+.shop-navbar-link:focus-visible,
+.shop-navbar-cart-button:focus-visible {
+  outline: 2px solid var(--shop-accent);
+  outline-offset: 4px;
+  border-radius: 2px;
 }
 
 .shop-navbar-cart-button {
@@ -64,12 +67,17 @@
   justify-content: center;
   color: var(--shop-black);
   margin-left: auto;
+  /* A 44x44px tap target (the icon was 20px). The negative margin on the right
+     keeps the icon exactly where it was, lined up with the page edge. */
+  width: 44px;
+  height: 44px;
+  margin-right: -12px;
 }
 
 .shop-navbar-cart-badge {
   position: absolute;
-  top: -8px;
-  right: -10px;
+  top: 4px;
+  right: 0;
   min-width: 17px;
   height: 17px;
   padding: 0 4px;
@@ -84,17 +92,28 @@
   line-height: 1;
 }
 
+/* Touch screens: the "Shop" link is a 44px tap target */
+@media (pointer: coarse) {
+  .shop-navbar-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+/* Phones: the bar is a little tighter. The "Shop" link is HIDDEN on phones in
+   the old CSS, which left no way to reach the products page from the navbar
+   (only the home page's hero and tiles). It stays visible now: the bar only
+   holds the logo, one link and the cart, which fit at 320px. */
 @media (max-width: 640px) {
-  .shop-navbar-back-wrapper {
-    left: 16px;
-  }
-
   .shop-navbar-inner {
-    padding: 16px 20px;
-    gap: 16px;
+    padding-top: 6px;
+    padding-bottom: 6px;
   }
+}
 
-  .shop-navbar-links {
-    display: none;
+@media (prefers-reduced-motion: reduce) {
+  .shop-navbar-link {
+    transition: none;
   }
 }

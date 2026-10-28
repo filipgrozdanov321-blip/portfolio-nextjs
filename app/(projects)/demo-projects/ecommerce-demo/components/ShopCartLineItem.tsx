@@ -38,30 +38,32 @@ export default function ShopCartLineItem({ item }: ShopCartLineItemProps) {
             onClick={handleRemove}
             aria-label={`Remove ${product.name} from cart`}
           >
-            <Trash2 size={15} strokeWidth={1.75} />
+            <Trash2 size={15} strokeWidth={1.75} aria-hidden="true" />
           </button>
         </div>
 
         {variant && <span className="shop-cart-line-item-variant">{variant}</span>}
 
         <div className="shop-cart-line-item-bottom">
-          <div className="shop-cart-line-item-stepper">
+          <div className="shop-cart-line-item-stepper" role="group" aria-label={`Quantity of ${product.name}`}>
             <button
               type="button"
               className="shop-cart-line-item-stepper-button"
               onClick={handleDecrease}
               aria-label="Decrease quantity"
             >
-              <Minus size={13} strokeWidth={2} />
+              <Minus size={13} strokeWidth={2} aria-hidden="true" />
             </button>
-            <span className="shop-cart-line-item-quantity">{quantity}</span>
+            <span className="shop-cart-line-item-quantity" aria-live="polite">
+              {quantity}
+            </span>
             <button
               type="button"
               className="shop-cart-line-item-stepper-button"
               onClick={handleIncrease}
               aria-label="Increase quantity"
             >
-              <Plus size={13} strokeWidth={2} />
+              <Plus size={13} strokeWidth={2} aria-hidden="true" />
             </button>
           </div>
           <span className="shop-cart-line-item-price">

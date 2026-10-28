@@ -1,4 +1,9 @@
-:root {
+/* The variables used to live on :root, which means every page of the whole
+   site gets them as soon as this file loads (Next.js CSS is global). Other
+   templates have their own globals.css, and two files defining the same
+   names would silently override each other. Scoped to .saas-root (the div
+   that wraps this page) they can't leak out or be overridden from outside. */
+   .saas-root {
     --bg-primary: #ffffff;
     --bg-secondary: #f5f7fb;
     --text-primary: #111111;

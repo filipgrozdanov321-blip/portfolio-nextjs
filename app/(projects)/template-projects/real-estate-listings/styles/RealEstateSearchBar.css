@@ -1,88 +1,133 @@
 .realestate-searchbar {
-    display: flex;
-    align-items: flex-end;
-    gap: 12px;
-    background-color: var(--realestate-white);
-    border-radius: var(--realestate-radius-md);
-    padding: 16px;
-    box-shadow: var(--realestate-shadow);
-  }
-  
-  .realestate-searchbar-field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    flex: 1;
-    min-width: 0;
-  }
-  
-  .realestate-searchbar-field label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--realestate-gray);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  
-  .realestate-searchbar-field input,
-  .realestate-searchbar-field select {
-    border: 1px solid var(--realestate-border);
-    border-radius: var(--realestate-radius-sm);
-    padding: 10px 12px;
-    font-size: 14px;
-    font-family: 'Inter', sans-serif;
-    color: var(--realestate-navy);
-    background-color: var(--realestate-white);
-  }
-  
-  .realestate-searchbar-field input:focus,
-  .realestate-searchbar-field select:focus {
-    outline: 2px solid var(--realestate-gold);
-    outline-offset: 1px;
-  }
-  
-  .realestate-searchbar-submit {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background-color: var(--realestate-navy);
-    color: var(--realestate-white);
-    padding: 11px 22px;
-    border-radius: var(--realestate-radius-sm);
-    font-size: 14px;
-    font-weight: 600;
-    white-space: nowrap;
-    transition: background-color 0.15s ease;
-  }
-  
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  background-color: var(--realestate-white);
+  border-radius: var(--realestate-radius-md);
+  /* 16px from about 800px up (same as before) */
+  padding: clamp(12px, 2vw, 16px);
+  box-shadow: var(--realestate-shadow);
+}
+
+.realestate-searchbar-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.realestate-searchbar-field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--realestate-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.realestate-searchbar-field input,
+.realestate-searchbar-field select {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid var(--realestate-border);
+  border-radius: var(--realestate-radius-sm);
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: var(--realestate-navy);
+  background-color: var(--realestate-white);
+}
+
+.realestate-searchbar-field input:focus,
+.realestate-searchbar-field select:focus {
+  outline: 2px solid var(--realestate-gold);
+  outline-offset: 1px;
+}
+
+.realestate-searchbar-submit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--realestate-navy);
+  color: var(--realestate-white);
+  padding: 11px 22px;
+  /* About 45px tall already; this makes the 44px touch minimum explicit */
+  min-height: 44px;
+  border-radius: var(--realestate-radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease;
+}
+
+/* Mouse only, so the color doesn't stay stuck after a tap on phones */
+@media (hover: hover) {
   .realestate-searchbar-submit:hover {
     background-color: #14202f;
   }
-  
-  /* Hero variant floats over the image */
-  .realestate-searchbar-hero {
-    width: 100%;
-    max-width: 920px;
+}
+
+.realestate-searchbar-submit:focus-visible {
+  outline: 2px solid var(--realestate-gold);
+  outline-offset: 2px;
+}
+
+/* Hero variant floats over the image */
+.realestate-searchbar-hero {
+  width: 100%;
+  max-width: 920px;
+}
+
+/* Page variant sits inline in normal document flow on /listings */
+.realestate-searchbar-page {
+  width: 100%;
+  box-shadow: none;
+  border: 1px solid var(--realestate-border);
+}
+
+/* Phones and tablets: the fields wrap by themselves. Each wants at least 10rem,
+   so on a 320px phone they stack one per row, and on a tablet three fit on
+   one row with the Search button below. (Before, each was 45% wide, which was
+   only about 110px on a small phone, too narrow to read "$500k – $750k".) */
+@media (max-width: 860px) {
+  .realestate-searchbar {
+    flex-wrap: wrap;
   }
-  
-  /* Page variant sits inline in normal document flow on /listings */
-  .realestate-searchbar-page {
-    width: 100%;
-    box-shadow: none;
-    border: 1px solid var(--realestate-border);
+
+  .realestate-searchbar-field {
+    flex: 1 1 10rem;
   }
-  
-  @media (max-width: 860px) {
-    .realestate-searchbar {
-      flex-wrap: wrap;
-    }
-  
-    .realestate-searchbar-field {
-      flex: 1 1 45%;
-    }
-  
-    .realestate-searchbar-submit {
-      flex: 1 1 100%;
-      justify-content: center;
-    }
+
+  .realestate-searchbar-submit {
+    flex: 1 1 100%;
+    justify-content: center;
   }
+}
+
+/* Phones and touch screens: 16px or larger stops iOS from zooming the page in
+   when a field is tapped, and each field is at least 44px tall.
+   (Desktop with a mouse keeps 14px.) */
+@media (pointer: coarse), (max-width: 860px) {
+  .realestate-searchbar-field input,
+  .realestate-searchbar-field select {
+    font-size: 16px;
+    min-height: 44px;
+  }
+}
+
+/* Touch screens: iPhone draws a dropdown in its own grey style, so it looks
+   out of place next to the text field. This removes the browser's own look
+   and draws a small down arrow instead. */
+@media (pointer: coarse) {
+  .realestate-searchbar-field select {
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    padding-right: 2.25rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235A6472' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+  }
+}

@@ -1,18 +1,33 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import "../styles/StartupCTASection.css";
 
 export default function StartupCTASection() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "submitted">("idle");
+  const successRef = useRef<HTMLDivElement>(null);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!email.trim()) return;
     setStatus("submitted");
   }
+
+  // After sending, the form is replaced by a short message. On a phone with the
+  // on-screen keyboard open that can leave you looking at blank space, so this
+  // brings the message into view (and lets screen readers announce it).
+  useEffect(() => {
+    if (status !== "submitted") return;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    successRef.current?.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "center",
+    });
+  }, [status]);
 
   return (
     <section id="cta" className="startup-cta">
@@ -29,8 +44,8 @@ export default function StartupCTASection() {
         </p>
 
         {status === "submitted" ? (
-          <div className="startup-cta-success">
-            <CheckCircle2 size={18} />
+          <div className="startup-cta-success" ref={successRef} role="status">
+            <CheckCircle2 size={18} aria-hidden="true" />
             <span>You&apos;re on the list — we&apos;ll email you shortly.</span>
           </div>
         ) : (
@@ -39,6 +54,8 @@ export default function StartupCTASection() {
               type="email"
               required
               placeholder="you@company.com"
+              autoComplete="email"
+              inputMode="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="startup-cta-input"
@@ -46,7 +63,7 @@ export default function StartupCTASection() {
             />
             <button type="submit" className="startup-cta-button">
               Get Early Access
-              <ArrowRight size={16} />
+              <ArrowRight size={16} aria-hidden="true" />
             </button>
           </form>
         )}

@@ -1,60 +1,78 @@
 .shop-category-tiles-section {
-    padding: 8px 0 80px;
-  }
-  
-  .shop-category-tiles-heading {
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 28px;
-  }
-  
-  .shop-category-tiles-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-  }
-  
-  .shop-category-tile {
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    aspect-ratio: 3 / 4;
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  
-  .shop-category-tile-image-wrapper {
-    position: absolute;
-    inset: 0;
-  }
-  
-  .shop-category-tile-image {
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-  
+  /* 80px bottom on desktop (same as before), less on phones */
+  padding: 8px 0 clamp(48px, 8vw, 80px);
+}
+
+.shop-category-tiles-heading {
+  font-size: clamp(1.25rem, 1.15rem + 0.4vw, 1.375rem);
+  font-weight: 700;
+  margin-bottom: 28px;
+}
+
+/* 4 tiles: 4 across, then 2 + 2 (the same breakpoint as before, 768px). With
+   exactly 4 tiles, "auto-fit" would sometimes leave a lone tile (3 + 1). The
+   gap shrinks smoothly. */
+.shop-category-tiles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 20px);
+}
+
+.shop-category-tile {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  aspect-ratio: 3 / 4;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.shop-category-tile-image-wrapper {
+  position: absolute;
+  inset: 0;
+}
+
+.shop-category-tile-image {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* Mouse only, so the photo doesn't stay zoomed after a tap on phones */
+@media (hover: hover) {
   .shop-category-tile:hover .shop-category-tile-image {
     transform: scale(1.05);
   }
-  
-  .shop-category-tile::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(26, 26, 24, 0) 40%, rgba(26, 26, 24, 0.55) 100%);
+}
+
+.shop-category-tile:focus-visible {
+  outline: 2px solid var(--shop-accent);
+  outline-offset: 3px;
+}
+
+.shop-category-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(26, 26, 24, 0) 40%, rgba(26, 26, 24, 0.55) 100%);
+}
+
+.shop-category-tile-label {
+  position: relative;
+  z-index: 1;
+  padding: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--shop-white);
+}
+
+@media (max-width: 768px) {
+  .shop-category-tiles-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  
-  .shop-category-tile-label {
-    position: relative;
-    z-index: 1;
-    padding: 16px;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--shop-white);
-  }
-  
-  @media (max-width: 768px) {
-    .shop-category-tiles-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+.shop-category-tile-image {
+  transition: none;
+}
+}

@@ -39,6 +39,11 @@ const GALLERY_IMAGES: GalleryImage[] = [
   { src: "/images/photographer/personal-04.jpg", alt: "Personal project, candid street", category: "Personal" },
 ];
 
+// Matches the grid in PhotographerGalleryGrid.css: 1 column up to 560px,
+// 2 columns up to 900px, then 3 (each at most about 380px wide).
+const TILE_SIZES =
+  "(max-width: 560px) 100vw, (max-width: 900px) 50vw, (max-width: 1264px) 33vw, 380px";
+
 export default function PhotographerGalleryGrid() {
   const [activeCategory, setActiveCategory] = useState<Category>("Portraits");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -46,7 +51,7 @@ export default function PhotographerGalleryGrid() {
   const filteredImages = GALLERY_IMAGES.filter(
     (image) => image.category === activeCategory
   );
-  
+
   const isFourImages = filteredImages.length === 4;
 
   const handleClose = () => setLightboxIndex(null);
@@ -63,15 +68,42 @@ export default function PhotographerGalleryGrid() {
     );
   };
 
+  // One photo tile. The same markup was written out three times before.
+  // alt="" because the button already has an aria-label that names the photo
+  // (otherwise a screen reader reads the same text twice).
+  const renderTile = (image: GalleryImage, index: number) => (
+    <button
+      key={image.src}
+      type="button"
+      className="portfolio-gallery-item"
+      onClick={() => setLightboxIndex(index)}
+      aria-label={`Open image: ${image.alt}`}
+    >
+      <Image
+        src={image.src}
+        alt=""
+        fill
+        sizes={TILE_SIZES}
+        className="portfolio-gallery-image"
+      />
+    </button>
+  );
+
   return (
     <section className="portfolio-gallery">
-      <div className="portfolio-gallery-tabs">
+      <div
+        className="portfolio-gallery-tabs"
+        role="group"
+        aria-label="Portfolio categories"
+      >
         {CATEGORIES.map((category) => (
           <button
             key={category}
+            type="button"
             className={`portfolio-gallery-tab ${
               activeCategory === category ? "portfolio-gallery-tab-active" : ""
             }`}
+            aria-pressed={activeCategory === category}
             onClick={() => {
               setActiveCategory(category);
               setLightboxIndex(null);
@@ -83,61 +115,23 @@ export default function PhotographerGalleryGrid() {
       </div>
 
       <div className="portfolio-gallery-grid">
-  {isFourImages ? (
-    <>
-      <div className="portfolio-gallery-row">
-        {filteredImages.slice(0, 2).map((image, index) => (
-          <button
-            key={image.src}
-            className="portfolio-gallery-item"
-            onClick={() => setLightboxIndex(index)}
-            aria-label={`Open image: ${image.alt}`}
-          >
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              className="portfolio-gallery-image"
-            />
-          </button>
-        ))}
+        {isFourImages ? (
+          <>
+            <div className="portfolio-gallery-row">
+              {filteredImages
+                .slice(0, 2)
+                .map((image, index) => renderTile(image, index))}
+            </div>
+            <div className="portfolio-gallery-row">
+              {filteredImages
+                .slice(2, 4)
+                .map((image, index) => renderTile(image, index + 2))}
+            </div>
+          </>
+        ) : (
+          filteredImages.map((image, index) => renderTile(image, index))
+        )}
       </div>
-      <div className="portfolio-gallery-row">
-        {filteredImages.slice(2, 4).map((image, index) => (
-          <button
-            key={image.src}
-            className="portfolio-gallery-item"
-            onClick={() => setLightboxIndex(index + 2)}
-            aria-label={`Open image: ${image.alt}`}
-          >
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              className="portfolio-gallery-image"
-            />
-          </button>
-        ))}
-      </div>
-    </>
-  ) : (
-    filteredImages.map((image, index) => (
-      <button
-        key={image.src}
-        className="portfolio-gallery-item"
-        onClick={() => setLightboxIndex(index)}
-        aria-label={`Open image: ${image.alt}`}
-      >
-        <Image
-          src={image.src}
-          alt={image.alt}
-          fill
-          className="portfolio-gallery-image"
-        />
-      </button>
-    ))
-  )}
-</div>
 
       {lightboxIndex !== null && (
         <PhotographerLightbox

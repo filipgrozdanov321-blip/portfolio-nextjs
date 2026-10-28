@@ -1,94 +1,141 @@
 .realestate-filterpanel {
-    background-color: var(--realestate-white);
-    border: 1px solid var(--realestate-border);
-    border-radius: var(--realestate-radius-md);
-    padding: 24px;
-    height: fit-content;
-    position: sticky;
-    top: 96px;
-  }
-  
-  .realestate-filterpanel-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  .realestate-filterpanel-header h3 {
-    font-size: 16px;
-    font-weight: 700;
-  }
-  
-  .realestate-filterpanel-clear {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 12.5px;
-    font-weight: 600;
-    color: var(--realestate-gray);
-  }
-  
+  background-color: var(--realestate-white);
+  border: 1px solid var(--realestate-border);
+  border-radius: var(--realestate-radius-md);
+  /* 24px from about 600px up (same as before) */
+  padding: clamp(16px, 4vw, 24px);
+  height: fit-content;
+  position: sticky;
+  /* Sits just under the sticky navbar (about 60px tall + 36px of air) */
+  top: 96px;
+  min-width: 0;
+}
+
+.realestate-filterpanel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.realestate-filterpanel-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.realestate-filterpanel-clear {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--realestate-gray);
+  /* A 44px-tall tap area without making the button look bigger: the extra
+     height is transparent padding, and the negative margin cancels it */
+  min-height: 44px;
+  margin: -12px -8px;
+  padding: 12px 8px;
+}
+
+/* Mouse only, so the color doesn't stay stuck after a tap on phones */
+@media (hover: hover) {
   .realestate-filterpanel-clear:hover {
     color: var(--realestate-navy);
   }
-  
-  .realestate-filterpanel-field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 20px;
+}
+
+.realestate-filterpanel-clear:focus-visible {
+  color: var(--realestate-navy);
+  outline: 2px solid var(--realestate-gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.realestate-filterpanel-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+  min-width: 0;
+}
+
+.realestate-filterpanel-field:last-child {
+  margin-bottom: 0;
+}
+
+.realestate-filterpanel-field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--realestate-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.realestate-filterpanel-field input,
+.realestate-filterpanel-field select {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid var(--realestate-border);
+  border-radius: var(--realestate-radius-sm);
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: var(--realestate-navy);
+  background-color: var(--realestate-white);
+}
+
+.realestate-filterpanel-field input:focus,
+.realestate-filterpanel-field select:focus {
+  outline: 2px solid var(--realestate-gold);
+  outline-offset: 1px;
+}
+
+/* Phones and small tablets: the panel sits above the results, no longer
+   sticky. The four fields wrap by themselves: each wants at least 12rem, so
+   on a tablet they sit two (or even four) per row, and on a 320px phone they
+   stack one per row. (Before, they stayed in 2 columns until 520px, which
+   squeezed "$500k – $750k" on a 375px phone.) */
+@media (max-width: 860px) {
+  .realestate-filterpanel {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+    gap: 16px 20px;
   }
-  
-  .realestate-filterpanel-field:last-child {
+
+  .realestate-filterpanel-header {
+    grid-column: 1 / -1;
+    margin-bottom: 4px;
+  }
+
+  .realestate-filterpanel-field {
     margin-bottom: 0;
   }
-  
-  .realestate-filterpanel-field label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--realestate-gray);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  
+}
+
+/* Phones and touch screens: 16px or larger stops iOS from zooming the page in
+   when a field is tapped, and each field is at least 44px tall.
+   (Desktop with a mouse keeps 14px.) */
+@media (pointer: coarse), (max-width: 860px) {
   .realestate-filterpanel-field input,
   .realestate-filterpanel-field select {
-    border: 1px solid var(--realestate-border);
-    border-radius: var(--realestate-radius-sm);
-    padding: 10px 12px;
-    font-size: 14px;
-    font-family: 'Inter', sans-serif;
-    color: var(--realestate-navy);
-    background-color: var(--realestate-white);
+    font-size: 16px;
+    min-height: 44px;
   }
-  
-  .realestate-filterpanel-field input:focus,
-  .realestate-filterpanel-field select:focus {
-    outline: 2px solid var(--realestate-gold);
-    outline-offset: 1px;
+}
+
+/* Touch screens: iPhone draws a dropdown in its own grey style, so it looks
+   out of place next to the text field. This removes the browser's own look
+   and draws a small down arrow instead. */
+@media (pointer: coarse) {
+  .realestate-filterpanel-field select {
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    padding-right: 2.25rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235A6472' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
   }
-  
-  @media (max-width: 860px) {
-    .realestate-filterpanel {
-      position: static;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px 20px;
-    }
-  
-    .realestate-filterpanel-header {
-      grid-column: 1 / -1;
-      margin-bottom: 4px;
-    }
-  
-    .realestate-filterpanel-field {
-      margin-bottom: 0;
-    }
-  }
-  
-  @media (max-width: 520px) {
-    .realestate-filterpanel {
-      grid-template-columns: 1fr;
-    }
-  }
+}

@@ -19,6 +19,17 @@ const DEFAULT_FIELDS: Record<ContentType, Record<string, string>> = {
 const HISTORY_LIMIT = 10;
 const PREVIEW_LENGTH = 60;
 
+// crypto.randomUUID only exists on secure (https) pages. When you open the site
+// on your phone through your computer's local address (http://192.168.x.x:3000)
+// it is undefined, so a generation would succeed and then fail with "Something
+// went wrong" while saving it to the history. This falls back to a plain id.
+function makeId(): string {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+  return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
 export default function AiContentGeneratorPage() {
   const [selectedType, setSelectedType] = useState<ContentType>("blog-intro");
   const [fields, setFields] = useState<Record<string, string>>(
@@ -65,7 +76,7 @@ export default function AiContentGeneratorPage() {
       setResult(text);
 
       const newItem: GeneratorHistoryItem = {
-        id: crypto.randomUUID(),
+        id: makeId(),
         type: selectedType,
         preview:
           text.length > PREVIEW_LENGTH

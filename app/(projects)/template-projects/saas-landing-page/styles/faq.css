@@ -1,23 +1,25 @@
 .saas-faq {
-  padding: 5rem 1.5rem;
+  padding: clamp(2.5rem, 7.3vw, 5rem) clamp(1rem, 4vw, 1.5rem);
   background-color: var(--bg-primary);
 }
 
 .saas-faq-header {
   max-width: 600px;
-  margin: 0 auto 3rem;
+  margin: 0 auto clamp(1.75rem, 4.4vw, 3rem);
   text-align: center;
 }
 
 .saas-faq-title {
-  font-size: 2.2rem;
+  /* 2.2rem from about 800px up (same as before). Before, it sat at 2.2rem down
+     to 641px and then jumped to 1.8rem; now it shrinks smoothly. */
+  font-size: clamp(1.7rem, 1.1rem + 2.2vw, 2.2rem);
   font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 0.75rem;
 }
 
 .saas-faq-subtitle {
-  font-size: 1.05rem;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.05rem);
   color: var(--text-secondary);
   line-height: 1.6;
 }
@@ -34,7 +36,7 @@
   background-color: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 0.25rem 1.25rem;
+  padding: 0.25rem clamp(1rem, 4vw, 1.25rem);
 }
 
 .saas-faq-question {
@@ -45,37 +47,90 @@
   padding: 1.1rem 0;
   font-size: 1rem;
   font-weight: 600;
+  /* Buttons don't inherit the page font by default */
+  font-family: inherit;
   color: var(--text-primary);
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
+}
+
+.saas-faq-question:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
 }
 
 .saas-faq-icon {
   font-size: 1.2rem;
   color: var(--accent);
   transition: transform 0.4s ease;
+  flex-shrink: 0; /* a long question can't squeeze the + */
 }
 
 .saas-faq-icon-open {
   transform: rotate(45deg);
 }
 
+/* The answer opens by animating its grid row from 0fr to 1fr. Before, it used
+   max-height: 300px, which would cut off a long answer (big text size, narrow
+   phone, or a longer answer you add later). The row now grows to fit.
+
+   The spacing the answer used to get from the browser's default <p> margin and
+   padding now sits on this wrapper, only while open, so the open state looks
+   the same and the closed state is exactly 0px tall.
+
+   visibility: hidden while closed keeps screen readers and the keyboard out of
+   the hidden text. */
 .saas-faq-answer-wrapper {
-  max-height: 0;
-  overflow: hidden;
+  display: grid;
+  grid-template-rows: 0fr;
+  padding: 0;
   opacity: 0;
-  transition: max-height 0.4s ease, opacity 0.25s ease, padding 0.3s ease;
+  visibility: hidden;
+  transition:
+    grid-template-rows 0.4s ease,
+    opacity 0.25s ease,
+    padding 0.3s ease,
+    visibility 0s linear 0.4s;
 }
+
 .saas-faq-answer-open {
-  max-height: 300px;
+  grid-template-rows: 1fr;
+  padding: 0.95rem 0 calc(1.1rem + 0.95rem);
   opacity: 1;
+  visibility: visible;
+  transition:
+    grid-template-rows 0.4s ease,
+    opacity 0.25s ease,
+    padding 0.3s ease,
+    visibility 0s;
 }
 
 .saas-faq-answer {
-  padding: 0 0 1.1rem 0;
+  min-height: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
   font-size: 0.95rem;
   color: var(--text-secondary);
   line-height: 1.6;
+}
+
+/* Leaves room for the sticky navbar when a link scrolls here (phones) */
+@media (max-width: 768px) {
+  .saas-faq {
+    scroll-margin-top: 3.5rem;
+  }
+}
+
+/* "Reduce motion" setting: no animation */
+@media (prefers-reduced-motion: reduce) {
+  .saas-faq-answer-wrapper,
+  .saas-faq-answer-open,
+  .saas-faq-icon {
+    transition: none;
+  }
 }

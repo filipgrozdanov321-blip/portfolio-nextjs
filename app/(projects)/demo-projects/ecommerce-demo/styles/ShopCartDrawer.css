@@ -1,124 +1,185 @@
 .shop-cart-backdrop {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(26, 26, 24, 0.4);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    z-index: 50;
-  }
-  
-  .shop-cart-backdrop-visible {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  
-  .shop-cart-drawer {
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    max-width: 420px;
-    background-color: var(--shop-white);
-    box-shadow: -4px 0 24px rgba(26, 26, 24, 0.12);
-    transform: translateX(100%);
-    transition: transform 0.35s ease;
-    z-index: 51;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .shop-cart-drawer-open {
-    transform: translateX(0);
-  }
-  
-  .shop-cart-drawer-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 24px 24px 20px;
-    border-bottom: 1px solid var(--shop-border);
-  }
-  
-  .shop-cart-drawer-title {
-    font-size: 16px;
-    font-weight: 700;
-  }
-  
-  .shop-cart-drawer-close {
-    color: var(--shop-black);
-    display: flex;
-    align-items: center;
-  }
-  
-  .shop-cart-drawer-empty {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 24px;
-    text-align: center;
-    color: var(--shop-gray);
-    font-size: 14px;
-  }
-  
-  .shop-cart-drawer-empty-link {
-    font-weight: 600;
-    color: var(--shop-accent);
-    text-decoration: underline;
-  }
-  
-  .shop-cart-drawer-items {
-    flex: 1;
-    overflow-y: auto;
-    padding: 8px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  
-  .shop-cart-drawer-footer {
-    padding: 20px 24px 24px;
-    border-top: 1px solid var(--shop-border);
-  }
-  
-  .shop-cart-drawer-subtotal {
-    display: flex;
-    justify-content: space-between;
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-  
-  .shop-cart-drawer-shipping-note {
-    font-size: 12px;
-    color: var(--shop-gray);
-    margin-bottom: 16px;
-  }
-  
-  .shop-cart-drawer-checkout-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 14px;
-    background-color: var(--shop-black);
-    color: var(--shop-white);
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 2px;
-    transition: background-color 0.2s ease;
-  }
-  
+  position: fixed;
+  inset: 0;
+  background-color: rgba(26, 26, 24, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  /* Above the Back button (which floats at z-index 999). It used to be 50, so
+     on phones the Back button sat on top of the dimmed page and the open
+     drawer. */
+  z-index: 1000;
+}
+
+.shop-cart-backdrop-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.shop-cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  /* The full screen height. "100dvh" follows the phone's moving address bar,
+     so the Checkout button is never hidden under it. The old "100%" was
+     taller than the visible screen on iOS Safari. */
+  height: 100%;
+  height: 100dvh;
+  width: 100%;
+  max-width: 420px;
+  background-color: var(--shop-white);
+  box-shadow: -4px 0 24px rgba(26, 26, 24, 0.12);
+  transform: translateX(100%);
+  transition: transform 0.35s ease, visibility 0s linear 0.35s;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+
+  /* Closed: out of sight AND out of reach of the keyboard and screen readers.
+     "visibility: hidden" takes effect after the slide-out finishes (the
+     delay in the transition above), and the drawer is visible again the
+     instant it starts opening. */
+  visibility: hidden;
+}
+
+.shop-cart-drawer-open {
+  transform: translateX(0);
+  visibility: visible;
+  transition: transform 0.35s ease, visibility 0s;
+}
+
+.shop-cart-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* 24px from about 480px up (same as before), 16px on small phones */
+  padding: 24px clamp(16px, 5vw, 24px) 20px;
+  border-bottom: 1px solid var(--shop-border);
+}
+
+.shop-cart-drawer-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.shop-cart-drawer-close {
+  color: var(--shop-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* A 44x44px tap target (the icon was 20px), offset so the icon stays exactly
+     where it was */
+  width: 44px;
+  height: 44px;
+  margin: -12px -12px -12px 0;
+}
+
+.shop-cart-drawer-close:focus-visible {
+  outline: 2px solid var(--shop-accent);
+  outline-offset: -4px;
+  border-radius: 2px;
+}
+
+.shop-cart-drawer-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  text-align: center;
+  color: var(--shop-gray);
+  font-size: 14px;
+}
+
+.shop-cart-drawer-empty-link {
+  font-weight: 600;
+  color: var(--shop-accent);
+  text-decoration: underline;
+  /* A 44px tap target */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.shop-cart-drawer-empty-link:focus-visible {
+  outline: 2px solid var(--shop-accent);
+  outline-offset: 2px;
+}
+
+.shop-cart-drawer-items {
+  flex: 1;
+  overflow-y: auto;
+  /* Scrolling the list stops at its ends instead of "chaining" to the page
+     behind (which is also locked while the drawer is open) */
+  overscroll-behavior: contain;
+  padding: 8px clamp(16px, 5vw, 24px);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.shop-cart-drawer-footer {
+  padding: 20px clamp(16px, 5vw, 24px) 24px;
+  /* The iPhone home bar sits at the bottom of the screen. This keeps the
+     Checkout button above it. */
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--shop-border);
+}
+
+.shop-cart-drawer-subtotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.shop-cart-drawer-shipping-note {
+  font-size: 12px;
+  color: var(--shop-gray);
+  margin-bottom: 16px;
+}
+
+.shop-cart-drawer-checkout-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 14px;
+  background-color: var(--shop-black);
+  color: var(--shop-white);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 2px;
+  transition: background-color 0.2s ease;
+}
+
+/* Mouse only, so the color doesn't stay stuck after a tap on phones */
+@media (hover: hover) {
   .shop-cart-drawer-checkout-button:hover {
     background-color: var(--shop-accent);
   }
-  
-  @media (max-width: 480px) {
-    .shop-cart-drawer {
-      max-width: 100%;
-    }
+}
+
+.shop-cart-drawer-checkout-button:active {
+  background-color: var(--shop-accent);
+}
+
+.shop-cart-drawer-checkout-button:focus-visible {
+  outline: 2px solid var(--shop-accent);
+  outline-offset: 3px;
+}
+
+/* On a phone the drawer already fills the screen width (width: 100% with a
+   420px cap), so the old 480px rule that set "max-width: 100%" did nothing and
+   is removed. */
+
+@media (prefers-reduced-motion: reduce) {
+  .shop-cart-backdrop,
+  .shop-cart-drawer,
+  .shop-cart-drawer-open {
+    transition: none;
   }
+}

@@ -1,125 +1,175 @@
 .realestate-contactform {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background-color: var(--realestate-white);
-    border: 1px solid var(--realestate-border);
-    border-radius: var(--realestate-radius-md);
-    padding: 32px;
-  }
-  
-  .realestate-contactform-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  
-  .realestate-contactform-field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  
-  .realestate-contactform-field label {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--realestate-navy);
-  }
-  
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--realestate-white);
+  border: 1px solid var(--realestate-border);
+  border-radius: var(--realestate-radius-md);
+  /* 32px from about 700px up (same as before), 20px on small phones */
+  padding: clamp(20px, 4.6vw, 32px);
+  min-width: 0;
+}
+
+/* Two fields side by side while each has at least 14rem (about 640px and up
+   inside the form), then stacked. The switch happens by itself instead of at a
+   fixed 640px. The 20px gap is the same as before. */
+.realestate-contactform-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 20px;
+}
+
+.realestate-contactform-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.realestate-contactform-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--realestate-navy);
+}
+
+.realestate-contactform-field input,
+.realestate-contactform-field select,
+.realestate-contactform-field textarea {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid var(--realestate-border);
+  border-radius: var(--realestate-radius-sm);
+  padding: 11px 13px;
+  font-size: 14.5px;
+  font-family: 'Inter', sans-serif;
+  color: var(--realestate-navy);
+  resize: none;
+}
+
+.realestate-contactform-field input:focus,
+.realestate-contactform-field select:focus,
+.realestate-contactform-field textarea:focus {
+  outline: 2px solid var(--realestate-gold);
+  outline-offset: 1px;
+}
+
+.realestate-contactform button {
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+.realestate-contactform-success {
+  background-color: var(--realestate-white);
+  border: 1px solid var(--realestate-border);
+  border-radius: var(--realestate-radius-md);
+  padding: clamp(24px, 5.7vw, 40px) clamp(20px, 4.6vw, 32px);
+}
+
+.realestate-contactform-success h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.realestate-contactform-success p {
+  font-size: 15px;
+  color: var(--realestate-gray);
+  line-height: 1.6;
+}
+
+/* Phones and touch screens: 16px or larger stops iOS from zooming the page in
+   when a field is tapped, and each input is at least 44px tall.
+   (Desktop with a mouse keeps 14.5px.) */
+@media (pointer: coarse), (max-width: 860px) {
   .realestate-contactform-field input,
   .realestate-contactform-field select,
   .realestate-contactform-field textarea {
-    border: 1px solid var(--realestate-border);
-    border-radius: var(--realestate-radius-sm);
-    padding: 11px 13px;
-    font-size: 14.5px;
-    font-family: 'Inter', sans-serif;
-    color: var(--realestate-navy);
-    resize: none;
-  }
-  
-  .realestate-contactform-field input:focus,
-  .realestate-contactform-field select:focus,
-  .realestate-contactform-field textarea:focus {
-    outline: 2px solid var(--realestate-gold);
-    outline-offset: 1px;
-  }
-  
-  .realestate-contactform button {
-    align-self: flex-start;
-    margin-top: 4px;
-  }
-  
-  .realestate-contactform-success {
-    background-color: var(--realestate-white);
-    border: 1px solid var(--realestate-border);
-    border-radius: var(--realestate-radius-md);
-    padding: 40px 32px;
-  }
-  
-  .realestate-contactform-success h3 {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-  
-  .realestate-contactform-success p {
-    font-size: 15px;
-    color: var(--realestate-gray);
-    line-height: 1.6;
-  }
-  
-  @media (max-width: 640px) {
-    .realestate-contactform {
-      padding: 24px 20px;
-    }
-  
-    .realestate-contactform-row {
-      grid-template-columns: 1fr;
-    }
+    font-size: 16px;
   }
 
+  .realestate-contactform-field input,
+  .realestate-contactform-field select {
+    min-height: 44px;
+  }
+}
+
+/* Touch screens: iPhone draws a dropdown in its own grey style, so it looks
+   out of place next to the text fields. This removes the browser's own look
+   and draws a small down arrow instead. */
+@media (pointer: coarse) {
+  .realestate-contactform-field select {
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    padding-right: 2.25rem;
+    background-color: var(--realestate-white);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235A6472' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 13px center;
+  }
+}
+
+/* Phones: the Send button goes full width, which is easier to tap */
+@media (max-width: 640px) {
+  .realestate-contactform button {
+    align-self: stretch;
+  }
+}
+
+/* ---- Page layout: the form on the left, office details on the right ---- */
+
+/* The same 1.6 : 1 split as before. minmax(0, ...) means a long address can't
+   stretch a column. The 40px gap shrinks smoothly below about 1100px. */
+.realestate-contact-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 3.6vw, 2.5rem);
+  align-items: start;
+}
+
+.realestate-contact-office {
+  background-color: var(--realestate-offwhite);
+  border: 1px solid var(--realestate-border);
+  border-radius: var(--realestate-radius-md);
+  /* 28px from about 700px up (same as before) */
+  padding: clamp(20px, 4vw, 28px);
+  min-width: 0;
+}
+
+.realestate-contact-office h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.realestate-contact-office-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--realestate-gray);
+  margin-bottom: 16px;
+}
+
+.realestate-contact-office-item:last-child {
+  margin-bottom: 0;
+}
+
+.realestate-contact-office-item svg {
+  color: var(--realestate-gold);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* A long address or email wraps instead of overflowing on narrow phones */
+.realestate-contact-office-item span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 860px) {
   .realestate-contact-layout {
-    display: grid;
-    grid-template-columns: 1.6fr 1fr;
-    gap: 40px;
-    align-items: start;
+    grid-template-columns: minmax(0, 1fr);
   }
-  
-  .realestate-contact-office {
-    background-color: var(--realestate-offwhite);
-    border: 1px solid var(--realestate-border);
-    border-radius: var(--realestate-radius-md);
-    padding: 28px;
-  }
-  
-  .realestate-contact-office h3 {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 20px;
-  }
-  
-  .realestate-contact-office-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 14px;
-    color: var(--realestate-gray);
-    margin-bottom: 16px;
-  }
-  
-  .realestate-contact-office-item:last-child {
-    margin-bottom: 0;
-  }
-  
-  .realestate-contact-office-item svg {
-    color: var(--realestate-gold);
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  
-  @media (max-width: 860px) {
-    .realestate-contact-layout {
-      grid-template-columns: 1fr;
-    }
-  }
+}

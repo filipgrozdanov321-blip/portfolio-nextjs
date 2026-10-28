@@ -1,82 +1,88 @@
-.agency-work-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2.5rem 2rem;
-  padding-bottom: 6rem;
-}
-
-.agency-work-grid-card {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.agency-work-grid-card-image {
-  position: relative;
-  aspect-ratio: 4 / 5;
-  border: 1px solid var(--agency-border);
-  border-radius: 2px;
-  overflow: hidden;
-  transition: border-color 0.2s ease;
-}
-
-.agency-work-grid-card:hover .agency-work-grid-card-image {
-  border-color: var(--agency-accent);
-}
-
-.agency-work-grid-card-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.agency-work-grid-card-client {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--agency-off-white);
-}
-
-.agency-work-grid-card-details {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.agency-work-grid-card-type {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.85rem;
-  color: var(--agency-gray);
-}
-
-.agency-work-grid-card-year {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.85rem;
-  color: var(--agency-gray);
-  position: relative;
-  padding-left: 0.7rem;
-}
-
-.agency-work-grid-card-year::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--agency-gray);
-}
-
-@media (max-width: 1024px) {
-  .agency-work-grid {
-    grid-template-columns: repeat(2, 1fr);
+/* 9 cards: 3 across (never more), then 2, then 1, with no fixed breakpoints.
+   Each card is at least 16rem wide. The "(100% - 2 gaps) / 3" part is what
+   caps it at 3 columns: without it, a 1440px screen would fit 4 or 5 cards in
+   a row. Desktop (1100px and wider) is the same 3 columns as before. */
+   .agency-work-grid {
+    --agency-work-gap: clamp(1rem, 2.9vw, 2rem);
+  
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(
+        min(100%, max(16rem, (100% - 2 * var(--agency-work-gap)) / 3)),
+        1fr
+      )
+    );
+    /* Row gap 2.5rem and column gap 2rem on desktop (same as before) */
+    gap: clamp(1.75rem, 3.6vw, 2.5rem) var(--agency-work-gap);
+    padding-bottom: clamp(3rem, 8.75vw, 6rem);
   }
-}
-
-@media (max-width: 640px) {
-  .agency-work-grid {
-    grid-template-columns: 1fr;
+  
+  .agency-work-grid-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 0;
   }
-}
+  
+  .agency-work-grid-card-image {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border: 1px solid var(--agency-border);
+    border-radius: 2px;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+  }
+  
+  /* Mouse only, so the border doesn't stay highlighted after a tap on phones */
+  @media (hover: hover) {
+    .agency-work-grid-card:hover .agency-work-grid-card-image {
+      border-color: var(--agency-accent);
+    }
+  }
+  
+  .agency-work-grid-card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  
+  .agency-work-grid-card-client {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--agency-off-white);
+  }
+  
+  .agency-work-grid-card-details {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 0.6rem;
+  }
+  
+  .agency-work-grid-card-type {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: var(--agency-gray);
+  }
+  
+  .agency-work-grid-card-year {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: var(--agency-gray);
+    position: relative;
+    padding-left: 0.7rem;
+  }
+  
+  .agency-work-grid-card-year::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--agency-gray);
+  }

@@ -10,6 +10,7 @@ export default function BackButton() {
     <button
       type="button"
       className="back-button"
+      aria-label="Back to home"
       onClick={() => router.push("/")}
     >
       ← Back

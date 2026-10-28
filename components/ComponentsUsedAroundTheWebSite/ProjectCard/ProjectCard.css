@@ -3,7 +3,9 @@
   padding: 24px;
   border-radius: 14px;
   border: 1px solid #2f2f2f;
-  width: 260px;
+  /* 260px on desktop (same as before). The 50px is the padding and border,
+     so the card is never wider than its container, even on a 320px phone. */
+  width: min(260px, 100% - 50px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.25);
   transition: 0.2s ease;
   display: flex;
@@ -11,9 +13,12 @@
   justify-content: space-between;
 }
 
-.project-card:hover {
-  transform: translateY(-5px);
-  border-color: #555;
+/* Mouse only, so the card doesn't stay lifted after a tap */
+@media (hover: hover) {
+  .project-card:hover {
+    transform: translateY(-5px);
+    border-color: #555;
+  }
 }
 
 .project-card h2 {
@@ -49,7 +54,24 @@
   text-align: center;
 }
 
-.project-card button:hover,
-.project-card a.button:hover {
-  background: #0066d1;
+@media (hover: hover) {
+  .project-card button:hover,
+  .project-card a.button:hover {
+    background: #0066d1;
+  }
+}
+
+.project-card button:focus-visible,
+.project-card a.button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Touch screens: the button is at least 44px tall */
+@media (pointer: coarse) {
+  .project-card button,
+  .project-card a.button {
+    min-height: 44px;
+    padding: 8px 20px;
+  }
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { COLUMNS, ColumnId, Priority, Task } from "../data/tasks";
 import "../styles/KanbanTaskModal.css";
@@ -61,9 +61,54 @@ export default function KanbanTaskModal({
   );
   const [error, setError] = useState<string | null>(null);
 
+  const dialogRef = useRef<HTMLDivElement>(null);
+
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
+
+  // Keyboard: Escape closes the dialog, and Tab stays inside it
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+
+      if (e.key === "Tab" && dialogRef.current) {
+        const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+          "button, input, textarea, select, [tabindex]:not([tabindex='-1'])"
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
+  // Lock the page behind the dialog while it's open, and give focus back to
+  // whatever opened it (the Add Task button or the card) when it closes
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    const opener = document.activeElement as HTMLElement | null;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      opener?.focus?.();
+    };
+  }, []);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -87,11 +132,20 @@ export default function KanbanTaskModal({
 
   return (
     <div className="kanban-modal-overlay" onClick={onClose}>
-      <div className="kanban-modal" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="kanban-modal"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="kanban-modal-title"
+        ref={dialogRef}
+      >
         <div className="kanban-modal-header">
-          <h2 className="kanban-modal-title">{mode === "create" ? "Add Task" : "Edit Task"}</h2>
+          <h2 id="kanban-modal-title" className="kanban-modal-title">
+            {mode === "create" ? "Add Task" : "Edit Task"}
+          </h2>
           <button type="button" className="kanban-modal-close" onClick={onClose} aria-label="Close">
-            <X size={18} />
+            <X size={18} aria-hidden="true" />
           </button>
         </div>
 
@@ -141,6 +195,7 @@ export default function KanbanTaskModal({
                 value={form.assignee}
                 onChange={(e) => update("assignee", e.target.value)}
                 placeholder="e.g. Alex Chen"
+                autoComplete="off"
               />
             </label>
           </div>
@@ -174,7 +229,11 @@ export default function KanbanTaskModal({
             )}
           </div>
 
-          {error && <p className="kanban-field-error">{error}</p>}
+          {error && (
+            <p className="kanban-field-error" role="alert">
+              {error}
+            </p>
+          )}
 
           <div className="kanban-modal-actions">
             {mode === "edit" && task && onDelete && (

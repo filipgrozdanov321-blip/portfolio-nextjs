@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Activity, Mail } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa"; // Иконите се преземени од пакетот react-icons/fa
+import { FaGithub, FaLinkedin } from "react-icons/fa"; // Icons come from the react-icons/fa package
 import {
   scrollToSection,
   STARTUP_HOME_PATH,
@@ -29,7 +29,7 @@ export default function StartupFooter() {
       <div className="startup-footer-inner">
         <div className="startup-footer-brand">
           <Link href={STARTUP_HOME_PATH} className="startup-footer-logo">
-            <Activity size={16} strokeWidth={2.5} />
+            <Activity size={16} strokeWidth={2.5} aria-hidden="true" />
             <span>Rivet</span>
           </Link>
           <p className="startup-footer-tagline">
@@ -60,27 +60,27 @@ export default function StartupFooter() {
         <div className="startup-footer-column">
           <span className="startup-footer-heading">Connect</span>
           <a href="mailto:hello@rivet.dev" className="startup-footer-link">
-            <Mail size={14} />
-            hello@rivet.dev
+            <Mail size={14} aria-hidden="true" />
+            <span>hello@rivet.dev</span>
           </a>
-          
+
           <a
             href="https://github.com/rivet"
             target="_blank"
             rel="noreferrer"
             className="startup-footer-link"
           >
-            <FaGithub size={14} />
+            <FaGithub size={14} aria-hidden="true" />
             GitHub
           </a>
-          
+
           <a
             href="https://linkedin.com"
             target="_blank"
             rel="noreferrer"
             className="startup-footer-link"
           >
-            <FaLinkedin size={14} />
+            <FaLinkedin size={14} aria-hidden="true" />
             LinkedIn
           </a>
         </div>

@@ -1,34 +1,49 @@
-:root {
-  --kanban-bg: #F1F2F6;
-  --kanban-column-bg: #EBECF0;
-  --kanban-card-bg: #FFFFFF;
-  --kanban-text: #172B4D;
-  --kanban-text-secondary: #5E6C84;
-  --kanban-accent: #0052CC;
-  --kanban-priority-low: #36B37E;
-  --kanban-priority-medium: #FFAB00;
-  --kanban-priority-high: #DE350B;
-  --kanban-wip-safe: #36B37E;
-  --kanban-wip-warning: #FFAB00;
-  --kanban-wip-danger: #DE350B;
-}
-
-.kanban-page {
-  font-family: var(--kanban-font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: var(--kanban-bg);
-  min-height: 100vh;
-  color: var(--kanban-text);
-}
-
-.kanban-page *,
-.kanban-page *::before,
-.kanban-page *::after {
-  box-sizing: border-box;
-}
-
-.kanban-page button,
-.kanban-page input,
-.kanban-page textarea,
-.kanban-page select {
-  font-family: inherit;
-}
+/* The color variables used to live on :root, which meant every page of the
+   whole site got them as soon as this file loaded (Next.js CSS is global).
+   Scoped to .kanban-page (the div in layout.tsx that wraps the whole board)
+   they can't leak out. Everything in the task board is inside it. The modal is
+   also inside it (it is rendered in the page component, not in a portal). */
+   .kanban-page {
+    --kanban-bg: #F1F2F6;
+    --kanban-column-bg: #EBECF0;
+    --kanban-card-bg: #FFFFFF;
+    --kanban-text: #172B4D;
+    --kanban-text-secondary: #5E6C84;
+    --kanban-accent: #0052CC;
+    --kanban-priority-low: #36B37E;
+    --kanban-priority-medium: #FFAB00;
+    --kanban-priority-high: #DE350B;
+    --kanban-wip-safe: #36B37E;
+    --kanban-wip-warning: #FFAB00;
+    --kanban-wip-danger: #DE350B;
+  
+    font-family: var(--kanban-font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--kanban-bg);
+    min-height: 100vh;
+    min-height: 100dvh;
+    color: var(--kanban-text);
+    /* Long words wrap instead of pushing the page sideways on phones */
+    overflow-wrap: break-word;
+  }
+  
+  .kanban-page *,
+  .kanban-page *::before,
+  .kanban-page *::after {
+    box-sizing: border-box;
+  }
+  
+  .kanban-page button,
+  .kanban-page input,
+  .kanban-page textarea,
+  .kanban-page select {
+    font-family: inherit;
+  }
+  
+  /* Below 1400px the Back button floats in the bottom-left corner. This extra
+     space at the bottom means it never sits on top of the last cards when you
+     scroll all the way down. */
+  @media (max-width: 1399px) {
+    .kanban-page {
+      padding-bottom: 3.5rem;
+    }
+  }

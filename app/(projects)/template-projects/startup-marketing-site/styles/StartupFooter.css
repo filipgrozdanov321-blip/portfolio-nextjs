@@ -1,114 +1,172 @@
 .startup-footer {
-    border-top: 1px solid var(--startup-border);
-    background: var(--startup-black);
-    padding: 56px 24px 24px;
-  }
-  
-  .startup-footer-inner {
-    max-width: 1180px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1.6fr 1fr 1fr;
-    gap: 40px;
-  }
-  
-  .startup-footer-brand {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    max-width: 320px;
-  }
-  
-  .startup-footer-logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: "Sora", sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--startup-white);
-    text-decoration: none;
-  }
-  
-  .startup-footer-logo svg {
-    color: var(--startup-accent);
-  }
-  
-  .startup-footer-tagline {
-    font-family: "Inter", sans-serif;
-    font-size: 0.85rem;
-    line-height: 1.5;
-    color: var(--startup-gray);
-  }
-  
-  .startup-footer-status {
-    font-size: 0.68rem;
-    color: var(--startup-success);
-    border: 1px solid rgba(52, 211, 153, 0.25);
-    background: rgba(52, 211, 153, 0.08);
-    padding: 4px 8px;
-    border-radius: 4px;
-    width: fit-content;
-  }
-  
-  .startup-footer-column {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .startup-footer-heading {
-    font-family: "Inter", sans-serif;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--startup-gray);
-    margin-bottom: 4px;
-  }
-  
-  .startup-footer-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: none;
-    border: none;
-    text-align: left;
-    font-family: "Inter", sans-serif;
-    font-size: 0.87rem;
-    color: var(--startup-white);
-    opacity: 0.75;
-    text-decoration: none;
-    cursor: pointer;
-    padding: 0;
-    transition: opacity 0.15s ease, color 0.15s ease;
-  }
-  
+  border-top: 1px solid var(--startup-border);
+  background: var(--startup-black);
+  /* 56px 24px 24px on desktop (same as before), less on phones */
+  padding: clamp(2.5rem, 5.1vw, 3.5rem) clamp(16px, 4vw, 24px) 24px;
+}
+
+.startup-footer-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  /* The same 1.6 : 1 : 1 split as before. minmax(0, ...) = a long email can't
+     stretch a column. */
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 3.6vw, 2.5rem);
+}
+
+.startup-footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 320px;
+}
+
+.startup-footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Sora", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--startup-white);
+  text-decoration: none;
+}
+
+.startup-footer-logo svg {
+  color: var(--startup-accent);
+}
+
+.startup-footer-tagline {
+  font-family: "Inter", sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--startup-gray);
+}
+
+.startup-footer-status {
+  font-size: 0.68rem;
+  color: var(--startup-success);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  background: rgba(52, 211, 153, 0.08);
+  padding: 4px 8px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.startup-footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.startup-footer-heading {
+  font-family: "Inter", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--startup-gray);
+  margin-bottom: 4px;
+}
+
+.startup-footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: "Inter", sans-serif;
+  font-size: 0.87rem;
+  color: var(--startup-white);
+  opacity: 0.75;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0;
+  min-width: 0;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.startup-footer-link svg {
+  flex-shrink: 0;
+}
+
+/* A long email address wraps instead of overflowing on a narrow phone */
+.startup-footer-link span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Mouse only, so the color doesn't stay stuck after a tap on phones */
+@media (hover: hover) {
   .startup-footer-link:hover {
     opacity: 1;
     color: var(--startup-accent);
   }
-  
+}
+
+.startup-footer-bottom {
+  max-width: 1180px;
+  margin: 40px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--startup-border);
+  font-family: "Inter", sans-serif;
+  font-size: 0.78rem;
+  color: var(--startup-gray);
+}
+
+.startup-footer-link:focus-visible,
+.startup-footer-logo:focus-visible {
+  outline: 2px solid var(--startup-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+  opacity: 1;
+  color: var(--startup-accent);
+}
+
+/* Touch screens (any width): every link is a 44px tap target. The column's gap
+   moves into the links' own height, so the footer doesn't get any taller. */
+@media (pointer: coarse) {
+  .startup-footer-column {
+    gap: 0;
+  }
+
+  .startup-footer-link {
+    min-height: 44px;
+  }
+
+  .startup-footer-logo {
+    min-height: 44px;
+  }
+}
+
+/* Below 1400px the Back button (if it's on this template) floats in the
+   bottom-left corner. This extra space at the bottom means it never sits on top
+   of the copyright line when you scroll all the way down. */
+@media (max-width: 1399px) {
   .startup-footer-bottom {
-    max-width: 1180px;
-    margin: 40px auto 0;
-    padding-top: 20px;
-    border-top: 1px solid var(--startup-border);
-    font-family: "Inter", sans-serif;
-    font-size: 0.78rem;
-    color: var(--startup-gray);
+    padding-bottom: 3.5rem;
   }
-  
-  .startup-footer-link:focus-visible,
-  .startup-footer-logo:focus-visible {
-    outline: 2px solid var(--startup-accent);
-    outline-offset: 2px;
-    border-radius: 4px;
+}
+
+/* Tablet (681 to 900px): the brand takes its own row and the two link columns
+   share the next one. At 681px the old three columns left only about 150px for
+   the "hello@rivet.dev" link. */
+@media (max-width: 900px) {
+  .startup-footer-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  
-  @media (max-width: 680px) {
-    .startup-footer-inner {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
+
+  .startup-footer-brand {
+    grid-column: 1 / -1;
+    max-width: none;
   }
+}
+
+@media (max-width: 680px) {
+  .startup-footer-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+}

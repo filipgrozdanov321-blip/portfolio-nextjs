@@ -11,6 +11,7 @@
   display: flex;
   flex-direction: column;
   text-align: left;
+  min-width: 0; /* a long option text can't stretch the grid */
 }
 
 /* Labels */
@@ -33,6 +34,7 @@
   font-size: 0.95rem;
   outline: none;
   box-sizing: border-box;
+  max-width: 100%;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -57,10 +59,11 @@
   min-height: 150px;
 }
 
-/* Two-column row */
+/* Two-column row: side by side while each field has at least 12rem,
+   then stacked. The switch happens by itself instead of at a fixed 640px. */
 .contact-form-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
   gap: 1.25rem;
 }
 
@@ -83,21 +86,41 @@
     box-shadow 0.2s ease;
 }
 
-.contact-form-button:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 10px 18px rgba(0, 0, 0, 0.35),  /* main dark shadow */
-    0 4px 8px rgba(0, 0, 0, 0.25);     /* subtle secondary layer */
-  background-color: #ffffff;
-  color: #111;
+/* Mouse only, so the button doesn't stay white after a tap on phones */
+@media (hover: hover) {
+  .contact-form-button:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 10px 18px rgba(0, 0, 0, 0.35),  /* main dark shadow */
+      0 4px 8px rgba(0, 0, 0, 0.25);     /* subtle secondary layer */
+    background-color: #ffffff;
+    color: #111;
+  }
+}
+
+.contact-form-button:focus-visible {
+  outline: 2px solid #007bff;
+  outline-offset: 3px;
+}
+
+/* Phones and touch screens: 16px or larger stops iOS from zooming the page
+   in when a field is tapped, and every field is at least 44px tall.
+   (Desktop keeps the 0.95rem above.) */
+@media (pointer: coarse), (max-width: 640px) {
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    font-size: 16px;
+  }
+
+  .contact-form input,
+  .contact-form select {
+    min-height: 44px;
+  }
 }
 
 /* Mobile */
 @media (max-width: 640px) {
-  .contact-form-row {
-    grid-template-columns: 1fr;
-  }
-
   .contact-form-button {
     align-self: center;
   }

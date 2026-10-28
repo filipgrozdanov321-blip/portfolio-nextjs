@@ -1,43 +1,70 @@
 .shop-product-gallery {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .shop-product-gallery-main {
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* When the page stacks (900px and narrower), the photo used to take the whole
+   width: on a 880px-wide tablet it was 880px wide and 1100px TALL (a 4:5
+   photo), more than a screen tall. It's capped at 544px wide now (680px tall),
+   aligned with the text below. On a phone it's still the full width. */
+@media (max-width: 900px) {
+  .shop-product-gallery {
     width: 100%;
-    aspect-ratio: 4 / 5;
-    background-color: var(--shop-cream);
-    border-radius: 2px;
-    overflow: hidden;
+    max-width: 34rem;
   }
-  
-  .shop-product-gallery-main-image {
-    object-fit: cover;
-  }
-  
-  .shop-product-gallery-thumbnails {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .shop-product-gallery-thumbnail {
-    position: relative;
-    width: 72px;
-    height: 88px;
-    flex-shrink: 0;
-    border-radius: 2px;
-    overflow: hidden;
-    background-color: var(--shop-cream);
-    border: 1.5px solid transparent;
-    transition: border-color 0.2s ease;
-  }
-  
-  .shop-product-gallery-thumbnail-active {
-    border-color: var(--shop-black);
-  }
-  
-  .shop-product-gallery-thumbnail-image {
-    object-fit: cover;
-  }
+}
+
+.shop-product-gallery-main {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background-color: var(--shop-cream);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.shop-product-gallery-main-image {
+  object-fit: cover;
+}
+
+/* The thumbnails wrap onto a second row if a product has more of them than fit
+   (before, they would have run off the edge of a phone) */
+.shop-product-gallery-thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.shop-product-gallery-thumbnail {
+  position: relative;
+  width: 72px;
+  height: 88px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  overflow: hidden;
+  background-color: var(--shop-cream);
+  border: 1.5px solid transparent;
+  transition: border-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.shop-product-gallery-thumbnail-active {
+  border-color: var(--shop-black);
+}
+
+.shop-product-gallery-thumbnail:focus-visible {
+  outline: 2px solid var(--shop-accent);
+  outline-offset: 2px;
+}
+
+.shop-product-gallery-thumbnail-image {
+  object-fit: cover;
+}
+
+@media (prefers-reduced-motion: reduce) {
+.shop-product-gallery-thumbnail {
+  transition: none;
+}
+}

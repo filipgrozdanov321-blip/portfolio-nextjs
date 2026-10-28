@@ -1,11 +1,15 @@
-.booking-staff-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: var(--booking-space-4);
-}
-
-@media (max-width: 480px) {
-  .booking-staff-grid {
-    grid-template-columns: repeat(2, 1fr);
+/* Staff cards: as many as fit on a row, each at least 160px wide, same as
+   before. On phones this gives 1 column below about 340px and 2 above, instead
+   of forcing 2 columns at 480px and under, which at 320px made each card only
+   about 130px wide. */
+   .booking-staff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 140px), 1fr));
+    gap: var(--booking-space-4);
   }
-}
+  
+  @media (min-width: 481px) {
+    .booking-staff-grid {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+  }

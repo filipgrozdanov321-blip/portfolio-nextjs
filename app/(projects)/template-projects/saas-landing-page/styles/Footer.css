@@ -1,70 +1,74 @@
-.footer {
+/* Every selector starts with ".saas-root". The main site's footer.css uses
+   the same class names (.footer-container, .footer-brand, .footer-bottom).
+   Next.js CSS is global, so without the prefix the two footers could restyle
+   each other, depending on which pages you opened first. For example, the main
+   footer's ".footer-brand p" rule would turn this footer's tagline pale grey. */
+
+   .saas-root .footer {
     background-color: var(--bg-secondary);
     border-top: 1px solid var(--border);
-    padding: 4rem 1.5rem 2rem;
+    /* 4rem 1.5rem 2rem on desktop (same as before), less on phones */
+    padding: clamp(2.5rem, 6vw, 4rem) clamp(1rem, 4vw, 1.5rem) clamp(1.5rem, 3vw, 2rem);
   }
   
-  .footer-container {
+  .saas-root .footer-container {
     max-width: 1100px;
     margin: 0 auto;
+    width: auto;
   }
   
-  .footer-top {
+  .saas-root .footer-top {
     display: flex;
     justify-content: space-between;
-    gap: 3rem;
+    gap: clamp(2rem, 5vw, 3rem);
     flex-wrap: wrap;
-    padding-bottom: 3rem;
+    padding-bottom: clamp(2rem, 5vw, 3rem);
   }
   
-  .footer-brand {
+  .saas-root .footer-brand {
     max-width: 280px;
   }
   
-  .footer-logo {
+  .saas-root .footer-logo {
     font-size: 1.3rem;
     font-weight: 700;
     color: var(--text-primary);
   }
   
-  .footer-tagline {
+  .saas-root .footer-tagline {
     margin-top: 0.75rem;
     font-size: 0.9rem;
     color: var(--text-secondary);
     line-height: 1.5;
   }
   
-  .footer-links-group {
+  .saas-root .footer-links-group {
     display: flex;
-    gap: 3rem;
+    gap: clamp(2rem, 6vw, 3rem);
     flex-wrap: wrap;
   }
   
-  .footer-links-column {
+  .saas-root .footer-links-column {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
   }
   
-  .footer-links-title {
+  .saas-root .footer-links-title {
     font-size: 0.85rem;
     font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 0.25rem;
   }
   
-  .footer-links-column a {
+  .saas-root .footer-links-column a {
     font-size: 0.9rem;
     color: var(--text-secondary);
     text-decoration: none;
     transition: color 0.2s ease;
   }
   
-  .footer-links-column a:hover {
-    color: var(--text-primary);
-  }
-  
-  .footer-bottom {
+  .saas-root .footer-bottom {
     border-top: 1px solid var(--border);
     padding-top: 1.5rem;
     display: flex;
@@ -72,31 +76,93 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
+    /* The main footer sets its own text color and size here; this keeps that
+       from reaching this footer's bottom bar */
+    font-size: inherit;
+    color: inherit;
   }
   
-  .footer-bottom p {
+  .saas-root .footer-bottom p {
     font-size: 0.85rem;
     color: var(--text-secondary);
   }
   
-  .footer-socials {
+  .saas-root .footer-socials {
     display: flex;
+    flex-wrap: wrap;
     gap: 1.25rem;
   }
   
-  .footer-socials a {
+  .saas-root .footer-socials a {
     font-size: 0.85rem;
     color: var(--text-secondary);
     text-decoration: none;
     transition: color 0.2s ease;
   }
   
-  .footer-socials a:hover {
-    color: var(--text-primary);
+  /* Mouse only, so the colors don't stay stuck after a tap on phones */
+  @media (hover: hover) {
+    .saas-root .footer-links-column a:hover,
+    .saas-root .footer-socials a:hover {
+      color: var(--text-primary);
+    }
   }
   
+  .saas-root .footer-links-column a:focus-visible,
+  .saas-root .footer-socials a:focus-visible {
+    color: var(--text-primary);
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  
+  /* Touch screens (any width): every link is a 44px-tall tap target */
+  @media (pointer: coarse) {
+    .saas-root .footer-links-column {
+      gap: 0;
+    }
+  
+    .saas-root .footer-links-title {
+      margin-bottom: 0.5rem;
+    }
+  
+    .saas-root .footer-links-column a {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+    }
+  
+    .saas-root .footer-socials a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+  }
+  
+  /* Below 1400px the Back button floats in the bottom-left corner. This extra
+     space at the bottom means it never sits on top of the copyright line when
+     you scroll all the way down. */
+  @media (max-width: 1399px) {
+    .saas-root .footer {
+      padding-bottom: calc(clamp(1.5rem, 3vw, 2rem) + 3.5rem);
+    }
+  }
+  
+  /* Phones: the three link columns become a tidy grid (2 across, then wrapping)
+     instead of three narrow columns, and the bottom bar stacks like before */
   @media (max-width: 640px) {
-    .footer-bottom {
+    .saas-root .footer-brand {
+      max-width: none;
+    }
+  
+    .saas-root .footer-links-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 7.5rem), 1fr));
+      gap: 1.5rem;
+      width: 100%;
+    }
+  
+    .saas-root .footer-bottom {
       flex-direction: column;
       align-items: flex-start;
     }

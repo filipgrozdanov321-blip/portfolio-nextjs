@@ -1,0 +1,22 @@
+.realestate-contact-page {
+    /* 56px top and 88px bottom on desktop (same as before), less on phones */
+    padding-top: clamp(2rem, 5.1vw, 3.5rem);
+    padding-bottom: clamp(3rem, 8vw, 5.5rem);
+  }
+  
+  .realestate-contact-intro {
+    max-width: 560px;
+    margin-bottom: clamp(1.75rem, 3.6vw, 2.5rem);
+  }
+  
+  .realestate-contact-title {
+    font-size: clamp(1.75rem, 1.4rem + 1.7vw, 2.125rem);
+    font-weight: 700;
+    margin-top: 8px;
+  }
+  
+  .realestate-contact-lead {
+    font-size: 15px;
+    color: var(--realestate-gray);
+    margin-top: 12px;
+  }

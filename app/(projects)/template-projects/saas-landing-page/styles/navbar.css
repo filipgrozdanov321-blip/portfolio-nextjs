@@ -1,63 +1,256 @@
 .navbar {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: var(--bg-primary);
-    border-bottom: 1px solid var(--border);
-    z-index: 1000;
-  }
-  
-  .navbar-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.5rem;
-  }
-  
-  .navbar-logo {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    text-decoration: none;
-  }
-  
-  .navbar-links {
-    display: flex;
-    gap: 2rem;
-  }
-  
-  .navbar-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: color 0.2s ease;
-  }
-  
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+}
+
+/* Wrapper around the links + Get Started button.
+   display: contents = "pretend this div isn't here", so on desktop the
+   layout is exactly what it was before. On mobile it becomes the panel. */
+.navbar-menu {
+  display: contents;
+}
+
+.navbar-logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.navbar-logo:focus-visible,
+.navbar-links a:focus-visible,
+.navbar-cta:focus-visible,
+.navbar-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.navbar-cta {
+  background-color: var(--accent);
+  color: #ffffff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+/* Mouse only, so hover colors don't stay stuck after a tap on phones */
+@media (hover: hover) {
   .navbar-links a:hover {
     color: var(--text-primary);
   }
-  
-  .navbar-cta {
-    background-color: var(--accent);
-    color: #ffffff;
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-  }
-  
+
   .navbar-cta:hover {
     background-color: var(--accent-hover);
   }
-  
-  @media (max-width: 768px) {
-    .navbar-links {
-      display: none; /* simple mobile fallback for now — can add a hamburger menu later */
-    }
+}
+
+/* Hamburger button: hidden on desktop, shown in the mobile media query */
+.navbar-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.navbar-toggle-bars,
+.navbar-toggle-bars::before,
+.navbar-toggle-bars::after {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: currentColor;
+  transition: transform 0.25s ease, background-color 0.2s ease;
+}
+
+.navbar-toggle-bars {
+  position: relative;
+}
+
+.navbar-toggle-bars::before,
+.navbar-toggle-bars::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.navbar-toggle-bars::before {
+  top: -7px;
+}
+
+.navbar-toggle-bars::after {
+  top: 7px;
+}
+
+/* Hamburger turns into an X when open */
+.navbar-toggle[aria-expanded="true"] .navbar-toggle-bars {
+  background-color: transparent;
+}
+
+.navbar-toggle[aria-expanded="true"] .navbar-toggle-bars::before {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.navbar-toggle[aria-expanded="true"] .navbar-toggle-bars::after {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (hover: hover) {
+  .navbar-toggle:hover {
+    background-color: rgba(127, 127, 127, 0.15);
   }
+}
+
+/* Touch screens (any width): every tap target is 44px tall */
+@media (pointer: coarse) {
+  .navbar-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .navbar-cta {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+}
+
+/* =========================================================
+   MOBILE (768px and narrower): hamburger + slide-down panel
+   (replaces the old "hide the links" fallback)
+   ========================================================= */
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-toggle {
+    display: inline-flex;
+  }
+
+  /* The panel: sits right under the navbar, closed by default */
+  .navbar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+    padding: 0.5rem 1rem 1rem;
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 12px 16px -8px rgba(0, 0, 0, 0.25);
+    max-height: calc(100vh - 3.75rem);
+    max-height: calc(100dvh - 3.75rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease,
+      visibility 0s linear 0.2s;
+  }
+
+  .navbar-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease,
+      visibility 0s;
+  }
+
+  /* Links stack in a column */
+  .navbar-links {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .navbar-links a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+
+  /* Tap feedback (works on touch; hover is mouse-only) */
+  .navbar-links a:active {
+    background-color: rgba(127, 127, 127, 0.15);
+  }
+
+  .navbar-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) and (hover: hover) {
+  .navbar-links a:hover {
+    background-color: rgba(127, 127, 127, 0.15);
+  }
+}
+
+/* Respect "reduce motion" system setting */
+@media (prefers-reduced-motion: reduce) {
+  .navbar-menu,
+  .navbar-menu.is-open,
+  .navbar-toggle-bars,
+  .navbar-toggle-bars::before,
+  .navbar-toggle-bars::after {
+    transition: none;
+  }
+}

@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 
-:root {
+/* The color variables used to live on :root, which meant every page of the
+   whole site got them as soon as this file loaded (Next.js CSS is global).
+   Scoped to .dashboard-page (the div in layout.tsx that wraps the dashboard)
+   they can't leak out. Everything in the dashboard is inside it. */
+.dashboard-page {
   --dashboard-bg: #F8F9FB;
   --dashboard-card: #FFFFFF;
   --dashboard-text: #111827;
@@ -14,19 +18,35 @@
   --dashboard-radius-sm: 8px;
   --dashboard-shadow: 0 1px 2px rgba(17, 24, 39, 0.04), 0 2px 8px rgba(17, 24, 39, 0.04);
   --dashboard-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
 
-.dashboard-page {
   min-height: 100vh;
+  min-height: 100dvh;
   background-color: var(--dashboard-bg);
   color: var(--dashboard-text);
   font-family: var(--dashboard-font);
-  padding: 60px clamp(16px, 4vw, 48px) 64px;
+  /* 60px top, 48px sides and 64px bottom on desktop (same as before), less on
+     phones. The top room is for the Back button, which sits in the top-left
+     corner at 1400px and wider. */
+  padding:
+    clamp(2.5rem, 6vw, 3.75rem)
+    clamp(16px, 4vw, 48px)
+    clamp(2.5rem, 6vw, 4rem);
+  /* Long words wrap instead of pushing the page sideways on phones */
+  overflow-wrap: break-word;
 }
 
 .dashboard-page,
 .dashboard-page * {
   box-sizing: border-box;
+}
+
+/* Below 1400px the Back button floats in the bottom-left corner. This extra
+   space at the bottom means it never sits on top of the last card when you
+   scroll all the way down. */
+@media (max-width: 1399px) {
+  .dashboard-page {
+    padding-bottom: calc(clamp(2.5rem, 6vw, 4rem) + 3.5rem);
+  }
 }
 
 /* Shared card shell used by KPI tiles, chart panels, and the products table */
@@ -44,34 +64,39 @@
 }
 
 .dashboard-section {
-  margin-top: 24px;
+  margin-top: clamp(1rem, 3vw, 1.5rem);
 }
 
+/* 4 KPI cards: 4 across, then 2 + 2, then 1 (the same breakpoints as before).
+   With exactly 4 cards, "auto-fit" would sometimes leave a lone card (3 + 1).
+   The gap shrinks smoothly, and minmax(0, 1fr) means a long number can't
+   stretch a column. */
 .dashboard-grid-4 {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 16px);
 }
 
+/* Two panels side by side (2 : 1) for the category chart, once it exists */
 .dashboard-grid-2 {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 16px;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: clamp(12px, 2vw, 16px);
   align-items: stretch;
 }
 
 @media (max-width: 900px) {
   .dashboard-grid-4 {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .dashboard-grid-2 {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
 @media (max-width: 520px) {
   .dashboard-grid-4 {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }

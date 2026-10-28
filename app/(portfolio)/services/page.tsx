@@ -1,12 +1,24 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import "../../../styles/pages/services-page.css";
 
+// How much of a whole section must be on screen before its content animates
+// in. It was 0.8. On a phone the stacked sections (How I Work, Core Services,
+// What This Solves for You...) are taller than the screen, so they could
+// never be 80% visible and everything inside them stayed at opacity 0.
+const SECTION_THRESHOLD = 0.15;
+
 export default function ServicesPage() {
+  const rootRef = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
-    document.querySelectorAll("[data-animate-load]").forEach(el => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    // Only look for elements inside THIS page (not the whole document)
+    root.querySelectorAll("[data-animate-load]").forEach(el => {
       requestAnimationFrame(() => {
         el.classList.add("in-view");
       });
@@ -24,10 +36,10 @@ export default function ServicesPage() {
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.8 }
+      { threshold: SECTION_THRESHOLD }
     );
 
-    document
+    root
       .querySelectorAll("[data-animate-section]")
       .forEach(section => observer.observe(section));
 
@@ -35,7 +47,7 @@ export default function ServicesPage() {
   }, []);
 
   return (
-    <main className="services-page">
+    <main className="services-page" ref={rootRef}>
       <section className="services-hero">
         <h1 data-animate="fade-up" data-delay="1" data-animate-load>
           Serious Websites. Measurable Growth.

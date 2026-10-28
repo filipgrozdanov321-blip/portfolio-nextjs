@@ -1,82 +1,97 @@
 .realestate-agentbio-inner {
-    display: grid;
-    grid-template-columns: 0.85fr 1.15fr;
-    gap: 56px;
-    align-items: start;
+  display: grid;
+  /* The same 0.85 : 1.15 split as before. minmax(0, ...) = long words can't
+     stretch a column. 56px gap from about 1100px up (same as before). */
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(2rem, 5.1vw, 3.5rem);
+  align-items: start;
+}
+
+/* Sticky on desktop, as before. A sticky box is also a positioned box, which
+   is what lets the photo (next/image "fill") position itself inside it. */
+.realestate-agentbio-image-wrap {
+  border-radius: var(--realestate-radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  position: sticky;
+  top: 96px;
+}
+
+/* next/image "fill" puts the photo in an absolutely positioned box, so the old
+   width: 100% / height: 100% rules are no longer needed; these two lines are
+   what keep the same crop as before. */
+.realestate-agentbio-image {
+  object-fit: cover;
+  object-position: top;
+}
+
+.realestate-agentbio-title {
+  font-size: clamp(1.75rem, 1.4rem + 1.7vw, 2.125rem);
+  font-weight: 800;
+  margin-top: 8px;
+}
+
+.realestate-agentbio-role {
+  font-size: 15px;
+  color: var(--realestate-gray);
+  margin-top: 6px;
+}
+
+.realestate-agentbio-credentials {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 28px;
+  /* 20px from about 500px up (same as before) */
+  padding: clamp(16px, 4vw, 20px);
+  background-color: var(--realestate-white);
+  border: 1px solid var(--realestate-border);
+  border-radius: var(--realestate-radius-md);
+}
+
+.realestate-agentbio-credential {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--realestate-navy);
+  /* A long credential wraps instead of overflowing on a narrow phone */
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.realestate-agentbio-credential svg {
+  color: var(--realestate-gold);
+  flex-shrink: 0;
+}
+
+.realestate-agentbio-text {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.realestate-agentbio-text p {
+  font-size: 15.5px;
+  color: var(--realestate-gray);
+  line-height: 1.75;
+}
+
+@media (max-width: 860px) {
+  .realestate-agentbio-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
   }
-  
+
+  /* "relative", not "static": the photo (next/image "fill") is absolutely
+     positioned, and a static box can't hold it, so it would escape and cover
+     the page on phones (the bug I fixed on the Photographer About page). The
+     photo is no longer sticky here. */
   .realestate-agentbio-image-wrap {
-    border-radius: var(--realestate-radius-lg);
-    overflow: hidden;
-    aspect-ratio: 4 / 5;
-    position: sticky;
-    top: 96px;
+    position: relative;
+    top: auto;
+    max-width: 340px;
   }
-  
-  .realestate-agentbio-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .realestate-agentbio-title {
-    font-size: 34px;
-    font-weight: 800;
-    margin-top: 8px;
-  }
-  
-  .realestate-agentbio-role {
-    font-size: 15px;
-    color: var(--realestate-gray);
-    margin-top: 6px;
-  }
-  
-  .realestate-agentbio-credentials {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 28px;
-    padding: 20px;
-    background-color: var(--realestate-white);
-    border: 1px solid var(--realestate-border);
-    border-radius: var(--realestate-radius-md);
-  }
-  
-  .realestate-agentbio-credential {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--realestate-navy);
-  }
-  
-  .realestate-agentbio-credential svg {
-    color: var(--realestate-gold);
-    flex-shrink: 0;
-  }
-  
-  .realestate-agentbio-text {
-    margin-top: 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
-  
-  .realestate-agentbio-text p {
-    font-size: 15.5px;
-    color: var(--realestate-gray);
-    line-height: 1.75;
-  }
-  
-  @media (max-width: 860px) {
-    .realestate-agentbio-inner {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-  
-    .realestate-agentbio-image-wrap {
-      position: static;
-      max-width: 340px;
-    }
-  }
+}

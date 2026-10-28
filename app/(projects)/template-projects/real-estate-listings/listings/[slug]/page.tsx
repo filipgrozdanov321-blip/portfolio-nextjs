@@ -5,13 +5,22 @@ import { properties, getPropertyBySlug } from "../../data/listings";
 import RealEstateImageGallery from "../../components/RealEstateImageGallery";
 import RealEstateListingDetail from "../../components/RealEstateListingDetail";
 import RealEstateAgentContactCard from "../../components/RealEstateAgentContactCard";
+import "../../styles/RealEstateDetailPage.css";
+
+// Next.js 15 (and 16) hands params to a page as a PROMISE. The old code read it
+// as a plain object, so on those versions every listing would have come back
+// "not found", and it fails the build with a type error. This works for both
+// versions: "await" on a plain object just returns it.
+type PageParams = { slug: string };
+type PageProps = { params: Promise<PageParams> | PageParams };
 
 export function generateStaticParams() {
   return properties.map((property) => ({ slug: property.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const property = getPropertyBySlug(params.slug);
+export async function generateMetadata({ params }: PageProps) {
+  const { slug } = await params;
+  const property = getPropertyBySlug(slug);
   if (!property) return { title: "Listing Not Found | Meridian Realty" };
 
   return {
@@ -20,47 +29,27 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   };
 }
 
-export default function RealEstateListingDetailPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const property = getPropertyBySlug(params.slug);
+export default async function RealEstateListingDetailPage({ params }: PageProps) {
+  const { slug } = await params;
+  const property = getPropertyBySlug(slug);
 
   if (!property) {
     notFound();
   }
 
   return (
-    <div className="realestate-container" style={{ paddingTop: "32px", paddingBottom: "80px" }}>
+    <div className="realestate-container realestate-detail-page">
       <Link
         href="/template-projects/real-estate-listings/listings"
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "6px",
-          fontSize: "14px",
-          fontWeight: 500,
-          color: "var(--realestate-gray)",
-          marginBottom: "20px",
-        }}
+        className="realestate-detail-back"
       >
-        <ArrowLeft size={16} />
+        <ArrowLeft size={16} aria-hidden="true" />
         Back to Listings
       </Link>
 
       <RealEstateImageGallery images={property.images} alt={property.address} />
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1.7fr 1fr",
-          gap: "40px",
-          marginTop: "40px",
-          alignItems: "start",
-        }}
-        className="realestate-detail-layout"
-      >
+      <div className="realestate-detail-layout">
         <RealEstateListingDetail property={property} />
         <RealEstateAgentContactCard propertyAddress={property.address} />
       </div>

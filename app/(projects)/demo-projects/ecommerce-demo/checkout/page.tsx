@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useCart } from "../context/ShopCartContext";
 import ShopCheckoutSteps, {
@@ -33,6 +33,22 @@ export default function ShopCheckoutPage() {
     orderNumber: string;
     email: string;
   } | null>(null);
+
+  // On a phone the "Continue" button is near the bottom of a tall form, so after
+  // pressing it you'd be looking at the bottom of the NEXT step. This takes you
+  // back to the top whenever the step changes or the order is placed. (It skips
+  // the very first render, so opening the page doesn't scroll.)
+  const isFirstRender = useRef(true);
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  }, [step, confirmedOrder]);
 
   const handleShippingNext = (data: ShippingData) => {
     setShippingData(data);

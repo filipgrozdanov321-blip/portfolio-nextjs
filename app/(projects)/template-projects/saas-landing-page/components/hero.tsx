@@ -1,6 +1,5 @@
 "use client";
 
-import { use } from "react";
 import { scrollToSection } from "../lib/scrollTo";
 import "../styles/hero.css";
 

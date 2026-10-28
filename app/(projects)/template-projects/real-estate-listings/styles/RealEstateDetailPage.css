@@ -1,0 +1,59 @@
+/* The detail page's own spacing, "Back to Listings" link and two-column
+   layout. These were inline styles in page.tsx, which can't change at a
+   screen size, so the layout stayed two columns on phones. */
+
+   .realestate-detail-page {
+    /* 32px top and 80px bottom on desktop (same as before), less on phones */
+    padding-top: clamp(1.25rem, 3vw, 2rem);
+    padding-bottom: clamp(3rem, 7.3vw, 5rem);
+  }
+  
+  .realestate-detail-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--realestate-gray);
+    margin-bottom: 20px;
+  }
+  
+  /* Mouse only, so the color doesn't stay stuck after a tap on phones */
+  @media (hover: hover) {
+    .realestate-detail-back:hover {
+      color: var(--realestate-navy);
+    }
+  }
+  
+  .realestate-detail-back:focus-visible {
+    color: var(--realestate-navy);
+    outline: 2px solid var(--realestate-gold);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+  
+  /* Touch screens: the link is a 44px tap target */
+  @media (pointer: coarse) {
+    .realestate-detail-back {
+      min-height: 44px;
+    }
+  }
+  
+  /* Details on the left, agent card on the right: the same 1.7 : 1 split as
+     before. The 40px gap shrinks smoothly below about 1100px. minmax(0, ...)
+     keeps a long address from stretching a column. */
+  .realestate-detail-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 3.6vw, 2.5rem);
+    margin-top: clamp(1.75rem, 3.6vw, 2.5rem);
+    align-items: start;
+  }
+  
+  /* Phones and small tablets: one column, with the agent card under the details
+     (it is no longer sticky; see RealEstateAgentContactCard.css) */
+  @media (max-width: 860px) {
+    .realestate-detail-layout {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }

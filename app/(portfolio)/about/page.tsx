@@ -3,11 +3,23 @@
 import { useEffect, useRef } from "react";
 import "../../../styles/pages/about-me.css";
 
+// How much of a whole section must be on screen before its content animates
+// in. It was 0.7. On a phone the stacked sections (Approach, Tools) are
+// taller than the screen, so they could never be 70% visible and everything
+// inside them stayed at opacity 0.
+const SECTION_THRESHOLD = 0.15;
+
 export default function AboutMe() {
+  const rootRef = useRef<HTMLDivElement | null>(null);
   const timelineRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    document
+    const root = rootRef.current;
+    const timeline = timelineRef.current;
+    if (!root || !timeline) return;
+
+    // Only look for elements inside THIS page (not the whole document)
+    root
       .querySelectorAll<HTMLElement>("[data-animate-load]")
       .forEach(el => {
         requestAnimationFrame(() => {
@@ -27,10 +39,10 @@ export default function AboutMe() {
           sectionObserver.unobserve(entry.target);
         });
       },
-      { threshold: 0.7 }
+      { threshold: SECTION_THRESHOLD }
     );
 
-    document
+    root
       .querySelectorAll<HTMLElement>("[data-animate-section]")
       .forEach(section => {
         if (!section.querySelector(".timeline")) {
@@ -56,14 +68,11 @@ export default function AboutMe() {
       }
     );
 
-    document
-      .querySelectorAll<HTMLElement>(".timeline-item")
-      .forEach(item => timelineItemObserver.observe(item));
+    const items = timeline.querySelectorAll<HTMLElement>(".timeline-item");
+    items.forEach(item => timelineItemObserver.observe(item));
 
-    const timeline = timelineRef.current;
-    if (!timeline) return;
-
-    const handleScroll = () => {
+    // Blue progress line + active dots
+    const updateTimeline = () => {
       const rect = timeline.getBoundingClientRect();
       const timelineHeight = timeline.offsetHeight;
       const windowHeight = window.innerHeight;
@@ -76,26 +85,38 @@ export default function AboutMe() {
       const lineHeight = progress * timelineHeight;
       timeline.style.setProperty("--timeline-progress", `${lineHeight}px`);
 
-      timeline
-        .querySelectorAll<HTMLElement>(".timeline-item")
-        .forEach(item => {
-          const dotOffset = item.offsetTop + 31;
-          item.classList.toggle("active", dotOffset <= lineHeight);
-        });
+      items.forEach(item => {
+        const dotOffset = item.offsetTop + 31;
+        item.classList.toggle("active", dotOffset <= lineHeight);
+      });
     };
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
+    // At most one update per frame, and it also re-runs when the screen is
+    // resized or rotated (the timeline's height changes when that happens).
+    let frame = 0;
+    const onScrollOrResize = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        updateTimeline();
+      });
+    };
+
+    window.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener("resize", onScrollOrResize);
+    updateTimeline();
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", onScrollOrResize);
+      window.removeEventListener("resize", onScrollOrResize);
+      cancelAnimationFrame(frame);
       sectionObserver.disconnect();
       timelineItemObserver.disconnect();
     };
   }, []);
 
   return (
-    <div className="about-me">
+    <div className="about-me" ref={rootRef}>
       <section className="about-me__intro" data-animate-section>
         <div
           className="terminal-window"

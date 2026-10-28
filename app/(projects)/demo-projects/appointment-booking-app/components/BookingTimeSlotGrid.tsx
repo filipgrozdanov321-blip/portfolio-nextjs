@@ -40,6 +40,7 @@ export default function BookingTimeSlotGrid({
             type="button"
             role="option"
             aria-selected={isSelected}
+            aria-disabled={!isAvailable}
             disabled={!isAvailable}
             className={[
               "booking-timeslot-pill",

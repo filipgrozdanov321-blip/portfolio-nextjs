@@ -1,9 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./businesses-thrive.css";
 
+// How much of an element must be on screen before it fades in.
+// 0.7 was too high: on a phone the stacked columns are taller than 70% of
+// the screen, so they could never reach it and stayed invisible.
+const REVEAL_THRESHOLD = 0.15;
+
 const BusinessesThriveSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+
   const [isVisible, setIsVisible] = useState({
     title: false,
     subtitle: false,
@@ -14,26 +21,35 @@ const BusinessesThriveSection = () => {
   });
 
   useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
 
-          if (entry.target.classList.contains("heading")) {
+          const el = entry.target;
+
+          if (el.classList.contains("heading")) {
             setIsVisible((prev) => ({ ...prev, title: true }));
-          } else if (entry.target.classList.contains("bt-under-header")) {
+          } else if (el.classList.contains("bt-under-header")) {
             setIsVisible((prev) => ({ ...prev, subtitle: true }));
-          } else if (entry.target.classList.contains("bt-column-left")) {
+          } else if (el.classList.contains("bt-column-left")) {
             setIsVisible((prev) => ({ ...prev, leftColumn: true }));
-          } else if (entry.target.classList.contains("bt-column-right")) {
+          } else if (el.classList.contains("bt-column-right")) {
             setIsVisible((prev) => ({ ...prev, rightColumn: true }));
           }
+
+          // Each element only needs to reveal once
+          observer.unobserve(el);
         });
       },
-      { threshold: 0.7 }
+      { threshold: REVEAL_THRESHOLD }
     );
 
-    const elements = document.querySelectorAll(
+    // Only look inside THIS section (".heading" is a very generic class name)
+    const elements = section.querySelectorAll(
       ".heading, .bt-under-header, .bt-column-left, .bt-column-right"
     );
 
@@ -43,7 +59,7 @@ const BusinessesThriveSection = () => {
   }, []);
 
   return (
-    <section id="how-i-help" className="businesses-thrive">
+    <section id="how-i-help" className="businesses-thrive" ref={sectionRef}>
       <div className="bt-container">
         <h2 className={`heading ${isVisible.title ? "visible" : ""}`}>
           How I Help Businesses Thrive Online

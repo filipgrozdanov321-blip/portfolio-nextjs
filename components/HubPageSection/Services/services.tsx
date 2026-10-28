@@ -3,6 +3,12 @@
 import { useEffect, useRef } from "react";
 import "./services.css";
 
+// How much of an element must be on screen before it animates in.
+// 0.9 meant "90% visible", which the elements that start 60px off to the
+// side (clipped by the section) could never reach on a phone. They stayed
+// at opacity 0 forever.
+const REVEAL_THRESHOLD = 0.15;
+
 export default function ServicesSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
 
@@ -19,7 +25,7 @@ export default function ServicesSection() {
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.9 }
+      { threshold: REVEAL_THRESHOLD }
     );
 
     elements.forEach((el) => {

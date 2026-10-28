@@ -1,20 +1,54 @@
 .back-button {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    padding: 8px 14px;
-    font-size: 16px;
-    background: #222;
-    border: 1px solid #444;
-    border-radius: 6px;
-    color: #fff;
-    cursor: pointer;
-    z-index: 999;
-    transition: 0.2s ease;
-  }
-  
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 8px 14px;
+  font-size: 16px;
+  background: #222;
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 999;
+  transition: 0.2s ease;
+}
+
+@media (hover: hover) {
   .back-button:hover {
     background: #333;
     border-color: #666;
   }
-  
+}
+
+.back-button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Touch screens: tap feedback instead of hover, and a 44px target */
+@media (pointer: coarse) {
+  .back-button {
+    min-height: 44px;
+  }
+}
+
+@media (hover: none) {
+  .back-button:active {
+    background: #333;
+    border-color: #666;
+  }
+}
+
+/* Below 1400px wide the navbar's logo starts close to the left edge, so a
+   button in the top-left corner would sit on top of it. The button moves to
+   the bottom-left corner instead. It is still always visible and always
+   reachable. (max() keeps it clear of an iPhone's rounded corners and home bar.) */
+@media (max-width: 1399px) {
+  .back-button {
+    top: auto;
+    bottom: max(16px, env(safe-area-inset-bottom));
+    left: max(16px, env(safe-area-inset-left));
+    padding: 8px 16px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  }
+}

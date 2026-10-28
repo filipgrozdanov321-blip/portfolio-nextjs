@@ -1,106 +1,156 @@
 .shop-payment-form {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    max-width: 520px;
-  }
-  
-  .shop-payment-form-heading {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 2px;
-  }
-  
-  .shop-payment-form-demo-note {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 14px;
-    background-color: var(--shop-cream);
-    border: 1px solid var(--shop-border);
-    border-radius: 2px;
-    font-size: 12.5px;
-    color: var(--shop-black);
-    opacity: 0.85;
-    margin-bottom: 4px;
-  }
-  
-  .shop-payment-form-field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  
-  .shop-payment-form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  
-  .shop-payment-form-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--shop-black);
-  }
-  
-  .shop-payment-form-input {
-    padding: 12px 14px;
-    font-size: 14px;
-    font-family: inherit;
-    color: var(--shop-black);
-    background-color: var(--shop-white);
-    border: 1px solid var(--shop-border);
-    border-radius: 2px;
-    transition: border-color 0.2s ease;
-  }
-  
-  .shop-payment-form-input:focus {
-    outline: none;
-    border-color: var(--shop-black);
-  }
-  
-  .shop-payment-form-error {
-    font-size: 12px;
-    color: var(--shop-error);
-  }
-  
-  .shop-payment-form-actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 12px;
-  }
-  
-  .shop-payment-form-back {
-    padding: 15px 24px;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--shop-black);
-    border: 1px solid var(--shop-border);
-    border-radius: 2px;
-    transition: border-color 0.2s ease;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  max-width: 520px;
+}
+
+.shop-payment-form-heading {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.shop-payment-form-demo-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  background-color: var(--shop-cream);
+  border: 1px solid var(--shop-border);
+  border-radius: 2px;
+  font-size: 12.5px;
+  color: var(--shop-black);
+  opacity: 0.85;
+  margin-bottom: 4px;
+}
+
+.shop-payment-form-demo-note svg {
+  flex-shrink: 0;
+}
+
+.shop-payment-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+/* Expiry and CVC sit side by side while each has at least 9rem (they're
+   short fields), and stack by themselves below that. The old rule stacked them
+   at 480px, which put two short fields on separate full-width rows. */
+.shop-payment-form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+  gap: 16px;
+}
+
+.shop-payment-form-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--shop-black);
+}
+
+.shop-payment-form-input {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--shop-black);
+  background-color: var(--shop-white);
+  border: 1px solid var(--shop-border);
+  border-radius: 2px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.shop-payment-form-input:focus {
+  outline: none;
+  border-color: var(--shop-black);
+  box-shadow: 0 0 0 3px rgba(74, 93, 78, 0.18);
+}
+
+.shop-payment-form-input[aria-invalid="true"] {
+  border-color: var(--shop-error);
+}
+
+.shop-payment-form-error {
+  font-size: 12px;
+  color: var(--shop-error);
+}
+
+.shop-payment-form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.shop-payment-form-back {
+  padding: 15px 24px;
+  min-height: 44px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--shop-black);
+  border: 1px solid var(--shop-border);
+  border-radius: 2px;
+  transition: border-color 0.2s ease;
+}
+
+.shop-payment-form-submit {
+  flex: 1;
+  min-width: 0;
+  padding: 15px;
+  min-height: 44px;
+  background-color: var(--shop-black);
+  color: var(--shop-white);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 2px;
+  transition: background-color 0.2s ease;
+}
+
+/* Mouse only, so the colors don't stay stuck after a tap on phones. The
+   pressed colors, for touch, are the :active rules below. */
+@media (hover: hover) {
   .shop-payment-form-back:hover {
     border-color: var(--shop-black);
   }
-  
-  .shop-payment-form-submit {
-    flex: 1;
-    padding: 15px;
-    background-color: var(--shop-black);
-    color: var(--shop-white);
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 2px;
-    transition: background-color 0.2s ease;
-  }
-  
+
   .shop-payment-form-submit:hover {
     background-color: var(--shop-accent);
   }
-  
-  @media (max-width: 480px) {
-    .shop-payment-form-row {
-      grid-template-columns: 1fr;
-    }
+}
+
+.shop-payment-form-back:active {
+  border-color: var(--shop-black);
+}
+
+.shop-payment-form-submit:active {
+  background-color: var(--shop-accent);
+}
+
+.shop-payment-form-back:focus-visible,
+.shop-payment-form-submit:focus-visible {
+  outline: 2px solid var(--shop-accent);
+  outline-offset: 3px;
+}
+
+/* Phones and touch screens: 16px or larger stops iOS from zooming the page in
+   when a field is tapped, and each field is at least 44px tall.
+   (Desktop with a mouse keeps 14px.) */
+@media (pointer: coarse), (max-width: 768px) {
+  .shop-payment-form-input {
+    font-size: 16px;
+    min-height: 44px;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+.shop-payment-form-input,
+.shop-payment-form-back,
+.shop-payment-form-submit {
+  transition: none;
+}
+}

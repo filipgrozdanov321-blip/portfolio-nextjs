@@ -1,106 +1,148 @@
 .portfolio-gallery {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 4rem 2rem 6rem;
-  }
-  
-  .portfolio-gallery-tabs {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    margin-bottom: 3rem;
-    border-bottom: 1px solid var(--portfolio-border);
-    padding-bottom: 1.25rem;
-  }
-  
-  .portfolio-gallery-tab {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    color: var(--portfolio-gray);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.25rem 0;
-    position: relative;
-    transition: color 0.2s ease;
-  }
-  
+  /* Gap between photos: 1.25rem from about 1100px up (same as before), a
+     little tighter on phones. --pg-cols is how many photos fit in a row; it
+     changes in the media queries at the bottom of this file. */
+  --pg-gap: clamp(0.75rem, 1.8vw, 1.25rem);
+  --pg-cols: 3;
+
+  max-width: 1200px;
+  margin: 0 auto;
+  /* 4rem top, 2rem sides and 6rem bottom on desktop (same as before), less on phones */
+  padding:
+    clamp(2rem, 5.8vw, 4rem)
+    clamp(1.25rem, 4vw, 2rem)
+    clamp(3rem, 8.75vw, 6rem);
+}
+
+/* The four category tabs. They wrap onto a second row by themselves if they
+   don't fit (small phones). Each tab reaches all the way down to the divider
+   line, so its whole area is tappable and the active underline always sits
+   ON the line, even when the tabs wrap. (Before, the underline was placed
+   1.35rem below the text, which landed in the wrong place on two rows.) */
+.portfolio-gallery-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  /* 2rem between tabs from about 900px up (same as before) */
+  gap: 0 clamp(1.25rem, 3.6vw, 2rem);
+  justify-content: center;
+  margin-bottom: clamp(1.75rem, 4.4vw, 3rem);
+  border-bottom: 1px solid var(--portfolio-border);
+}
+
+.portfolio-gallery-tab {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: var(--portfolio-gray);
+  background: none;
+  border: none;
+  cursor: pointer;
+  /* 0.25rem above the text and 1.5rem below it: the text and underline end
+     up exactly where they were before (1.25rem container padding + 0.25rem) */
+  padding: 0.25rem 0 1.5rem;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+/* Mouse only, so a tapped tab doesn't stay "hovered" on phones */
+@media (hover: hover) {
   .portfolio-gallery-tab:hover {
     color: var(--portfolio-black);
   }
-  
-  .portfolio-gallery-tab-active {
-    color: var(--portfolio-black);
-    font-weight: 500;
-  }
-  
-  .portfolio-gallery-tab-active::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -1.35rem;
-    width: 100%;
-    height: 1px;
-    background-color: var(--portfolio-accent);
-  }
-  
-  .portfolio-gallery-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.25rem;
-  }
+}
 
-  .portfolio-gallery-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.25rem;
-    flex: 1 1 100%;
-  }
-  
-  .portfolio-gallery-item {
-    position: relative;
-    width: calc(33.333% - 0.834rem);
-    aspect-ratio: 3 / 4;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    background-color: var(--portfolio-border);
-    display: block;
-    overflow: hidden;
-  }
-  
-  .portfolio-gallery-item:nth-child(3n + 2) {
-    aspect-ratio: 3 / 4;
-  }
+.portfolio-gallery-tab:focus-visible {
+  outline: 2px solid var(--portfolio-accent);
+  outline-offset: 2px;
+}
 
-  .portfolio-gallery-row .portfolio-gallery-item {
-    aspect-ratio: 3 / 4;
-  }
-  
-  .portfolio-gallery-image {
-    object-fit: cover;
-    transition: transform 0.4s ease;
-  }
-  
+.portfolio-gallery-tab-active {
+  color: var(--portfolio-black);
+  font-weight: 500;
+}
+
+.portfolio-gallery-tab-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px; /* covers the divider line */
+  width: 100%;
+  height: 1px;
+  background-color: var(--portfolio-accent);
+}
+
+/* The photos: a centered, wrapping row. This is deliberately NOT a CSS grid:
+   with 5 photos it shows 3 + 2 with the last two CENTERED, and with 4 photos
+   it shows 2 + 2 (see the TSX). A grid can't center a partly-empty last row.
+   Each photo's width is worked out from --pg-cols and --pg-gap, so a row
+   always fills the width exactly. The 0.1px keeps rounding from pushing the
+   last photo of a row onto the next line. */
+.portfolio-gallery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--pg-gap);
+}
+
+.portfolio-gallery-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--pg-gap);
+  flex: 1 1 100%;
+}
+
+.portfolio-gallery-item {
+  position: relative;
+  width: calc(
+    (100% - (var(--pg-cols) - 1) * var(--pg-gap)) / var(--pg-cols) - 0.1px
+  );
+  aspect-ratio: 3 / 4;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background-color: var(--portfolio-border);
+  display: block;
+  overflow: hidden;
+}
+
+.portfolio-gallery-item:focus-visible {
+  outline: 2px solid var(--portfolio-accent);
+  outline-offset: 3px;
+}
+
+.portfolio-gallery-image {
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+/* Mouse only, so the photo doesn't stay zoomed after a tap on phones */
+@media (hover: hover) {
   .portfolio-gallery-item:hover .portfolio-gallery-image {
     transform: scale(1.03);
   }
-  
-  @media (max-width: 900px) {
-    .portfolio-gallery-item {
-      width: calc(50% - 0.625rem);
-    }
-  
-    .portfolio-gallery-tabs {
-      gap: 1.25rem;
-      flex-wrap: wrap;
-    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-gallery-image {
+    transition: none;
   }
-  
-  @media (max-width: 560px) {
-    .portfolio-gallery-item {
-      width: 100%;
-    }
+}
+
+/* Touch screens and small screens: the tabs get a full 44px tap height and a
+   tighter shape, since they can wrap onto two rows */
+@media (max-width: 900px) {
+  .portfolio-gallery {
+    --pg-cols: 2;
   }
+
+  .portfolio-gallery-tab {
+    min-height: 44px;
+    padding: 0.5rem 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .portfolio-gallery {
+    --pg-cols: 1;
+  }
+}

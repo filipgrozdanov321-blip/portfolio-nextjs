@@ -1,62 +1,69 @@
 .portfolio-testimonials {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 5rem 2rem;
-  }
-  
-  .portfolio-testimonials-title {
-    font-size: 2rem;
-    text-align: center;
-    margin: 0 0 3rem;
-  }
-  
+  max-width: 1200px;
+  margin: 0 auto;
+  /* 5rem top/bottom and 2rem sides on desktop (same as before), less on phones */
+  padding: clamp(3rem, 7.3vw, 5rem) clamp(1.25rem, 4vw, 2rem);
+}
+
+.portfolio-testimonials-title {
+  font-size: clamp(1.6rem, 1.3rem + 1.4vw, 2rem);
+  text-align: center;
+  margin: 0 0 clamp(1.75rem, 4.4vw, 3rem);
+}
+
+/* 3 cards: side by side down to 901px, then a single column (the same
+   breakpoint as before). A middle step of 2 + 1 would leave a lone card.
+   The gap shrinks smoothly, and minmax(0, ...) means a long word can't
+   stretch a column. */
+.portfolio-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+.portfolio-testimonial-card {
+  background-color: transparent;
+  border: 1px solid var(--portfolio-border);
+  /* 2rem from about 800px up (same as before). The fixed 2rem squeezed the
+     quote on phones. */
+  padding: clamp(1.25rem, 4vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 220px;
+}
+
+.portfolio-testimonial-quote {
+  font-family: 'Fraunces', serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--portfolio-black);
+  margin: 0 0 1.5rem;
+}
+
+.portfolio-testimonial-author {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.portfolio-testimonial-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--portfolio-black);
+}
+
+.portfolio-testimonial-role {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: var(--portfolio-gray);
+}
+
+@media (max-width: 900px) {
   .portfolio-testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.75rem;
+    grid-template-columns: minmax(0, 1fr);
   }
-  
-  .portfolio-testimonial-card {
-    background-color: transparent;
-    border: 1px solid var(--portfolio-border);
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 220px;
-  }
-  
-  .portfolio-testimonial-quote {
-    font-family: 'Fraunces', serif;
-    font-size: 1.05rem;
-    font-weight: 400;
-    font-style: italic;
-    line-height: 1.6;
-    color: var(--portfolio-black);
-    margin: 0 0 1.5rem;
-  }
-  
-  .portfolio-testimonial-author {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-  }
-  
-  .portfolio-testimonial-name {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--portfolio-black);
-  }
-  
-  .portfolio-testimonial-role {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
-    color: var(--portfolio-gray);
-  }
-  
-  @media (max-width: 900px) {
-    .portfolio-testimonials-grid {
-      grid-template-columns: 1fr;
-    }
-  }
+}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { FormEvent } from "react";
 import "./ContactForm.css";
 
 export default function ContactForm() {
@@ -8,7 +9,7 @@ export default function ContactForm() {
     "idle"
   );
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("sending");
 
@@ -39,6 +40,7 @@ export default function ContactForm() {
           type="text"
           id="name"
           name="name"
+          autoComplete="name"
           required
           placeholder="Your full name"
         />
@@ -50,6 +52,7 @@ export default function ContactForm() {
           type="email"
           id="email"
           name="email"
+          autoComplete="email"
           required
           placeholder="you@example.com"
         />
@@ -110,12 +113,12 @@ export default function ContactForm() {
       </button>
 
       {status === "success" && (
-        <p className="contact-form-status success">
+        <p className="contact-form-status success" role="status">
           Thanks — I'll get back to you within a day.
         </p>
       )}
       {status === "error" && (
-        <p className="contact-form-status error">
+        <p className="contact-form-status error" role="alert">
           Something went wrong. Try emailing me directly instead.
         </p>
       )}

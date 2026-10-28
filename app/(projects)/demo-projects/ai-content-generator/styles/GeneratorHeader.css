@@ -1,19 +1,20 @@
 .generator-header {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 8px;
-  }
-  
-  .generator-header-title {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--generator-text);
-    margin: 0;
-  }
-  
-  .generator-header-subtitle {
-    font-size: 14px;
-    color: var(--generator-text-secondary);
-    margin: 0;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.generator-header-title {
+  /* 28px from about 640px up (same as before), smaller on small phones */
+  font-size: clamp(1.4rem, 1.1rem + 1.3vw, 1.75rem);
+  font-weight: 700;
+  color: var(--generator-text);
+  margin: 0;
+}
+
+.generator-header-subtitle {
+  font-size: 14px;
+  color: var(--generator-text-secondary);
+  margin: 0;
+}
