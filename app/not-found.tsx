@@ -4,9 +4,9 @@ import Header from "@/components/partials/header";
 import Footer from "@/components/partials/footer";
 import "../styles/pages/NotFound.css";
 
+// (Next.js marks 404 pages noindex by itself.)
 export const metadata: Metadata = {
   title: "Page not found",
-  robots: { index: false },
 };
 
 // Shown for any URL that doesn't exist. It sits outside the (portfolio)

@@ -56,7 +56,7 @@ export default function RealEstateListingCard({ property }: { property: Property
           )}
           <span>
             <Ruler size={15} aria-hidden="true" />
-            {property.sqft.toLocaleString()} {isLand ? "sqft lot" : "sqft"}
+            {property.sqft.toLocaleString("en-US")} {isLand ? "sqft lot" : "sqft"}
           </span>
         </div>
       </div>

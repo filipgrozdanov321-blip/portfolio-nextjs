@@ -71,7 +71,7 @@ export default function RealEstateListingDetail({ property }: { property: Proper
         )}
         <div className="realestate-listingdetail-spec">
           <Ruler size={20} />
-          <span>{property.sqft.toLocaleString()} {isLand ? "sqft lot" : "sqft"}</span>
+          <span>{property.sqft.toLocaleString("en-US")} {isLand ? "sqft lot" : "sqft"}</span>
         </div>
       </div>
 
