@@ -2,7 +2,22 @@
 
 import { useState } from "react";
 import type { FormEvent } from "react";
+import Link from "next/link";
 import "./ContactForm.css";
+
+// Option values are the readable labels, so the email you receive says
+// "€1,000 – €3,000" rather than a code like "1k-3k".
+const PROJECT_TYPES = [
+  "Website",
+  "Web app (booking system, shop, dashboard)",
+  "Redesign of an existing site",
+  "Development work for an agency",
+  "Not sure yet",
+];
+
+const BUDGETS = ["Under €1,000", "€1,000 – €3,000", "€3,000 – €5,000", "€5,000+"];
+
+const TIMELINES = ["ASAP", "Within 1 month", "1–3 months", "Flexible"];
 
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">(
@@ -33,7 +48,7 @@ export default function ContactForm() {
   };
 
   return (
-    <form className="contact-form" onSubmit={handleSubmit}>
+    <form id="contact-form" className="contact-form" onSubmit={handleSubmit}>
       <div className="contact-form-group">
         <label htmlFor="name">Name *</label>
         <input
@@ -42,6 +57,7 @@ export default function ContactForm() {
           name="name"
           autoComplete="name"
           required
+          maxLength={200}
           placeholder="Your full name"
         />
       </div>
@@ -54,6 +70,7 @@ export default function ContactForm() {
           name="email"
           autoComplete="email"
           required
+          maxLength={320}
           placeholder="you@example.com"
         />
       </div>
@@ -62,10 +79,11 @@ export default function ContactForm() {
         <label htmlFor="projectType">Project Type</label>
         <select id="projectType" name="projectType">
           <option value="">Select a project type</option>
-          <option value="web-development">Web Development</option>
-          <option value="marketing">Marketing</option>
-          <option value="branding">Branding</option>
-          <option value="not-sure">Not sure yet</option>
+          {PROJECT_TYPES.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
         </select>
       </div>
 
@@ -74,10 +92,11 @@ export default function ContactForm() {
           <label htmlFor="budget">Budget Range</label>
           <select id="budget" name="budget">
             <option value="">Select budget</option>
-            <option value="under-1k">Under $1,000</option>
-            <option value="1k-3k">$1,000 - $3,000</option>
-            <option value="3k-5k">$3,000 - $5,000</option>
-            <option value="5k-plus">$5,000+</option>
+            {BUDGETS.map((budget) => (
+              <option key={budget} value={budget}>
+                {budget}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -85,10 +104,11 @@ export default function ContactForm() {
           <label htmlFor="timeline">Timeline</label>
           <select id="timeline" name="timeline">
             <option value="">Select timeline</option>
-            <option value="asap">ASAP</option>
-            <option value="1-month">Within 1 month</option>
-            <option value="1-3-months">1-3 months</option>
-            <option value="flexible">Flexible</option>
+            {TIMELINES.map((timeline) => (
+              <option key={timeline} value={timeline}>
+                {timeline}
+              </option>
+            ))}
           </select>
         </div>
       </div>
@@ -99,8 +119,22 @@ export default function ContactForm() {
           id="message"
           name="message"
           required
+          maxLength={5000}
           placeholder="Tell me about your project..."
           rows={5}
+        />
+      </div>
+
+      {/* Spam trap: hidden from people, but simple bots fill in every field.
+          The server quietly drops any message where this has a value. */}
+      <div className="contact-form-trap" aria-hidden="true">
+        <label htmlFor="company-website">Leave this field empty</label>
+        <input
+          type="text"
+          id="company-website"
+          name="companyWebsite"
+          tabIndex={-1}
+          autoComplete="off"
         />
       </div>
 
@@ -112,9 +146,14 @@ export default function ContactForm() {
         {status === "sending" ? "Sending..." : "Let's Get Started"}
       </button>
 
+      <p className="contact-form-privacy">
+        I only use your details to reply to your message. See the{" "}
+        <Link href="/privacy-policy">privacy notice</Link>.
+      </p>
+
       {status === "success" && (
         <p className="contact-form-status success" role="status">
-          Thanks — I'll get back to you within a day.
+          Thanks, I&apos;ll get back to you within a day.
         </p>
       )}
       {status === "error" && (

@@ -129,3 +129,73 @@
 #contact-page .title-of-alternative {
   font-size: clamp(1.4rem, 1rem + 2.5vw, 30px);
 }
+/* "Prefer to talk?" box above the form */
+#contact-page .contact-page-call {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  padding: clamp(1.1rem, 3vw, 1.5rem);
+  background: #fff;
+  border-radius: 14px;
+  text-align: left;
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.1),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+#contact-page .contact-page-call > div {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+#contact-page .contact-page-call h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.2rem;
+  color: #111;
+}
+
+#contact-page .contact-page-call p {
+  margin: 0;
+  color: #444;
+  line-height: 1.55;
+}
+
+.contact-page-call-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  box-sizing: border-box;
+  padding: 0.7rem 1.6rem;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #FFEB3B, #FFB300);
+  color: #111;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (hover: hover) {
+  .contact-page-call-button:hover {
+    background: linear-gradient(135deg, #FFB300, #FFEB3B);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.contact-page-call-button:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .contact-page-call-button {
+    width: 100%;
+  }
+}

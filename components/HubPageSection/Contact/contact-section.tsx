@@ -56,7 +56,7 @@ export default function ContactSection() {
             </div>
 
             <div className="contact-info animate animate-right">
-              <h3>Prefer email or social?</h3>
+              <h3>Prefer email or WhatsApp?</h3>
 
               <div className="contact-page-links">
                 <div className="contact-link">

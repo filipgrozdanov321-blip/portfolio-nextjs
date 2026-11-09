@@ -125,3 +125,37 @@
     align-self: center;
   }
 }
+/* Privacy line under the submit button */
+.contact-form-privacy {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #555;
+  text-align: center;
+}
+
+.contact-form-privacy a {
+  color: #2563eb;
+  text-underline-offset: 2px;
+}
+
+/* Spam trap: off-screen for people, still in the form for bots */
+.contact-form-trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* "Book a call" links into the form land below the sticky header */
+#contact-form {
+  scroll-margin-top: 90px;
+}
+
+/* Form fields use the page font (textareas default to a monospace font) */
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  font-family: inherit;
+}
