@@ -68,6 +68,134 @@
   overflow: hidden;
 }
 
+/* ---------- PROFILE CARD (photo + facts) ----------
+   Sits next to the terminal on desktop, above it on tablets and phones. */
+
+.about-me__intro-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  width: 100%;
+  max-width: 1040px;
+}
+
+.about-me__intro-inner .terminal-window {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.about-me__profile {
+  flex: 0 0 300px;
+  box-sizing: border-box;
+  padding: 1.5rem;
+  background: #15161b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  text-align: center;
+}
+
+.about-me__photo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 220px;
+  aspect-ratio: 4 / 5;
+  margin: 0 auto 1rem;
+  border-radius: 10px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #1f2a44, #0f1320);
+}
+
+.about-me__photo-img {
+  object-fit: cover;
+}
+
+/* Shown until public/images/filip.jpg exists */
+.about-me__photo-placeholder {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 4rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.about-me__profile-name {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.about-me__profile-role {
+  margin: 0.15rem 0 1.25rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.about-me__facts {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0 0 1.25rem;
+  text-align: left;
+}
+
+.about-me__facts div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.about-me__facts dt {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.about-me__facts dd {
+  margin: 0;
+  font-weight: 600;
+  text-align: right;
+}
+
+.about-me__how {
+  margin: 0;
+  text-align: left;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.about-me__how-label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4da3ff;
+}
+
+@media (max-width: 860px) {
+  .about-me__intro-inner {
+    flex-direction: column;
+  }
+
+  .about-me__profile {
+    flex: none;
+    width: 100%;
+    max-width: 640px;
+  }
+
+  .about-me__photo {
+    max-width: 200px;
+  }
+}
+
 .terminal-window__bar {
   display: flex;
   align-items: center;
