@@ -74,6 +74,59 @@
   animation: fadeInUp 1s ease-out forwards 0.7s;
 }
 
+/* Main button + "See my work" side by side, stacked on small phones */
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.hero-secondary-cta {
+  display: inline-block;
+  padding: calc(0.8rem - 2px) 2rem;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.25);
+  transition: background 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+}
+
+@media (hover: hover) {
+  .hero-secondary-cta:hover {
+    background: #fff;
+    color: #111;
+    text-shadow: none;
+  }
+}
+
+.hero-secondary-cta:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+@media (pointer: coarse) {
+  .contact-button-hero,
+  .hero-secondary-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 420px) {
+  .contact-button-hero,
+  .hero-secondary-cta {
+    width: 100%;
+    text-align: center;
+  }
+}
+
 
 .contact-button-hero {
   align-self: center;

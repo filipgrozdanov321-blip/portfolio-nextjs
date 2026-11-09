@@ -1,23 +1,34 @@
-"use client";
-
-import Link from "next/link";
+import { bookingHref, bookingIsExternal, site } from "@/lib/site";
 import "./hero.css";
 
+// What I build, for whom, and what to do next, in one screen.
 export default function Hero() {
   return (
-    <section className="hero">
+    <section className="hero" aria-labelledby="hero-title">
       <div className="hero-content">
-        <h1 className="hero-h1-title">I build products people actually enjoy using.</h1>
+        <h1 id="hero-title" className="hero-h1-title">
+          {site.headline}
+        </h1>
 
         <p>
-          Full-stack developer working in React, Next.js, and TypeScript — from
-          pixel-perfect landing pages to fully interactive web apps. Take a look around.
+          I&apos;m Filip. I build fast business websites and custom web apps
+          (booking systems, online shops, dashboards), and I take on
+          development work for agencies.
         </p>
 
-        <div className="hero-cta-anim">
-          <Link href="/contact" className="contact-button-hero">
-            Contact Me
-          </Link>
+        <div className="hero-cta-anim hero-ctas">
+          <a
+            href={bookingHref()}
+            className="contact-button-hero"
+            {...(bookingIsExternal
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
+          >
+            Book a 15-minute call
+          </a>
+          <a href="#my-work" className="hero-secondary-cta">
+            See my work
+          </a>
         </div>
       </div>
     </section>
