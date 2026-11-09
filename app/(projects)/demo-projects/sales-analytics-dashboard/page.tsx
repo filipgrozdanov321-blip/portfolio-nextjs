@@ -8,7 +8,9 @@ import DashboardFilterBar, { type DashboardDateRange } from "./components/Dashbo
 import DashboardKPICard from "./components/DashboardKPICard";
 import DashboardRevenueChart from "./components/DashboardRevenueChart";
 import DashboardOrdersChart from "./components/DashboardOrdersChart";
-import { salesData } from "./data/salesData";
+import DashboardTopProducts from "./components/DashboardTopProducts";
+import DashboardCategoryChart from "./components/DashboardCategoryChart";
+import { salesData, topProducts } from "./data/salesData";
 
 const RANGE_DAY_COUNTS: Record<Exclude<DashboardDateRange, "all">, number> = {
   "7d": 7,
@@ -126,7 +128,6 @@ export default function DashboardPage() {
         />
       </div>
 
-      {/* DashboardCategoryChart will join this in a dashboard-grid-2 split once it exists */}
       <div className="dashboard-section">
         <DashboardRevenueChart data={filteredData} />
       </div>
@@ -135,7 +136,11 @@ export default function DashboardPage() {
         <DashboardOrdersChart data={filteredData} />
       </div>
 
-      {/* DashboardTopProducts goes here next */}
+      {/* Product panels use all-time figures; their subtitles say so */}
+      <div className="dashboard-section dashboard-grid-2">
+        <DashboardTopProducts products={topProducts} />
+        <DashboardCategoryChart products={topProducts} />
+      </div>
     </>
   );
 }

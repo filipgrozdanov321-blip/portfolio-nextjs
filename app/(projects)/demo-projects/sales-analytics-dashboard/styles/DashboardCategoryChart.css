@@ -1,0 +1,26 @@
+.dashboard-category-chart {
+  padding: clamp(14px, 3.9vw, 20px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.dashboard-category-chart-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dashboard-category-chart-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dashboard-text);
+}
+
+.dashboard-category-chart-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: var(--dashboard-text-secondary);
+}

@@ -1,0 +1,109 @@
+.dashboard-top-products {
+  padding: clamp(14px, 3.9vw, 20px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.dashboard-top-products-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dashboard-top-products-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dashboard-text);
+}
+
+.dashboard-top-products-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: var(--dashboard-text-secondary);
+}
+
+.dashboard-top-products-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.dashboard-top-products-table thead th {
+  padding: 8px 0;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: left;
+  color: var(--dashboard-text-secondary);
+  border-bottom: 1px solid var(--dashboard-border);
+}
+
+.dashboard-top-products-table tbody tr + tr th,
+.dashboard-top-products-table tbody tr + tr td {
+  border-top: 1px solid var(--dashboard-border);
+}
+
+.dashboard-top-products-table tbody th,
+.dashboard-top-products-table tbody td {
+  padding: 12px 0;
+  vertical-align: middle;
+}
+
+.dashboard-top-products-table tbody th {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.dashboard-top-products-table .is-number {
+  text-align: right;
+  padding-left: 12px;
+  white-space: nowrap;
+}
+
+.dashboard-top-products-rank {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #047857;
+  background: #ECFDF5;
+}
+
+.dashboard-top-products-name {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  color: var(--dashboard-text);
+}
+
+.dashboard-top-products-category {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--dashboard-text-secondary);
+}
+
+/* Small phones: tighter cells so three columns still fit */
+@media (max-width: 420px) {
+  .dashboard-top-products-table {
+    font-size: 13px;
+  }
+
+  .dashboard-top-products-table tbody th {
+    gap: 8px;
+  }
+
+  .dashboard-top-products-rank {
+    width: 22px;
+    height: 22px;
+  }
+}
