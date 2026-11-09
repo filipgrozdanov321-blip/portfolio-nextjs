@@ -25,33 +25,6 @@ const slides = [
     link: "/demo-projects/sales-analytics-dashboard",
   },
   {
-    title: "Task Board (Kanban)",
-    description:
-      "Drag-and-drop board for To Do, In Progress, and Done — simple enough that teams actually use it.",
-    tag: "Demo Project",
-    image: "/images/task-board.jpg",
-    linkText: "View Project →",
-    link: "/demo-projects/task-board",
-  },
-  {
-    title: "Photographer Portfolio",
-    description:
-      "Minimal, image-led portfolio built to let the work speak — and turn viewers into inquiries.",
-    tag: "Template",
-    image: "/images/photographer-portfolio.jpg",
-    linkText: "View Template →",
-    link: "/template-projects/photographer-portfolio",
-  },
-  {
-    title: "Restaurant Website",
-    description:
-      "Elegant restaurant site with menu, hours, and a booking flow built to get the table filled.",
-    tag: "Template",
-    image: "/images/restaurant.jpg",
-    linkText: "View Template →",
-    link: "/template-projects/restaurant",
-  },
-  {
     title: "Appointment Booking App",
     description:
       "Full booking flow — service, time, confirmation — built for salons, clinics, and consultants.",
@@ -59,15 +32,6 @@ const slides = [
     image: "/images/appointment-booking.jpg",
     linkText: "View Project →",
     link: "/demo-projects/appointment-booking-app",
-  },
-  {
-    title: "Creative Agency Website",
-    description:
-      "A bold, multi-page agency site built to make a service business look like the obvious choice.",
-    tag: "Template",
-    image: "/images/creative-agency.jpg",
-    linkText: "View Template →",
-    link: "/template-projects/creative-agency",
   },
   {
     title: "E-commerce Demo",

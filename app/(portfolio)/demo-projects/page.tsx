@@ -14,34 +14,16 @@ const STAGGER_MS = 400;
 
 const demoProjects = [
   {
-    title: "Habit Tracker App",
-    description: "Track daily habits with streaks and progress stats — simple enough that people actually stick with it.",
-    tech: "React · CSS",
-    link: "/demo-projects/habit-tracker",
-  },
-  {
     title: "Sales Analytics Dashboard",
     description: "Interactive revenue dashboard with live filtering — built so decisions come from data, not guesswork.",
     tech: "React · Recharts",
     link: "/demo-projects/sales-analytics-dashboard",
   },
   {
-    title: "Task Board (Kanban)",
-    description: "Drag-and-drop board for To Do, In Progress, and Done — simple enough that teams actually use it.",
-    tech: "React · Drag & Drop",
-    link: "/demo-projects/task-board",
-  },
-  {
     title: "Appointment Booking App",
     description: "Full booking flow — service, time, confirmation — built for salons, clinics, and consultants.",
     tech: "React · State Management",
     link: "/demo-projects/appointment-booking-app",
-  },
-  {
-    title: "AI Content Generator",
-    description: "Generates blog intros, product copy, and captions in seconds — no more blank-page syndrome.",
-    tech: "React · Claude API",
-    link: "/demo-projects/ai-content-generator",
   },
   {
     title: "E-commerce Demo",

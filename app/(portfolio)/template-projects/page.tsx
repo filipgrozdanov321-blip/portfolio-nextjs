@@ -14,40 +14,10 @@ const STAGGER_MS = 400;
 
 const templateProjects = [
   {
-    title: "SaaS Landing Template",
-    description: "A SaaS landing page built around one goal: getting the sign-up, not just looking sleek.",
-    tech: "React · Next.js · CSS",
-    link: "/template-projects/saas-landing-page",
-  },
-  {
-    title: "Restaurant Website",
-    description: "Elegant restaurant site with menu, hours, and a booking flow built to get the table filled.",
-    tech: "React · Next.js · CSS",
-    link: "/template-projects/restaurant",
-  },
-  {
-    title: "Creative Agency Website",
-    description: "A bold, multi-page agency site built to make a service business look like the obvious choice.",
-    tech: "React · Next.js · CSS",
-    link: "/template-projects/creative-agency",
-  },
-  {
-    title: "Photographer Portfolio",
-    description: "Minimal, image-led portfolio built to let the work speak — and turn viewers into inquiries.",
-    tech: "React · Next.js · CSS",
-    link: "/template-projects/photographer-portfolio",
-  },
-  {
     title: "Real Estate Listings",
     description: "Property listings with a filterable grid, search, and sorting options — built to get the agent the call.",
     tech: "React · Next.js · CSS",
     link: "/template-projects/real-estate-listings",
-  },
-  {
-    title: "Startup Marketing Site",
-    description: "A trust-building site for early-stage startups that need to look credible on day one.",
-    tech: "React · Next.js · CSS",
-    link: "/template-projects/startup-marketing-site",
   },
 ];
 
