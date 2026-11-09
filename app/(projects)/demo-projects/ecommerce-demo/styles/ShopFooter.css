@@ -178,15 +178,6 @@
   }
 }
 
-/* Below 1400px the Back button floats in the bottom-left corner. This extra
-   space at the very bottom of the page means it never sits on top of the
-   copyright line when you scroll all the way down. */
-@media (max-width: 1399px) {
-  .shop-footer-bottom {
-    padding-bottom: calc(clamp(32px, 4vw, 40px) + 3.5rem);
-  }
-}
-
 /* Tablet (769 to 1000px): the brand takes its own row, and the links and the
    newsletter share the next one, so the Subscribe field isn't squeezed to about
    100px wide */

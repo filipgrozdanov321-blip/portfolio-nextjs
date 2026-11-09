@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import "../styles/RealEstateNavbar.css";
-import BackButton from "@/components/ComponentsUsedAroundTheWebSite/BackButton/BackButton";
 
 // Keep this number in sync with the 860px media query in RealEstateNavbar.css
 const MOBILE_QUERY = "(max-width: 860px)";
@@ -72,7 +71,6 @@ export default function RealEstateNavbar() {
 
   return (
     <header className="realestate-navbar" ref={headerRef}>
-      <BackButton />
       <div className="realestate-navbar-inner">
         <Link
           href={BASE_PATH}

@@ -23,9 +23,7 @@
   background-color: var(--dashboard-bg);
   color: var(--dashboard-text);
   font-family: var(--dashboard-font);
-  /* 60px top, 48px sides and 64px bottom on desktop (same as before), less on
-     phones. The top room is for the Back button, which sits in the top-left
-     corner at 1400px and wider. */
+  /* 60px top, 48px sides and 64px bottom on desktop, less on phones */
   padding:
     clamp(2.5rem, 6vw, 3.75rem)
     clamp(16px, 4vw, 48px)
@@ -37,15 +35,6 @@
 .dashboard-page,
 .dashboard-page * {
   box-sizing: border-box;
-}
-
-/* Below 1400px the Back button floats in the bottom-left corner. This extra
-   space at the bottom means it never sits on top of the last card when you
-   scroll all the way down. */
-@media (max-width: 1399px) {
-  .dashboard-page {
-    padding-bottom: calc(clamp(2.5rem, 6vw, 4rem) + 3.5rem);
-  }
 }
 
 /* Shared card shell used by KPI tiles, chart panels, and the products table */

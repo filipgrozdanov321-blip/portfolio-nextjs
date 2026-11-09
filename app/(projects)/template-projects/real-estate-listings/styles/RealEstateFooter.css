@@ -166,15 +166,6 @@
   }
 }
 
-/* Below 1400px the Back button floats in the bottom-left corner. This extra
-   space at the bottom means it never sits on top of the copyright line when
-   you scroll all the way down. */
-@media (max-width: 1399px) {
-  .realestate-footer-bottom-inner {
-    padding-bottom: calc(20px + 3.5rem);
-  }
-}
-
 /* Tablet and small laptop (769 to 1000px): the brand takes its own row and the
    two link columns share the next one, so the office address isn't squeezed */
 @media (max-width: 1000px) {

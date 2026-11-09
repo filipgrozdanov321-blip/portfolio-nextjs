@@ -60,19 +60,11 @@
 .booking-page {
   max-width: 1080px;
   margin: 0 auto;
-  /* 32px top, 16px sides and 64px bottom on desktop (same as before). Below
-     1400px the Back button floats in the bottom-left corner, so the extra
-     bottom space (see the media query below) keeps it off the last button. */
+  /* 32px top, 16px sides and 64px bottom */
   padding:
     clamp(20px, 4vw, var(--booking-space-6))
     var(--booking-space-4)
     64px;
-}
-
-@media (max-width: 1399px) {
-  .booking-page {
-    padding-bottom: calc(64px + 3.5rem);
-  }
 }
 
 .booking-page-header {

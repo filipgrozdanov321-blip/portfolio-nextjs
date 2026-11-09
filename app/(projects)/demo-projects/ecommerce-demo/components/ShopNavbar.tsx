@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ShoppingBag } from "lucide-react";
 import { useCart } from "../context/ShopCartContext";
 import "../styles/ShopNavbar.css";
-import BackButton from "@/components/ComponentsUsedAroundTheWebSite/BackButton/BackButton";
 
 const BASE_PATH = "/demo-projects/ecommerce-demo";
 
@@ -13,10 +12,6 @@ export default function ShopNavbar() {
 
   return (
     <header className="shop-navbar">
-      <div className="shop-navbar-back-wrapper">
-        <BackButton />
-      </div>
-
       <div className="shop-navbar-inner">
         <Link href={BASE_PATH} className="shop-navbar-logo">
           Norrland

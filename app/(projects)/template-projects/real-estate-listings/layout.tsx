@@ -11,7 +11,7 @@ const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakart
 export const metadata: Metadata = {
   title: "Meridian Realty | Austin Real Estate",
   description:
-    "Meridian Realty is a residential real estate agency serving Austin, TX, offering straightforward pricing and local expertise.",
+    "Demo website for Meridian Realty, a fictional real estate agency in Austin, TX: property search, filters and listing pages. Sample data only.",
 };
 
 export default function RealEstateLayout({

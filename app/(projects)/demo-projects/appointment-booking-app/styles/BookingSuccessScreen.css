@@ -13,14 +13,6 @@
   width: calc(100% - 32px);
 }
 
-/* Below 1400px the Back button floats in the bottom-left corner; this space
-   keeps it off the "Book another appointment" button */
-@media (max-width: 1399px) {
-  .booking-success-screen {
-    margin-bottom: calc(64px + 3.5rem);
-  }
-}
-
 .booking-success-icon {
   color: var(--booking-success);
   margin-bottom: var(--booking-space-4);
