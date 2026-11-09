@@ -44,6 +44,21 @@ export const site = {
     // once the file exists; until then it shows an "FG" placeholder.
     photo: "/images/filip.jpg",
   },
+
+  // Used by the privacy notice (/privacy-policy)
+  legal: {
+    controller: "Filip Grozdanov",
+    // TODO(filip): your postal address (or business address). Shown on the
+    // privacy notice exactly as written.
+    address: "[postal address]",
+    // TODO(filip): business registration or VAT number if you have a
+    // registered business. If you don't, set this to "" and the line is
+    // hidden.
+    registration: "[business registration / VAT number, if any]",
+    // Delete enquiries that don't turn into a project after this long
+    enquiryRetention: "12 months",
+    lastUpdated: "9 November 2026",
+  },
 } as const;
 
 /**

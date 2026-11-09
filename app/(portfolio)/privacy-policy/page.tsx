@@ -1,250 +1,192 @@
-import React from "react";
-import "../../../styles/pages/PrivacyPolicy.css"
+import type { Metadata } from "next";
+import Link from "next/link";
+import { SITE_HOST, SITE_URL, site } from "@/lib/site";
+import "../../../styles/pages/PrivacyPolicy.css";
 
-const PrivacyPolicy = () => {
+export const metadata: Metadata = {
+  title: "Privacy Notice",
+  description:
+    "What personal data the contact form collects, why, the legal basis, how long it's kept, and how to contact Filip Grozdanov about it.",
+  alternates: { canonical: "/privacy-policy" },
+};
+
+const { legal } = site;
+
+// The booking tool only appears here once a booking link is set in
+// lib/site.ts (e.g. "cal.com" or "calendly.com").
+const bookingHost = site.bookingUrl ? new URL(site.bookingUrl).host : "";
+
+interface Purpose {
+  title: string;
+  what: string;
+  why: string;
+  basis: string;
+  howLong: string;
+}
+
+const purposes: Purpose[] = [
+  {
+    title: "When you use the contact form",
+    what: "Your name, email address and message, plus the project type, budget and timeline if you choose them.",
+    why: "To reply to you and talk about your project.",
+    basis:
+      "Taking steps you asked for before a possible contract (GDPR Art. 6(1)(b)). If your message isn't about a project, my legitimate interest in answering messages sent to me (Art. 6(1)(f)).",
+    howLong: `If your enquiry doesn't turn into a project, I delete it after ${legal.enquiryRetention}. If it does, I keep it with the project records for as long as the project runs and the law requires (for example, for accounting).`,
+  },
+  {
+    title: "When you email me or message me on WhatsApp",
+    what: "Whatever you include in your message, and your email address or phone number.",
+    why: "To reply to you and talk about your project.",
+    basis: "The same as for the contact form (GDPR Art. 6(1)(b) or (f)).",
+    howLong: `The same as for the contact form: deleted after ${legal.enquiryRetention} if it doesn't become a project.`,
+  },
+  ...(bookingHost
+    ? [
+        {
+          title: "When you book a call",
+          what: "Your name, email address, the time you pick and anything you add to the booking.",
+          why: "To schedule and hold the call.",
+          basis: "Taking steps you asked for before a possible contract (GDPR Art. 6(1)(b)).",
+          howLong: `The same as for the contact form: deleted after ${legal.enquiryRetention} if it doesn't become a project.`,
+        },
+      ]
+    : []),
+  {
+    title: "When you visit this website",
+    what: "Technical data your browser sends with every request, such as your IP address, browser type and the page you asked for.",
+    why: "To deliver the website and keep it secure. This data ends up in the hosting provider's server logs; I don't use it to identify or track you.",
+    basis: "My legitimate interest in running a working, secure website (GDPR Art. 6(1)(f)).",
+    howLong: "Kept by the hosting provider (Vercel) for a limited time under its own policy.",
+  },
+];
+
+export default function PrivacyPolicy() {
   return (
     <main className="privacy-policy">
-      <section className="privacy-policy__container">
+      <div className="privacy-policy__container">
         <header className="privacy-policy__header">
-          <h1 className="privacy-policy__title">Privacy Policy</h1>
+          <h1 className="privacy-policy__title">Privacy Notice</h1>
           <p className="privacy-policy__effective-date">
-            Effective date: September 28, 2026
+            Last updated: {legal.lastUpdated}
           </p>
         </header>
 
         <section className="privacy-policy__section">
           <p className="privacy-policy__text">
-            This Privacy Policy explains how <strong>Filip Grozdanov</strong>
-            ("I", "me", "my") collects, uses, and protects personal information
-            when you visit this website.
-          </p>
-          <p className="privacy-policy__text">
-            This website is a professional portfolio and business website used
-            to present web development and digital marketing services.
+            <strong>The short version:</strong> I only collect what you send
+            me, I use it to reply to you and talk about your project, and I
+            delete enquiries that don&apos;t become a project after{" "}
+            {legal.enquiryRetention}. No advertising, no tracking cookies, no
+            analytics, and I never sell your data.
           </p>
         </section>
 
         <section className="privacy-policy__section">
-          <h2 className="privacy-policy__heading">1. Who I Am</h2>
+          <h2 className="privacy-policy__heading">Who is responsible</h2>
           <ul className="privacy-policy__list">
-            <li>Name: Filip Grozdanov</li>
-            <li>Website: filipgrozdanov.com</li>
-            <li>Location: Slovenia and North Macedonia</li>
+            <li>Data controller: {legal.controller}</li>
             <li>
-              Contact email: <span className="privacy-policy__email">filip.grozdanov.web@gmail.com</span>
+              Email:{" "}
+              <a className="privacy-policy__email" href={`mailto:${site.email}`}>
+                {site.email}
+              </a>
             </li>
+            <li>Address: {legal.address}</li>
+            {legal.registration && <li>Registration: {legal.registration}</li>}
             <li>
-              Privacy contact: <span className="privacy-policy__email">filip.grozdanov.web@gmail.com</span>
+              Website: <a href={SITE_URL}>{SITE_HOST}</a>
             </li>
-          </ul>
-          <p className="privacy-policy__text">
-            I work with clients worldwide.
-          </p>
-        </section>
-
-        <section className="privacy-policy__section">
-          <h2 className="privacy-policy__heading">
-            2. What Personal Data I Collect
-          </h2>
-          <p className="privacy-policy__text">
-            I only collect personal data when you voluntarily provide it.
-          </p>
-          <ul className="privacy-policy__list">
-            <li>Name</li>
-            <li>Email address</li>
-            <li>Company name (if provided)</li>
-            <li>Any information included in your message or inquiry</li>
           </ul>
         </section>
 
         <section className="privacy-policy__section">
-          <h2 className="privacy-policy__heading">
-            3. How Your Data Is Collected
-          </h2>
+          <h2 className="privacy-policy__heading">What I collect, why, and for how long</h2>
+
+          {purposes.map((purpose) => (
+            <div key={purpose.title} className="privacy-policy__purpose">
+              <h3>{purpose.title}</h3>
+              <dl>
+                <dt>What</dt>
+                <dd>{purpose.what}</dd>
+                <dt>Why</dt>
+                <dd>{purpose.why}</dd>
+                <dt>Legal basis</dt>
+                <dd>{purpose.basis}</dd>
+                <dt>How long</dt>
+                <dd>{purpose.howLong}</dd>
+              </dl>
+            </div>
+          ))}
+
+          <p className="privacy-policy__text">
+            The <Link href="/projects">demo projects</Link> run entirely in
+            your browser: anything you type into them is not sent to me or
+            stored anywhere.
+          </p>
+        </section>
+
+        <section className="privacy-policy__section">
+          <h2 className="privacy-policy__heading">Who else handles your data</h2>
           <ul className="privacy-policy__list">
             <li>
-              Contact form submissions, delivered to my email inbox through an
-              email delivery service
+              <strong>Google (Gmail):</strong> contact form messages are sent
+              through Gmail and kept in my Gmail inbox.
             </li>
             <li>
-              Direct email communication
-            </li>
-            {/* <li>
-              Meeting scheduling through Calendly
-            </li> */}
-          </ul>
-          <p className="privacy-policy__text">
-            I do not store contact form submissions in a database on this
-            website.
-          </p>
-        </section>
-
-        <section className="privacy-policy__section">
-          <h2 className="privacy-policy__heading">
-            4. How I Use Your Data
-          </h2>
-          <ul className="privacy-policy__list">
-            <li>Respond to inquiries</li>
-            <li>Communicate about potential or ongoing projects</li>
-            <li>Schedule meetings or calls</li>
-            <li>Provide requested services</li>
-          </ul>
-          <p className="privacy-policy__text">
-            I do not use personal data for advertising, remarketing, automated
-            profiling, or selling personal information.
-          </p>
-        </section>
-
-        <section className="privacy-policy__section">
-          <h2 className="privacy-policy__heading">5. Payments</h2>
-          <p className="privacy-policy__text">
-            Payments are not processed directly on this website.
-          </p>
-          <p className="privacy-policy__text">
-            Payments are handled after direct communication using methods such
-            as PayPal, bank transfer, cryptocurrency, or other mutually agreed
-            legal payment methods.
-          </p>
-          <p className="privacy-policy__text">
-            Payment providers operate under their own privacy policies.
-          </p>
-        </section>
-
-        <section className="privacy-policy__section">
-          <h2 className="privacy-policy__heading">
-            6. Third-Party Services
-          </h2>
-          <ul className="privacy-policy__list">
-            {/* <li>Calendly (meeting scheduling)</li> */}
-            <li>Vercel (website hosting)</li>
-            <li>Google Fonts (website typography)</li>
-            <li>An email delivery service (to deliver contact form messages to my inbox)</li>
-          </ul>
-          <p className="privacy-policy__text">
-            These services may process limited technical data such as IP
-            addresses as part of normal operation.
-          </p>
-        </section>
-
-        <section className="privacy-policy__section">
-          <h2 className="privacy-policy__heading">
-            7. Cookies and Technical Data
-          </h2>
-          <p className="privacy-policy__text">
-            This website does not use cookies for analytics, advertising,
-            remarketing, or marketing purposes.
-          </p>
-          <p className="privacy-policy__text">
-            Basic technical data such as IP address, browser type, or device
-            information may be processed automatically for website
-            functionality and security.
-          </p>
-        </section>
-
-        <section className="privacy-policy__section">
-          <h2 className="privacy-policy__heading">
-            8. Testimonials, Demos and Portfolio Content
-          </h2>
-          <p className="privacy-policy__text">
-            Testimonials and project references are displayed only with explicit
-            client permission.
-          </p>
-          <p className="privacy-policy__text">
-            Any personal or business information shown is published with
-            consent.
-          </p>
-          <p className="privacy-policy__text">
-            The template and demo projects showcased on this website use
-            fictional brands, people, and sample data created purely for
-            demonstration purposes.
-          </p>
-          <p className="privacy-policy__text">
-            Interactive demos such as the booking app and the e-commerce
-            checkout run in your browser and do not send what you type to me.
-            Please do not enter real personal or payment details into them.
-          </p>
-        </section>
-
-        <section className="privacy-policy__section">
-          <h2 className="privacy-policy__heading">9. Data Retention</h2>
-          <p className="privacy-policy__text">
-            Personal data is kept only as long as necessary for professional
-            communication or legal obligations.
-          </p>
-          <p className="privacy-policy__text">
-            You may request deletion of your data at any time.
-          </p>
-        </section>
-
-        <section className="privacy-policy__section">
-          <h2 className="privacy-policy__heading">10. Your Privacy Rights</h2>
-          <p className="privacy-policy__text">
-            Depending on your location, you may have rights under:
-          </p>
-          <ul className="privacy-policy__list">
-            <li>
-              GDPR (General Data Protection Regulation – European Union privacy
-              law)
+              <strong>Vercel:</strong> hosts this website.
             </li>
             <li>
-              The Law on Personal Data Protection of North Macedonia, which is
-              closely aligned with the GDPR
+              <strong>WhatsApp (Meta):</strong> only if you choose to message
+              me on WhatsApp.
             </li>
-            <li>
-              CCPA (California Consumer Privacy Act – United States privacy law)
-            </li>
+            {bookingHost && (
+              <li>
+                <strong>{bookingHost}:</strong> handles call bookings.
+              </li>
+            )}
           </ul>
           <p className="privacy-policy__text">
-            You may request access, correction, or deletion of your personal
-            data by contacting <span className="privacy-policy__email">filip.grozdanov.web@gmail.com</span>.
-          </p>
-          <p className="privacy-policy__text">
-            You also have the right to lodge a complaint with the data
-            protection authority in your country, for example the Information
-            Commissioner in Slovenia or the personal data protection agency in
-            North Macedonia.
+            Some of these companies may process data outside the EU. They use
+            safeguards recognised under the GDPR, such as standard contractual
+            clauses. This website does not use cookies or analytics, and every
+            font is served from this website itself, not from a third party.
           </p>
         </section>
 
         <section className="privacy-policy__section">
-          <h2 className="privacy-policy__heading">
-            11. Children’s Information
-          </h2>
+          <h2 className="privacy-policy__heading">Your rights</h2>
           <p className="privacy-policy__text">
-            This website is intended for adults and businesses only.
-          </p>
-          <p className="privacy-policy__text">
-            I do not knowingly collect personal data from children.
-          </p>
-        </section>
-
-        <section className="privacy-policy__section">
-          <h2 className="privacy-policy__heading">12. Security</h2>
-          <p className="privacy-policy__text">
-            Reasonable security measures are used, including HTTPS encryption
-            and secure access to email and administrative tools.
-          </p>
-          <p className="privacy-policy__text">
-            No system is completely secure, but I take data protection
-            seriously.
+            You can ask me to show you the data I have about you, correct it,
+            delete it, limit how I use it, or give you a copy. You can also
+            object to any use based on my legitimate interest. Email{" "}
+            <a className="privacy-policy__email" href={`mailto:${site.email}`}>
+              {site.email}
+            </a>{" "}
+            and I&apos;ll reply within one month.
           </p>
         </section>
 
         <section className="privacy-policy__section">
-          <h2 className="privacy-policy__heading">
-            13. Changes to This Policy
-          </h2>
+          <h2 className="privacy-policy__heading">Complaints</h2>
           <p className="privacy-policy__text">
-            This Privacy Policy may be updated from time to time.
-          </p>
-          <p className="privacy-policy__text">
-            Any changes will be posted on this page with an updated effective
-            date.
+            If you think I&apos;ve handled your data wrongly, you have the
+            right to complain to a data protection authority, in particular in
+            the country where you live or work, or where you think the problem
+            happened. For example, the Information Commissioner of the
+            Republic of Slovenia, or the Personal Data Protection Agency of
+            North Macedonia. I&apos;d appreciate the chance to sort it out
+            with you first.
           </p>
         </section>
-      </section>
+
+        <section className="privacy-policy__section">
+          <h2 className="privacy-policy__heading">Changes</h2>
+          <p className="privacy-policy__text">
+            If this notice changes, the new version appears on this page with
+            a new date at the top.
+          </p>
+        </section>
+      </div>
     </main>
   );
-};
-
-export default PrivacyPolicy;
+}

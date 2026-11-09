@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { site } from "@/lib/site";
 import "./footer.css";
 
 export default function Footer() {
@@ -21,30 +23,29 @@ export default function Footer() {
       <div className="footer-container">
         <div className="footer-main">
           <div className="footer-brand">
-            <h3>Filip Grozdanov</h3>
+            <h3>{site.name}</h3>
             <p>
-              Web developer building fast, conversion-focused websites for
-              businesses that want real results, not just a nice-looking site.
+              Web developer building fast websites and web apps for small
+              businesses and agencies. Websites from {site.pricing.websitesFrom}.
             </p>
           </div>
 
           <div className="footer-section">
             <h4>Navigation</h4>
             <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="/services">Services</a></li>
-              <li><a href="/demo-projects">Demo Projects</a></li>
-              <li><a href="/template-projects">Template Projects</a></li>
-              <li><a href="/about">About</a></li>
-              <li><a href="/contact">Contact</a></li>
+              <li><Link href="/">Home</Link></li>
+              <li><Link href="/projects">Projects</Link></li>
+              <li><Link href="/services">Services</Link></li>
+              <li><Link href="/about">About</Link></li>
+              <li><Link href="/contact">Contact</Link></li>
             </ul>
           </div>
 
           <div className="footer-section">
             <h4>Legal</h4>
             <ul>
-              <li><a href="/privacy-policy">Privacy Policy</a></li>
-              <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
+              <li><Link href="/privacy-policy">Privacy Notice</Link></li>
+              <li><Link href="/terms-and-conditions">Terms &amp; Conditions</Link></li>
             </ul>
           </div>
 
@@ -52,33 +53,23 @@ export default function Footer() {
             <h4>Connect</h4>
             <ul>
               <li>
-                <a href="mailto:filip.grozdanov.web@gmail.com">
-                  <i className="fas fa-envelope"></i>
+                <a href={`mailto:${site.email}`}>
+                  <i className="fas fa-envelope" aria-hidden="true"></i>
                   Email
                 </a>
               </li>
               <li>
                 <a href="/api/whatsapp" target="_blank" rel="noopener noreferrer">
-                  <i className="fab fa-whatsapp"></i>
+                  <i className="fab fa-whatsapp" aria-hidden="true"></i>
                   WhatsApp
                 </a>
               </li>
-              {/* <li>
-                
-                  href="https://www.linkedin.com/in/yourprofile"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="fab fa-linkedin"></i>
-                  LinkedIn
-                </a>
-              </li> */}
             </ul>
           </div>
         </div>
 
         <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} Filip Grozdanov. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
 
           <button
             type="button"

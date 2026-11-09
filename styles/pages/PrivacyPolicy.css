@@ -72,3 +72,51 @@
   font-weight: 500;
   overflow-wrap: anywhere;
 }
+.privacy-policy a {
+  color: #2563eb;
+  text-underline-offset: 2px;
+}
+
+/* One block per purpose: what / why / legal basis / how long */
+.privacy-policy__purpose {
+  margin-bottom: 1.5rem;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+}
+
+.privacy-policy__purpose h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.privacy-policy__purpose dl {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  gap: 0.5rem 1rem;
+  margin: 0;
+}
+
+.privacy-policy__purpose dt {
+  font-weight: 600;
+  color: #444;
+}
+
+.privacy-policy__purpose dd {
+  margin: 0;
+  line-height: 1.65;
+}
+
+/* Phones: label above its text */
+@media (max-width: 560px) {
+  .privacy-policy__purpose dl {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.15rem;
+  }
+
+  .privacy-policy__purpose dd + dt {
+    margin-top: 0.6rem;
+  }
+}

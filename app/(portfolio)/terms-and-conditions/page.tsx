@@ -1,5 +1,12 @@
-import React from "react";
-import "../../../styles/pages/Terms-and-Conditions.css"
+import type { Metadata } from "next";
+import Link from "next/link";
+import "../../../styles/pages/Terms-and-Conditions.css";
+
+export const metadata: Metadata = {
+  title: "Terms and Conditions",
+  description: "Terms for using Filip Grozdanov's portfolio website and its demo projects.",
+  alternates: { canonical: "/terms-and-conditions" },
+};
 
 const TermsAndConditions = () => {
   return (
@@ -8,14 +15,14 @@ const TermsAndConditions = () => {
         <header className="terms__header">
           <h1 className="terms__title">Terms and Conditions</h1>
           <p className="terms__effective-date">
-            Effective date: September 28, 2026
+            Effective date: November 9, 2026
           </p>
         </header>
 
         <section className="terms__section">
           <p className="terms__text">
             These Terms and Conditions govern your use of this website operated
-            by <strong>Filip Grozdanov</strong> ("I", "me", "my").
+            by <strong>Filip Grozdanov</strong> (&ldquo;I&rdquo;, &ldquo;me&rdquo;, &ldquo;my&rdquo;).
           </p>
           <p className="terms__text">
             By accessing or using this website, you agree to these Terms. If you
@@ -27,8 +34,8 @@ const TermsAndConditions = () => {
           <h2 className="terms__heading">1. Purpose of the Website</h2>
           <p className="terms__text">
             This website is a professional portfolio and informational platform
-            designed to showcase my skills, experience, demo projects, and
-            template examples related to web development and digital marketing.
+            designed to showcase my skills, experience and demo projects
+            related to building websites and web apps.
           </p>
           <p className="terms__text">
             The website does not offer products or services for direct purchase.
@@ -75,27 +82,23 @@ const TermsAndConditions = () => {
         </section>
 
         <section className="terms__section">
-          <h2 className="terms__heading">5. Demo Projects and Templates</h2>
+          <h2 className="terms__heading">5. Demo Projects</h2>
           <p className="terms__text">
             Demo projects are interactive examples intended solely to
             demonstrate functionality, technical skills, and user experience.
           </p>
           <p className="terms__text">
-            Demo projects do not use live databases and do not store personal
-            data. Any interaction relies on local browser storage only.
+            Demo projects run entirely in your browser. They don&apos;t use
+            live databases, and nothing you type into them is sent or stored.
+            Bookings, orders and payments in the demos are not real.
           </p>
           <p className="terms__text">
-            Template projects are static or visual examples and are not
-            production-ready solutions.
+            The demo projects feature fictional businesses, people,
+            testimonials and sample data created purely for demonstration, and
+            do not represent real clients or businesses.
           </p>
           <p className="terms__text">
-            Some demo and template projects feature fictional brands, people,
-            testimonials, and sample data created purely for demonstration
-            purposes, and do not represent real clients or businesses unless
-            explicitly stated otherwise.
-          </p>
-          <p className="terms__text">
-            All demo and template projects are provided “as is” and may not be
+            All demo projects are provided &ldquo;as is&rdquo; and may not be
             reused or deployed without explicit permission.
           </p>
         </section>
@@ -127,8 +130,8 @@ const TermsAndConditions = () => {
         <section className="terms__section">
           <h2 className="terms__heading">8. Limitation of Liability</h2>
           <p className="terms__text">
-            This website and its content are provided on an “as is” and “as
-            available” basis.
+            This website and its content are provided on an &ldquo;as is&rdquo;
+            and &ldquo;as available&rdquo; basis.
           </p>
           <p className="terms__text">
             I make no warranties regarding accuracy, completeness, or
@@ -149,8 +152,9 @@ const TermsAndConditions = () => {
         <section className="terms__section">
           <h2 className="terms__heading">10. Privacy</h2>
           <p className="terms__text">
-            Use of this website is also governed by the Privacy Policy, which
-            explains how personal data is handled.
+            Use of this website is also governed by the{" "}
+            <Link href="/privacy-policy">Privacy Notice</Link>, which explains
+            how personal data is handled.
           </p>
         </section>
 
