@@ -193,19 +193,36 @@
   }
 }
 
-.digital-marketing-card {
+.web-apps-card {
   box-shadow:
     0 20px 45px rgba(34, 197, 94, 0.28),
     0 8px 18px rgba(0, 0, 0, 0.14);
 }
 
 @media (hover: hover) {
-  .digital-marketing-card:hover {
+  .web-apps-card:hover {
     box-shadow:
       0 38px 85px rgba(34, 197, 94, 0.42),
       0 18px 35px rgba(0, 0, 0, 0.22);
     transition: box-shadow 0.3s ease;
   }
+}
+
+/* The two cards link to their detail sections below */
+a.services-overview-item {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+a.services-overview-item:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 4px;
+}
+
+/* In-page links (#websites, #pricing...) stop below the sticky header */
+.services-page section[id] {
+  scroll-margin-top: 80px;
 }
 
 .services-overview-item h3 {
@@ -219,7 +236,7 @@
   line-height: 1.7;
 }
 
-/* ---------- SERVICE DETAIL (Web Development / Digital Marketing) ---------- */
+/* ---------- SERVICE DETAIL (Business Websites / Web Apps) ---------- */
 
 .service-detail {
   max-width: 900px;
@@ -264,12 +281,24 @@
   font-weight: 700;
 }
 
-.digital-marketing-li li::before {
+.web-apps-li li::before {
   content: "→";
   position: absolute;
   left: -22px;
   color: #22c55e;
   font-weight: 700;
+}
+
+.service-points a,
+.service-example a {
+  color: #2563eb;
+  font-weight: 600;
+  text-underline-offset: 3px;
+}
+
+.service-example {
+  margin: 0 0 clamp(1.5rem, 4vw, 2.25rem);
+  color: #333;
 }
 
 .service-cta {
@@ -306,6 +335,123 @@
 
 .service-cta:focus-visible::after {
   transform: scaleX(1);
+}
+
+/* ---------- PRICING ---------- */
+
+.services-pricing {
+  padding: clamp(2.5rem, 6.55vw, 4.5rem) clamp(1rem, 4vw, 2rem);
+}
+
+.services-pricing-card {
+  max-width: 760px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 22px;
+  padding: clamp(1.5rem, 5vw, 3.5rem);
+  text-align: center;
+  box-shadow:
+    0 20px 45px rgba(0, 123, 255, 0.18),
+    0 8px 18px rgba(0, 0, 0, 0.1);
+}
+
+.services-pricing-eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #2563eb;
+}
+
+.services-pricing-card h2 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.9rem, 1.2rem + 2.8vw, 2.7rem);
+  letter-spacing: -0.03em;
+}
+
+.services-pricing-intro {
+  margin: 0 0 1.5rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Included items: 2 columns of ticks on wider screens, 1 on phones */
+.services-pricing-list {
+  list-style: none;
+  margin: 0 auto 1.75rem;
+  padding: 0;
+  max-width: 520px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1.5rem;
+  text-align: left;
+}
+
+.services-pricing-list li {
+  position: relative;
+  padding-left: 1.75rem;
+  line-height: 1.5;
+  color: #111;
+}
+
+.services-pricing-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 700;
+  color: #16a34a;
+}
+
+.services-pricing-note {
+  margin: 0 auto 1.75rem;
+  max-width: 520px;
+  color: #444;
+  line-height: 1.6;
+}
+
+.services-pricing-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.services-pricing-secondary {
+  display: inline-block;
+  padding: calc(0.8rem - 2px) 2rem;
+  border: 2px solid #111;
+  border-radius: 8px;
+  color: #111;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+@media (hover: hover) {
+  .services-pricing-secondary:hover {
+    background: #111;
+    color: #fff;
+  }
+}
+
+.services-pricing-secondary:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 3px;
+}
+
+@media (max-width: 520px) {
+  .services-pricing-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .services-pricing-buttons .services-hero-cta,
+  .services-pricing-secondary {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
 }
 
 /* ---------- HOW I WORK (4 steps) ---------- */
@@ -520,6 +666,14 @@
     display: inline-flex;
     align-items: center;
     min-height: 44px;
+  }
+
+  .services-pricing-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    box-sizing: border-box;
   }
 }
 

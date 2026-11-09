@@ -54,7 +54,7 @@ export default function WhyMeSection() {
               n: "01",
               t: "Clarity Before Code",
               d: "I nail down the goal, message, and structure before writing a line of code — so there's a clear direction from day one.",
-              r: "Result: your offer is clearer and converts faster.",
+              r: "Result: you know exactly what's being built, and why, before work starts.",
             },
             {
               n: "02",

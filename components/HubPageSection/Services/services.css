@@ -48,7 +48,7 @@
   border-left: 4px solid #2563eb;
 }
 
-.service-heading.marketing {
+.service-heading.apps {
   border-left: 4px solid #16a34a;
 }
 
@@ -92,6 +92,16 @@
   color: #16a34a;
 }
 
+.service-outcome a {
+  color: #2563eb;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.service-outcome a:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
 .service-outcome {
   display: inline-block;
   font-weight: 600;

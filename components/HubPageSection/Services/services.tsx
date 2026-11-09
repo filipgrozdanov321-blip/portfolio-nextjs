@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
+import { site } from "@/lib/site";
 import "./services.css";
 
 // How much of an element must be on screen before it animates in.
@@ -44,52 +46,53 @@ export default function ServicesSection() {
           What I Actually Deliver
         </h2>
 
-        {/* Web Development */}
+        {/* Websites */}
         <div className="service-row">
           <div className="service-heading web animate animate-left">
-            <h3>Websites That Convert</h3>
+            <h3>Business Websites</h3>
             <p>
-              I build fast, modern websites designed to turn visitors into
-              leads — not just look good.
+              Fast, modern websites that explain what you do and make it easy
+              for customers to get in touch.
             </p>
           </div>
 
           <div className="service-content animate animate-right">
             <ul>
-              <li>Custom design built around your brand, not a template</li>
-              <li>Mobile-first, responsive layouts</li>
-              <li>Clear messaging and conversion-focused structure</li>
-              <li>Fast load times and clean code</li>
-              <li>Scalable setup for future growth</li>
+              <li>Custom design built around your business, not a template</li>
+              <li>Mobile-first layouts that work on every phone</li>
+              <li>A contact form that sends enquiries to your inbox</li>
+              <li>Basic SEO setup: page titles, descriptions and a sitemap</li>
+              <li>Launched on your own domain</li>
             </ul>
 
             <span className="service-outcome">
-              Outcome: A website that builds trust and generates inquiries.
+              Websites from {site.pricing.websitesFrom}, up to 5 pages.{" "}
+              <Link href="/services#pricing">See what&apos;s included</Link>
             </span>
           </div>
         </div>
 
-        {/* Digital Marketing */}
+        {/* Web apps */}
         <div className="service-row reverse">
-          <div className="service-heading marketing animate animate-left">
-            <h3>Marketing That Drives Results</h3>
+          <div className="service-heading apps animate animate-left">
+            <h3>Web Apps</h3>
             <p>
-              I focus on practical, measurable marketing — not vanity metrics
-              or empty traffic.
+              Custom tools for when a website isn&apos;t enough, built around
+              how your business actually works.
             </p>
           </div>
 
           <div className="service-content animate animate-right">
             <ul>
-              <li>SEO strategies for long-term organic growth</li>
-              <li>Targeted paid ads with clear intent</li>
-              <li>Simple funnels that convert visitors into leads</li>
-              <li>Email marketing for follow-ups and retention</li>
-              <li>Data-driven decisions, not guesswork</li>
+              <li>Booking systems: customers pick a service, a person and a free slot</li>
+              <li>Online shops: product pages, filters, cart and checkout</li>
+              <li>Dashboards: revenue, orders and best sellers on one screen</li>
+              <li>For agencies: React and Next.js development on client projects</li>
             </ul>
 
             <span className="service-outcome">
-              Outcome: More qualified leads and predictable growth.
+              Each of these has a working demo.{" "}
+              <Link href="/projects">Try the projects</Link>
             </span>
           </div>
         </div>
