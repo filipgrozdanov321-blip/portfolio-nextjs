@@ -226,6 +226,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 0.3em; /* flex drops the space before the arrow */
     min-height: 44px;
     box-sizing: border-box;
   }
