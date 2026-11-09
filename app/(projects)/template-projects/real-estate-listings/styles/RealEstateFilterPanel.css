@@ -80,7 +80,7 @@
   border-radius: var(--realestate-radius-sm);
   padding: 10px 12px;
   font-size: 14px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), sans-serif;
   color: var(--realestate-navy);
   background-color: var(--realestate-white);
 }

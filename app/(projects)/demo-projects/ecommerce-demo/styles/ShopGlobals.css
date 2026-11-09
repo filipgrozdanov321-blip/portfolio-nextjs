@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
 
 /* Everything in this file is scoped to .shop-root (the div in layout.tsx).
    Next.js CSS is global, so the old bare selectors (*, html, body, a, button,
@@ -21,7 +20,7 @@
   --shop-error: #C0392B;
 
   /* These used to be set on <body> */
-  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-manrope), -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--shop-cream);
   color: var(--shop-black);
   -webkit-font-smoothing: antialiased;

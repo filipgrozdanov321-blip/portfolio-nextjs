@@ -62,7 +62,7 @@ export default function DashboardOrdersChart({ data }: DashboardOrdersChartProps
               borderRadius: 8,
               borderColor: "#E5E7EB",
               fontSize: 13,
-              fontFamily: "Inter, sans-serif",
+              fontFamily: "inherit",
             }}
             cursor={{ fill: "#F8F9FB" }}
           />

@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { Inter } from "next/font/google";
 // NOTE: this import path is a placeholder — point it at wherever
 // BackButton actually lives in your portfolio (e.g. app/components/BackButton).
 import BackButton from "@/components/ComponentsUsedAroundTheWebSite/BackButton/BackButton";
 import "./styles/BookingGlobals.css";
+
+// Self-hosted by Next.js at build time: visitors never connect to Google
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: "Appointment Booking Demo",
@@ -17,7 +21,7 @@ export default function AppointmentBookingLayout({
   children: ReactNode;
 }) {
   return (
-    <div className="booking-demo-root">
+    <div className={`booking-demo-root ${inter.variable}`}>
       <div className="booking-back-button-wrapper">
         <BackButton />
       </div>
