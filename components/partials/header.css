@@ -24,7 +24,7 @@
   padding: 0;
 }
 
-/* Wrapper around nav + search + contact button.
+/* Wrapper around nav + contact button.
    display: contents = "pretend this div isn't here", so on desktop the
    layout is exactly what it was before. On mobile it becomes the panel. */
 .header-menu {
@@ -104,6 +104,7 @@
 }
 
 .logo {
+  display: block;
   flex-shrink: 0;
   margin-left: 0px;
   will-change: filter;
@@ -130,11 +131,6 @@
   margin-right: auto;
 }
 
-.arrow {
-  margin-left: 0px;
-  padding-left: 2px;
-}
-
 .nav-button {
   display: inline-flex;
   align-items: center;
@@ -149,18 +145,6 @@
   transition: all 0.3s ease;
 }
 
-/* "Projects" is now a <button> (so keyboards and touch can use it).
-   This resets the browser's default button look so it matches the links. */
-button.nav-button {
-  -webkit-appearance: none;
-  appearance: none;
-  border: 0;
-  margin: 0;
-  font-family: inherit;
-  line-height: inherit;
-  cursor: default;
-}
-
 @media (hover: hover) {
   .nav-button:hover {
     background-color: white;
@@ -173,173 +157,11 @@ button.nav-button {
   color: black;
 }
 
-.nav-dropdown {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-@media (hover: hover) {
-  .nav-dropdown > .nav-button:hover {
-    background-color: white;
-    color: black;
-    cursor: default;
-  }
-}
-
-.dropdown-menu::before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: 0;
-  right: 0;
-  height: 10px;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%) translateY(0);
-  background-color: #1f1f1f;
-  border: 1px solid #333;
-  border-radius: 8px;
-  min-width: 200px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  z-index: 2000;
-}
-
-.nav-dropdown .dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%) translateY(0);
-  background-color: #1f1f1f;
-  border: 1px solid #333;
-  border-radius: 8px;
-  min-width: 200px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  z-index: 2000;
-}
-
-/* Only the JS-controlled "show" class opens the dropdown now —
-   :hover and :focus-within triggers were removed so clicking a
-   link inside the menu actually closes it. */
-.nav-dropdown .dropdown-menu.show {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(6px);
-}
-
-.dropdown-item {
-  display: block;
-  padding: 0.75rem 1.1rem;
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  transition: background-color 0.2s ease, color 0.2s ease;
-  white-space: nowrap;
-}
-
-@media (hover: hover) {
-  .dropdown-item:hover {
-    background-color: white;
-    color: black;
-  }
-}
-
-.dropdown-item:first-child {
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-}
-
-.dropdown-item:last-child {
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-}
-
 .header-right {
   display: flex;
   align-items: center;
   gap: 1.5rem;
   margin-right: 0px;
-}
-
-/* The search icon is now a <button> so it can be tapped and focused.
-   Reset the browser button look; size and position stay as before. */
-.search-icon {
-  display: block;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  background: none;
-  font-family: inherit;
-  line-height: inherit;
-  font-size: 1rem;
-  color: white;
-  cursor: pointer;
-  position: relative;
-  z-index: 1;
-  transition: transform 0.3s ease-in-out;
-}
-
-@media (hover: hover) {
-  .search-icon:hover {
-    transform: scale(1.3);
-  }
-}
-
-.search-container {
-  position: relative;
-}
-
-.search-field {
-  opacity: 0;
-  width: 0;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: none;
-  margin-right: -0.35rem;
-  padding-left: 1.5rem;
-  position: absolute;
-  top: 50%;
-  right: 100%;
-  transform: translateY(-50%);
-  transition: width 0.3s ease, transform 0.3s ease;
-  background-color: #1f1f1f;
-  color: white;
-  border-bottom: 1px solid white;
-  z-index: 0;
-}
-
-/* Hover opens it for a mouse. :focus opens it for touch and keyboard
-   (tapping the icon focuses the field). */
-@media (hover: hover) {
-  .search-container:hover .search-field {
-    opacity: 1;
-    width: 200px;
-    transform: translateY(-50%);
-    right: 0;
-  }
-}
-
-.search-field:focus {
-  opacity: 1;
-  width: 200px;
-  transform: translateY(-50%);
-  right: 0;
-}
-
-.search-field:focus {
-  outline: none;
-  background-color: #1f1f1f;
-  border-bottom: 2px solid white;
-  transition: border-color 0.3s ease;
 }
 
 .contact-button {
@@ -380,11 +202,6 @@ button.nav-button {
   color: black;
 }
 
-.dropdown-item.active {
-  background-color: white;
-  color: black;
-}
-
 .contact-button.active {
   background-color: white;
   color: black;
@@ -395,26 +212,9 @@ button.nav-button {
    ========================================================= */
 @media (pointer: coarse) {
   .nav-button,
-  .dropdown-item,
   .contact-button {
     min-height: 44px;
     box-sizing: border-box;
-  }
-
-  .search-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 44px;
-    min-height: 44px;
-  }
-}
-
-/* Highlight "Projects" while it's open on touch screens */
-@media (hover: none) {
-  .nav-dropdown > .nav-button[aria-expanded="true"] {
-    background-color: white;
-    color: black;
   }
 }
 
@@ -490,101 +290,13 @@ button.nav-button {
     padding: 0.6rem 1rem;
   }
 
-  button.nav-button {
-    justify-content: space-between;
-    cursor: pointer;
-  }
-
-  /* Projects dropdown becomes an accordion inside the panel */
-  .nav-dropdown {
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-  }
-
-  .nav-dropdown > .nav-button[aria-expanded="true"] {
-    background-color: white;
-    color: black;
-  }
-
-  .arrow {
-    transition: transform 0.2s ease;
-  }
-
-  .nav-button[aria-expanded="true"] .arrow {
-    transform: rotate(180deg);
-  }
-
-  .dropdown-menu::before {
-    display: none;
-  }
-
-  .nav-dropdown .dropdown-menu,
-  .nav-dropdown .dropdown-menu.show {
-    position: static;
-    transform: none;
-    min-width: 0;
-    margin: 0.25rem 0 0.25rem 1rem;
-    border: 0;
-    border-left: 2px solid #333;
-    border-radius: 0;
-    opacity: 1;
-    visibility: visible;
-    display: none;
-  }
-
-  .nav-dropdown .dropdown-menu.show {
-    display: block;
-  }
-
-  .dropdown-item,
-  .dropdown-item:first-child,
-  .dropdown-item:last-child {
-    display: flex;
-    align-items: center;
-    min-height: 44px;
-    border-radius: 8px;
-  }
-
-  /* Search + Contact button stack under the links */
+  /* Contact button sits under the links */
   .header-right {
     flex-direction: column;
     align-items: stretch;
     gap: 0.75rem;
     width: 100%;
     margin: 0;
-  }
-
-  .search-container {
-    width: 100%;
-  }
-
-  /* Search is always visible as a full-width field, icon sits inside it */
-  .search-icon {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-  }
-
-  .search-field,
-  .search-field:focus,
-  .search-container:hover .search-field {
-    position: static;
-    top: auto;
-    right: auto;
-    transform: none;
-    opacity: 1;
-    width: 100%;
-    box-sizing: border-box;
-    min-height: 44px;
-    margin: 0;
-    padding: 0.5rem 0.75rem 0.5rem 2.75rem;
-    font-size: 16px; /* 16px+ stops iOS zooming in on focus */
   }
 
   .contact-button {
@@ -604,8 +316,7 @@ button.nav-button {
   .header-menu.is-open,
   .menu-toggle-bars,
   .menu-toggle-bars::before,
-  .menu-toggle-bars::after,
-  .arrow {
+  .menu-toggle-bars::after {
     transition: none;
   }
 }

@@ -8,3 +8,16 @@ body {
   /* Long words, emails and URLs wrap instead of pushing the page sideways on phones */
   overflow-wrap: break-word;
 }
+
+/* Text for screen readers only (e.g. which project a "Open live demo" link opens) */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
