@@ -1,0 +1,80 @@
+.not-found {
+  box-sizing: border-box;
+  min-height: 60vh;
+  min-height: 60dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(3rem, 10vw, 6rem) clamp(1rem, 4vw, 1.5rem);
+  background: #fcfcfc;
+  color: #111;
+  text-align: center;
+}
+
+.not-found-code {
+  margin: 0;
+  font-size: clamp(3.5rem, 2rem + 8vw, 6rem);
+  font-weight: 800;
+  line-height: 1;
+  color: #2563eb;
+}
+
+.not-found h1 {
+  margin: 1rem 0 0.75rem;
+  font-size: clamp(1.6rem, 1.2rem + 2vw, 2.2rem);
+}
+
+.not-found-text {
+  max-width: 520px;
+  margin: 0 0 2rem;
+  line-height: 1.7;
+  color: #333;
+}
+
+.not-found-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1rem;
+}
+
+.not-found-primary,
+.not-found-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  box-sizing: border-box;
+  padding: 0.6rem 1.6rem;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.not-found-primary {
+  background: linear-gradient(135deg, #FFEB3B, #FFB300);
+  color: #111;
+}
+
+.not-found-secondary {
+  border: 2px solid #111;
+  color: #111;
+}
+
+.not-found-primary:focus-visible,
+.not-found-secondary:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .not-found-primary:hover {
+    background: linear-gradient(135deg, #FFB300, #FFEB3B);
+  }
+
+  .not-found-secondary:hover {
+    background: #111;
+    color: #fff;
+  }
+}
