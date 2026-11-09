@@ -22,8 +22,11 @@
     min-width: 0;
   }
   
+  /* The last step has no connector, so it's exactly as wide as its circle.
+     ("flex: 0" made it 0px wide, and the circle stuck out past the right
+     edge: on a 375px phone the whole page scrolled sideways.) */
   .booking-step-indicator-item:last-child {
-    flex: 0;
+    flex: 0 0 auto;
   }
   
   .booking-step-indicator-circle {
