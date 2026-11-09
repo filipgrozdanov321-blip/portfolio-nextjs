@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { CustomerDetails } from "../data/bookingData";
 import "../styles/BookingDetailsStep.css";
 
@@ -31,9 +31,14 @@ export default function BookingDetailsStep({
   const [form, setForm] = useState<CustomerDetails>(details ?? EMPTY_DETAILS);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
-  useEffect(() => {
+  // When the saved details change from outside (e.g. the booking is reset),
+  // show them. Adjusted while rendering, as React recommends, instead of in
+  // an effect.
+  const [syncedDetails, setSyncedDetails] = useState(details);
+  if (details !== syncedDetails) {
+    setSyncedDetails(details);
     setForm(details ?? EMPTY_DETAILS);
-  }, [details]);
+  }
 
   const errors = {
     name: form.name.trim().length === 0 ? "Name is required." : "",

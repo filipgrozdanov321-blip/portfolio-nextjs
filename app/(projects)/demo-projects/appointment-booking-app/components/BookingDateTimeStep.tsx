@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import BookingDateGrid from "./BookingDateGrid";
 import BookingTimeSlotGrid from "./BookingTimeSlotGrid";
 import { ALL_TIME_SLOTS, generateTimeSlots } from "../data/bookingData";
@@ -58,17 +58,20 @@ export default function BookingDateTimeStep({
   // clicking a date only changes what you're looking at. A date/time
   // pair is only committed to parent state once an available time slot
   // is actually clicked (see BookingTimeSlotGrid's onSelectTime below).
-  const [viewingDate, setViewingDate] = useState<string>(
-    selectedDate ?? days[0].iso
-  );
+  const committedDate = selectedDate ?? days[0].iso;
+  const [viewingDate, setViewingDate] = useState<string>(committedDate);
 
   // Re-sync only when the committed date changes from OUTSIDE this
   // component (e.g. going back to the staff step and picking someone
   // whose availability invalidates the old date, resetting it to null).
   // Browsing locally never touches selectedDate, so it won't re-trigger this.
-  useEffect(() => {
-    setViewingDate(selectedDate ?? days[0].iso);
-  }, [selectedDate, days]);
+  // (Adjusting state while rendering, as React recommends, instead of in an
+  // effect: no extra render with the stale date.)
+  const [syncedDate, setSyncedDate] = useState(committedDate);
+  if (committedDate !== syncedDate) {
+    setSyncedDate(committedDate);
+    setViewingDate(committedDate);
+  }
 
   const availableTimes = useMemo(
     () => generateTimeSlots(viewingDate, staffId),

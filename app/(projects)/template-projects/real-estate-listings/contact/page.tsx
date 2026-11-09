@@ -14,10 +14,10 @@ export default function RealEstateContactPage() {
       <div className="realestate-contact-intro">
         <p className="realestate-eyebrow">Get in Touch</p>
         <h1 className="realestate-contact-title">
-          Let's talk about your next move
+          Let&apos;s talk about your next move
         </h1>
         <p className="realestate-contact-lead">
-          Fill out the form or reach out directly — whichever's easier.
+          Fill out the form or reach out directly — whichever&apos;s easier.
         </p>
       </div>
 

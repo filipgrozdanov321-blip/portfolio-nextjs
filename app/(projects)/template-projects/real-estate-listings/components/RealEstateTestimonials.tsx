@@ -28,7 +28,7 @@ export default function RealEstateTestimonials() {
       <div className="realestate-container">
         <div className="realestate-testimonials-header">
           <p className="realestate-eyebrow">Client Stories</p>
-          <h2 className="realestate-testimonials-title">What it's been like to work together</h2>
+          <h2 className="realestate-testimonials-title">What it&apos;s been like to work together</h2>
         </div>
 
         <div className="realestate-testimonials-grid">

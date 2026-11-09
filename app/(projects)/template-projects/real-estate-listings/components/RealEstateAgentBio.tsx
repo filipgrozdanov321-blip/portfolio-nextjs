@@ -53,11 +53,11 @@ export default function RealEstateAgentBio() {
             <p>
               I work with a small number of clients at a time, on purpose. That means fewer
               generic showings and more time spent actually understanding what a property is
-              worth and whether it fits what someone's looking for — not just what's listed on
+              worth and whether it fits what someone&apos;s looking for — not just what&apos;s listed on
               the sheet.
             </p>
             <p>
-              Outside of work, I'm usually at Barton Springs, at a Longhorns game, or trying (and
+              Outside of work, I&apos;m usually at Barton Springs, at a Longhorns game, or trying (and
               often failing) to keep up with renovations on my own place.
             </p>
           </div>

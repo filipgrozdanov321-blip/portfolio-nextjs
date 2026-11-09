@@ -26,8 +26,8 @@ export default function RealEstateAgentPreview() {
             Someone who answers the phone, not a call center
           </h2>
           <p className="realestate-agentpreview-text">
-            I've spent the last decade helping Austin buyers and sellers make sense of a market
-            that changes fast. My approach is simple: give people the same information I'd want
+            I&apos;ve spent the last decade helping Austin buyers and sellers make sense of a market
+            that changes fast. My approach is simple: give people the same information I&apos;d want
             if it were my own money on the line.
           </p>
           <Link href="/template-projects/real-estate-listings/about" className="realestate-agentpreview-link">

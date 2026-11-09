@@ -43,7 +43,7 @@ export default function ShopFooter() {
           <span className="shop-footer-heading">Stay in the loop</span>
           {subscribed ? (
             <p className="shop-footer-newsletter-success" role="status">
-              You're on the list — thank you.
+              You&apos;re on the list — thank you.
             </p>
           ) : (
             <form className="shop-footer-newsletter-form" onSubmit={handleSubscribe}>

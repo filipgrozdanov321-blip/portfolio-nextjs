@@ -7,7 +7,7 @@ export default function RealEstateCTASection() {
       <div className="realestate-container realestate-cta-inner">
         <h2 className="realestate-cta-title">Ready to talk about your next move?</h2>
         <p className="realestate-cta-text">
-          Whether you're buying, selling, or just getting a feel for the market, a short call is
+          Whether you&apos;re buying, selling, or just getting a feel for the market, a short call is
           the fastest way to get real answers.
         </p>
         <Link
