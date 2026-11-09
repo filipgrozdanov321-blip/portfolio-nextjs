@@ -286,7 +286,7 @@ export default function AboutContent({ hasPhoto }: AboutContentProps) {
                 I started with Wix and WordPress, then moved into real code —
                 HTML, CSS, and JavaScript. Today that&apos;s grown into React,
                 Next.js, TypeScript, and PostgreSQL, paired with an eye for
-                design and marketing.
+                design.
               </p>
             </div>
           </div>
