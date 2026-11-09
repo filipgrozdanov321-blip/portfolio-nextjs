@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
+import { site } from "@/lib/site";
 import Hero from "../../components/HubPageSection/hero/hero";
 import BusinessesThriveSection from "../../components/HubPageSection/Business Thrive/businesses-thrive";
 import MyWorkSection from "../../components/HubPageSection/Mt Work Section/My-Work";
@@ -9,9 +11,12 @@ import "../../styles/pages/HubPage.css";
 
 // A server component: each section that animates is its own client
 // component, so all the text is in the HTML the server sends.
-export const metadata: Metadata = {
-  alternates: { canonical: "/" },
-};
+export const metadata: Metadata = pageMetadata({
+  title: `${site.name} | ${site.headline}`,
+  description: site.description,
+  path: "/",
+  absoluteTitle: true,
+});
 
 export default function HubPage() {
   return (

@@ -1,15 +1,16 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { site } from "@/lib/site";
 import AboutContent from "./AboutContent";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About",
   description:
     "Filip Grozdanov is a self-taught web developer building websites and web apps for small businesses and agencies. One person from first call to launch, a fixed price agreed upfront, and you own the code and the domain.",
-  alternates: { canonical: "/about" },
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   // Checked when the page is built: the photo shows up automatically once

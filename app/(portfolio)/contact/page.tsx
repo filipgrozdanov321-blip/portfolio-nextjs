@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import ContactForm from "../../../components/ComponentsUsedAroundTheWebSite/ContactForm/ContactFrom";
 import { bookingHref, bookingIsExternal, site } from "@/lib/site";
 import "../../../styles/pages/Contact.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact",
   description:
     "Tell Filip Grozdanov what you need: a website, a web app or development help for your agency. Book a 15-minute call or send a message and get a reply within a day.",
-  alternates: { canonical: "/contact" },
-};
+  path: "/contact",
+});
 
 export default function Contact() {
   return (

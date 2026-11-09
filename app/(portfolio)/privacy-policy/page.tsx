@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { SITE_HOST, SITE_URL, site } from "@/lib/site";
 import "../../../styles/pages/PrivacyPolicy.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Privacy Notice",
   description:
     "What personal data the contact form collects, why, the legal basis, how long it's kept, and how to contact Filip Grozdanov about it.",
-  alternates: { canonical: "/privacy-policy" },
-};
+  path: "/privacy-policy",
+});
 
 const { legal } = site;
 

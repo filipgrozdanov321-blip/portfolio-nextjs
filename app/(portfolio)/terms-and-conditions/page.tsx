@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import "../../../styles/pages/Terms-and-Conditions.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Terms and Conditions",
-  description: "Terms for using Filip Grozdanov's portfolio website and its demo projects.",
-  alternates: { canonical: "/terms-and-conditions" },
-};
+  description:
+    "Terms for using Filip Grozdanov's portfolio website and its demo projects.",
+  path: "/terms-and-conditions",
+});
 
 const TermsAndConditions = () => {
   return (

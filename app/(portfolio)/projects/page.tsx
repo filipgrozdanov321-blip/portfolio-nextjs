@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/ComponentsUsedAroundTheWebSite/Reveal/Reveal";
@@ -6,12 +7,12 @@ import { projects } from "@/lib/projects";
 import { bookingHref, bookingIsExternal } from "@/lib/site";
 import "../../../styles/pages/projects.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Projects",
   description:
     "Four demo projects by Filip Grozdanov: an appointment booking app, an e-commerce store, a real estate website and a sales dashboard. Live demos with features and tech stack.",
-  alternates: { canonical: "/projects" },
-};
+  path: "/projects",
+});
 
 export default function ProjectsPage() {
   return (
