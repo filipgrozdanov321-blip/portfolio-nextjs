@@ -128,12 +128,14 @@ export default function AboutContent({ hasPhoto }: AboutContentProps) {
       <section className="about-me__intro" data-animate-section>
         <div className="about-me__intro-inner">
         <div
-          className="about-me__profile"
+          className={`about-me__profile ${hasPhoto ? "" : "is-text-only"}`}
           data-animate="fade-up"
           data-animate-load
         >
-          <div className="about-me__photo">
-            {hasPhoto ? (
+          {/* Shown once public/images/filip.jpg exists (see lib/site.ts).
+              Without it the card is text only, with no empty photo area. */}
+          {hasPhoto && (
+            <div className="about-me__photo">
               <Image
                 src={site.about.photo}
                 alt="Filip Grozdanov"
@@ -142,32 +144,15 @@ export default function AboutContent({ hasPhoto }: AboutContentProps) {
                 className="about-me__photo-img"
                 priority
               />
-            ) : (
-              // TODO(filip): add public/images/filip.jpg and this
-              // placeholder is replaced by your photo automatically.
-              <span className="about-me__photo-placeholder" aria-hidden="true">
-                FG
-              </span>
-            )}
-          </div>
+            </div>
+          )}
 
           <p className="about-me__profile-name">Filip Grozdanov</p>
           <p className="about-me__profile-role">Web developer</p>
 
-          <dl className="about-me__facts">
-            <div>
-              <dt>Based in</dt>
-              <dd>{site.about.city}</dd>
-            </div>
-            <div>
-              <dt>Speaks</dt>
-              <dd>{site.about.languages}</dd>
-            </div>
-            <div>
-              <dt>Studies</dt>
-              <dd>{site.about.studies}</dd>
-            </div>
-          </dl>
+          <p className="about-me__bio">
+            {`Based in ${site.about.location}. I speak ${site.about.languages}.`}
+          </p>
 
           <p className="about-me__how">
             <span className="about-me__how-label">How I work</span>

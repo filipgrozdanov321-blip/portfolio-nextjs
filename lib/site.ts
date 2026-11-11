@@ -14,10 +14,9 @@ export const site = {
     "Filip Grozdanov builds fast business websites and custom web apps (booking systems, online shops, dashboards) for small businesses and agencies. Websites from €700.",
   email: "filip.grozdanov.web@gmail.com",
 
-  // TODO(filip): paste your Cal.com or Calendly link here, e.g.
-  // "https://cal.com/your-name/15min". While it's empty, every
-  // "Book a 15-minute call" button opens the contact form instead.
-  bookingUrl: "",
+  // Every "Book a 15-minute call" button opens this page in a new tab.
+  // If you ever set it to "", the buttons fall back to the contact form.
+  bookingUrl: "https://calendly.com/filip-grozdanov-web/intro-call",
 
   pricing: {
     websitesFrom: "€700",
@@ -32,32 +31,23 @@ export const site = {
   },
 
   about: {
-    // TODO(filip): fill in these three. Anything still in [brackets] shows
-    // on the About page exactly as written, so it's easy to spot.
-    city: "[city]",
-    languages: "[languages]",
-    studies: "[field]",
+    // Shown on the About page as: "Based in <location>. I speak <languages>."
+    location: "Kranj, Slovenia",
+    languages: "English, Macedonian, Slovenian, Serbian and Croatian",
     howIWork:
       "One person from first call to launch, a fixed price agreed upfront, and you own the code and the domain.",
-    // TODO(filip): add your photo at public/images/filip.jpg (a square or
-    // portrait crop works best). The About page shows it automatically
-    // once the file exists; until then it shows an "FG" placeholder.
+    // TODO(filip): commit your photo at public/images/filip.jpg (portrait
+    // crop works best). The About page checks for it when the site is built
+    // and shows it automatically; without it, the card has no photo area.
     photo: "/images/filip.jpg",
   },
 
   // Used by the privacy notice (/privacy-policy)
   legal: {
     controller: "Filip Grozdanov",
-    // TODO(filip): your postal address (or business address). Shown on the
-    // privacy notice exactly as written.
-    address: "[postal address]",
-    // TODO(filip): business registration or VAT number if you have a
-    // registered business. If you don't, set this to "" and the line is
-    // hidden.
-    registration: "[business registration / VAT number, if any]",
     // Delete enquiries that don't turn into a project after this long
     enquiryRetention: "12 months",
-    lastUpdated: "9 November 2026",
+    lastUpdated: "11 November 2026",
   },
 } as const;
 
@@ -69,5 +59,14 @@ export function bookingHref(fallback = "/contact#contact-form") {
   return site.bookingUrl || fallback;
 }
 
-/** True when the booking link points to another site (Cal.com, Calendly). */
+/** True when the booking link points to another site (Calendly, Cal.com). */
 export const bookingIsExternal = site.bookingUrl.startsWith("http");
+
+/** The booking service's name for display, e.g. "Calendly" */
+export function bookingServiceName(): string {
+  if (!site.bookingUrl) return "";
+  const host = new URL(site.bookingUrl).host;
+  if (host === "calendly.com" || host.endsWith(".calendly.com")) return "Calendly";
+  if (host === "cal.com" || host.endsWith(".cal.com")) return "Cal.com";
+  return host;
+}

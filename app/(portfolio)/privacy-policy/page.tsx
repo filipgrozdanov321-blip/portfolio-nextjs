@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { SITE_HOST, SITE_URL, site } from "@/lib/site";
+import { bookingServiceName, site } from "@/lib/site";
 import "../../../styles/pages/PrivacyPolicy.css";
 
 export const metadata: Metadata = pageMetadata({
@@ -13,9 +13,9 @@ export const metadata: Metadata = pageMetadata({
 
 const { legal } = site;
 
-// The booking tool only appears here once a booking link is set in
-// lib/site.ts (e.g. "cal.com" or "calendly.com").
-const bookingHost = site.bookingUrl ? new URL(site.bookingUrl).host : "";
+// The booking service ("Calendly") is listed only while a booking link is
+// set in lib/site.ts.
+const bookingService = bookingServiceName();
 
 interface Purpose {
   title: string;
@@ -41,14 +41,14 @@ const purposes: Purpose[] = [
     basis: "The same as for the contact form (GDPR Art. 6(1)(b) or (f)).",
     howLong: `The same as for the contact form: deleted after ${legal.enquiryRetention} if it doesn't become a project.`,
   },
-  ...(bookingHost
+  ...(bookingService
     ? [
         {
-          title: "When you book a call",
+          title: `When you book a call (through ${bookingService})`,
           what: "Your name, email address, the time you pick and anything you add to the booking.",
           why: "To schedule and hold the call.",
           basis: "Taking steps you asked for before a possible contract (GDPR Art. 6(1)(b)).",
-          howLong: `The same as for the contact form: deleted after ${legal.enquiryRetention} if it doesn't become a project.`,
+          howLong: `My copy: deleted after ${legal.enquiryRetention} if it doesn't become a project, the same as for the contact form. ${bookingService} also keeps the booking under its own privacy policy.`,
         },
       ]
     : []),
@@ -87,15 +87,10 @@ export default function PrivacyPolicy() {
           <ul className="privacy-policy__list">
             <li>Data controller: {legal.controller}</li>
             <li>
-              Email:{" "}
+              Contact:{" "}
               <a className="privacy-policy__email" href={`mailto:${site.email}`}>
                 {site.email}
               </a>
-            </li>
-            <li>Address: {legal.address}</li>
-            {legal.registration && <li>Registration: {legal.registration}</li>}
-            <li>
-              Website: <a href={SITE_URL}>{SITE_HOST}</a>
             </li>
           </ul>
         </section>
@@ -140,9 +135,10 @@ export default function PrivacyPolicy() {
               <strong>WhatsApp (Meta):</strong> only if you choose to message
               me on WhatsApp.
             </li>
-            {bookingHost && (
+            {bookingService && (
               <li>
-                <strong>{bookingHost}:</strong> handles call bookings.
+                <strong>{bookingService}:</strong> handles call bookings, only
+                if you book a call.
               </li>
             )}
           </ul>

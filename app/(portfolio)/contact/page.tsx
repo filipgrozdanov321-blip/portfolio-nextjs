@@ -28,7 +28,7 @@ export default function Contact() {
             <h2>Prefer to talk?</h2>
             <p>
               {site.bookingUrl
-                ? "Pick a time for a 15-minute call. No forms, just a quick chat about what you need."
+                ? "Pick a time that suits you for a 15-minute call about what you need. It opens my calendar in a new tab."
                 : "Book a 15-minute call: send a message below with a few times that suit you."}
             </p>
           </div>

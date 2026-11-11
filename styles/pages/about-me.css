@@ -69,7 +69,9 @@
 }
 
 /* ---------- PROFILE CARD (photo + facts) ----------
-   Sits next to the terminal on desktop, above it on tablets and phones. */
+   Sits next to the terminal on desktop, above it on tablets and phones.
+   Without a photo (public/images/filip.jpg missing) it's a text-only card:
+   ".is-text-only", left-aligned, with no empty photo area. */
 
 .about-me__intro-inner {
   position: relative;
@@ -117,13 +119,6 @@
   object-fit: cover;
 }
 
-/* Shown until public/images/filip.jpg exists */
-.about-me__photo-placeholder {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 4rem;
-  color: rgba(255, 255, 255, 0.85);
-}
-
 .about-me__profile-name {
   margin: 0;
   font-size: 1.25rem;
@@ -136,30 +131,25 @@
   color: rgba(255, 255, 255, 0.65);
 }
 
-.about-me__facts {
-  display: grid;
-  gap: 0.5rem;
+/* "Based in ... I speak ..." between two thin lines */
+.about-me__bio {
   margin: 0 0 1.25rem;
+  padding: 0.9rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: left;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* No photo yet: the card reads top to bottom like the rest of its text */
+.about-me__profile.is-text-only {
   text-align: left;
 }
 
-.about-me__facts div {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.about-me__facts dt {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.about-me__facts dd {
-  margin: 0;
-  font-weight: 600;
-  text-align: right;
+.about-me__profile.is-text-only .about-me__profile-name {
+  font-size: 1.5rem;
 }
 
 .about-me__how {
