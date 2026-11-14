@@ -1,5 +1,6 @@
 // One place for site-wide values. Everything that mentions the site's
-// address, your contact details or your personal facts reads from here.
+// web address, your name, your contact email, the booking link or your
+// pricing reads from here.
 
 // Moving to your own domain? Change this one line (no trailing slash).
 export const SITE_URL = "https://filipgrozdanov.vercel.app";
@@ -31,15 +32,10 @@ export const site = {
   },
 
   about: {
-    // Shown on the About page as: "Based in <location>. I speak <languages>."
-    location: "Kranj, Slovenia",
-    languages: "English, Macedonian, Slovenian, Serbian and Croatian",
+    // Shown on the Services page under "What You Can Expect". The About
+    // page's own text lives in app/(portfolio)/about/AboutContent.tsx.
     howIWork:
       "One person from first call to launch, a fixed price agreed upfront, and you own the code and the domain.",
-    // TODO(filip): commit your photo at public/images/filip.jpg (portrait
-    // crop works best). The About page checks for it when the site is built
-    // and shows it automatically; without it, the card has no photo area.
-    photo: "/images/filip.jpg",
   },
 
   // Used by the privacy notice (/privacy-policy)

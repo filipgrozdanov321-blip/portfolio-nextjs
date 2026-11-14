@@ -13,7 +13,7 @@
   overflow-x: clip;
 }
 
-/* ---------- TERMINAL HERO ---------- */
+/* ---------- INTRO: PHOTO CARD + TERMINAL ---------- */
 
 .about-me__intro {
   position: relative;
@@ -22,14 +22,14 @@
   align-items: center;
   width: 100%;
   box-sizing: border-box;
-  /* Was height: 80vh. min-height means it can grow if the terminal is
-     taller than the screen (a phone turned sideways) instead of clipping.
+  /* min-height (not height) means it can grow if the content is taller than
+     the screen (a phone, or a phone turned sideways) instead of clipping.
      dvh = the screen height without the phone's moving address bar. */
   min-height: 80vh;
   min-height: 80dvh;
   padding: 2rem clamp(1rem, 4vw, 2rem);
   overflow: hidden;
-  background-color: #14161c;   /* was #0d0e12 — a touch lighter overall */
+  background-color: #14161c;
   background-image: radial-gradient(
     circle,
     rgba(255, 255, 255, 0.06) 1px,
@@ -43,11 +43,11 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 1100px;                /* was 700px — bleeds further toward the edges */
+  width: 1100px;
   height: 1100px;
   background: radial-gradient(
     circle,
-    rgba(0, 123, 255, 0.4) 0%,     /* was 0.18 — noticeably brighter core */
+    rgba(0, 123, 255, 0.4) 0%,
     rgba(0, 123, 255, 0.12) 45%,
     transparent 75%
   );
@@ -56,23 +56,7 @@
   pointer-events: none;
 }
 
-.terminal-window {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 640px;
-  background: #15161b;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
-}
-
-/* ---------- PROFILE CARD (photo + facts) ----------
-   Sits next to the terminal on desktop, above it on tablets and phones.
-   Without a photo (public/images/filip.jpg missing) it's a text-only card:
-   ".is-text-only", left-aligned, with no empty photo area. */
-
+/* Photo card next to the terminal on desktop, above it on tablets and phones */
 .about-me__intro-inner {
   position: relative;
   z-index: 2;
@@ -89,85 +73,54 @@
   min-width: 0;
 }
 
+/* ---------- PHOTO CARD ---------- */
+
 .about-me__profile {
   flex: 0 0 300px;
+  margin: 0; /* <figure> comes with default margins */
   box-sizing: border-box;
-  padding: 1.5rem;
   background: #15161b;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
   color: #fff;
   text-align: center;
+  overflow: hidden; /* the photo's top corners follow the card's */
 }
 
+/* The frame has the same 4:5 shape on every screen, so the crop is identical
+   on phone and desktop: only the size changes. */
 .about-me__photo {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
-  max-width: 220px;
   aspect-ratio: 4 / 5;
-  margin: 0 auto 1rem;
-  border-radius: 10px;
-  overflow: hidden;
-  background: linear-gradient(160deg, #1f2a44, #0f1320);
+  background: #0f1320;
 }
 
+/* The photo is a little taller than the frame, so some of its height is
+   cropped. "50% 15%" keeps most of that crop at the bottom: the face sits in
+   the upper part of the frame with clear space above the hair. (With this
+   photo and a 4:5 frame, no value here can cut into the face.) */
 .about-me__photo-img {
   object-fit: cover;
+  object-position: 50% 15%;
+}
+
+.about-me__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 1rem 1.25rem 1.15rem;
 }
 
 .about-me__profile-name {
-  margin: 0;
   font-size: 1.25rem;
   font-weight: 700;
 }
 
 .about-me__profile-role {
-  margin: 0.15rem 0 1.25rem;
   font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.65);
-}
-
-/* "Based in ... I speak ..." between two thin lines */
-.about-me__bio {
-  margin: 0 0 1.25rem;
-  padding: 0.9rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  text-align: left;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.85);
-}
-
-/* No photo yet: the card reads top to bottom like the rest of its text */
-.about-me__profile.is-text-only {
-  text-align: left;
-}
-
-.about-me__profile.is-text-only .about-me__profile-name {
-  font-size: 1.5rem;
-}
-
-.about-me__how {
-  margin: 0;
-  text-align: left;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.85);
-}
-
-.about-me__how-label {
-  display: block;
-  margin-bottom: 0.3rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #4da3ff;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 @media (max-width: 860px) {
@@ -178,12 +131,22 @@
   .about-me__profile {
     flex: none;
     width: 100%;
-    max-width: 640px;
+    max-width: 300px;
   }
+}
 
-  .about-me__photo {
-    max-width: 200px;
-  }
+/* ---------- TERMINAL ---------- */
+
+.terminal-window {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 640px;
+  background: #15161b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 }
 
 .terminal-window__bar {
@@ -230,6 +193,9 @@
   margin-right: 0.6rem;
 }
 
+/* The "typing" effect: the text is uncovered one character per step.
+   Each steps() number and each --typed-width is the number of characters in
+   that line of text: keep them in sync if the text changes. */
 .terminal-typed {
   display: inline-block;
   overflow: hidden;
@@ -238,10 +204,19 @@
   width: 0;
 }
 
+/* The two commands grow to exactly their own width (1ch = one character in
+   the terminal's fixed-width font), so they stay on the same line as the
+   "$". Growing to 100% made them too wide to fit next to it, and they
+   dropped onto a line of their own. */
+
+/* "whoami" = 6 characters */
 .terminal-typed--1 {
+  --typed-width: calc(6ch + 1px);
   animation: type-reveal 0.45s steps(6, end) 1.2s forwards;
 }
 
+/* "Hi, I'm Filip." = 14 characters. A heading on its own line, so it can
+   simply grow to the full width. */
 .about-me-title.terminal-typed--2 {
   display: block;
   font-size: clamp(1.8rem, 5vw, 2.5rem);
@@ -249,16 +224,18 @@
   color: #fcfcfc;
   text-align: left;
   margin: 0.6rem 0 1.3rem;
-  animation: type-reveal 0.9s steps(13, end) 1.8s forwards;
+  animation: type-reveal 0.9s steps(14, end) 1.8s forwards;
 }
 
+/* "cat about.txt" = 13 characters */
 .terminal-typed--3 {
-  animation: type-reveal 1s steps(15, end) 2.9s forwards;
+  --typed-width: calc(13ch + 1px);
+  animation: type-reveal 1s steps(13, end) 2.9s forwards;
 }
 
 @keyframes type-reveal {
   from { width: 0; }
-  to { width: 100%; }
+  to { width: var(--typed-width, 100%); }
 }
 
 .about-me-description {
@@ -291,10 +268,11 @@
 }
 
 @media (max-width: 640px) {
+  /* Less empty space above the photo, so it sits near the top of the screen */
   .about-me__intro {
     min-height: 70vh;
     min-height: 70dvh;
-    padding: 4rem 1.25rem;
+    padding: 2.5rem 1.25rem;
   }
 
   .terminal-window__body {
@@ -316,224 +294,133 @@
   }
 }
 
-/* Timeline */
+/* ---------- CONTENT SECTIONS (What I do, How I work, Tools, Languages) ---------- */
 
-.about-me__experience {
-  padding: 0rem 1rem 0rem 1rem;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.about-me__experience h2 {
-  font-size: clamp(1.9rem, 1.2rem + 2.8vw, 2.7rem);
-  text-align: center;
-  margin-bottom: clamp(1.5rem, 4.4vw, 3rem);
-}
-
-.timeline {
-  position: relative;
-  padding: 3rem 0rem 0rem 0rem;
-}
-
-.timeline::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 2px;
-  height: 100%;
-  background: rgba(85, 85, 85, 0.25);
-  transform: translateX(-50%);
-  z-index: 1;
-}
-
-.timeline::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 2px;
-  height: var(--timeline-progress, 0px);
-  background: #007bff;
-  transform: translateX(-50%);
-  z-index: 1;
-  transition: height 0.1s linear;
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: clamp(2rem, 5.9vw, 4rem);
+.about-me__section {
   width: 100%;
-}
-
-.timeline-item::before {
-  content: "";
-  position: absolute;
-  top: 24px;
-  left: 50%;
-  width: 14px;
-  height: 14px;
-  background: #fcfcfc;
-  border: 2px solid rgba(85, 85, 85, 0.25);
-  border-radius: 50%;
-  transform: translateX(-50%);
-  transition: border-color 0.3s ease;
-  z-index: 2;
-}
-
-.timeline-item.active::before {
-  border-color: #007bff;
-}
-
-.timeline-content {
-  width: 40%;
-  background: #fcfcfc;
-  padding: 1.6rem clamp(1.1rem, 4vw, 1.75rem);
-  border-radius: 10px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-}
-
-.timeline-item.left .timeline-content {
-  margin-left: 0;
-  margin-right: auto;
-}
-
-.timeline-item.right .timeline-content {
-  margin-left: auto;
-  margin-right: 0;
-}
-
-.timeline-date {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #007bff;
-  margin-bottom: 0.5rem;
-}
-
-.timeline-content h3 {
-  margin-bottom: 0.75rem;
-  font-size: 1.3rem;
-  color: #111;
-}
-
-.timeline-content p {
-  line-height: 1.65;
-  color: #111;
-  margin: 0;
-}
-
-/* Tablet / small laptop: the cards grow as the screen narrows. The gap
-   between a card and the center line shrinks, so at 1099px the width equals
-   the 40% desktop value (no jump) and it gets wider from there. */
-@media (max-width: 1099px) {
-  .timeline-content {
-    width: calc(50% - max(1.5rem, 20vw - 113px));
-  }
-}
-
-/* ---------- MY APPROACH ---------- */
-
-.about-me__approach {
   max-width: 1350px;
+  box-sizing: border-box;
   margin: 0 auto;
-  padding: clamp(3rem, 7.3vw, 5rem) clamp(1rem, 4vw, 1.5rem);
+  padding: clamp(3rem, 7.3vw, 5rem) clamp(1rem, 4vw, 1.5rem) 0;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(2rem, 4.4vw, 3rem);
 }
 
-.about-me__approach h2 {
+.about-me__section--narrow {
+  max-width: 1100px;
+}
+
+.about-me__section h2 {
+  margin: 0 0 clamp(1.75rem, 4.4vw, 3rem);
   font-size: clamp(1.9rem, 1.3rem + 2.4vw, 2.5rem);
-  text-align: center;
+  color: #111;
 }
 
-.about-me__approach-intro {
-  max-width: 720px;
+/* ---------- CARDS (What I do: 3, How I work: 4) ---------- */
+
+.about-me__cards {
+  list-style: none;
   margin: 0 auto;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: #111;
-  text-align: center;
+  padding: 0;
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  text-align: left;
+}
+
+/* The <li> does the slide-in animation and the card inside does the hover
+   lift, so the two never fight over the same "transform". */
+.about-me__cards > li {
+  display: flex;
+  min-width: 0;
+}
+
+/* 3 cards: 3 across, then 1 column */
+.about-me__cards--3 {
+  max-width: 1100px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 /* 4 cards: 4 across, then 2 + 2, then 1. (auto-fit would leave a lone card
-   on its own row at some widths: 3 + 1.) The gaps and padding shrink smoothly
-   in between. */
-.about-me__approach-steps {
-  display: grid;
+   on its own row at some widths: 3 + 1.) */
+.about-me__cards--4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(1.25rem, 3vw, 2rem);
 }
 
 @media (max-width: 1100px) {
-  .about-me__approach-steps {
+  .about-me__cards--4 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 600px) {
-  .about-me__approach-steps {
+@media (max-width: 860px) {
+  .about-me__cards--3 {
+    max-width: 640px;
     grid-template-columns: minmax(0, 1fr);
   }
 }
 
-.about-me__approach-step {
+@media (max-width: 600px) {
+  .about-me__cards--4 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.about-me__card {
+  flex: 1;
+  box-sizing: border-box;
   background: #fcfcfc;
   padding: clamp(1.5rem, 5vw, 2.25rem) clamp(1.25rem, 4vw, 1.75rem);
   border-radius: 14px;
   border: 1px solid #fcfcfc;
-  text-align: left;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-  transition: transform 0.25s ease, border-color 0.25s ease;
+  transition: transform 0.25s ease;
 }
 
 @media (hover: hover) {
-  .about-me__approach-step:hover {
+  .about-me__card:hover {
     transform: translateY(-4px);
   }
 }
 
-.about-me__approach-step-number {
-  display: block;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: #007bff;
-  margin-bottom: 0.75rem;
-}
-
-.about-me__approach-step h3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.75rem;
-  color: #111;
-}
-
-.about-me__approach-step p {
-  font-size: 0.95rem;
+.about-me__card p {
+  margin: 0;
+  font-size: 1rem;
   line-height: 1.65;
   color: #111;
-  margin: 0;
 }
 
-/* Tools & Technologies */
-
-.about-me__technologies {
-  max-width: 1100px;
-  margin: clamp(3rem, 8.75vw, 6rem) auto;
-  padding: 0 1rem;
+/* The first words of a "What I do" point, shown as the card's title */
+.about-me__card-lead {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-size: 1.25rem;
+  line-height: 1.3;
 }
 
-.about-me__technologies h2 {
-  font-size: clamp(1.9rem, 1.2rem + 2.8vw, 2.7rem);
-  text-align: center;
-  margin-bottom: clamp(2rem, 5.1vw, 3.5rem);
+/* "How I work" cards: a tick, then the point */
+.about-me__check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 0.9rem;
+  border-radius: 999px;
+  background: rgba(0, 123, 255, 0.12);
+  color: #007bff;
+  font-weight: 700;
 }
+
+.about-me__card--check p {
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+/* ---------- TOOLS ---------- */
 
 .tech-map {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
@@ -570,43 +457,76 @@
   border-radius: 12px;
   color: #111;
   line-height: 1.6;
+  text-align: left;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
   font-weight: 500;
 }
 
+.tech-result a {
+  color: #2563eb;
+  font-weight: 600;
+  text-underline-offset: 3px;
+}
+
+/* Phones and small tablets: each tool becomes ONE card (name on top, what
+   it's for underneath, no arrow). As two boxes plus an arrow per tool, the
+   six tools took about 1,200px of scrolling on a phone. */
 @media (max-width: 768px) {
-  .tech-row {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.75rem;
+  .tech-map {
+    gap: 1rem;
   }
 
-  .tech-arrow {
-    transform: rotate(90deg);
-    font-size: 1.4rem;
+  .tech-row {
+    display: block;
+    background: #fcfcfc;
+    padding: 1.2rem 1.4rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
   }
 
   .tech-tool,
   .tech-result {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
     text-align: left;
+  }
+
+  .tech-tool {
+    margin-bottom: 0.35rem;
+    font-weight: 700;
+  }
+
+  .tech-arrow {
+    display: none;
   }
 }
 
-/* Call To Action */
+/* ---------- LANGUAGES ---------- */
+
+.about-me__lead {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: clamp(1.1rem, 1rem + 0.6vw, 1.35rem);
+  line-height: 1.7;
+  color: #111;
+}
+
+/* ---------- CLOSING CALL TO ACTION ---------- */
+
 .about-me__cta {
-  margin: 0rem;
-  padding-top: clamp(2.5rem, 5.9vw, 4rem);
-  padding-bottom: clamp(3rem, 7.3vw, 5rem);
-  padding-left: clamp(1rem, 4vw, 1.5rem);
-  padding-right: clamp(1rem, 4vw, 1.5rem);
+  margin: 0;
+  padding: clamp(3.5rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.5rem)
+    clamp(3rem, 7.3vw, 5rem);
   text-align: center;
 }
 
-.about-me__cta p {
+.about-me__cta h2 {
   max-width: 1000px;
-  margin: 0 auto 2rem;
-  font-size: clamp(1.35rem, 0.9rem + 2.2vw, 2rem);
-  font-weight: 600;
-  line-height: 1.6;
+  margin: 0 auto 1.75rem;
+  font-size: clamp(1.6rem, 1rem + 2.6vw, 2.25rem);
+  line-height: 1.3;
   color: #111;
 }
 
@@ -640,25 +560,49 @@
   outline-offset: 3px;
 }
 
-/* Mobile: the timeline becomes a single column with the line on the left */
-@media (max-width: 768px) {
-  .timeline::before,
-  .timeline::after {
-    left: 12px;
+/* "or send a message through the contact form" under the button */
+.about-me__cta-alt {
+  margin: 1.1rem 0 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.about-me__cta-alt a {
+  color: #2563eb;
+  font-weight: 600;
+  text-underline-offset: 3px;
+}
+
+.about-me__cta-alt a:focus-visible,
+.tech-result a:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Touch screens: the button and the link are at least 44px tall */
+@media (pointer: coarse) {
+  .about-me__cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    box-sizing: border-box;
   }
 
-  /* The dot keeps the translateX(-50%) from above so it sits centered on the line */
-  .timeline-item::before {
-    left: 12px;
+  .about-me__cta-alt a {
+    display: inline-block;
+    padding: 0.65rem 0;
   }
+}
 
-  /* These need the same specificity as the .left / .right rules above,
-     otherwise those win and the cards slide under the line */
-  .timeline-item.left .timeline-content,
-  .timeline-item.right .timeline-content {
-    width: auto;
-    margin-left: 2.5rem;
-    margin-right: 0;
+@media (max-width: 480px) {
+  .about-me__cta-button {
+    width: 100%;
+    max-width: 340px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    box-sizing: border-box;
+    text-align: center;
   }
 }
 
