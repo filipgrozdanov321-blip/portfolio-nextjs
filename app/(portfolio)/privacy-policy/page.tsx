@@ -166,13 +166,11 @@ export default function PrivacyPolicy() {
         <section className="privacy-policy__section">
           <h2 className="privacy-policy__heading">Complaints</h2>
           <p className="privacy-policy__text">
-            If you think I&apos;ve handled your data wrongly, you have the
-            right to complain to a data protection authority, in particular in
-            the country where you live or work, or where you think the problem
-            happened. For example, the Information Commissioner of the
-            Republic of Slovenia, or the Personal Data Protection Agency of
-            North Macedonia. I&apos;d appreciate the chance to sort it out
-            with you first.
+            If you think I&apos;ve handled your data wrongly, you can
+            complain to your local data protection authority. In Slovenia,
+            that&apos;s the Information Commissioner (Informacijski
+            pooblaščenec). I&apos;d appreciate the chance to sort it out with
+            you first.
           </p>
         </section>
 

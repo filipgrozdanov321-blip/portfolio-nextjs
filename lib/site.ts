@@ -43,7 +43,7 @@ export const site = {
     controller: "Filip Grozdanov",
     // Delete enquiries that don't turn into a project after this long
     enquiryRetention: "12 months",
-    lastUpdated: "11 November 2026",
+    lastUpdated: "14 November 2026",
   },
 } as const;
 

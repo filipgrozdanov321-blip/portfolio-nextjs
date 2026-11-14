@@ -17,7 +17,7 @@ const TermsAndConditions = () => {
         <header className="terms__header">
           <h1 className="terms__title">Terms and Conditions</h1>
           <p className="terms__effective-date">
-            Effective date: November 9, 2026
+            Effective date: November 14, 2026
           </p>
         </header>
 
@@ -164,8 +164,7 @@ const TermsAndConditions = () => {
           <h2 className="terms__heading">11. Governing Law</h2>
           <p className="terms__text">
             These Terms are governed by and interpreted in accordance with the
-            laws of Slovenia and North Macedonia, without regard to
-            conflict-of-law principles.
+            laws of Slovenia, without regard to conflict-of-law principles.
           </p>
         </section>
 
