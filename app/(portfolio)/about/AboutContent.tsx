@@ -179,7 +179,7 @@ export default function AboutContent() {
 
               <p className="about-me-description">
                 I&apos;m a web developer based in Kranj, Slovenia. I build fast
-                websites and web apps for small businesses, such as booking
+                websites and web apps for businesses, such as booking
                 systems, online shops and dashboards, and I take on
                 development work for agencies.
                 <span className="terminal-cursor" aria-hidden="true">▌</span>

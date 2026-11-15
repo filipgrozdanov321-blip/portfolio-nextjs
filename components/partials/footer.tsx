@@ -25,7 +25,7 @@ export default function Footer() {
           <div className="footer-brand">
             <h3>{site.name}</h3>
             <p>
-              Web developer building fast websites and web apps for small
+              Web developer building fast websites and web apps for
               businesses and agencies. Websites from {site.pricing.websitesFrom}.
             </p>
           </div>

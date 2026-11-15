@@ -66,7 +66,7 @@ const BusinessesThriveSection = () => {
         </h2>
 
         <p className={`bt-under-header ${isVisible.subtitle ? "visible" : ""}`}>
-          Most small-business websites run into the same few problems.
+          Most business websites run into the same few problems.
           Here&apos;s where they usually break down, and how I fix them.
         </p>
 

@@ -8,11 +8,14 @@ export const SITE_URL = "https://filipgrozdanov.vercel.app";
 // "filipgrozdanov.vercel.app", for showing the address as text
 export const SITE_HOST = new URL(SITE_URL).host;
 
+// The starting price for a website. Change it here and every page, the meta
+// descriptions and the link-preview image all follow.
+const WEBSITES_FROM = "€500";
+
 export const site = {
   name: "Filip Grozdanov",
-  headline: "Websites and web apps for small businesses",
-  description:
-    "Filip Grozdanov builds fast business websites and custom web apps (booking systems, online shops, dashboards) for small businesses and agencies. Websites from €700.",
+  headline: "Websites and web apps for businesses",
+  description: `Filip Grozdanov builds fast websites and custom web apps (booking systems, online shops, dashboards) for businesses and agencies. Websites from ${WEBSITES_FROM}.`,
   email: "filip.grozdanov.web@gmail.com",
 
   // Every "Book a 15-minute call" button opens this page in a new tab.
@@ -20,7 +23,7 @@ export const site = {
   bookingUrl: "https://calendly.com/filip-grozdanov-web/intro-call",
 
   pricing: {
-    websitesFrom: "€700",
+    websitesFrom: WEBSITES_FROM,
     included: [
       "Up to 5 pages",
       "Custom design",
